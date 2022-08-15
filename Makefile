@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/15 13:41:18 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/15 18:36:43 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,13 @@ NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -f
-LIBFT_PATH = libft/
-SRCS = minishell.c 
+LIBFT_PATH = sources/libs/libft/
+SRCS = minishell.c\
+		sources/utils/count_elem.c\
+		sources/utils/list_to_tab.c\
+		sources/add_end_list.c\
+		sources/copy_env.c\
+		sources/ft_malloc.c
 
 HEAD = includes/minishell.h
 
@@ -28,7 +33,7 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm libft/libft.a
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -fsanitize=address -g3
 
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)
