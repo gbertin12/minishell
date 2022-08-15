@@ -1,0 +1,6 @@
+*.o
+*.a
+*.out
+*.so
+libftTester/*
+ft_memmove_temp.c
