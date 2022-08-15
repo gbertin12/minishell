@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/15 18:42:07 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:20:08 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ char	**env_to_tab(t_minishell *ms)
 	t_env	*tmp;
 
 	nb_element = count_env(ms->e_head);
-	ret_v = ft_malloc(nb_element + 1, ms);
+	ret_v = ft_malloc(sizeof(char *) * (nb_element + 1), ms);
 	if (!ret_v)
 		return (ret_v);
-	i = -1;
+	i = 0;
 	tmp = ms->e_head;
-	while (++i < nb_element)
+	while (tmp != NULL)
 	{
 		s_tmp = ft_strjoin(tmp->key, "=");
 		ret_v[i] = ft_strjoin(s_tmp, tmp->value);
 		free(s_tmp);
 		tmp = tmp->next;
+		i++;
 	}
 	ret_v[i] = NULL;
 	return (ret_v);

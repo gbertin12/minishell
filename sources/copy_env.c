@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:31:02 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/15 17:54:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:10:33 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_superjoin(char **s)
 	ret_v = NULL;
 	while (s[++i] != NULL)
 	{
-		tmp = ft_strjoin(ret_v, s[i]);
+		tmp = ft_strjoin("", s[i]);
 		free(s[i]);
 		free(ret_v);
 		ret_v = tmp;
