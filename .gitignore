@@ -1,0 +1,8 @@
+
+*.o
+minishell
+.vscode
+*.out
+
+out.a
+out.b
