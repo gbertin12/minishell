@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/15 13:41:19 by gbertin          ###   ########.fr       */
+/*   Created: 2021/11/25 09:16:45 by gbertin           #+#    #+#             */
+/*   Updated: 2021/12/08 13:21:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include"libft.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <sys/wait.h>
-# include <fcntl.h>
+void	*ft_calloc(size_t count, size_t size)
+{
+	void			*ptr;
 
-
-#endif
+	size = count * size;
+	ptr = (void *)malloc(size);
+	if (ptr == NULL)
+		return (ptr);
+	ft_bzero(ptr, size);
+	return (ptr);
+}

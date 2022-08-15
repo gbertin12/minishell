@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/15 13:41:19 by gbertin          ###   ########.fr       */
+/*   Created: 2021/11/25 08:32:48 by gbertin           #+#    #+#             */
+/*   Updated: 2021/11/25 09:33:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include"libft.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <sys/wait.h>
-# include <fcntl.h>
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
+	unsigned int	i;
 
-
-#endif
+	tmp1 = (unsigned char *)s1;
+	tmp2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (tmp1[i] != tmp2[i])
+		{
+			return (tmp1[i] - tmp2[i]);
+		}
+		i++;
+	}
+	return (0);
+}
