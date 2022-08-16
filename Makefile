@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/16 15:01:55 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/16 21:10:23 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
 		sources/built-in/_env.c\
 		sources/built-in/_export.c\
+		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/utils/add_end_list.c\
 		sources/utils/count_elem.c\
