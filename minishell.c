@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/16 15:09:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/16 15:54:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	_export(t, &ms);
 	s = env_to_tab(&ms);
 	i = -1;
+	free(readline("minishell ➤"));
 	while (s[++i])
 		printf("%s\n", s[i]);
 	e = ms.e_head;

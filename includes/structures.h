@@ -6,12 +6,14 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 13:45:15 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:51:03 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_minishell	t_minishell;
 
 typedef struct s_file
 {
@@ -48,6 +50,13 @@ typedef struct s_obj
 	void			*ptr;
 	struct s_obj	*next;
 }	t_obj;
+
+typedef struct s_builtin
+{
+	char				*name;
+	int					(*f)(struct s_token, struct s_minishell);
+	struct s_builtin	*next;
+}	t_builtin;
 
 /* 
  *  @param t_head head of token list from parsing
