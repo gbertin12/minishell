@@ -1,26 +1,29 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/15 21:15:50 by ccambium         ###   ########.fr        #
+#    Updated: 2022/08/16 11:10:00 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror -g3
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
+		sources/built-in/_export.c\
+		sources/utils/add_end_list.c\
 		sources/utils/count_elem.c\
+		sources/utils/do_env_key_exist.c\
+		sources/utils/ft_malloc.c\
+		sources/utils/ft_superjoin.c\
 		sources/utils/list_to_tab.c\
-		sources/add_end_list.c\
-		sources/copy_env.c\
-		sources/ft_malloc.c
+		sources/copy_env.c
 
 HEAD = includes/minishell.h
 

@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_superjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 11:04:53 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/16 10:35:41 by ccambium          #+#    #+#             */
+/*   Updated: 2022/08/16 11:19:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-# include "structures.h"
-# include "minishell.h"
+#include "../../includes/minishell.h"
 
-size_t	count_env(t_env *ptr);
+char	*ft_superjoin(char **s)
+{
+	char	*ret_v;
+	char	*tmp;
+	size_t	i;
 
-char	**env_to_tab(t_minishell *ms);
-char	*ft_superjoin(char **s);
-
-char	do_env_key_exist(char *key, t_minishell *ms);
-
-void	free_all(t_minishell *ms);
-void	ft_free(void *ptr, t_minishell *ms);
-void	add_end_obj(t_obj *head, t_obj *obj);
-
-void	*ft_malloc(size_t size, t_minishell *ms);
-
-#endif
+	i = 0;
+	ret_v = NULL;
+	if (!s[1])
+		return (ft_strdup(""));
+	while (s[++i] != NULL)
+	{
+		tmp = ft_strjoin("", s[i]);
+		free(s[i]);
+		free(ret_v);
+		ret_v = tmp;
+		if (s[i + 1])
+		{
+			tmp = ft_strjoin(ret_v, "=");
+			free(ret_v);
+			ret_v = tmp;
+		}
+	}
+	return (ret_v);
+}

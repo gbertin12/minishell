@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/15 16:34:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/16 10:23:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_file
 
 typedef struct s_arg
 {
-	char			*arg;
+	char			*value;
 	struct s_arg	*next;	
 }	t_arg;
 

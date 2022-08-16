@@ -6,35 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:31:02 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/15 21:10:33 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/16 10:35:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static char	*ft_superjoin(char **s)
-{
-	char	*ret_v;
-	char	*tmp;
-	size_t	i;
-
-	i = 0;
-	ret_v = NULL;
-	while (s[++i] != NULL)
-	{
-		tmp = ft_strjoin("", s[i]);
-		free(s[i]);
-		free(ret_v);
-		ret_v = tmp;
-		if (s[i + 1])
-		{
-			tmp = ft_strjoin(ret_v, "=");
-			free(ret_v);
-			ret_v = tmp;
-		}
-	}
-	return (ret_v);
-}
 
 void	copy_env(t_minishell *ms, char **env)
 {

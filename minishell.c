@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/15 18:34:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:24:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,18 @@ int	main(int argc, char **argv, char **envp)
 	t_env		*e;
 	char		**s;
 	size_t		i;
+	t_token		*t;
 
-	(void)argv;
-	(void)argc;
 	ms.o_head = NULL;
 	ms.e_head = NULL;
+	t = ft_malloc(sizeof(t_token), &ms);
+	t->arg_head = ft_malloc(sizeof(t_arg), &ms);
+	t->arg_head->next = NULL;
+	t->arg_head->value = "L=miam";
+	(void)argv;
+	(void)argc;
 	copy_env(&ms, envp);
+	_export(t, &ms);
 	s = env_to_tab(&ms);
 	i = -1;
 	while (s[++i])
