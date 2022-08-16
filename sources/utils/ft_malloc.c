@@ -6,11 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:43:45 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/15 17:01:34 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:55:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	*ft_malloc(size_t size, t_minishell *ms)
 {

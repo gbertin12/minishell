@@ -6,11 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 21:08:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/15 17:01:08 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:06:14 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	add_end_obj(t_obj *head, t_obj *obj)
 {
