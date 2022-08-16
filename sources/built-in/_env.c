@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   _env.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 14:59:23 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/16 14:52:41 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/16 15:09:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "minishell.h"
+#include "../../includes/minishell.h"
 
-int	_export(t_token *token, t_minishell *ms);
-int	_unset(char *key, t_minishell *ms);
-int	_env(t_minishell *ms);
+int	_env(t_minishell *ms)
+{
+	char	**s;
+	int		i;
+	char	*tmp;
 
-#endif
+	s = env_to_tab(ms);
+	if (!s)
+		return (0);
+	i = -1;
+	while (s[++i])
+	{
+		tmp = ft_strjoin(s[i], "\n");
+		ft_putstr_fd(tmp, 1);
+		free(tmp);
+	}
+	i = -1;
+	while (s[++i])
+		free(s[i]);
+	return (1);
+}
