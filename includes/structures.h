@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 15:51:03 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 11:25:56 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_file
 {
 	char			*path;
 	int				*fd;
+	char			redir;
 	char			exist;
 	struct s_file	*next;
 }	t_file;
@@ -41,6 +42,7 @@ typedef struct s_token
 	char			*cmd;
 	t_file			*input_head;
 	t_file			*output_head;
+	int				pipefd[2];
 	struct s_arg	*arg_head;
 	struct s_token	*next;
 }	t_token;
