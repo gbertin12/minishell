@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/17 09:38:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 10:29:57 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ int	main(int argc, char **argv, char **envp)
 		free(s);
 	}
 	free(s);
-	e = ms.e_head;
-	while (e != NULL)
-	{
-		free(e->key);
-		free(e->value);
-		e = e->next;
-	}
 	free_all(&ms);
 	return (EXIT_SUCCESS);
 }

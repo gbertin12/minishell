@@ -45,7 +45,7 @@ static size_t	size_next_word(char const *s, char c)
 	return (i);
 }
 
-static void	*free_all(char **tab)
+static void	*s_free_all(char **tab, t_minishell *ms)
 {
 	size_t	i;
 	void	*x;
@@ -55,13 +55,13 @@ static void	*free_all(char **tab)
 	{
 		x = tab[i];
 		i++;
-		free(x);
+		ft_free(x, ms);
 	}
-	free(tab);
+	ft_free(tab, ms);
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, t_minishell *ms)
 {
 	char	**v;
 	size_t	len;
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	i = -1;
 	j = 0;
 	wc = count_world(s, c);
-	v = malloc(sizeof(char *) * (wc + 1));
+	v = ft_malloc(sizeof(char *) * (wc + 1), ms);
 	if (v == NULL)
 		return (NULL);
 	while (++i < wc)
@@ -80,9 +80,9 @@ char	**ft_split(char const *s, char c)
 		while (s[j] == c && s[j] != 0)
 			j++;
 		len = size_next_word(s + j, c);
-		v[i] = malloc(len + 1);
+		v[i] = ft_malloc(len + 1, ms);
 		if (v[i] == NULL)
-			return (free_all(v));
+			return (s_free_all(v, ms));
 		ft_strlcpy(v[i], s + j, len + 1);
 		j += len;
 	}

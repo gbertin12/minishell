@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 15:53:15 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 10:12:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ char	**env_to_tab(t_minishell *ms)
 	tmp = ms->e_head;
 	while (tmp != NULL)
 	{
-		s_tmp = ft_strjoin(tmp->key, "=");
-		ret_v[i] = ft_strjoin(s_tmp, tmp->value);
-		free(s_tmp);
+		s_tmp = ft_strjoin(tmp->key, "=", ms);
+		ret_v[i] = ft_strjoin(s_tmp, tmp->value, ms);
+		ft_free(s_tmp, ms);
 		tmp = tmp->next;
 		i++;
 	}

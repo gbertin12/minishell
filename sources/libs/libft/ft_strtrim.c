@@ -49,7 +49,7 @@ static size_t	newsize(const char *s, char const *set)
 	return (len);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set, t_minishell *ms)
 {
 	size_t	i;
 	size_t	len;
@@ -58,11 +58,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 	len = newsize(s1, set);
 	if (len == 0 || len > ft_strlen(s1) + 1)
 	{
-		v = malloc(1);
+		v = ft_malloc(1, ms);
 		v[0] = '\0';
 		return (v);
 	}
-	v = malloc(len);
+	v = ft_malloc(len, ms);
 	if (v == NULL)
 		return (NULL);
 	i = 0;

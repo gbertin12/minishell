@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, t_minishell *ms)
 {
 	size_t	nlen;
 	char	*sv;
 
 	nlen = ft_strlen(s1) + ft_strlen(s2) + 1;
-	sv = malloc(nlen);
+	sv = ft_malloc(nlen, ms);
 	if (sv == NULL)
 		return (NULL);
 	ft_strlcpy(sv, s1, ft_strlen(s1) + 1);

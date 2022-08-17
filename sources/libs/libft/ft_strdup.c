@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s, t_minishell *ms)
 {
 	size_t	len;
 	size_t	i;
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	len = ft_strlen(s);
-	v = malloc(len + 1);
+	v = ft_malloc(len + 1, ms);
 	if (v == NULL)
 		return (NULL);
 	while (i < len)

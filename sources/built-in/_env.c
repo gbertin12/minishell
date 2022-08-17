@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _env.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:52:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/16 15:09:53 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 10:04:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	_env(t_minishell *ms)
 	i = -1;
 	while (s[++i])
 	{
-		tmp = ft_strjoin(s[i], "\n");
+		tmp = ft_strjoin(s[i], "\n", ms);
 		ft_putstr_fd(tmp, 1);
-		free(tmp);
+		ft_free(tmp, ms);
 	}
 	i = -1;
 	while (s[++i])
-		free(s[i]);
+		ft_free(s[i], ms);
 	return (1);
 }

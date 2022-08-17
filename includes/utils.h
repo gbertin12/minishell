@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 04:30:10 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 10:00:11 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 size_t	count_env(t_env *ptr);
 
 char	**env_to_tab(t_minishell *ms);
-char	*ft_superjoin(char **s);
+char	*ft_superjoin(char **s, t_minishell *ms);
 char	*env_var_to_value(char *key, t_minishell *ms);
 
 char	do_env_key_exist(char *key, t_minishell *ms);
