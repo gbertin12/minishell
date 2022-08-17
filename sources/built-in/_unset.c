@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/16 14:46:09 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 10:10:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	unset_elem(t_env *before, t_env *env, t_env *after, t_env *head)
+static void	unset_elem(t_env *before, t_env *after, t_env *head)
 {
 	if (!before && !after)
 		head->next = NULL;
@@ -22,8 +22,6 @@ static void	unset_elem(t_env *before, t_env *env, t_env *after, t_env *head)
 		before->next = NULL;
 	else
 		before->next = after;
-	free(env->key);
-	free(env->value);
 }
 
 int	_unset(char *key, t_minishell *ms)
@@ -41,7 +39,9 @@ int	_unset(char *key, t_minishell *ms)
 	{
 		if (!ft_strncmp(key, e_env->key, ft_strlen(key)))
 		{
-			unset_elem(e_before, e_env, e_env->next, ms->e_head);
+			unset_elem(e_before, e_env->next, ms->e_head);
+			ft_free(e_env->key, ms);
+			ft_free(e_env->value, ms);
 			return (1);
 		}
 		e_before = e_env;

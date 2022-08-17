@@ -6,13 +6,13 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:35:41 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 11:19:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 09:59:15 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_superjoin(char **s)
+char	*ft_superjoin(char **s, t_minishell *ms)
 {
 	char	*ret_v;
 	char	*tmp;
@@ -21,17 +21,17 @@ char	*ft_superjoin(char **s)
 	i = 0;
 	ret_v = NULL;
 	if (!s[1])
-		return (ft_strdup(""));
+		return (ft_strdup("", ms));
 	while (s[++i] != NULL)
 	{
-		tmp = ft_strjoin("", s[i]);
-		free(s[i]);
-		free(ret_v);
+		tmp = ft_strjoin("", s[i], ms);
+		ft_free(s[i], ms);
+		ft_free(ret_v, ms);
 		ret_v = tmp;
 		if (s[i + 1])
 		{
-			tmp = ft_strjoin(ret_v, "=");
-			free(ret_v);
+			tmp = ft_strjoin(ret_v, "=", ms);
+			ft_free(ret_v, ms);
 			ret_v = tmp;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 11:27:06 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 10:06:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	replace_env_value(char *key, char *value, t_minishell *ms)
 	{
 		if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
 		{
-			free(env->value);
+			ft_free(env->value, ms);
 			env->value = value;
-			free(env->key);
+			ft_free(env->key, ms);
 			env->key = key;
 			return ;
 		}
@@ -70,15 +70,15 @@ int	_export(t_token *token, t_minishell *ms)
 			arg = arg->next;
 			continue ;
 		}
-		tmp = ft_split(arg->value, '=');
+		tmp = ft_split(arg->value, '=', ms);
 		key = tmp[0];
-		value = ft_superjoin(tmp);
+		value = ft_superjoin(tmp, ms);
 		if (do_env_key_exist(key, ms))
 			replace_env_value(key, value, ms);
 		else
 			add_env_key_value(key, value, ms);
 		arg = arg->next;
-		free(tmp);
+		ft_free(tmp, ms);
 	}
 	return (EXIT_SUCCESS);
 }

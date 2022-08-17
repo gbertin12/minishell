@@ -12,7 +12,8 @@
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char), t_minishell *ms)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char),
+			t_minishell *ms)
 {
 	unsigned int	i;
 	char			*v;
