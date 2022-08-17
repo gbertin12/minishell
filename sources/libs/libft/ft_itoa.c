@@ -47,7 +47,7 @@ static char	*ft_itoa_part2(int len, int n, unsigned int x, char *v)
 	return (v);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int n, t_minishell *ms)
 {
 	int					len;
 	unsigned int		x;
@@ -62,7 +62,7 @@ char	*ft_itoa(int n)
 		len++;
 	if (n < 0)
 		len++;
-	v = malloc(len + 1);
+	v = ft_malloc(len + 1, ms);
 	if (v == NULL)
 		return (NULL);
 	return (ft_itoa_part2(len, n, x, v));

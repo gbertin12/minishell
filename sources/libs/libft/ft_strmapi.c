@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char), t_minishell *ms)
 {
 	unsigned int	i;
 	char			*v;
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	i = 0;
 	len = ft_strlen(s) + 1;
-	v = malloc(len);
+	v = ft_malloc(len, ms);
 	if (v == NULL)
 		return (NULL);
 	while (i < len - 1)

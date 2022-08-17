@@ -12,7 +12,8 @@
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len,
+			t_minishell *ms)
 {
 	size_t			slen;
 	char			*v;
@@ -20,13 +21,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	slen = ft_strlen(s) + 1;
 	if (start > slen)
 	{
-		v = malloc(1);
+		v = ft_malloc(1, ms);
 		*v = '\0';
 		return (v);
 	}
 	if (len > slen - start)
 		len = slen - start;
-	v = malloc(len + 1);
+	v = ft_malloc(len + 1, ms);
 	if (v == NULL)
 		return (NULL);
 	ft_strlcpy(v, s + start, len + 1);
