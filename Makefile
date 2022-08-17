@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/16 15:01:55 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/17 04:45:25 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = minishell.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/ft_malloc.c\
 		sources/utils/ft_superjoin.c\
+		sources/utils/init_minishell.c\
 		sources/utils/list_to_tab.c\
 		sources/copy_env.c
 
