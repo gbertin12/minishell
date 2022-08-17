@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 17:16:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 17:44:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 {
 	size_t	size;
-	
+
 	if (s[0] == '>')
 		return (add_output(s, token, ms));
 	else if (s[0] == '<')
@@ -25,7 +25,7 @@ static size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 		size = search_next_sep(s);
 		token->cmd = ft_substr(s, 0, size, ms);
 	}
-	else 
+	else
 		add_arg(s, token, ms);
 	return (0);
 }
@@ -45,7 +45,7 @@ void	parsing(char *s, t_minishell *ms)
 	while (s[i + 1] != '\0')
 	{
 		while ((s[i] != '|' && s[i] != '>' && s[i] != '<'
-		&& !is_space(s[i]) && s[i] != '\0'))
+			&& !is_space(s[i]) && s[i] != '\0'))
 			i++;
 		while (is_space(s[i]))
 			i++;
