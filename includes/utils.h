@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 13:54:48 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 04:30:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	do_env_key_exist(char *key, t_minishell *ms);
 
 void	free_all(t_minishell *ms);
 void	ft_free(void *ptr, t_minishell *ms);
+void	init_minishell(t_minishell *ms);
 void	add_end_obj(t_obj *head, t_obj *obj);
 
 void	*ft_malloc(size_t size, t_minishell *ms);

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/16 16:30:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/17 04:30:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	(void)argc;
-	ms.e_head = NULL;
-	ms.o_head = NULL;
+	init_minishell(&ms);
 	copy_env(&ms, envp);
 	while (1)
 	{
