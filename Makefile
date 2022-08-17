@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/17 08:18:54 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/17 09:27:01 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = minishell.c\
 		sources/built-in/_export.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
+		sources/parsing/parsing.c\
 		sources/utils/add_end_list.c\
 		sources/utils/count_elem.c\
 		sources/utils/do_env_key_exist.c\

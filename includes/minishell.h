@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/16 21:22:32 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 09:32:25 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "structures.h"
 # include "utils.h"
 # include "built_in.h"
+# include "parsing.h"
 
 void	copy_env(t_minishell *ms, char **env);
 
