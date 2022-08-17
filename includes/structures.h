@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 11:25:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:05:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_file
 {
 	char			*path;
 	int				*fd;
-	char			redir;
+	char			append;
 	char			exist;
 	struct s_file	*next;
 }	t_file;

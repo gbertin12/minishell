@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_end_list.c                                     :+:      :+:    :+:   */
+/*   search_next_sep.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/02 21:08:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 15:34:16 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/17 17:15:55 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/17 17:16:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_end_obj(t_obj *head, t_obj *obj)
+size_t	search_next_sep(char *s)
 {
-	t_obj	*x;
+	size_t	i;
 
-	x = head;
-	while (x->next != NULL)
-		x = x->next;
-	x->next = obj;
-}
-
-void	add_end_token(t_token *head, t_token *obj)
-{
-	t_token	*x;
-
-	x = head;
-	while (x->next != NULL)
-		x = x->next;
-	x->next = obj;
-}
-
-void	add_end_arg(t_arg *head, t_arg *obj)
-{
-	t_arg	*x;
-
-	x = head;
-	while (x->next != NULL)
-		x = x->next;
-	x->next = obj;
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '|' && s[i] != '>' && s[i] != '<'
+		&& s[i] != ' ' && s[i] != '\0')
+		i++;
+	return (i);
 }

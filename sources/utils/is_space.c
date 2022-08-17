@@ -1,43 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_end_list.c                                     :+:      :+:    :+:   */
+/*   is_space.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/02 21:08:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 15:34:16 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/17 17:14:02 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/17 17:15:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_end_obj(t_obj *head, t_obj *obj)
+char is_space(char c)
 {
-	t_obj	*x;
-
-	x = head;
-	while (x->next != NULL)
-		x = x->next;
-	x->next = obj;
-}
-
-void	add_end_token(t_token *head, t_token *obj)
-{
-	t_token	*x;
-
-	x = head;
-	while (x->next != NULL)
-		x = x->next;
-	x->next = obj;
-}
-
-void	add_end_arg(t_arg *head, t_arg *obj)
-{
-	t_arg	*x;
-
-	x = head;
-	while (x->next != NULL)
-		x = x->next;
-	x->next = obj;
+	return (c == '\f' || c == '\n' || c == '\r'
+		|| c == '\t' || c == '\v' || c == ' ');
 }
