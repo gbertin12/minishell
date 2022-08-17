@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/17 10:30:07 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:58:48 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	_pwd(void)
 	{
 		ft_putstr_fd("Cannot get cwd path\n", 2);
 		if (errno == ERANGE)
-			ft_putstr_fd("Buffer size is too small", 2);
+			ft_putstr_fd("Buffer size is too small\n", 2);
 		else if (errno == EFAULT)
-			ft_putstr_fd("Invalide pointer on buffer", 2);
+			ft_putstr_fd("Invalide pointer on buffer\n", 2);
 		else if (errno == EIO)
-			ft_putstr_fd("I/O error", 2);
+			ft_putstr_fd("I/O error\n", 2);
 		else if (errno == EACCES)
-			ft_putstr_fd("You don't have access for this folder", 2);
+			ft_putstr_fd("You don't have access for this folder\n", 2);
 		return (EXIT_FAILURE);
 	}
 	ft_putstr_fd(v_print, 0);
