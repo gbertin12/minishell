@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 03:33:55 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:27:40 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minishell.h"
 
 size_t	count_env(t_env *ptr);
+size_t	count_arg(t_arg *ptr);
 
 char	**env_to_tab(t_minishell *ms);
 char	*ft_superjoin(char **s, t_minishell *ms);

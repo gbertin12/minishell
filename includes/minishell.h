@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/17 09:32:25 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/18 10:33:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <dirent.h>
 # include "../sources/libs/libft/libft.h"
 
 //include minishell

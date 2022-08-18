@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 12:34:09 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/18 10:56:23 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/18 12:33:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "minishell.h"
+#include "../../includes/minishell.h"
 
-char	_cd(t_token *token);
-int		_env(t_minishell *ms);
-int		_export(t_token *token, t_minishell *ms);
-int		_pwd(int fd);
-int		_unset(char *key, t_minishell *ms);
+static char exec_chdir(char *path)
+{
+	if(chdir(path) == -1)
+	{
+		//print error
+		return (0);
+	}
+	return (1);
+}
 
-#endif
+char	_cd(t_token *token)
+{
+	size_t	nb_arg;
+
+	nb_arg = count_arg(token->arg_head);
+	if (nb_arg > 1)
+	{
+		ft_putstr_fd("cd: too many arguments\n", 2);
+		return (0);
+	}
+	if (nb_arg == 0)
+		return (1);
+	return(exec_chdir(token->arg_head->value));
+}
