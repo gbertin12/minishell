@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 03:57:50 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/18 12:12:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,24 @@ static size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 	return (0);
 }
 
-void	parsing(char *s, t_minishell *ms)
+static size_t	skip_spaces(char *s)
 {
-	t_token			*token;
-	size_t			i;
-	long long int	x;
+	size_t	ret_v;
 
-	token = new_token(NULL, ms);
-	if (!token || !s)
-		return ;
-	i = next_arg(s, token, ms);
+	ret_v = 0;
+	while (is_space(s[ret_v]))
+		ret_v++;
+	return (ret_v);
+}
+
+void	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
+{
+	long long	x;
+
 	while (s[i + 1] != '\0')
 	{
 		i += search_next_sep(&s[i]);
-		while (is_space(s[i]))
-				i++;
+		i += skip_spaces(&s[i]);
 		if (s[i] == '|')
 		{
 			token = new_token(token, ms);
@@ -63,12 +66,23 @@ void	parsing(char *s, t_minishell *ms)
 				return ;
 			i++;
 		}
-		while (is_space(s[i]))
-			i++;
+		i += skip_spaces(&s[i]);
 		x = next_arg(&s[i], token, ms);
 		if (x < 0)
 			return ;
 		i += (size_t)x;
 	}
 	add_end_token(token, ms);
+}
+
+void	parsing(char *s, t_minishell *ms)
+{
+	t_token			*token;
+	size_t			i;
+
+	token = new_token(NULL, ms);
+	if (!token || !s)
+		return ;
+	i = next_arg(s, token, ms);
+	parsing2(s, i, token, ms);
 }
