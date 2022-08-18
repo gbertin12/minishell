@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/18 08:06:27 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:23:40 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp("exit", s, 4) == 0)
 			break ;
 		parsing(s, &ms);
+		expand(&ms);
 		token = ms.t_head;
 		while (token)
 		{
