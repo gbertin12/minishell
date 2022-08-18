@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/17 17:45:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/18 15:12:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 	while (is_space(s[ret_v]))
 		ret_v++;
 	file->path = ft_substr(s, (size_t)ret_v, search_next_sep(&s[ret_v]), ms);
-	file->next = token->output_head;
-	token->output_head = file;
+	file->type = 1;
+	add_end_file(token, file);
 	return (ret_v);
 }
 
@@ -70,7 +70,6 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 	while (is_space(s[ret_v]))
 		ret_v++;
 	file->path = ft_substr(s, (size_t)ret_v, search_next_sep(&s[ret_v]), ms);
-	file->next = token->input_head;
-	token->input_head = file;
+	add_end_file(token, file);
 	return (ret_v);
 }
