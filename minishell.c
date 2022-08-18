@@ -44,19 +44,11 @@ int	main(int argc, char **argv, char **envp)
 				arg = arg->next;
 			}
 			printf("\n");
-			file = token->input_head;
-			printf("INFILE = ");
+			file = token->file_head;
+			printf("FILES = ");
 			while (file)
 			{
-				printf("%s[%d] | ", file->path, file->append);
-				file = file->next;
-			}
-			printf("\n");
-			file = token->output_head;
-			printf("OUTFILE = ");
-			while (file)
-			{
-				printf("%s[%d] | ", file->path, file->append);
+				printf("%s[%d] %s | ", file->path, file->append, file->type == 1 ? "OUT" : "IN");
 				file = file->next;
 			}
 			printf("\n");
