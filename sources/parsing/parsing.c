@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 17:44:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/18 03:57:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static t_token	*new_token(t_token *token, t_minishell *ms)
+{
+	if (token)
+		add_end_token(token, ms);
+	token = (t_token *)ft_malloc(sizeof(t_token), ms);
+	if (!token)
+		return (NULL);
+	ft_memset(token, 0, sizeof(t_token));
+	return (token);
+}
 
 static size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 {
@@ -36,38 +47,28 @@ void	parsing(char *s, t_minishell *ms)
 	size_t			i;
 	long long int	x;
 
-	token = ft_malloc(sizeof(t_token), ms);
-	ft_memset(token, 0, sizeof(t_token));
-	if (!s)
+	token = new_token(NULL, ms);
+	if (!token || !s)
 		return ;
-	i = 0;
-	i = next_arg(&s[i], token, ms);
+	i = next_arg(s, token, ms);
 	while (s[i + 1] != '\0')
 	{
-		while ((s[i] != '|' && s[i] != '>' && s[i] != '<'
-			&& !is_space(s[i]) && s[i] != '\0'))
-			i++;
+		i += search_next_sep(&s[i]);
 		while (is_space(s[i]))
-			i++;
-		if (s[i] == '|' && s[i] != '\0')
+				i++;
+		if (s[i] == '|')
 		{
-			if (ms->t_head == NULL)
-				ms->t_head = token;
-			else
-				add_end_token(ms->t_head, token);
-			token = ft_malloc(sizeof(t_token), ms);
-			ft_memset(token, 0, sizeof(t_token));
+			token = new_token(token, ms);
+			if (!token)
+				return ;
 			i++;
 		}
-		if (is_space(s[i]) || s[i] == '|')
+		while (is_space(s[i]))
 			i++;
 		x = next_arg(&s[i], token, ms);
 		if (x < 0)
 			return ;
 		i += (size_t)x;
 	}
-	if (ms->t_head == NULL)
-		ms->t_head = token;
-	else
-		add_end_token(ms->t_head, token);
+	add_end_token(token, ms);
 }

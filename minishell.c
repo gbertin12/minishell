@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/17 17:12:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/18 03:53:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	(void)argc;
-	init_minishell(&ms);
+	//init_minishell(&ms);
+	ft_bzero(&ms, sizeof(t_minishell));
 	copy_env(&ms, envp);
-	
 	while (1)
 	{
 		s = readline("\033[30mminishell ➤ \033[32m");
@@ -33,15 +33,12 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		parsing(s, &ms);
 		token = ms.t_head;
-		// printf("cmd 1 : %s\n", token->cmd);
-		// token = token->next;
-		// printf("cmd 2 : %s\n", token->cmd);
-		while(token)
+		while (token)
 		{
 			arg = token->arg_head;
 			printf("CMD = %s\n", token->cmd);
 			printf("ARG = ");
-			while(arg)
+			while (arg)
 			{
 				printf("%s | ", arg->value);
 				arg = arg->next;
@@ -49,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("\n");
 			file = token->input_head;
 			printf("INFILE = ");
-			while(file)
+			while (file)
 			{
 				printf("%s[%d] | ", file->path, file->append);
 				file = file->next;
@@ -57,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("\n");
 			file = token->output_head;
 			printf("OUTFILE = ");
-			while(file)
+			while (file)
 			{
 				printf("%s[%d] | ", file->path, file->append);
 				file = file->next;
@@ -67,7 +64,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(s);
 	}
-	
 	free(s);
 	free_all(&ms);
 	return (EXIT_SUCCESS);

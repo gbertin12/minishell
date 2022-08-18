@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror
 NAME=libft.a
 SRC=ft_atoi.c\
 	ft_bzero.c\
