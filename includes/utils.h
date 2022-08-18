@@ -30,6 +30,7 @@ void	init_minishell(t_minishell *ms);
 void	add_end_obj(t_obj *head, t_obj *obj);
 void	add_end_token(t_token *obj, t_minishell *ms);
 void	add_end_arg(t_arg *head, t_arg *obj);
+void	add_end_file(t_token *token, t_file *obj);
 
 char	is_space(char c);
 
