@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/18 15:12:26 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 09:39:08 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 		ret_v++;
 		file->append = 1;
 	}
-	if (!ft_isalnum(s[ret_v]) && !is_space(s[ret_v]))
+	if (!ft_isprint(s[ret_v]) && !is_space(s[ret_v]))
 		return (-1);
 	while (is_space(s[ret_v]))
 		ret_v++;
@@ -65,7 +65,7 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 		ret_v++;
 		file->append = 1;
 	}
-	if (!ft_isalnum(s[ret_v]) && !is_space(s[ret_v]))
+	if (!ft_isprint(s[ret_v]) && !is_space(s[ret_v]))
 		return (-1);
 	while (is_space(s[ret_v]))
 		ret_v++;

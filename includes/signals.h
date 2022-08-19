@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 14:52:46 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/19 10:19:46 by ccambium          #+#    #+#             */
+/*   Updated: 2022/08/19 10:20:32 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
+
 # include "minishell.h"
 
-char	_cd(t_token *token, t_minishell *ms);
-int		_env(t_minishell *ms);
-int		_export(t_token *token, t_minishell *ms);
-int		_pwd(int fd);
-int		_unset(char *key, t_minishell *ms);
+
 
 #endif

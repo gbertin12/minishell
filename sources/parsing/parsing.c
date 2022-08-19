@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 12:12:25 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 09:36:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 		return (add_output(s, token, ms));
 	else if (s[0] == '<')
 		return (add_input(s, token, ms));
-	else if (token->cmd == NULL)
+	if (token->cmd == NULL)
 	{
 		size = search_next_sep(s);
 		token->cmd = ft_substr(s, 0, size, ms);
@@ -68,6 +68,7 @@ void	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 		}
 		i += skip_spaces(&s[i]);
 		x = next_arg(&s[i], token, ms);
+		printf("x = %lld\n", x);
 		if (x < 0)
 			return ;
 		i += (size_t)x;
