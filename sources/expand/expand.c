@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 13:25:45 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:48:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,6 @@ static size_t	next_var(char *s)
 	return (i);
 }
 
-static char	*read_var(char *s, t_minishell *ms)
-{
-	size_t	i;
-	char	*ret_v;
-
-	i = 0;
-	while (s[i] && !is_space(s[i]) && s[i] != '$')
-		i++;
-	ret_v = ft_substr(s, 0, i, ms);
-	return (ret_v);
-}
-
-static char	*replace_var(char *s, size_t x, t_minishell *ms)
-{
-	size_t	i;
-	char	*tmp;
-	char	*tmp2;
-	char	*ret_v;
-
-	if (!s || s[x] == 0)
-		return (s);
-	tmp2 = read_var(&s[x + 1], ms);
-	tmp = get_env_value(tmp2, ms);
-	ft_free(tmp2, ms);
-	if (!tmp)
-		tmp = (ft_strdup("", ms));
-	tmp2 = ft_substr(s, 0, x, ms);
-	ret_v = ft_strjoin(tmp2, tmp, ms);
-	ft_free(tmp2, ms);
-	ft_free(tmp, ms);
-	i = x + 1;
-	while (s[i] && !is_space(s[i]) && s[i] != '$')
-		i++;
-	tmp = ft_substr(s, x + i, ft_strlen(&s[x + i]), ms);
-	ret_v = ft_strjoin(ret_v, tmp, ms);
-	ft_free(tmp, ms);
-	return (ret_v);
-}
-
 static void	expand_arg(t_token *token, t_minishell *ms)
 {
 	t_arg	*arg;
@@ -70,26 +31,21 @@ static void	expand_arg(t_token *token, t_minishell *ms)
 	arg = token->arg_head;
 	while (arg)
 	{
-		if (arg->apos == 1)
+		if (arg->apos == 1 || !arg->value)
 		{
 			arg = arg->next;
 			continue ;
 		}
-		if (arg->value)
+		i = next_var(arg->value);
+		while (arg->value[i])
 		{
+			tmp = arg->value;
+			arg->value = replace_var(arg->value, i, ms);
+			if (!arg->value)
+				arg->value = tmp;
+			else
+				ft_free(tmp, ms);
 			i = next_var(arg->value);
-			while (arg->value[i])
-			{
-				if (arg->value[i] == 0)
-					break ;
-				tmp = arg->value;
-				arg->value = replace_var(arg->value, i, ms);
-				if (!arg->value)
-					arg->value = tmp;
-				else
-					ft_free(tmp, ms);
-				i = next_var(arg->value);
-			}
 		}
 		arg = arg->next;
 	}
@@ -104,26 +60,21 @@ static void	expand_file(t_token *token, t_minishell *ms)
 	file = token->file_head;
 	while (file)
 	{
-		if (file->apos == 1)
+		if (file->apos == 1 || !file->path)
 		{
 			file = file->next;
 			continue ;
 		}
-		if (file->path)
+		i = next_var(file->path);
+		while (file->path[i])
 		{
+			tmp = file->path;
+			file->path = replace_var(file->path, i, ms);
+			if (!file->path)
+				file->path = tmp;
+			else
+				ft_free(tmp, ms);
 			i = next_var(file->path);
-			while (file->path[i])
-			{
-				if (file->path[i] == 0)
-					break ;
-				tmp = file->path;
-				file->path = replace_var(file->path, i, ms);
-				if (!file->path)
-					file->path = tmp;
-				else
-					ft_free(tmp, ms);
-				i = next_var(file->path);
-			}
 		}
 		file = file->next;
 	}

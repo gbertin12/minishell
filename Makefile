@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/19 13:26:17 by ccambium         ###   ########.fr        #
+#    Updated: 2022/08/19 13:50:01 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = minishell.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/expand/expand.c\
+		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
 		sources/parsing/parsing.c\
 		sources/parsing/search_next_sep.c\

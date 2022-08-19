@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 13:26:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:40:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 			token = token->next;
 		}
 		if (s && *s)
-    		add_history (s);
+    		add_history(s);
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);
