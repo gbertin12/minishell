@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/19 14:30:59 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/19 19:48:54 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
 		sources/built-in/_cd.c\
+		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
 		sources/built-in/_export.c\
 		sources/built-in/_pwd.c\

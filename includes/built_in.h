@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 14:52:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:52:43 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int		_env(t_minishell *ms);
 int		_export(t_token *token, t_minishell *ms);
 int		_pwd(int fd);
 int		_unset(char *key, t_minishell *ms);
+int		_echo(t_token *token);
 
 #endif
