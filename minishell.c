@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 10:36:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 12:23:57 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 		while (token)
 		{
 			arg = token->arg_head;
-			printf("CMD = %s\n", token->cmd);
+			printf("CMD = %s apos = %d\n", token->cmd, token->apos);
 			printf("ARG = ");
 			while (arg)
 			{
