@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 14:00:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 14:04:52 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 void	parsing(char *s, t_minishell *ms)
 {
 	t_token			*token;
-	size_t			i;
+	long long		i;
 
 	token = new_token(NULL, ms);
 	if (!token || !s)
