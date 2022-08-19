@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 09:39:08 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 12:58:03 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,21 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 	file->path = ft_substr(s, (size_t)ret_v, search_next_sep(&s[ret_v]), ms);
 	add_end_file(token, file);
 	return (ret_v);
+}
+
+void	add_arg_w_quote(char *cmd, char quote, t_token *token, t_minishell *ms)
+{
+	t_arg	*n_arg;
+
+	if (!cmd || cmd[0] == '\0')
+		return ;
+	n_arg = ft_malloc(sizeof(t_arg), ms);
+	n_arg->value = cmd;
+	n_arg->next = NULL;
+	if (quote == '\'')
+		n_arg->apos = 1;
+	if (token->arg_head == NULL)
+		token->arg_head = n_arg;
+	else
+		add_end_arg(token->arg_head, n_arg);
 }

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 09:36:10 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 13:04:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,26 @@ static t_token	*new_token(t_token *token, t_minishell *ms)
 	return (token);
 }
 
-static size_t	next_arg(char *s, t_token *token, t_minishell *ms)
+static char	*get_cmd_w_quote(char *cmd, char c, t_minishell *ms)
 {
-	size_t	size;
+	size_t	i;
+	char	*s_ret;
+	size_t	y;
 
-	if (s[0] == '>')
-		return (add_output(s, token, ms));
-	else if (s[0] == '<')
-		return (add_input(s, token, ms));
-	if (token->cmd == NULL)
+	i = 1;
+	y = 1;
+	while (cmd[i] != c)
+		i++;
+	s_ret = ft_malloc(i, ms);
+	if (!s_ret)
+		return (NULL);
+	while (y < i && i != 1)
 	{
-		size = search_next_sep(s);
-		token->cmd = ft_substr(s, 0, size, ms);
+		s_ret[y - 1] = cmd[y];
+		y++;
 	}
-	else
-		add_arg(s, token, ms);
-	return (0);
+	s_ret[y - 1] = '\0';
+	return (s_ret);
 }
 
 static size_t	skip_spaces(char *s)
@@ -68,7 +72,6 @@ void	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 		}
 		i += skip_spaces(&s[i]);
 		x = next_arg(&s[i], token, ms);
-		printf("x = %lld\n", x);
 		if (x < 0)
 			return ;
 		i += (size_t)x;
@@ -85,5 +88,7 @@ void	parsing(char *s, t_minishell *ms)
 	if (!token || !s)
 		return ;
 	i = next_arg(s, token, ms);
+	if (i < 0)
+		return ;
 	parsing2(s, i, token, ms);
 }
