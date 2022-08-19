@@ -6,11 +6,24 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 14:27:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 14:56:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static size_t	search_end_of_cmd(char *cmd)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '|' && s[i] != '>' && s[i] != '<'
+		&& s[i] != ' ' && s[i] != '\0')
+		i++;
+	return (i);
+}
 
 size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 {
