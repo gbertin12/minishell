@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 14:12:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 14:27:55 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ long long	next_arg_w_quote(char *s, t_token *token, t_minishell *ms)
 	char		quote;
 
 	quote = s[0];
-	if (!ft_strchr(s, quote))
+	if (ft_strchr(s, quote))
 		cmd = get_cmd_w_quote(s, quote, ms);
 	else
 	{
