@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:41:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 13:43:28 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:52:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*replace_var(char *s, size_t x, t_minishell *ms)
 	i = x + 1;
 	while (s[i] && !is_space(s[i]) && s[i] != '$')
 		i++;
-	tmp = ft_substr(s, x + i, ft_strlen(&s[x + i]), ms);
+	printf("s[i] = %s |\n", &s[i]);
+	tmp = ft_substr(s, i, ft_strlen(&s[i]), ms);
 	ret_v = ft_strjoin(ret_v, tmp, ms);
 	ft_free(tmp, ms);
 	return (ret_v);

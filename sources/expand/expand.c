@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 13:48:06 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:50:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	expand_arg(t_token *token, t_minishell *ms)
 	arg = token->arg_head;
 	while (arg)
 	{
-		if (arg->apos == 1 || !arg->value)
+		if (arg->apos || !arg->value)
 		{
 			arg = arg->next;
 			continue ;
@@ -60,7 +60,7 @@ static void	expand_file(t_token *token, t_minishell *ms)
 	file = token->file_head;
 	while (file)
 	{
-		if (file->apos == 1 || !file->path)
+		if (file->apos || !file->path)
 		{
 			file = file->next;
 			continue ;
@@ -86,7 +86,7 @@ static void	expand_cmd(t_token *token, t_minishell *ms)
 	size_t	i;
 
 	printf("%s\n", token->cmd);
-	if (token->cmd == NULL)
+	if (token->cmd == NULL || token->apos)
 		return ;
 	i = next_var(token->cmd);
 	while (token->cmd[i])
