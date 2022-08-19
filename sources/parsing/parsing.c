@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 13:04:27 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 14:09:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,6 @@ static t_token	*new_token(t_token *token, t_minishell *ms)
 		return (NULL);
 	ft_memset(token, 0, sizeof(t_token));
 	return (token);
-}
-
-static char	*get_cmd_w_quote(char *cmd, char c, t_minishell *ms)
-{
-	size_t	i;
-	char	*s_ret;
-	size_t	y;
-
-	i = 1;
-	y = 1;
-	while (cmd[i] != c)
-		i++;
-	s_ret = ft_malloc(i, ms);
-	if (!s_ret)
-		return (NULL);
-	while (y < i && i != 1)
-	{
-		s_ret[y - 1] = cmd[y];
-		y++;
-	}
-	s_ret[y - 1] = '\0';
-	return (s_ret);
 }
 
 static size_t	skip_spaces(char *s)

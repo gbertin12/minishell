@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 12:59:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 14:12:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,28 @@ size_t	next_arg(char *s, t_token *token, t_minishell *ms)
 	else
 		add_arg(s, token, ms);
 	return (0);
+}
+
+static char	*get_cmd_w_quote(char *cmd, char c, t_minishell *ms)
+{
+	size_t	i;
+	char	*s_ret;
+	size_t	y;
+
+	i = 1;
+	y = 1;
+	while (cmd[i] != c)
+		i++;
+	s_ret = ft_malloc(i, ms);
+	if (!s_ret)
+		return (NULL);
+	while (y < i && i != 1)
+	{
+		s_ret[y - 1] = cmd[y];
+		y++;
+	}
+	s_ret[y - 1] = '\0';
+	return (s_ret);
 }
 
 long long	next_arg_w_quote(char *s, t_token *token, t_minishell *ms)
