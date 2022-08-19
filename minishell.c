@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 11:53:36 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 12:01:39 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	g_mode = 0;
 	init_signals();
-	ft_bzero(&ms, sizeof(t_minishell));
+	//ft_bzero(&ms, sizeof(t_minishell));
+	init_minishell(&ms);
 	token = ft_malloc(sizeof(token), &ms);
 	arg = ft_malloc(sizeof(arg), &ms);
 	file = ft_malloc(sizeof(file), &ms);
