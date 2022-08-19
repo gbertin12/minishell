@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 16:46:24 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 09:52:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*read_var(char *s, t_minishell *ms)
 	char	*ret_v;
 
 	i = 0;
-	while (s[i] && !isspace(s[i]) && s[i] != '$')
+	while (s[i] && !is_space(s[i]) && s[i] != '$')
 		i++;
 	ret_v = ft_substr(s, 0, i, ms);
 	return (ret_v);
@@ -54,7 +54,7 @@ static char	*replace_var(char *s, size_t x, t_minishell *ms)
 	ft_free(tmp2, ms);
 	ft_free(tmp, ms);
 	i = x + 1;
-	while (s[i] && !isspace(s[i]) && s[i] != '$')
+	while (s[i] && !is_space(s[i]) && s[i] != '$')
 		i++;
 	tmp = ft_substr(s, x + i, ft_strlen(&s[x + i]), ms);
 	ret_v = ft_strjoin(ret_v, tmp, ms);
@@ -123,7 +123,7 @@ static void	expand_file(t_token *token, t_minishell *ms)
 					file->path = tmp;
 				else
 					ft_free(tmp, ms);
-				i = next_var(file->path) ;
+				i = next_var(file->path);
 			}
 		}
 		file = file->next;
