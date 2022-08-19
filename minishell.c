@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 13:40:46 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:56:31 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 	copy_env(&ms, envp);
 	while (1)
 	{
-		s = readline("\033[34mminishell ➤ \033[32m");
+		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
 		if (s == NULL)
 			break ;
 		if (ft_strncmp("exit", s, 4) == 0)
