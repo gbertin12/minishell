@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/19 10:19:39 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/19 10:54:15 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = minishell.c\
 		sources/parsing/add_param.c\
 		sources/parsing/parsing.c\
 		sources/parsing/search_next_sep.c\
+		sources/signals/signals.c\
 		sources/utils/add_end_list.c\
 		sources/utils/add_env_key_value.c\
 		sources/utils/count_elem.c\
