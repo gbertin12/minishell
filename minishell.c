@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 09:43:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 10:36:03 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (s && *s)
     		add_history (s);
+		free_tokens(&ms);
+		ms.t_head = NULL;
 		free(s);
 	}
 	free_all(&ms);

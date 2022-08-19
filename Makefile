@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/18 17:01:09 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/19 10:19:39 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = minishell.c\
 		sources/utils/add_env_key_value.c\
 		sources/utils/count_elem.c\
 		sources/utils/do_env_key_exist.c\
+		sources/utils/free_tokens.c\
 		sources/utils/ft_malloc.c\
 		sources/utils/ft_superjoin.c\
 		sources/utils/get_env_value.c\

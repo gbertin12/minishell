@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 17:01:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 10:19:59 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	add_env_key_value(char *key, char *value, t_minishell *ms);
 void	free_all(t_minishell *ms);
 void	ft_free(void *ptr, t_minishell *ms);
 void	init_minishell(t_minishell *ms);
+void	free_tokens(t_minishell *ms);
 
 void	add_end_obj(t_obj *head, t_obj *obj);
 void	add_end_token(t_token *obj, t_minishell *ms);
