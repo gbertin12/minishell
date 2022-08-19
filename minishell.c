@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 11:07:12 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 11:53:36 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		s = readline("\033[34mminishell ➤ \033[32m");
+		if (s == NULL)
+			break ;
 		if (ft_strncmp("exit", s, 4) == 0)
 			break ;
 		parsing(s, &ms);
