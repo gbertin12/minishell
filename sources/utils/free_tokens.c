@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:09:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 10:33:25 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 13:02:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	free_files(t_file *head, t_minishell *ms)
 {
 	t_file	*tmp;
 
-	while(head)
+	while (head)
 	{
 		tmp = head;
 		head = head->next;
@@ -29,7 +29,7 @@ static void	free_args(t_arg *head, t_minishell *ms)
 {
 	t_arg	*tmp;
 
-	while(head)
+	while (head)
 	{
 		tmp = head;
 		head = head->next;

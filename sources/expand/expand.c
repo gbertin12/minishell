@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 17:04:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 12:53:02 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static char	*replace_var(char *s, size_t x, t_minishell *ms)
 
 	if (!s || s[x] == 0)
 		return (s);
-	printf("s[x] == %c && x = %lu\n", s[x], x);
 	tmp2 = read_var(&s[x + 1], ms);
 	tmp = get_env_value(tmp2, ms);
 	ft_free(tmp2, ms);
@@ -135,6 +134,9 @@ static void	expand_cmd(t_token *token, t_minishell *ms)
 	char	*tmp;
 	size_t	i;
 
+	printf("%s\n", token->cmd);
+	if (token->cmd == NULL)
+		return ;
 	i = next_var(token->cmd);
 	while (token->cmd[i])
 	{

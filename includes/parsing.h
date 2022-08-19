@@ -6,13 +6,13 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:29:08 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/17 17:16:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 13:03:40 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-#include "minishell.h"
+# include "minishell.h"
 
 void			parsing(char *s, t_minishell *ms);
 
