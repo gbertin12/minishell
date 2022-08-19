@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/18 15:12:28 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/18 17:01:09 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = minishell.c\
 		sources/built-in/_export.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
+		sources/expand/expand.c\
 		sources/parsing/add_param.c\
 		sources/parsing/parsing.c\
 		sources/parsing/search_next_sep.c\
@@ -30,6 +31,7 @@ SRCS = minishell.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/ft_malloc.c\
 		sources/utils/ft_superjoin.c\
+		sources/utils/get_env_value.c\
 		sources/utils/init_minishell.c\
 		sources/utils/is_space.c\
 		sources/utils/list_to_tab.c\
