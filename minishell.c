@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 10:36:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/19 11:07:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	(void)argc;
+	g_mode = 0;
+	init_signals();
 	ft_bzero(&ms, sizeof(t_minishell));
 	token = ft_malloc(sizeof(token), &ms);
 	arg = ft_malloc(sizeof(arg), &ms);

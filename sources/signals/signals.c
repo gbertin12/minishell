@@ -6,11 +6,13 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 10:46:12 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/19 11:14:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	g_mode;
 
 void	init_signals(void)
 {
