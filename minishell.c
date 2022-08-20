@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/20 22:35:40 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:46:07 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
-		if (s == NULL)
-			break ;
-		if (ft_strncmp("exit", s, 4) == 0)
+		if (!s || ft_strncmp("exit", s, 4) == 0)
 			break ;
 		parsing(s, &ms);
 		expand(&ms);
