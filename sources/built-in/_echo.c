@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 19:53:05 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:22:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_files(t_token *token)
 	file = token->file_head;
 	while (file)
 	{
-		if (!file->type)
+		if (file->type)
 		{
 			file = file->next;
 			continue ;
