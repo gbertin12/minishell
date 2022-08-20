@@ -6,20 +6,22 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 12:58:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/20 10:49:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_arg(char *s, t_token *token, t_minishell *ms)
+long long	add_arg(char *s, t_token *token, t_minishell *ms)
 {
-	t_arg	*n_arg;
-	size_t	size;
+	t_arg		*n_arg;
+	long long	size;
 
 	if (!s || s[0] == '\0')
-		return ;
-	size = search_next_sep(s);
+		return (0);
+	size = get_size_of_cmd(s);
+		if (size < 0)
+			return (-1);
 	n_arg = ft_malloc(sizeof(t_arg), ms);
 	n_arg->value = ft_substr(s, 0, size, ms);
 	n_arg->next = NULL;
@@ -27,6 +29,7 @@ void	add_arg(char *s, t_token *token, t_minishell *ms)
 		token->arg_head = n_arg;
 	else
 		add_end_arg(token->arg_head, n_arg);
+	return (size);
 }
 
 long long int	add_output(char *s, t_token *token, t_minishell *ms)

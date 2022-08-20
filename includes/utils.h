@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 13:03:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/20 10:51:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ void		add_end_obj(t_obj *head, t_obj *obj);
 void		add_end_token(t_token *obj, t_minishell *ms);
 void		add_end_arg(t_arg *head, t_arg *obj);
 void		add_end_file(t_token *token, t_file *obj);
-void		add_arg_w_quote(char *cmd, char quote, t_token *token, t_minishell *ms);
 
-long long	next_arg_w_quote(char *s, t_token *token, t_minishell *ms);
-size_t		next_arg(char *s, t_token *token, t_minishell *ms);
+long long	next_arg(char *s, t_token *token, t_minishell *ms);
+long long 	get_size_of_cmd(char *cmd);
 
 char		is_space(char c);
 
