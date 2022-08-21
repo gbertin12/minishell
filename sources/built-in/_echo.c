@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   _echo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/08/20 22:18:57 by gbertin          ###   ########.fr       */
-=======
-/*   Updated: 2022/08/20 22:22:25 by ccambium         ###   ########.fr       */
->>>>>>> cd95459b48694bb8ce9e18784f847acd56c2b8f8
+/*   Updated: 2022/08/20 22:38:52 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
