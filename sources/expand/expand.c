@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 12:53:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:00:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static void	expand_file(t_token *token, t_minishell *ms)
 					file->path = tmp;
 				else
 					ft_free(tmp, ms);
-				i = next_var(file->path) ;
+				i = next_var(file->path);
 			}
 		}
 		file = file->next;

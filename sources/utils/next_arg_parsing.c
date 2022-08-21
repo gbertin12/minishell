@@ -6,17 +6,17 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/20 11:20:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:00:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-long long get_size_of_cmd(char *cmd)
+long long	get_size_of_cmd(char *cmd)
 {
 	long long	i;
-	char	quote;
-	
+	char		quote;
+
 	i = 0;
 	while (cmd[i] && !is_space(cmd[i]))
 	{
@@ -26,10 +26,13 @@ long long get_size_of_cmd(char *cmd)
 			i++;
 			if (ft_strchr(&cmd[i], quote))
 			{
-				while(cmd[i] != quote)
+				while (cmd[i] != quote)
 					i++;
-				if (!is_space(cmd[i]) || cmd[i] != '\'' || cmd[i] != '\"')
-					i++;
+				i++;
+				if (is_space(cmd[i]))
+					return (i);
+				if (cmd[i] == '\'' || cmd[i] == '\"')
+					i--;
 			}
 			else
 			{
@@ -40,7 +43,6 @@ long long get_size_of_cmd(char *cmd)
 				return (-1);
 			}		
 		}
-		//if (((cmd[i] == '\'' || cmd[i] == '\"') && is_space(cmd[i + 1])) || ft_isprint(cmd[i]))
 		i++;
 	}
 	return (i);
@@ -57,11 +59,9 @@ long long	next_arg(char *s, t_token *token, t_minishell *ms)
 	if (token->cmd == NULL)
 	{
 		size = get_size_of_cmd(s);
-		printf("size = %lld\n", size);
 		if (size < 0)
 			return (-1);
 		token->cmd = ft_substr(s, 0, size, ms);
-		printf("cmd =%s\n", token->cmd);
 	}
 	else
 		return (add_arg(s, token, ms));

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/20 10:49:54 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:01:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ long long	add_arg(char *s, t_token *token, t_minishell *ms)
 	if (!s || s[0] == '\0')
 		return (0);
 	size = get_size_of_cmd(s);
-		if (size < 0)
-			return (-1);
+	if (size < 0)
+		return (-1);
 	n_arg = ft_malloc(sizeof(t_arg), ms);
 	n_arg->value = ft_substr(s, 0, size, ms);
 	n_arg->next = NULL;
@@ -36,6 +36,7 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 {
 	long long int	ret_v;
 	t_file			*file;
+	long long int	size;
 
 	ret_v = 1;
 	file = ft_malloc(sizeof(t_file), ms);
@@ -49,9 +50,13 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 		return (-1);
 	while (is_space(s[ret_v]))
 		ret_v++;
-	file->path = ft_substr(s, (size_t)ret_v, search_next_sep(&s[ret_v]), ms);
+	size = get_size_of_cmd(&s[ret_v]);
+	if (size < 0)
+		return (-1);
+	file->path = ft_substr(s, (size_t)ret_v, size, ms);
 	file->type = 1;
 	add_end_file(token, file);
+	ret_v += size;
 	return (ret_v);
 }
 
@@ -59,6 +64,7 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 {
 	long long int	ret_v;
 	t_file			*file;
+	long long int	size;
 
 	ret_v = 1;
 	file = ft_malloc(sizeof(t_file), ms);
@@ -72,24 +78,9 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 		return (-1);
 	while (is_space(s[ret_v]))
 		ret_v++;
-	file->path = ft_substr(s, (size_t)ret_v, search_next_sep(&s[ret_v]), ms);
+	size = get_size_of_cmd(&s[ret_v]);
+	file->path = ft_substr(s, (size_t)ret_v, size, ms);
 	add_end_file(token, file);
+	ret_v += size;
 	return (ret_v);
-}
-
-void	add_arg_w_quote(char *cmd, char quote, t_token *token, t_minishell *ms)
-{
-	t_arg	*n_arg;
-
-	if (!cmd || cmd[0] == '\0')
-		return ;
-	n_arg = ft_malloc(sizeof(t_arg), ms);
-	n_arg->value = cmd;
-	n_arg->next = NULL;
-	if (quote == '\'')
-		n_arg->apos = 1;
-	if (token->arg_head == NULL)
-		token->arg_head = n_arg;
-	else
-		add_end_arg(token->arg_head, n_arg);
 }
