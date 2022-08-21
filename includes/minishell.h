@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 11:13:58 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/21 19:25:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <dirent.h>
+# include <string.h>
 # include "../sources/libs/libft/libft.h"
 
 //include minishell

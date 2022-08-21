@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/19 19:48:54 by ccambium         ###   ########.fr        #
+#    Updated: 2022/08/21 19:37:19 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -fsanitize=address -g3
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline  -fsanitize=address -g3
 
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)
