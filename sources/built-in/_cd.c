@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:56:23 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 11:01:50 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:40:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,11 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	value_oldpwd = get_pwd(ms);
 	if (chdir(path) == -1)
 	{
-		check_err(EACCES, "EACCES");
-		check_err(EFAULT, "EFAULT");
-		check_err(EIO, "EIO");
-		check_err(ELOOP, "ELOOP");
-		check_err(ENAMETOOLONG, "ENAMETOOLONG");
-		check_err(ENOENT, "ENOENT");
-		check_err(EACCES, "EACCES");
-		check_err(EBADF, "EBADF");
-		return (0);
+		strerror(errno);
+		return (1);
 	}
 	replace_pwd_in_env(value_oldpwd, ms);
-	return (1);
+	return (0);
 }
 
 char	_cd(t_token *token, t_minishell *ms)
@@ -99,6 +92,6 @@ char	_cd(t_token *token, t_minishell *ms)
 		return (0);
 	}
 	if (nb_arg == 0)
-		return (1);
+		return (exec_chdir("/home", ms));
 	return (exec_chdir(token->arg_head->value, ms));
 }

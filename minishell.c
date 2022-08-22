@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/21 09:27:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:21:18 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (s && *s)
     		add_history(s);
+		printf
+		if (ms.t_head->cmd == "echo")
+		{
+			printf("here\n");
+			_echo(ms.t_head);
+		}
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);

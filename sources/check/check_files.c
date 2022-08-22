@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _pwd.c                                             :+:      :+:    :+:   */
+/*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 09:38:30 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/22 09:29:40 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/22 09:30:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	_pwd(t_token *token)
+int	check_files(t_token *token)
 {
-	char	v_print[50];
-	int		fd;
-	int		check_f;
+	t_file	*file;
 
-	check_f = check_files(token);
-	if (check_f)
-		return (1);
-	fd = open_output(token);
-	if (fd < 0)
-		return (fd);
-	if (getcwd(v_print, 50) == NULL)
-		strerror(errno);
-	if (*v_print)
+	file = token->file_head;
+	while (file)
 	{
-		ft_putstr_fd(v_print, fd);
-		ft_putstr_fd("\n", fd);
+		if (file->type)
+		{
+			file = file->next;
+			continue ;
+		}
+		if (!access(file->path, F_OK))
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(file->path, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("file not found or permission denied\n", 2);
+			return (1);
+		}
+		file = file->next;
 	}
-	return (EXIT_SUCCESS);
+	return (0);
+	
 }

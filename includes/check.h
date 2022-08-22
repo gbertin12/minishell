@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _pwd.c                                             :+:      :+:    :+:   */
+/*   check.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 09:38:30 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/22 09:32:47 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/22 09:35:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef CHECK_H
+# define CHECK_H
 
-int	_pwd(t_token *token)
-{
-	char	v_print[50];
-	int		fd;
-	int		check_f;
+#include "minishell.h"
 
-	check_f = check_files(token);
-	if (check_f)
-		return (1);
-	fd = open_output(token);
-	if (fd < 0)
-		return (fd);
-	if (getcwd(v_print, 50) == NULL)
-		strerror(errno);
-	if (*v_print)
-	{
-		ft_putstr_fd(v_print, fd);
-		ft_putstr_fd("\n", fd);
-	}
-	return (EXIT_SUCCESS);
-}
+int	check_files(t_token *token);
+int	open_output(t_token *token);
+
+#endif
