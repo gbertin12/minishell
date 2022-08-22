@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/21 15:03:34 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 09:36:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void	expand_file(t_token *token, t_minishell *ms)
 static void	expand_cmd(t_token *token, t_minishell *ms)
 {
 	char	*tmp;
+	char	flag;
 	size_t	i;
 
 	printf("%s\n", token->cmd);
