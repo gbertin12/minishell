@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/08/22 14:29:54 by gbertin          ###   ########.fr        #
+=======
+#    Updated: 2022/08/22 12:45:33 by ccambium         ###   ########.fr        #
+>>>>>>> 94037e790329b8a080c4c2ec9907b06af105822f
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +26,10 @@ SRCS = minishell.c\
 		sources/built-in/_export.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
-		sources/expand/expand.c\
+		sources/check/check_files.c \
+		sources/check/open_output.c \
+		sources/expand/between_quote.c\
+ 		sources/expand/expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
 		sources/parsing/parsing.c\
@@ -41,6 +48,7 @@ SRCS = minishell.c\
 		sources/utils/list_to_tab.c\
 		sources/utils/next_arg_parsing.c\
 		sources/utils/replace_env_value.c\
+		sources/utils/ternaries.c\
 		sources/copy_env.c
 
 HEAD = includes/minishell.h

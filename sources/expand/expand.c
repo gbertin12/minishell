@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/21 15:03:34 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 12:12:21 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t	next_var(char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] && s[i] != '$')
+	while (s && s[i] && (between_quote(s, i) || s[i] != '$'))
 		i++;
 	return (i);
 }
@@ -31,11 +31,6 @@ static void	expand_arg(t_token *token, t_minishell *ms)
 	arg = token->arg_head;
 	while (arg)
 	{
-		if (arg->apos || !arg->value)
-		{
-			arg = arg->next;
-			continue ;
-		}
 		i = next_var(arg->value);
 		while (arg->value[i])
 		{
@@ -60,11 +55,6 @@ static void	expand_file(t_token *token, t_minishell *ms)
 	file = token->file_head;
 	while (file)
 	{
-		if (file->apos || !file->path)
-		{
-			file = file->next;
-			continue ;
-		}
 		i = next_var(file->path);
 		while (file->path[i])
 		{
@@ -120,6 +110,7 @@ void	expand(t_minishell *ms)
 	t_token	*token;
 
 	token = ms->t_head;
+	printf("cmd = %s\n", token->cmd);
 	while (token)
 	{
 		expand_cmd(token, ms);

@@ -6,28 +6,26 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/18 15:36:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 09:38:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	_pwd(int fd)
+int	_pwd(t_token *token)
 {
 	char	v_print[50];
+	int		fd;
+	int		check_f;
 
+	check_f = check_files(token);
+	if (check_f)
+		return (1);
+	fd = open_output(token);
+	if (fd < 0)
+		return (fd);
 	if (getcwd(v_print, 50) == NULL)
-	{
-		if (errno == ERANGE)
-			perror("ERANGE");
-		else if (errno == EFAULT)
-			perror("EFAULT");
-		else if (errno == EIO)
-			perror("EIO");
-		else if (errno == EACCES)
-			perror("EACCES");
-		return (EXIT_FAILURE);
-	}
+		strerror(errno);
 	if (*v_print)
 	{
 		ft_putstr_fd(v_print, fd);

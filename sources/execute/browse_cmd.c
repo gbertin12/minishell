@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   browse_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 12:39:50 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/22 14:14:40 by ccambium          #+#    #+#             */
+/*   Updated: 2022/08/22 14:35:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "minishell.h"
+#include ".../../includes/minishell.h"
 
-char	_cd(t_token *token, t_minishell *ms);
-int		_env(t_minishell *ms);
-int		_export(t_token *token, t_minishell *ms);
-int		_pwd(t_token *token);
-int		_unset(char *key, t_minishell *ms);
-int		_echo(t_token *token);
+int	check_access()
+{
+	
+	return (0);
+}
+int	execute_cmd(t_token *token, t_minishell *ms)
+{
+		
+}
 
-#endif
+int	browse_cmd(t_minishell *ms)
+{
+	t_token	*token;
+
+	ms->path_absolute = get_path_absolute(ms);
+	while (token)
+	{
+		execute_cmd(token, ms);
+		token = token->next;
+	}
+}

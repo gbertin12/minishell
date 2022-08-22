@@ -3,33 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/22 09:48:41 by gbertin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   _cd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:56:23 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 11:01:50 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/18 16:35:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_pwd(t_minishell *ms)
+char static	*get_pwd(t_minishell *ms)
 {
 	char	v_print[50];
 	char	*v_ret;
 
 	v_ret = NULL;
 	if (getcwd(v_print, 50) == NULL)
-	{
-		if (errno == ERANGE)
-			perror("ERANGE");
-		else if (errno == EFAULT)
-			perror("EFAULT");
-		else if (errno == EIO)
-			perror("EIO");
-		else if (errno == EACCES)
-			perror("EACCES");
-		return (NULL);
-	}
+		strerror(errno);
 	v_ret = ft_strdup(v_print, ms);
 	return (v_ret);
 }
@@ -74,14 +76,7 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	value_oldpwd = get_pwd(ms);
 	if (chdir(path) == -1)
 	{
-		check_err(EACCES, "EACCES");
-		check_err(EFAULT, "EFAULT");
-		check_err(EIO, "EIO");
-		check_err(ELOOP, "ELOOP");
-		check_err(ENAMETOOLONG, "ENAMETOOLONG");
-		check_err(ENOENT, "ENOENT");
-		check_err(EACCES, "EACCES");
-		check_err(EBADF, "EBADF");
+		strerror(errno);
 		return (0);
 	}
 	replace_pwd_in_env(value_oldpwd, ms);
@@ -99,6 +94,6 @@ char	_cd(t_token *token, t_minishell *ms)
 		return (0);
 	}
 	if (nb_arg == 0)
-		return (1);
+		return (exec_chdir("/home", ms));
 	return (exec_chdir(token->arg_head->value, ms));
 }

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/21 15:03:11 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:15:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ long long	get_size_of_cmd(char *cmd)
 	return (i);
 }
 
+// int	check_next_sep(char c, char *s)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	while (is_space(s[i]))
+// 	{
+// 		if (s[i + 1] == '>')
+// 			return (0);
+// 		if (ft_isprint(s[i + 1]))
+// 			i++;
+// 	}
+
+// }
+
 long long	next_arg(char *s, t_token *token, t_minishell *ms)
 {
 	long long	size;
@@ -58,6 +73,8 @@ long long	next_arg(char *s, t_token *token, t_minishell *ms)
 		return (add_input(s, token, ms));
 	if (token->cmd == NULL)
 	{
+		// if (check_next_sep('>', s))
+		// 	add_input_before();
 		size = get_size_of_cmd(s);
 		if (size < 0)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 14:32:27 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 14:37:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	main(int argc, char **argv, char **envp)
 		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
 		if (!s || ft_strncmp("exit", s, 4) == 0)
 			break ;
-		parsing(s, &ms);
+		if (parsing(s, &ms) != 0)
+			continue ;
 		expand(&ms);
 		token = ms.t_head;
 		while (token)
@@ -59,6 +60,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (s && *s)
     		add_history(s);
+		// if (ms.t_head->cmd == "echo")
+		// {
+		// 	printf("here\n");
+		// 	_echo(ms.t_head);
+		// }
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);

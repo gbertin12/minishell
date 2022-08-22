@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   ternaries.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 12:39:50 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/22 09:39:18 by ccambium          #+#    #+#             */
+/*   Updated: 2022/08/22 09:41:40 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "minishell.h"
+#include "../../includes/minishell.h"
 
-char	_cd(t_token *token, t_minishell *ms);
-int		_env(t_minishell *ms);
-int		_export(t_token *token, t_minishell *ms);
-int		_pwd(t_token *token);
-int		_unset(char *key, t_minishell *ms);
-int		_echo(t_token *token);
-
-#endif
+char	char_ternary(char condition, char true, char false)
+{
+	if (condition)
+		return (true);
+	return (false);
+}
