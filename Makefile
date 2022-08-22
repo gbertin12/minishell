@@ -6,13 +6,13 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/21 19:42:37 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/22 14:29:54 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = cc
-FLAGS = -Wall -Wextra -Werror -g3
+CC = cc 
+FLAGS = -Wall -Wextra -Werror  -g3 -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -54,7 +54,7 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline  -fsanitize=address -g3
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -fsanitize=address -g3 -lreadline -L/opt/homebrew/opt/readline/lib
 
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)
