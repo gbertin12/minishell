@@ -6,11 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/08/22 10:20:57 by gbertin          ###   ########.fr       */
-=======
-/*   Updated: 2022/08/22 11:06:35 by ccambium         ###   ########.fr       */
->>>>>>> 64ddce6caa692b304698043698d2f8fd2d803a0d
+/*   Updated: 2022/08/22 12:48:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +33,8 @@ int	main(int argc, char **argv, char **envp)
 		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
 		if (!s || ft_strncmp("exit", s, 4) == 0)
 			break ;
-		parsing(s, &ms);
+		if (parsing(s, &ms) != 0)
+			continue ;
 		expand(&ms);
 		token = ms.t_head;
 		while (token)
@@ -63,14 +60,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (s && *s)
     		add_history(s);
-<<<<<<< HEAD
 		// if (ms.t_head->cmd == "echo")
 		// {
 		// 	printf("here\n");
 		// 	_echo(ms.t_head);
 		// }
-=======
->>>>>>> 64ddce6caa692b304698043698d2f8fd2d803a0d
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);
