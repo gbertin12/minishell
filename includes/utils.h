@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 09:47:15 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:05:44 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ long long	next_arg(char *s, t_token *token, t_minishell *ms);
 long long	get_size_of_cmd(char *cmd);
 
 char		is_space(char c);
+char		between_quote(char *s, size_t x);
 char		do_env_key_exist(char *key, t_minishell *ms);
 char		char_ternary(char condition, char true, char false);
 
