@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/21 09:27:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:20:53 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	//ft_bzero(&ms, sizeof(t_minishell));
 	init_minishell(&ms);
 	copy_env(&ms, envp);
+	init_signals();
 	while (1)
 	{
 		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
