@@ -6,13 +6,13 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/22 11:25:39 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/22 23:19:14 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -23,7 +23,9 @@ SRCS = minishell.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/check/check_files.c \
-		sources/check/open_output.c \
+		sources/execute/if_type_file_exist.c \
+		sources/execute/browse_cmd.c \
+		sources/execute/open_files.c \
 		sources/expand/between_quote.c \
  		sources/expand/expand.c\
 		sources/expand/replace_var.c\
@@ -58,7 +60,7 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline  -fsanitize=address -g3
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib  -fsanitize=address -g3
 
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)

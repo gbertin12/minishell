@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 11:19:42 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:23:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	expand_cmd(t_token *token, t_minishell *ms)
 	size_t	i;
 
 	printf("%s\n", token->cmd);
-	if (token->cmd == NULL || token->apos)
+	if (token->cmd == NULL)
 		return ;
 	i = next_var(token->cmd);
 	while (token->cmd[i])

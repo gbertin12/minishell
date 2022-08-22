@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 11:05:44 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:40:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 
 size_t		count_env(t_env *ptr);
 size_t		count_arg(t_arg *ptr);
+size_t		count_token(t_token *ptr);
 
 char		**env_to_tab(t_minishell *ms);
+char	**args_to_tab(t_token *token, t_minishell *ms);
 
 char		*ft_superjoin(char **s, t_minishell *ms);
 char		*get_env_value(char *key, t_minishell *ms);

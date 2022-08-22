@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 11:19:22 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:58:11 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,30 @@ int	main(int argc, char **argv, char **envp)
 	t_token		*token;
 	t_arg		*arg;
 	t_file		*file;
+	int			new_cmd;
 
 	(void)argv;
 	(void)argc;
 	g_mode = 0;
+	new_cmd = 1;
 	//ft_bzero(&ms, sizeof(t_minishell));
 	init_minishell(&ms);
 	copy_env(&ms, envp);
 	init_signals();
 	while (1)
 	{
-		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
+		if (new_cmd)
+			s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
 		if (!s || ft_strncmp("exit", s, 4) == 0)
 			break ;
 		parsing(s, &ms);
 		expand(&ms);
+		new_cmd = 0;
 		token = ms.t_head;
 		while (token)
 		{
 			arg = token->arg_head;
-			printf("CMD = %s apos = %d\n", token->cmd, token->apos);
+			printf("CMD = %s\n", token->cmd);
 			printf("ARG = ");
 			while (arg)
 			{
@@ -64,6 +68,8 @@ int	main(int argc, char **argv, char **envp)
 		// 	printf("here\n");
 		// 	_echo(ms.t_head);
 		// }
+		if (browse_cmd(&ms))
+			new_cmd = 1;
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);
