@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/22 11:16:58 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/22 11:25:39 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = minishell.c\
 		sources/built-in/_unset.c\
 		sources/check/check_files.c \
 		sources/check/open_output.c \
+		sources/expand/between_quote.c \
  		sources/expand/expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
