@@ -6,7 +6,11 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/22 11:14:43 by gbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/08/22 11:08:46 by ccambium         ###   ########.fr       */
+>>>>>>> 64ddce6caa692b304698043698d2f8fd2d803a0d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +107,11 @@ static void	expand_cmd(t_token *token, t_minishell *ms)
 	i = next_var(token->cmd);
 	while (token->cmd[i])
 	{
+		if (between_quote(token->cmd, i))
+		{
+			i++;
+			continue ;
+		}
 		if (token->cmd[i] == 0)
 			return ;
 		tmp = token->cmd;
