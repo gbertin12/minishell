@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 18:40:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 18:51:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 			close(last->pipefd[1]);
 			if (dup2(last->pipefd[0], 0) == -1)
 				perror("minishell 12 : ");
+			close(last->pipefd[0]);
 		}
 		if (token->have_out)
 		{
@@ -266,9 +267,20 @@ int	browse_cmd(t_minishell *ms)
 	token = ms->t_head;
 	args = args_to_tab(token, ms);
 	exec_first_cmd(args, ms);
+	
 	last = token;
 	if (token->next)
 		token = token->next;
+	else
+	{
+		token = ms->t_head;
+		while (token)
+		{
+			waitpid(token->pid, NULL, 0);
+			token = token->next;
+		}	
+		return (0);
+	}
 	while (token->next)
 	{
 		args = args_to_tab(token, ms);
@@ -276,7 +288,6 @@ int	browse_cmd(t_minishell *ms)
 		last = token;
 		token = token->next;
 	}
-	
 	exec_last(args, last, token, ms);
 	token = ms->t_head;
 	while (token)
