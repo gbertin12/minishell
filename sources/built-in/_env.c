@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:52:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/18 03:50:28 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/23 21:47:58 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,14 @@
 
 int	_env(t_minishell *ms)
 {
-	char	**s;
-	int		i;
-	char	*tmp;
+	t_env	*env;
 
-	s = env_to_tab(ms);
-	if (!s)
-		return (0);
-	i = -1;
-	while (s[++i])
+	env = ms->e_head;
+	while (env)
 	{
-		tmp = ft_strjoin(s[i], "\n", ms);
-		ft_putstr_fd(tmp, 1);
-		ft_free(tmp, ms);
+		if (env->value && env->value[0])
+			printf("%s=%s", env->key, env->value);
+		env = env->next;
 	}
-	i = -1;
-	while (s[++i])
-		ft_free(s[i], ms);
-	return (1);
+	return (0);
 }
