@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 15:48:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 22:54:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	open_input(t_token *token, t_minishell *ms)
 			unlink(".tmp");
 		}
 		else 
-			fd = open(file->path, O_RDONLY , 0644);
+			fd = open(file->path, O_RDONLY, 0644);
 		if (fd < 0)
 		{
 			ft_putstr_fd("NB FILE ", 2);

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 18:51:54 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 22:59:11 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,21 @@ char	*make_path(t_token *token, t_minishell *ms)
 
 int		init_execute(t_token *token, t_minishell *ms)
 {
+	int oldfd;
+	
 	token->have_in = have_infile(token);
 	token->have_out = have_outfile(token);
 	if (token->have_in)
+	{
 		token->inputfile = open_input(token, ms);
+	}
 	if (token->have_out)
-		token->outputfile = open_output(token);
+	{
+		oldfd = open_input(token, ms);
+		token->inputfile = dup(oldfd);
+		close(oldfd);
+	}
+		token->outputfile = dup(open_output(token));
 	printf("%s fd in = %d have in = %d fd out = %d have out = %d NBFILE = %zu\n", token->cmd, token->inputfile, token->have_in, token->outputfile, token->have_out, count_file(token->file_head));
 	return (0);
 }
@@ -103,13 +112,13 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 	}
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
-	if (init_execute(token, ms))
-		return (1);
 	token->pid = fork();
 	if (token->pid == -1)
 		return (2);
 	if (token->pid == 0)
 	{
+		if (init_execute(token, ms))
+			return (1);
 		if (token->have_in)
 		{
 			if (dup2(token->inputfile, 0) == -1)
@@ -199,10 +208,11 @@ int	exec_middle(char **args, t_token *last, t_token *token, t_minishell *ms)
 	if (pipe(token->pipefd))
 		perror("minishell 8 :");
 	token->pid = fork();
-	if (token->pid == -1)
-		return (2);
+
 	if (token->pid == 0)
 	{
+		if (init_execute(token, ms))
+			return (1);
 		redir_in(token, last);
 		redir_out(token, last);
 		if (path)
@@ -218,8 +228,6 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 	char	*path;
 	char	**env;
 
-	ft_putstr_fd("LAST\n", 2);
-	init_execute(token, ms);
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
 	token->pid = fork();
@@ -227,6 +235,8 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 		return (2);
 	if (token->pid == 0)
 	{
+		if (init_execute(token, ms))
+			return (1);
 		if (token->have_in)
 		{
 			if (last->pipefd[0])
@@ -285,11 +295,16 @@ int	browse_cmd(t_minishell *ms)
 	{
 		args = args_to_tab(token, ms);
 		exec_middle(args, last, token, ms);
+		close(last->pipefd[0]);
+		close(last->pipefd[1]);
 		last = token;
 		token = token->next;
 	}
+	args = args_to_tab(token, ms);
 	exec_last(args, last, token, ms);
 	token = ms->t_head;
+	close(last->pipefd[0]);
+	close(last->pipefd[1]);
 	while (token)
 	{
 		waitpid(token->pid, NULL, 0);
