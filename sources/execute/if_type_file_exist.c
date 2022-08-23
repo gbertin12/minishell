@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   if_type_file_exist.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 11:06:46 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/22 17:59:20 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/23 11:05:17 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "minishell.h"
+#include "../../includes/minishell.h"
 
-char	_cd(t_token *token, t_minishell *ms);
-int		_env(t_minishell *ms);
-int		_export(t_token *token, t_minishell *ms);
-int		_pwd(t_token *token);
-int		_unset(char *key, t_minishell *ms);
-int		_echo(t_token *token);
+int	have_infile(t_token *token)
+{
+	t_file *file;
 
-#endif
+	file = token->file_head;
+	while (file)
+	{
+		if (file->type == 0)
+			return (1);
+		file = file->next;
+	}
+	return (0);
+}
+
+int	have_outfile(t_token *token)
+{
+	t_file *file;
+
+	file = token->file_head;
+	while (file)
+	{
+		if (file->type == 1)
+			return (1);
+		file = file->next;
+	}
+	return (0);
+	
+}

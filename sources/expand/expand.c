@@ -6,9 +6,10 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 12:12:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/23 11:01:58 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -88,7 +89,7 @@ static void	expand_cmd(t_token *token, t_minishell *ms)
 	size_t	i;
 
 	printf("%s\n", token->cmd);
-	if (token->cmd == NULL || token->apos)
+	if (token->cmd == NULL)
 		return ;
 	i = next_var(token->cmd);
 	while (token->cmd[i])
