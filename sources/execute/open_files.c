@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 23:45:32 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 14:44:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	open_output(t_token *token)
 			continue ;
 		}
 		if (file->append)
-			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND | O_TRUNC, 0644);
+			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
 			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
@@ -37,7 +37,8 @@ int	open_output(t_token *token)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(file->path, 2);
 			ft_putstr_fd(": ", 2);
-			ft_putstr_fd(strerror(errno), 2);
+			strerror(errno);
+			ft_putchar_fd('\n', 2);
 			//ft_putstr_fd("file not found or permission denied\n", 2);
 		}
 		file = file->next;
@@ -45,15 +46,18 @@ int	open_output(t_token *token)
 	return (fd);
 }
 
-int	open_input(t_token *token)
+int	open_input(t_token *token, t_minishell *ms)
 {
 	t_file	*file;
 	int		fd;
+	int i;
 
+	i = 0;
 	file = token->file_head;
 	fd = 1;
 	while (file)
 	{
+		i++;
 		if (fd > 0 && fd != 1)
 			close(fd);
 		if (file->type)
@@ -70,13 +74,16 @@ int	open_input(t_token *token)
 			fd = open(file->path, O_WRONLY, 0644);
 		if (fd < 0)
 		{
+			ft_putstr_fd("NB FILE ", 2);
+			ft_putstr_fd(ft_itoa(i, ms), 2);
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(file->path, 2);
 			ft_putstr_fd(": ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			//ft_putstr_fd("file not found or permission denied\n", 2);
+			strerror(errno);
 		}
 		file = file->next;
 	}
+	ft_putstr_fd("NB FILE ", 2);
+	puts(ft_itoa(i, ms));
 	return (fd);
 }

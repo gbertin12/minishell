@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:47:47 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 00:04:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 14:40:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,17 @@ char	*make_path(t_token *token, t_minishell *ms)
 	return (NULL);
 }
 
-int		init_execute(t_token *token)
+int		init_execute(t_token *token, t_minishell *ms)
 {
-	if (check_files(token))
-		return (1);
+	// if (check_files(token))
+	// 	return (1);
 	token->have_in = have_infile(token);
 	token->have_out = have_outfile(token);
-	token->inputfile = open_input(token);
-	token->outputfile = open_output(token);
-	printf("fd in = %d have in = %d fd out = %d have out = %d\n", token->inputfile, token->have_in, token->outputfile, token->have_out);
+	if (token->have_in)
+		token->inputfile = open_input(token, ms);
+	if (token->have_out)
+		token->outputfile = open_output(token);
+	printf("%s fd in = %d have in = %d fd out = %d have out = %d\n", token->cmd, token->inputfile, token->have_in, token->outputfile, token->have_out);
 	return (0);
 }
 
@@ -96,6 +98,7 @@ int	redir_in(t_token *token, int pipefd[2])
 		close(pipefd[1]);
 		if (dup2(token->inputfile, 0) == -1)
 			return (1);
+		close(token->inputfile);
 	}
 	return (0);
 }
@@ -108,9 +111,10 @@ int	redir_out(t_token *token, int pipefd[2])
 		close(pipefd[1]);
 		if (dup2(token->outputfile, 1) == -1)
 			return (1);
+		close(token->outputfile);
 		return (0);
 	}
-	if (token->next)
+	else if (token->next)
 	{
 		close(pipefd[0]);
 		if (dup2(pipefd[1], 1) == - 1)
@@ -119,9 +123,9 @@ int	redir_out(t_token *token, int pipefd[2])
 	return (0);
 }
 
-int	redir_pipeout(t_token *token, int pipefd[2])
+int	redir_pipein(t_token *token, int pipefd[2])
 {
-	if (!token->have_out)
+	if (!token->have_in)
 	{
 		close(pipefd[1]);
 		if (dup2(pipefd[0], 0) == -1)
@@ -139,7 +143,7 @@ int	execute_cmd(t_token *token, int pipefd[2], char **args, t_minishell *ms)
 	path = make_path(token, ms);
 	if (!path)
 		return (1);
-	if (init_execute(token))
+	if (init_execute(token, ms))
 		return (1);
 	token->pid = fork();
 	if (token->pid == -1)
@@ -147,9 +151,9 @@ int	execute_cmd(t_token *token, int pipefd[2], char **args, t_minishell *ms)
 	if (token->pid == 0)
 	{
 		if (redir_in(token, pipefd))
-			return (1);
+			strerror(errno);
 		if (redir_out(token, pipefd))
-			return (1);
+			strerror(errno);
 		if (path)
 			execve(path, args, env);
 		strerror(errno);
@@ -157,7 +161,7 @@ int	execute_cmd(t_token *token, int pipefd[2], char **args, t_minishell *ms)
 	}
 	else
 	{
-		if (redir_pipeout(token, pipefd))
+		if (redir_pipein(token, pipefd))
 			return (1);
 	}
 	return (0);
@@ -182,21 +186,18 @@ int	browse_cmd(t_minishell *ms)
 				continue ;
 			}
 		}
-		if(execute_cmd(token, pipefd, args, ms) == 2)
+		if (execute_cmd(token, pipefd, args, ms) == 2)
+		{
+			ft_putstr_fd("AFTER EXEC : ", 2);
 			strerror(errno);
-		if (token->have_in)
-			close(token->inputfile);
-		if (token->have_out)
-			close(token->outputfile);
+		}
 		token = token->next;
 	}
 	token = ms->t_head;
 	while (token)
 	{
-		waitpid(-1, NULL, 0);
+		waitpid(token->pid, NULL, 0);
 		token = token->next;
 	}
-	// close(pipefd[0]);
-	// close(pipefd[1]);
 	return (1);
 }

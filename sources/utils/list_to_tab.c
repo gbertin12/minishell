@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 17:12:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 10:44:31 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,15 @@ char	**args_to_tab(t_token *token, t_minishell *ms)
 	size_t	i;
 	t_arg	*arg;
 
-	arg = token->arg_head;
-	if (!arg)
-		return (NULL);
-	nb_element = count_arg(token->arg_head);
+	nb_element = 0;
+	arg = NULL;
+	if (token->arg_head)
+	{
+		arg = token->arg_head;
+		if (!arg)
+			return (NULL);
+		nb_element = count_arg(token->arg_head);
+	}
 	ret_v = ft_malloc(sizeof(char *) * (nb_element + 2), ms);
 	if (!ret_v)
 		return (ret_v);
