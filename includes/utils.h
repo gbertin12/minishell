@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 11:05:44 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/23 10:00:49 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char		**env_to_tab(t_minishell *ms);
 
 char		*ft_superjoin(char **s, t_minishell *ms);
 char		*get_env_value(char *key, t_minishell *ms);
+char		*string_ternary(char condition, char *true, char *false);
 
 void		replace_env_value(char *key, char *value, t_minishell *ms);
 void		add_env_key_value(char *key, char *value, t_minishell *ms);
