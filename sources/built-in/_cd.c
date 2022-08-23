@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 09:48:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 10:30:19 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #include "../../includes/minishell.h"
 
-char static	*get_pwd(t_minishell *ms)
+static char	*get_pwd(t_minishell *ms)
 {
 	char	v_print[50];
 	char	*v_ret;
