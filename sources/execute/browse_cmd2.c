@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 18:01:26 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 18:40:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 	char	*path;
 	char	**env;
 	
+	ft_putstr_fd("FIRST\n", 2);
 	token = ms->t_head;
 	if (token->next)
 	{
@@ -138,8 +139,9 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 	return (0);
 }
 
-int	redir_out(t_token *token)
+int	redir_out(t_token *token, t_token *last)
 {
+	(void)last;
 	if (token->have_out)
 	{
 		if (token->next)
@@ -147,11 +149,13 @@ int	redir_out(t_token *token)
 			close(token->pipefd[0]);
 			close(token->pipefd[1]);
 		}
-		if (dup2(token->outputfile, 1) == -1)
+		if (dup2(token->outputfile, 1))
 			perror("minishell 6 : ");
 	}
 	else if (token->next)
 	{
+		//close(last->pipefd[0]);
+		// close(last->pipefd[1]);
 		close(token->pipefd[0]);
 		if (dup2(token->pipefd[1], 1) == -1)
 			perror("minishell 7 : ");
@@ -171,14 +175,13 @@ int	redir_in(t_token *token, t_token *last)
 			close(last->pipefd[0]);
 		if (last->pipefd[1])
 			close(last->pipefd[1]);
-		if (dup2(token->inputfile, 0) == -1)
+		if (dup2(token->inputfile, 0))
 			perror("minishell 4 : ");
 	}
 	else
 	{
 		close(last->pipefd[1]);
-			
-		if (dup2(last->pipefd[0], 0) == -1)
+		if (dup2(last->pipefd[0], 0))
 			perror("minishell 5 : ");
 	}
 	return (0);
@@ -189,17 +192,25 @@ int	exec_middle(char **args, t_token *last, t_token *token, t_minishell *ms)
 	char	*path;
 	char	**env;
 
+	ft_putstr_fd("MID\n", 2);
 	init_execute(token, ms);
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
 	if (pipe(token->pipefd))
 		perror("minishell 8 :");
-	redir_in(token, last);
-	redir_out(token);
-	if (path)
-		execve(path, args, env);
-	perror("minishell 10 :");
-	exit (1);
+	token->pid = fork();
+	if (token->pid == -1)
+		return (2);
+	if (token->pid == 0)
+	{
+		redir_in(token, last);
+		redir_out(token, last);
+		if (path)
+			execve(path, args, env);
+		perror("minishell 10 :");
+		exit (1);
+	}
+	return (0);
 }
 
 int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
@@ -207,38 +218,41 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 	char	*path;
 	char	**env;
 
+	ft_putstr_fd("LAST\n", 2);
 	init_execute(token, ms);
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
-	if (token->have_in)
+	token->pid = fork();
+	if (token->pid == -1)
+		return (2);
+	if (token->pid == 0)
 	{
-		if (last->pipefd[0])
-			close(last->pipefd[0]);
-		if (last->pipefd[1])
+		if (token->have_in)
+		{
+			if (last->pipefd[0])
+				close(last->pipefd[0]);
+			if (last->pipefd[1])
+				close(last->pipefd[1]);
+			if (dup2(token->inputfile, 0))
+				perror("minishell 11 : ");
+		}
+		else
+		{
 			close(last->pipefd[1]);
-		if (dup2(token->inputfile, 0))
-			perror("minishell 11 : ");
+			if (dup2(last->pipefd[0], 0) == -1)
+				perror("minishell 12 : ");
+		}
+		if (token->have_out)
+		{
+			if (dup2(token->outputfile, 1) == -1)
+				perror("minishell 13 :");
+		}
+		if (path)
+			execve(path, args, env);
+		perror("minishell 10 :");
+		exit (1);
 	}
-	else
-	{
-		close(last->pipefd[1]);
-		if (dup2(last->pipefd[0], 0) == -1)
-			perror("minishell 12 : ");
-	}
-	if (token->have_out)
-	{
-		if (dup2(token->outputfile, 1) == -1)
-			perror("minishell 13 :");
-	}
-	// else
-	// {
-	// 	if (dup2(1, 1))
-	// 		perror("minishell 14 :");
-	// }
-	if (path)
-		execve(path, args, env);
-	perror("minishell 10 :");
-	exit (1);
+	return (0);
 }
 
 int	browse_cmd(t_minishell *ms)
@@ -253,17 +267,17 @@ int	browse_cmd(t_minishell *ms)
 	args = args_to_tab(token, ms);
 	exec_first_cmd(args, ms);
 	last = token;
-	token = token->next;
-	while (token)
+	if (token->next)
+		token = token->next;
+	while (token->next)
 	{
 		args = args_to_tab(token, ms);
-		if (token->next)
-			exec_middle(args, last, token, ms);
-		else
-			exec_last(args, last, token, ms);
+		exec_middle(args, last, token, ms);
 		last = token;
 		token = token->next;
 	}
+	
+	exec_last(args, last, token, ms);
 	token = ms->t_head;
 	while (token)
 	{
