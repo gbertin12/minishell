@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:52:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 21:47:58 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/23 21:50:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	_env(t_minishell *ms)
 	env = ms->e_head;
 	while (env)
 	{
-		if (env->value && env->value[0])
+		if (env->value)
 			printf("%s=%s", env->key, env->value);
 		env = env->next;
 	}
