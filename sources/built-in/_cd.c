@@ -24,7 +24,7 @@
 
 #include "../../includes/minishell.h"
 
-char static	*get_pwd(t_minishell *ms)
+static char	*get_pwd(t_minishell *ms)
 {
 	char	v_print[50];
 	char	*v_ret;
