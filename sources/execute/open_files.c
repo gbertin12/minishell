@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 14:44:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 15:48:59 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	open_output(t_token *token)
 			ft_putstr_fd(": ", 2);
 			strerror(errno);
 			ft_putchar_fd('\n', 2);
-			//ft_putstr_fd("file not found or permission denied\n", 2);
 		}
 		file = file->next;
 	}
@@ -71,7 +70,7 @@ int	open_input(t_token *token, t_minishell *ms)
 			unlink(".tmp");
 		}
 		else 
-			fd = open(file->path, O_WRONLY, 0644);
+			fd = open(file->path, O_RDONLY , 0644);
 		if (fd < 0)
 		{
 			ft_putstr_fd("NB FILE ", 2);
@@ -83,7 +82,5 @@ int	open_input(t_token *token, t_minishell *ms)
 		}
 		file = file->next;
 	}
-	ft_putstr_fd("NB FILE ", 2);
-	puts(ft_itoa(i, ms));
 	return (fd);
 }
