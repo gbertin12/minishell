@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 11:15:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:20:00 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,27 +85,27 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 	return (ret_v);
 }
 
-// long long int	add_input_before(char *s, t_token *token, t_minishell *ms)
-// {
-// 	long long int	ret_v;
-// 	t_file			*file;
-// 	long long int	size;
+long long int	add_input_before(char *s, t_token *token, t_minishell *ms)
+{
+	long long int	ret_v;
+	t_file			*file;
+	long long int	size;
 
-// 	ret_v = 1;
-// 	file = ft_malloc(sizeof(t_file), ms);
-// 	ft_memset(file, 0, sizeof(t_file));
-// 	if (s[ret_v] == '<')
-// 	{
-// 		ret_v++;
-// 		file->append = 1;
-// 	}
-// 	if (!ft_isprint(s[ret_v]) && !is_space(s[ret_v]))
-// 		return (-1);
-// 	while (is_space(s[ret_v]))
-// 		ret_v++;
-// 	size = get_size_of_cmd(&s[ret_v]);
-// 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
-// 	add_end_file(token, file);
-// 	ret_v += size;
-// 	return (ret_v);
-// }
+	ret_v = 1;
+	file = ft_malloc(sizeof(t_file), ms);
+	ft_memset(file, 0, sizeof(t_file));
+	if (s[ret_v] == '<')
+	{
+		ret_v++;
+		file->append = 1;
+	}
+	if (!ft_isprint(s[ret_v]) && !is_space(s[ret_v]))
+		return (-1);
+	while (is_space(s[ret_v]))
+		ret_v++;
+	size = get_size_of_cmd(&s[ret_v]);
+	file->path = ft_substr(s, (size_t)ret_v, size, ms);
+	add_end_file(token, file);
+	ret_v += size;
+	return (ret_v);
+}

@@ -3,7 +3,7 @@
 minishell
 .vscode
 *.out
-
+for_makefile
 out.a
 out.b
 test.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 12:19:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 11:06:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*cmd;
-	t_file			*file_head;
+	int 			pid;
 	int				pipefd[2];
-	int				apos;
+	int				have_in;
+	int				have_out;
+	int				inputfile;
+	int				outputfile;
+	t_file			*file_head;
 	struct s_arg	*arg_head;
 	struct s_token	*next;
 }	t_token;
@@ -76,6 +80,7 @@ typedef struct s_minishell
 	struct s_obj	*o_head;
 	int				l_retv;
 	t_env			*e_head;
+	char			**path_absolute;
 	char			*l_input;
 }	t_minishell;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:09:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/19 13:26:30 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:27:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	free_tokens(t_minishell *ms)
 	t_token	*tmp;
 	t_token	*token;
 
-	printf("FREE\n");
 	token = ms->t_head;
 	while (token)
 	{
