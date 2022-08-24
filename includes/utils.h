@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 11:07:24 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:04:01 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 size_t		count_env(t_env *ptr);
 size_t		count_arg(t_arg *ptr);
 size_t		count_token(t_token *ptr);
+size_t		count_file(t_file *ptr);
 
 char		**env_to_tab(t_minishell *ms);
 char		**args_to_tab(t_token *token, t_minishell *ms);

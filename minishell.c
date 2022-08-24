@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 11:05:58 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:05:31 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	init_signals();
 	while (1)
 	{
-		if (new_cmd)
-			s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
+		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
 		if (!s || ft_strncmp("exit", s, 4) == 0)
 			break ;
 		if (parsing(s, &ms) != 0)
@@ -64,13 +63,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (s && *s)
     		add_history(s);
-		// if (ms.t_head->cmd == "echo")
-		// {
-		// 	printf("here\n");
-		// 	_echo(ms.t_head);
-		// }
-		if (browse_cmd(&ms))
-			new_cmd = 1;
+		browse_cmd(&ms);
+		g_mode = 0;
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);
@@ -78,34 +72,3 @@ int	main(int argc, char **argv, char **envp)
 	free_all(&ms);
 	return (EXIT_SUCCESS);
 }
-
-// token = ms.t_head;
-// 		while (token)
-// 		{
-// 			arg = token->arg_head;
-// 			printf("CMD = %s\n", token->cmd);
-// 			printf("ARG = ");
-// 			while (arg)
-// 			{
-// 				printf("%s | ", arg->value);
-// 				arg = arg->next;
-// 			}
-// 			printf("\n");
-// 			file = token->input_head;
-// 			printf("INFILE = ");
-// 			while (file)
-// 			{
-// 				printf("%s[%d] | ", file->path, file->append);
-// 				file = file->next;
-// 			}
-// 			printf("\n");
-// 			file = token->output_head;
-// 			printf("OUTFILE = ");
-// 			while (file)
-// 			{
-// 				printf("%s[%d] | ", file->path, file->append);
-// 				file = file->next;
-// 			}
-// 			printf("\n");
-// 			token = token->next;
-// 		}

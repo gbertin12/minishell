@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:04:14 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 15:15:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/23 15:00:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,23 @@ size_t	count_token(t_token *ptr)
 {
 	size_t	ret_v;
 	t_token	*tmp;
+
+	if (!ptr)
+		return (0);
+	ret_v = 0;
+	tmp = ptr;
+	while (tmp != NULL)
+	{
+		ret_v++;
+		tmp = tmp->next;
+	}
+	return (ret_v);
+}
+
+size_t	count_file(t_file *ptr)
+{
+	size_t	ret_v;
+	t_file	*tmp;
 
 	if (!ptr)
 		return (0);
