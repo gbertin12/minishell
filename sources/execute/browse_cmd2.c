@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/24 21:13:47 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/24 21:26:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,11 +218,7 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 	init_execute(token, ms);
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
-	token->pid = fork();
-	if (token->pid == -1)
-		return (2);
-	if (token->pid == 0)
-	{
+	
 		if (token->have_in)
 		{
 			if (last->pipefd[0])
@@ -243,6 +239,11 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 			if (dup2(token->outputfile, 1) == -1)
 				perror("minishell 13 :");
 		}
+	token->pid = fork();
+	if (token->pid == -1)
+		return (2);
+	if (token->pid == 0)
+	{
 		if (path)
 			execve(path, args, env);
 		perror("minishell 10 :");
@@ -269,9 +270,20 @@ int	browse_cmd(t_minishell *ms)
 	{
 		args = args_to_tab(token, ms);
 		exec_middle(args, last, token, ms);
+		if (last)
+		{
+			close(last->pipefd[0]);
+			close(last->pipefd[1]);
+		}
 		last = token;
 		token = token->next;
 	}
+	if (last)
+	{
+		close(last->pipefd[0]);
+		close(last->pipefd[1]);
+	}
+	args = args_to_tab(token, ms);
 	exec_last(args, last, token, ms);
 	token = ms->t_head;
 	while (token)
