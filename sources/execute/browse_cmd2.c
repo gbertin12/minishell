@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 18:40:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/24 21:13:47 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 	char	*path;
 	char	**env;
 	
-	ft_putstr_fd("FIRST\n", 2);
 	token = ms->t_head;
 	if (token->next)
 	{
@@ -154,8 +153,6 @@ int	redir_out(t_token *token, t_token *last)
 	}
 	else if (token->next)
 	{
-		//close(last->pipefd[0]);
-		// close(last->pipefd[1]);
 		close(token->pipefd[0]);
 		if (dup2(token->pipefd[1], 1) == -1)
 			perror("minishell 7 : ");
@@ -218,7 +215,6 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 	char	*path;
 	char	**env;
 
-	ft_putstr_fd("LAST\n", 2);
 	init_execute(token, ms);
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
@@ -276,7 +272,6 @@ int	browse_cmd(t_minishell *ms)
 		last = token;
 		token = token->next;
 	}
-	
 	exec_last(args, last, token, ms);
 	token = ms->t_head;
 	while (token)

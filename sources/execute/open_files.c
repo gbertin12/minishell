@@ -6,11 +6,22 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 15:48:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/24 21:12:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_have_next_type(t_file *file, int type)
+{
+	while (file)
+	{
+		if (file->type == type)
+			return (0);
+		file = file->next;
+	}
+	return (1);
+}
 
 int	open_output(t_token *token)
 {
@@ -41,6 +52,8 @@ int	open_output(t_token *token)
 			ft_putchar_fd('\n', 2);
 		}
 		file = file->next;
+		if (check_have_next_type(file, 1))
+			return (fd);
 	}
 	return (fd);
 }
@@ -81,6 +94,8 @@ int	open_input(t_token *token, t_minishell *ms)
 			strerror(errno);
 		}
 		file = file->next;
+		if (check_have_next_type(file, 0))
+			return (fd);
 	}
 	return (fd);
 }
