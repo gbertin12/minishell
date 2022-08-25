@@ -6,7 +6,11 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/25 14:25:46 by gbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/08/25 11:30:06 by ccambium         ###   ########.fr       */
+>>>>>>> 20465a7791db45fe180824c2f65cad1674d4a99f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +70,6 @@ static void	expand_file(t_token *token, t_minishell *ms)
 			else
 				ft_free(tmp, ms);
 			i = next_var(file->path);
-			while (file->path[i])
-			{
-				if (file->path[i] == 0)
-					break ;
-				tmp = file->path;
-				file->path = replace_var(file->path, i, ms);
-				if (!file->path)
-					file->path = tmp;
-				else
-					ft_free(tmp, ms);
-				i = next_var(file->path);
-			}
 		}
 		file = file->next;
 	}
@@ -117,6 +109,7 @@ void	expand(t_minishell *ms)
 		expand_cmd(token, ms);
 		expand_arg(token, ms);
 		expand_file(token, ms);
+		delete_quotes(token, ms);
 		token = token->next;
 	}
 }
