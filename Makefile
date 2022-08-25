@@ -12,7 +12,7 @@
 
 NAME = minishell
 CC = cc 
-FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include -g3
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\

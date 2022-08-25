@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _echo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 16:01:11 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:36:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,17 @@ char	check_flag(char	*s)
 int	_echo(t_token *token)
 {
 	t_arg		*arg;
-	int			e;
-	int			fd;
 	char		flag;
 
 	arg = token->arg_head;
-	flag = check_flag(arg->value);
-	e = check_files(token);
-	if (e)
-		return (e);
-	if (flag)
+	while (arg)
+	{
+		if (check_flag(arg->value))
+			flag++;
+		else
+			break ;
 		arg = arg->next;
-	fd = open_output(token);
-	if (fd < 0)
-		return (fd);
+	}
 	while (arg)
 	{
 		printf("%s", arg->value);
@@ -50,6 +47,5 @@ int	_echo(t_token *token)
 	}
 	if (!flag)
 		printf("\n");
-	close(fd);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_built_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:39:59 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 16:57:19 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:28:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ int check_is_built_in(t_token *token, t_minishell *ms)
 		return (exec_export(token, ms));
 	if (ft_strcmp(token->cmd, "unset"))
 		return (exec_unset(token, ms));
-	
 	return (0);
 }

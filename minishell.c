@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 09:38:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:21:07 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ int	main(int argc, char **argv, char **envp)
 	t_token		*token;
 	t_arg		*arg;
 	t_file		*file;
-	int			new_cmd;
 
 	(void)argv;
 	(void)argc;
 	g_mode = 0;
-	new_cmd = 1;
 	init_minishell(&ms);
 	copy_env(&ms, envp);
 	init_signals();
@@ -37,7 +35,6 @@ int	main(int argc, char **argv, char **envp)
 		if (parsing(s, &ms) != 0)
 			continue ;
 		expand(&ms);
-		new_cmd = 0;
 		token = ms.t_head;
 		while (token)
 		{
