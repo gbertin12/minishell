@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 12:47:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:02:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 {
 	long long	x;
 
-	while (s[i + 1] != '\0')
+	while (s[i] != '\0')
 	{
 		i += search_next_sep(&s[i]);
 		i += skip_spaces(&s[i]);
