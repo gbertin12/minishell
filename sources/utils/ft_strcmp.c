@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 12:22:47 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/25 11:59:55 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/25 12:00:11 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "minishell.h"
+#include "../../includes/minishell.h"
 
-char	_cd(t_token *token, t_minishell *ms);
-int		_env(t_minishell *ms);
-int		_export(t_token *token, t_minishell *ms);
-int		_pwd(t_token *token);
-int		_unset(char *key, t_minishell *ms);
-int		_echo(t_token *token);
+int	ft_strcmp(char *str1, char *str2)
+{
+	int	i;
 
-int		check_is_built_in(t_token *token, t_minishell *ms);
-int		exec_env(t_token *token, t_minishell *ms);
-
-#endif
+	i = 0;
+	while (str1[i] || str2[i])
+	{
+		if (str1[i] == '\n' && str2[i] == '\0')
+			return (1);
+		if (str1[i] != str2[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}

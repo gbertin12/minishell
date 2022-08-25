@@ -1,76 +1,39 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #@
-#    Updated: 2022/08/25 09:36:48 by gbertin          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = minishell
-CC = cc 
-FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
-RM = rm -f
-LIBFT_PATH = sources/libs/libft/
-SRCS = minishell.c\
-		sources/built-in/_cd.c\
-		sources/built-in/_echo.c\
-		sources/built-in/_env.c\
-		sources/built-in/_export.c\
-		sources/built-in/_pwd.c\
-		sources/built-in/_unset.c\
-		sources/check/check_files.c \
-		sources/execute/if_type_file_exist.c \
-		sources/execute/browse_cmd2.c \
-		sources/execute/get_path.c \
-		sources/execute/open_files.c \
-		sources/expand/between_quote.c \
- 		sources/expand/expand.c\
-		sources/expand/replace_var.c\
-		sources/parsing/add_param.c\
-		sources/parsing/parsing.c\
-		sources/parsing/search_next_sep.c\
-		sources/signals/signals.c\
-		sources/utils/add_end_list.c\
-		sources/utils/add_env_key_value.c\
-		sources/utils/count_elem.c\
-		sources/utils/do_env_key_exist.c\
-		sources/utils/free_tokens.c\
-		sources/utils/ft_malloc.c\
-		sources/utils/ft_superjoin.c\
-		sources/utils/get_env_value.c\
-		sources/utils/init_minishell.c\
-		sources/utils/is_space.c\
-		sources/utils/list_to_tab.c\
-		sources/utils/next_arg_parsing.c\
-		sources/utils/replace_env_value.c\
-		sources/utils/ternaries.c\
-		sources/copy_env.c
-
-HEAD = includes/minishell.h
-
-OBJ=$(SRCS:.c=.o)
-
-all: $(NAME)
-
-%.o: %.c $(HEAD)
-			$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
-
-$(NAME):$(OBJ)
-			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib  -fsanitize=address -g3
-
-clean: 
-			$(MAKE) clean -C $(LIBFT_PATH)
-			$(RM) $(OBJ)
-
-fclean: clean
-			$(MAKE) clean -C $(LIBFT_PATH)
-			$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: clean fclean all re
+USER=tsawe07
+MallocNanoZone=0
+__CFBundleIdentifier=com.microsoft.VSCode
+COMMAND_MODE=unix2003
+LOGNAME=tsawe07
+PATH=/opt/homebrew/opt/ruby@2.6/bin:/usr/local/opt/ruby/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion Tech Preview.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/homebrew/opt/ruby@2.6/bin:/usr/local/opt/ruby/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.9/bin
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.5oIii4G8cV/Listeners
+SHELL=/bin/zsh
+HOME=/Users/tsawe07
+__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+TMPDIR=/var/folders/6j/myzvr8d93vzckpn7rlh8tck80000gn/T/
+XPC_SERVICE_NAME=0
+XPC_FLAGS=0x0
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+SHLVL=1
+PWD=/Users/tsawe07/Documents/42/minishell
+OLDPWD=/Users/tsawe07/Documents/42/minishell
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_REPOSITORY=/opt/homebrew
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/homebrew/share/man:
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+ZSH=/Users/tsawe07/.oh-my-zsh
+PAGER=less
+LESS=-R
+LSCOLORS=Gxfxcxdxbxegedabagacad
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.70.0
+LANG=en_GB.UTF-8
+COLORTERM=truecolor
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper.app/Contents/MacOS/Code Helper
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_IPC_HANDLE=/var/folders/6j/myzvr8d93vzckpn7rlh8tck80000gn/T/vscode-git-d646a5408a.sock
+VSCODE_INJECTION=1
+ZDOTDIR=/var/folders/6j/myzvr8d93vzckpn7rlh8tck80000gn/T/vscode-zsh
+TERM=xterm-256color
+_=/Users/tsawe07/Documents/42/minishell/./minishell

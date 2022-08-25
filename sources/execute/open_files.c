@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 10:34:16 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 11:27:47 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,28 @@ int	check_have_next_type(t_file *file, int type)
 		file = file->next;
 	}
 	return (1);
+}
+
+int	heredoc(char *limiter)
+{
+	char	*append;
+	int		fd;
+	
+	g_mode = 1;
+	ft_putstr_fd(limiter, 2);
+	fd = open(".tmp",  O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fd < 0)
+		return (-1);
+	append = readline("heredoc>");
+	while (!ft_strcmp(append, limiter))
+	{
+		ft_putstr_fd(append, fd);
+		free(append);
+		append = readline("heredoc>");
+	}
+	free(append);
+	g_mode = 0;
+	return (fd);
 }
 
 int	open_output(t_token *token)
@@ -79,7 +101,7 @@ int	open_input(t_token *token, t_minishell *ms)
 		}
 		if (file->append)
 		{
-			fd = open(".tmp", O_RDWR | O_CREAT | O_APPEND, 0644);
+			fd = heredoc(file->path);
 			unlink(".tmp");
 		}
 		else 
