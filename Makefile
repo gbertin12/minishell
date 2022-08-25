@@ -22,11 +22,13 @@ SRCS = minishell.c\
 		sources/built-in/_export.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
+		sources/built-in/exec_built_in.c\
 		sources/check/check_files.c \
 		sources/execute/if_type_file_exist.c \
 		sources/execute/browse_cmd2.c \
 		sources/execute/get_path.c \
 		sources/execute/open_files.c \
+		sources/execute/redir.c \
 		sources/expand/between_quote.c \
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
@@ -41,6 +43,7 @@ SRCS = minishell.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/free_tokens.c\
 		sources/utils/ft_malloc.c\
+		sources/utils/ft_strcmp.c\
 		sources/utils/ft_superjoin.c\
 		sources/utils/get_env_value.c\
 		sources/utils/init_minishell.c\

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 10:53:07 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:43:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		init_execute(t_token *token, t_minishell *ms)
 {
+	ft_putstr_fd("INIT EXECUTE\n", 2);
 	token->inputfile = 0;
 	token->outputfile = 0;
 	token->have_in = have_infile(token);
@@ -22,44 +23,9 @@ int		init_execute(t_token *token, t_minishell *ms)
 		token->inputfile = open_input(token, ms);
 	if (token->have_out)
 		token->outputfile = open_output(token);
+	ft_putstr_fd(ft_itoa(token->have_out, ms), 2);
+	ft_putstr_fd("\n", 2);
 	printf("%s fd in = %d have in = %d fd out = %d have out = %d NBFILE = %zu\n", token->cmd, token->inputfile, token->have_in, token->outputfile, token->have_out, count_file(token->file_head));
-	return (0);
-}
-
-int	redir_out(t_token *token)
-{
-	if (token->have_out)
-	{
-		if (dup2(token->outputfile, 1) == -1)
-			perror("minishell 6 : ");
-	}
-	else if (token->next)
-	{
-		close(token->pipefd[0]);
-		if (dup2(token->pipefd[1], 1) == -1)
-			perror("minishell 7 : ");
-	}
-	return (0);
-}
-
-int	redir_in(t_token *token, t_token *last)
-{
-	if (token->have_in == 1)
-	{
-		if (last->pipefd[0])
-			close(last->pipefd[0]);
-		if (last->pipefd[1])
-			close(last->pipefd[1]);
-		if (dup2(token->inputfile, 0))
-			perror("minishell 4 : ");
-	}
-	else
-	{
-		ft_putstr_fd("REDIR OUT WITH PIPE\n", 2);
-		close(last->pipefd[1]);
-		if (dup2(last->pipefd[0], 0))
-			perror("minishell 5 : ");
-	}
 	return (0);
 }
 
@@ -78,8 +44,8 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
 	token->pid = fork();
-	if (token->pid == -1)
-		return (2);
+	if (token->pid < 0)
+		return (1);
 	if (token->pid == 0)
 	{
 		if (init_execute(token, ms))
@@ -108,6 +74,8 @@ int	exec_middle(char **args, t_token *last, t_token *token, t_minishell *ms)
 	if (pipe(token->pipefd))
 			perror("minishell 8 :");
 	token->pid = fork();
+	if (token->pid < 0)
+		return (1);
 	if (token->pid == 0)
 	{
 		if (init_execute(token, ms))
@@ -130,27 +98,19 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
 	token->pid = fork();
-	if (token->pid == -1)
-		return (2);
+	if (token->pid < 0)
+		return (1);
 	if (token->pid == 0)
 	{
-		if (init_execute(token, ms))
-			return (1);
-	}
-	init_execute(token, ms);
-	env = env_to_tab(ms);
-	path = make_path(token, ms);
-	redir_in(token, last);
-	if (token->have_out)
-	{
-		if (dup2(token->outputfile, 1) == -1)
-			perror("minishell 13 :");
-	}
-	token->pid = fork();
-	if (token->pid == -1)
-		return (2);
-	if (token->pid == 0)
-	{
+		init_execute(token, ms);
+		env = env_to_tab(ms);
+		path = make_path(token, ms);
+		redir_in(token, last);
+		if (token->have_out)
+		{
+			if (dup2(token->outputfile, 1) == -1)
+				perror("minishell 13 :");
+		}
 		if (path)
 			execve(path, args, env);
 		perror("minishell 10 :");
@@ -170,11 +130,16 @@ int	browse_cmd(t_minishell *ms)
 	tmpin = (dup(0));
 	tmpout = (dup(1));
 	g_mode = 1;
-	ms->path_absolute = get_path_env(ms);
 	token = ms->t_head;
+	if (token->cmd == NULL)
+		return (1);
+	ms->path_absolute = get_path_env(ms);
 	last = NULL;
 	args = args_to_tab(token, ms);
-	exec_first_cmd(args, ms);
+	if (check_is_built_in(token, ms))
+		;
+	else
+		exec_first_cmd(args, ms);
 	last = token;
 	if (count_token(ms->t_head) > 1)
 		token = token->next;
@@ -205,5 +170,7 @@ int	browse_cmd(t_minishell *ms)
 	}
 	dup2(tmpin, 0);
 	dup2(tmpout, 1);
+	close(tmpin);
+	close(tmpout);
 	return (1);
 }
