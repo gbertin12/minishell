@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:19:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/19 11:13:52 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:41:30 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void		sigint_handler(int sig);
 void		sigquit_handler(int sig);
 void		init_signals(void);
+void		sigint_heredoc(int sig);
 
 extern char	g_mode;
 #endif
