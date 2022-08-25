@@ -3,20 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/08/22 14:29:54 by gbertin          ###   ########.fr        #
-=======
-#    Updated: 2022/08/22 12:45:33 by ccambium         ###   ########.fr        #
->>>>>>> 94037e790329b8a080c4c2ec9907b06af105822f
+#    Updated: 2022/08/25 09:35:54 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
+<<<<<<< HEAD
 CC = cc 
 FLAGS = -Wall -Wextra -Werror  -g3 -I /opt/homebrew/opt/readline/include
+=======
+CC = cc
+FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
+>>>>>>> 435e724585f6dfe1dffccb573be6d582f6b53963
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -27,8 +28,10 @@ SRCS = minishell.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/check/check_files.c \
-		sources/check/open_output.c \
-		sources/expand/between_quote.c\
+		sources/execute/if_type_file_exist.c \
+		sources/execute/browse_cmd2.c \
+		sources/execute/open_files.c \
+		sources/expand/between_quote.c \
  		sources/expand/expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
@@ -62,7 +65,11 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
+<<<<<<< HEAD
 			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -fsanitize=address -g3 -lreadline -L/opt/homebrew/opt/readline/lib
+=======
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib  -fsanitize=address -g3
+>>>>>>> 435e724585f6dfe1dffccb573be6d582f6b53963
 
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ternaries.c                                        :+:      :+:    :+:   */
+/*   other.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 09:39:18 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 09:59:14 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/22 15:17:12 by ccambium          #+#    #+#             */
+/*   Updated: 2022/08/22 18:00:57 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef OTHER_H
+# define OTHER_H
+# include "../includes/minishell.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <stddef.h>
 
-char	char_ternary(char condition, char true, char false)
-{
-	if (condition)
-		return (true);
-	return (false);
-}
 
-char	*string_ternary(char condition, char *true, char *false)
-{
-	if (condition)
-		return (true);
-	return (false);
-}
+#endif

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:29:40 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 12:26:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:03:49 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	check_files(t_token *token)
 			file = file->next;
 			continue ;
 		}
-		if (!access(file->path, F_OK))
+		if (access(file->path, F_OK))
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(file->path, 2);
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("file not found or permission denied\n", 2);
-			return (1);
+			return (0);
 		}
 		file = file->next;
 	}
-	return (0);
+	return (1);
+	
 }

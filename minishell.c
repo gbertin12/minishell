@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 14:37:21 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 09:36:06 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ int	main(int argc, char **argv, char **envp)
 	t_token		*token;
 	t_arg		*arg;
 	t_file		*file;
+	int			new_cmd;
 
 	(void)argv;
 	(void)argc;
 	g_mode = 0;
+	new_cmd = 1;
 	//ft_bzero(&ms, sizeof(t_minishell));
 	init_minishell(&ms);
 	copy_env(&ms, envp);
@@ -36,11 +38,12 @@ int	main(int argc, char **argv, char **envp)
 		if (parsing(s, &ms) != 0)
 			continue ;
 		expand(&ms);
+		new_cmd = 0;
 		token = ms.t_head;
 		while (token)
 		{
 			arg = token->arg_head;
-			printf("CMD = %s apos = %d\n", token->cmd, token->apos);
+			printf("CMD = %s\n", token->cmd);
 			printf("ARG = ");
 			while (arg)
 			{
@@ -60,11 +63,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (s && *s)
     		add_history(s);
-		// if (ms.t_head->cmd == "echo")
-		// {
-		// 	printf("here\n");
-		// 	_echo(ms.t_head);
-		// }
+		browse_cmd(&ms);
+		g_mode = 0;
 		free_tokens(&ms);
 		ms.t_head = NULL;
 		free(s);
@@ -72,34 +72,3 @@ int	main(int argc, char **argv, char **envp)
 	free_all(&ms);
 	return (EXIT_SUCCESS);
 }
-
-// token = ms.t_head;
-// 		while (token)
-// 		{
-// 			arg = token->arg_head;
-// 			printf("CMD = %s\n", token->cmd);
-// 			printf("ARG = ");
-// 			while (arg)
-// 			{
-// 				printf("%s | ", arg->value);
-// 				arg = arg->next;
-// 			}
-// 			printf("\n");
-// 			file = token->input_head;
-// 			printf("INFILE = ");
-// 			while (file)
-// 			{
-// 				printf("%s[%d] | ", file->path, file->append);
-// 				file = file->next;
-// 			}
-// 			printf("\n");
-// 			file = token->output_head;
-// 			printf("OUTFILE = ");
-// 			while (file)
-// 			{
-// 				printf("%s[%d] | ", file->path, file->append);
-// 				file = file->next;
-// 			}
-// 			printf("\n");
-// 			token = token->next;
-// 		}

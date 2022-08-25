@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 09:36:45 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:14:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 //include libs
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
 # include <signal.h>
 # include <sys/wait.h>
 # include <fcntl.h>
@@ -33,6 +36,7 @@
 # include "expand.h"
 # include "signals.h"
 # include "check.h"
+# include "execute.h"
 
 void	copy_env(t_minishell *ms, char **env);
 

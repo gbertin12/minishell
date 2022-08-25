@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ternaries.c                                        :+:      :+:    :+:   */
+/*   if_type_file_exist.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 09:39:18 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 09:59:14 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/22 17:59:20 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/23 11:05:17 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	char_ternary(char condition, char true, char false)
+int	have_infile(t_token *token)
 {
-	if (condition)
-		return (true);
-	return (false);
+	t_file *file;
+
+	file = token->file_head;
+	while (file)
+	{
+		if (file->type == 0)
+			return (1);
+		file = file->next;
+	}
+	return (0);
 }
 
-char	*string_ternary(char condition, char *true, char *false)
+int	have_outfile(t_token *token)
 {
-	if (condition)
-		return (true);
-	return (false);
+	t_file *file;
+
+	file = token->file_head;
+	while (file)
+	{
+		if (file->type == 1)
+			return (1);
+		file = file->next;
+	}
+	return (0);
+	
 }
