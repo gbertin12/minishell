@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 09:36:06 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 09:38:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	g_mode = 0;
 	new_cmd = 1;
-	//ft_bzero(&ms, sizeof(t_minishell));
 	init_minishell(&ms);
 	copy_env(&ms, envp);
 	init_signals();
