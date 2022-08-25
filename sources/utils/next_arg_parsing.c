@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   next_arg_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 11:33:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:37:13 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ long long	get_size_of_cmd(char *cmd)
 	i = 0;
 	while (cmd[i] && !is_space(cmd[i]))
 	{
+		if (cmd[i] == '|')
+			return (i);
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 		{
 			quote = cmd[i];
