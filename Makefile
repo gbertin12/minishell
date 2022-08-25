@@ -12,7 +12,7 @@
 
 NAME = minishell
 CC = cc 
-FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include -g3
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -28,6 +28,7 @@ SRCS = minishell.c\
 		sources/execute/get_path.c \
 		sources/execute/open_files.c \
 		sources/expand/between_quote.c \
+		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
