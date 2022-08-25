@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 09:30:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 16:01:11 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	_echo(t_token *token)
 		return (fd);
 	while (arg)
 	{
-		ft_putstr_fd(arg->value, fd);
+		printf("%s", arg->value);
 		arg = arg->next;
 	}
 	if (!flag)
-		ft_putstr_fd("\n", fd);
+		printf("\n");
 	close(fd);
 	return (0);
 }
