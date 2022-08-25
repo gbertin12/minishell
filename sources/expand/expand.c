@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 14:46:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:44:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static void	expand_cmd(t_token *token, t_minishell *ms)
 	char	*tmp;
 	size_t	i;
 
-	printf("%s\n", token->cmd);
 	if (token->cmd == NULL)
 		return ;
 	i = next_var(token->cmd);
@@ -99,7 +98,6 @@ void	expand(t_minishell *ms)
 	t_token	*token;
 
 	token = ms->t_head;
-	printf("cmd = %s\n", token->cmd);
 	while (token)
 	{
 		expand_cmd(token, ms);

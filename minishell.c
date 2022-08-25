@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 17:39:35 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:45:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	ms;
 	char		*s;
-	t_token		*token;
-	t_arg		*arg;
-	t_file		*file;
+	// t_token		*token;
+	// t_arg		*arg;
+	// t_file		*file;
 
 	(void)argv;
 	(void)argc;
@@ -35,28 +35,28 @@ int	main(int argc, char **argv, char **envp)
 		if (parsing(s, &ms) != 0)
 			continue ;
 		expand(&ms);
-		token = ms.t_head;
-		while (token)
-		{
-			arg = token->arg_head;
-			printf("CMD = %s\n", token->cmd);
-			printf("ARG = ");
-			while (arg)
-			{
-				printf("%s | ", arg->value);
-				arg = arg->next;
-			}
-			printf("\n");
-			file = token->file_head;
-			printf("FILES = ");
-			while (file)
-			{
-				printf("%s[%d] %s | ", file->path, file->append, file->type == 1 ? "OUT" : "IN");
-				file = file->next;
-			}
-			printf("\n");
-			token = token->next;
-		}
+		// token = ms.t_head;
+		// while (token)
+		// {
+		// 	arg = token->arg_head;
+		// 	printf("CMD = %s\n", token->cmd);
+		// 	printf("ARG = ");
+		// 	while (arg)
+		// 	{
+		// 		printf("%s | ", arg->value);
+		// 		arg = arg->next;
+		// 	}
+		// 	printf("\n");
+		// 	file = token->file_head;
+		// 	printf("FILES = ");
+		// 	while (file)
+		// 	{
+		// 		printf("%s[%d] %s | ", file->path, file->append, file->type == 1 ? "OUT" : "IN");
+		// 		file = file->next;
+		// 	}
+		// 	printf("\n");
+		// 	token = token->next;
+		// }
 		if (s && *s)
     		add_history(s);
 		browse_cmd(&ms);
