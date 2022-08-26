@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 10:19:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 16:41:30 by ccambium         ###   ########.fr       */
+/*   Created: 2022/08/26 13:47:27 by ccambium          #+#    #+#             */
+/*   Updated: 2022/08/26 14:15:17 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
-
+#ifndef PROMPT_H
+# define PROMPT_H
 # include "minishell.h"
 
-void		sigint_handler(int sig);
-void		sigquit_handler(int sig);
-void		init_signals(void);
-void		sigint_heredoc(int sig);
+//colors
+# define BLUE "\033[034m"
+# define RED "\033[031m"
+# define GREEN "\033[032m"
+# define YELLOW "\033[033m"
+# define PURPLE "\033[035m"
+# define LIGHTPURPLE "\033[034m"
+# define WHITE "\033[037m"
+# define RESET "\033(B\033[m"
 
-extern char	g_mode;
+char	*get_prompt(t_minishell *ms, int x);
+
 #endif
