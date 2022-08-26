@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 16:06:12 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:39:51 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "signals.h"
 # include "check.h"
 # include "execute.h"
+# include "prompt.h"
 
 void	copy_env(t_minishell *ms, char **env);
 
