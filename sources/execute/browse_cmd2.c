@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 12:27:12 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 15:28:08 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	browse_cmd(t_minishell *ms)
 	tmpout = (dup(1));
 	g_mode = 1;
 	token = ms->t_head;
-	if (token->cmd == NULL)
+	if (!token)
 		return (1);
 	ms->path_absolute = get_path_env(ms);
 	last = NULL;
@@ -171,6 +171,7 @@ int	browse_cmd(t_minishell *ms)
 	dup2(tmpout, 1);
 	close(tmpin);
 	close(tmpout);
+	g_mode = 0;
 	ms->l_retv = WEXITSTATUS(status);
 	printf("RETURN STATUS : %d\n", WEXITSTATUS(status));
 	return (1);
