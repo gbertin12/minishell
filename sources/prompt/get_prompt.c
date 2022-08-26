@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:44:17 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 14:57:51 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:52:13 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_prompt(t_minishell *ms, int x)
 	pwd = NULL;
 	user = ft_strdup("minishell", ms);
 	pwd = getcwd(NULL, 0);
-	ret_v = ft_strjoin(RED, "┌──", ms);
+	ret_v = ft_strjoin(BLUE, "┌──", ms);
 	tmp = ft_strjoin(ret_v, YELLOW, ms);
 	ft_free(ret_v, ms);
 	ret_v = ft_strjoin(tmp, "(", ms);
@@ -36,7 +36,7 @@ char	*get_prompt(t_minishell *ms, int x)
 	ft_free(ret_v, ms);
 	ret_v = ft_strjoin(tmp, ")", ms);
 	ft_free(tmp, ms);
-	tmp = ft_strjoin(ret_v, RED, ms);
+	tmp = ft_strjoin(ret_v, BLUE, ms);
 	ft_free(ret_v, ms);
 	ret_v = ft_strjoin(tmp, "──", ms);
 	ft_free(tmp, ms);
@@ -57,7 +57,7 @@ char	*get_prompt(t_minishell *ms, int x)
 		return (ret_v);
 	tmp = ft_strjoin(ret_v, "\n", ms);
 	ft_free(ret_v, ms);
-	ret_v = ft_strjoin(tmp, RED, ms);
+	ret_v = ft_strjoin(tmp, BLUE, ms);
 	ft_free(tmp, ms);
 	tmp = ft_strjoin(ret_v, "└─", ms);
 	ft_free(ret_v, ms);

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 14:40:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:38:44 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int argc, char **argv, char **envp)
 	init_signals();
 	while (1)
 	{
+		if (g_mode ==  5)
+			g_mode = 0;
 		s = readline(get_prompt(&ms, 2));
 		if (!s || ft_strncmp("exit", s, 4) == 0)
 			break ;

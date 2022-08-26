@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:47:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 14:15:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:53:48 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "minishell.h"
 
 //colors
-# define BLUE "\033[034m"
+# define BLUE "\033[036m"
 # define RED "\033[031m"
 # define GREEN "\033[032m"
 # define YELLOW "\033[033m"
