@@ -6,13 +6,13 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 11:41:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 12:27:12 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		init_execute(t_token *token, t_minishell *ms)
+int	init_execute(t_token *token, t_minishell *ms)
 {
 	token->inputfile = 0;
 	token->outputfile = 0;
@@ -22,16 +22,15 @@ int		init_execute(t_token *token, t_minishell *ms)
 		token->inputfile = open_input(token, ms);
 	if (token->have_out)
 		token->outputfile = open_output(token);
-	// printf("%s fd in = %d have in = %d fd out = %d have out = %d NBFILE = %zu\n", token->cmd, token->inputfile, token->have_in, token->outputfile, token->have_out, count_file(token->file_head));
 	return (0);
 }
 
 int	exec_first_cmd(char **args, t_minishell *ms)
 {
-	t_token *token;
+	t_token	*token;
 	char	*path;
 	char	**env;
-	
+
 	token = ms->t_head;
 	if (token->next)
 	{
@@ -69,7 +68,7 @@ int	exec_middle(char **args, t_token *last, t_token *token, t_minishell *ms)
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
 	if (pipe(token->pipefd))
-			perror("minishell 8 :");
+		perror("minishell 8 :");
 	token->pid = fork();
 	if (token->pid < 0)
 		return (1);
@@ -120,9 +119,10 @@ int	browse_cmd(t_minishell *ms)
 {
 	t_token	*token;
 	char	**args;
-	t_token *last;
+	t_token	*last;
 	int		tmpin;
 	int		tmpout;
+	int		status;
 
 	tmpin = (dup(0));
 	tmpout = (dup(1));
@@ -136,7 +136,6 @@ int	browse_cmd(t_minishell *ms)
 	if (check_is_built_in(token, ms))
 	{
 		ms->l_retv = 0;
-	
 	}
 	else
 		exec_first_cmd(args, ms);
@@ -165,12 +164,14 @@ int	browse_cmd(t_minishell *ms)
 	token = ms->t_head;
 	while (token)
 	{
-		waitpid(token->pid, NULL, 0);
+		waitpid(token->pid, &status, 0);
 		token = token->next;
 	}
 	dup2(tmpin, 0);
 	dup2(tmpout, 1);
 	close(tmpin);
 	close(tmpout);
+	ms->l_retv = WEXITSTATUS(status);
+	printf("RETURN STATUS : %d\n", WEXITSTATUS(status));
 	return (1);
 }

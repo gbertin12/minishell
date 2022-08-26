@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:44:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 17:43:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 12:25:44 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	redir_in(t_token *token, t_token *last)
 	}
 	else
 	{
-		// ft_putstr_fd("REDIR OUT WITH PIPE\n", 2);
 		close(last->pipefd[1]);
 		if (dup2(last->pipefd[0], 0))
 			perror("minishell 5 : ");

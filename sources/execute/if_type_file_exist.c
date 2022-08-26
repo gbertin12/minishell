@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   if_type_file_exist.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 17:59:20 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/23 11:05:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 12:22:50 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	have_infile(t_token *token)
 {
-	t_file *file;
+	t_file	*file;
 
 	file = token->file_head;
 	while (file)
@@ -28,7 +28,7 @@ int	have_infile(t_token *token)
 
 int	have_outfile(t_token *token)
 {
-	t_file *file;
+	t_file	*file;
 
 	file = token->file_head;
 	while (file)
@@ -38,5 +38,4 @@ int	have_outfile(t_token *token)
 		file = file->next;
 	}
 	return (0);
-	
 }
