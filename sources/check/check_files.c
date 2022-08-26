@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:29:40 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/24 10:03:49 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 12:22:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ int	check_files(t_token *token)
 		file = file->next;
 	}
 	return (1);
-	
 }

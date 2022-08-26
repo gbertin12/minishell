@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 11:11:48 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 11:28:25 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static int	declaration(t_minishell *ms)
 	env = ms->e_head;
 	while (env)
 	{
-		printf("declare -x %s=\"%s\"", env->key,
-			string_ternary(env->value != NULL, env->value, ""));
+		if (env->value)
+			printf("declare -x %s=\"%s\"\n", env->key,
+				string_ternary(env->value != NULL, env->value, ""));
+		else
+			printf("declare -x %s=\n", env->key);
 		env = env->next;
 	}
 	return (EXIT_SUCCESS);
@@ -40,9 +43,13 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	char	*value;
 	char	**tmp;
 
-	if (!arg->value[0] || (!ft_isalpha(arg->value[0]) && arg->value[0] != '_'))
-		return (printf("minishell: export: `%s': not a valid identifier",
-				arg->value));
+	if (check_key_env(&arg->value[0]))
+	{
+		ft_putstr_fd("export: not an identifier: ", 2);
+		ft_putstr_fd(&arg->value[0], 2);
+		ft_putstr_fd("\n", 2);
+		return (1);
+	}
 	else if (ft_strchr(arg->value, '=') == NULL)
 	{
 		add_key_with_empty_value(arg->value, ms);

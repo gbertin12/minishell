@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 13:46:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:42:39 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ static char	*remove_quotes(char *s, t_minishell *ms)
 		to_find = '"';
 	x = size_t_ternary(strchr(s, to_find) - s > 0, strchr(s, to_find) - s, 0);
 	tmp[0] = ft_substr(s, 0, x, ms);
-	printf("delete_quote : tmp[0] = %s\n", tmp[0]);
+	//printf("delete_quote : tmp[0] = %s\n", tmp[0]);
 	z = (ft_strrchr(s, to_find) - s) - x;
 	tmp[1] = ft_substr(s, x + 1, z - 1, ms);
-	printf("delete_quote : tmp[1] = %s\n", tmp[1]);
+	// printf("delete_quote : tmp[1] = %s\n", tmp[1]);
 	tmp[2] = ft_substr(s, ft_strrchr(s, to_find) - s + 1, ft_strlen(s), ms);
-	printf("delete_quote : tmp[2] = %s\n", tmp[2]);
+	// printf("delete_quote : tmp[2] = %s\n", tmp[2]);
 	tmp[3] = NULL;
 	ret_v = ft_concate(tmp, ms);
 	ft_free(tmp[0], ms);
@@ -66,7 +66,7 @@ static char	*remove_quotes(char *s, t_minishell *ms)
 	ft_free(tmp[2], ms);
 	ft_free(tmp, ms);
 	ft_free(s, ms);
-	printf("delete quote : ret_v = %s\n", ret_v);
+	// printf("delete quote : ret_v = %s\n", ret_v);
 	return (ret_v);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 14:45:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 11:21:32 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char		do_env_key_exist(char *key, t_minishell *ms);
 char		char_ternary(char condition, char true, char false);
 
 int			ft_strcmp(char *str1, char *str2);
+int			check_key_env(char *s);
 void		*ft_malloc(size_t size, t_minishell *ms);
 
 #endif

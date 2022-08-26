@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/24 09:59:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 12:51:11 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,39 @@ static char	replace_pwd_in_env(char *value_oldpwd, t_minishell *ms)
 		replace_env_value(key_pwd, value_pwd, ms);
 	else
 		add_env_key_value(key_pwd, value_pwd, ms);
-	return (1);
+	return (0);
 }
 
 static char	exec_chdir(char *path, t_minishell *ms)
 {
 	char	*value_oldpwd;
-
+	
 	value_oldpwd = get_pwd(ms);
 	if (chdir(path) == -1)
 	{
 		strerror(errno);
-		return (0);
+		return (1);
 	}
 	replace_pwd_in_env(value_oldpwd, ms);
-	return (1);
+	return (0);
 }
 
 char	_cd(t_token *token, t_minishell *ms)
 {
 	size_t	nb_arg;
+	char	*home_path;
 
+	home_path = get_env_value("HOME", ms);
+	if (home_path == NULL)
+		home_path = "/home";
 	nb_arg = count_arg(token->arg_head);
 	if (nb_arg > 1)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
-		return (0);
+		return (1);
 	}
+	ft_putstr_fd(home_path, 2);
 	if (nb_arg == 0)
-		return (exec_chdir("/home", ms));
+		return (exec_chdir(home_path, ms));
 	return (exec_chdir(token->arg_head->value, ms));
 }
