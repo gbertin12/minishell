@@ -3,28 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 11:28:25 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 17:42:39 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static t_env	*next_declare(t_minishell *ms, t_env *last)
+{
+	t_env	*env;
+	char	flag;
+	t_env	*ret_v;
+
+	env = ms->e_head->next;
+	ret_v = ms->e_head;
+	flag = 0;
+	while (env)
+	{
+		if (last)
+		{
+			if (strcmp(env->key, last->key) > 0
+				&& strcmp(env->key, ret_v->key) < 0)
+			{
+				flag = 1;
+				ret_v = env;
+			}
+		}
+		else
+		{
+			if (strcmp(env->key, ret_v->key) < 0)
+			{
+				flag = 1;
+				ret_v = env;
+			}
+		}
+		env = env->next;
+	}
+	if (!flag)
+		return (NULL);
+	return (ret_v);
+}
+
 static int	declaration(t_minishell *ms)
 {
 	t_env	*env;
 
-	env = ms->e_head;
+	env = next_declare(ms, NULL);
 	while (env)
 	{
 		if (env->value)
-			printf("declare -x %s=\"%s\"\n", env->key,
-				string_ternary(env->value != NULL, env->value, ""));
+			printf("declare -x %s=\"%s\"\n", env->key, env->value);
 		else
 			printf("declare -x %s=\n", env->key);
-		env = env->next;
+		env = next_declare(ms, env);
 	}
 	return (EXIT_SUCCESS);
 }
