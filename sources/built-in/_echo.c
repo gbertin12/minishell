@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _echo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 09:30:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:36:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,23 @@ char	check_flag(char	*s)
 int	_echo(t_token *token)
 {
 	t_arg		*arg;
-	int			e;
-	int			fd;
 	char		flag;
 
 	arg = token->arg_head;
-	flag = check_flag(arg->value);
-	e = check_files(token);
-	if (e)
-		return (e);
-	if (flag)
-		arg = arg->next;
-	fd = open_output(token);
-	if (fd < 0)
-		return (fd);
 	while (arg)
 	{
-		ft_putstr_fd(arg->value, fd);
+		if (check_flag(arg->value))
+			flag++;
+		else
+			break ;
+		arg = arg->next;
+	}
+	while (arg)
+	{
+		printf("%s", arg->value);
 		arg = arg->next;
 	}
 	if (!flag)
-		ft_putstr_fd("\n", fd);
-	close(fd);
+		printf("\n");
 	return (0);
 }

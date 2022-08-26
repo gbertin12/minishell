@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 14:43:22 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:44:05 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		init_execute(t_token *token, t_minishell *ms)
 {
-	ft_putstr_fd("INIT EXECUTE\n", 2);
 	token->inputfile = 0;
 	token->outputfile = 0;
 	token->have_in = have_infile(token);
@@ -23,9 +22,7 @@ int		init_execute(t_token *token, t_minishell *ms)
 		token->inputfile = open_input(token, ms);
 	if (token->have_out)
 		token->outputfile = open_output(token);
-	ft_putstr_fd(ft_itoa(token->have_out, ms), 2);
-	ft_putstr_fd("\n", 2);
-	printf("%s fd in = %d have in = %d fd out = %d have out = %d NBFILE = %zu\n", token->cmd, token->inputfile, token->have_in, token->outputfile, token->have_out, count_file(token->file_head));
+	// printf("%s fd in = %d have in = %d fd out = %d have out = %d NBFILE = %zu\n", token->cmd, token->inputfile, token->have_in, token->outputfile, token->have_out, count_file(token->file_head));
 	return (0);
 }
 
