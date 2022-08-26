@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 12:27:12 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 15:58:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 		if (path)
 			execve(path, args, env);
 		perror("minishell 9 :");
-		exit (1);
+		exit (127);
 	}
 	return (0);
 }
@@ -81,7 +81,7 @@ int	exec_middle(char **args, t_token *last, t_token *token, t_minishell *ms)
 		if (path)
 			execve(path, args, env);
 		perror("minishell 10 :");
-		exit (1);
+		exit (127);
 	}
 	return (0);
 }
@@ -110,7 +110,7 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 		if (path)
 			execve(path, args, env);
 		perror("minishell 10 :");
-		exit (1);
+		exit (127);
 	}
 	return (0);
 }
