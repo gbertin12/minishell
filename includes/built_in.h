@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 15:02:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 13:39:06 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 char	_cd(t_token *token, t_minishell *ms);
 int		_env(t_minishell *ms);
 int		_export(t_token *token, t_minishell *ms);
-int		_pwd();
+int		_pwd(t_token *token);
 int		_unset(char *key, t_minishell *ms);
 int		_echo(t_token *token);
 
