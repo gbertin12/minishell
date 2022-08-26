@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/18 03:49:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 11:40:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int	_unset(char *key, t_minishell *ms)
 
 	e_before = NULL;
 	e_env = ms->e_head;
+	if (check_key_env(key))
+	{
+		ft_putstr_fd("unset: ", 2);
+		ft_putstr_fd(key, 2);
+		ft_putstr_fd(": invalid parameter name\n", 2);
+		return (1);
+	}
 	if (!e_env)
 		return (0);
 	if (!do_env_key_exist(key, ms))

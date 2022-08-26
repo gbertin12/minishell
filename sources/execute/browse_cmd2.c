@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 17:44:05 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/26 11:41:46 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,10 @@ int	browse_cmd(t_minishell *ms)
 	last = NULL;
 	args = args_to_tab(token, ms);
 	if (check_is_built_in(token, ms))
-		;
+	{
+		ms->l_retv = 0;
+	
+	}
 	else
 		exec_first_cmd(args, ms);
 	last = token;

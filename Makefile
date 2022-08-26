@@ -39,6 +39,7 @@ SRCS = minishell.c\
 		sources/signals/signals.c\
 		sources/utils/add_end_list.c\
 		sources/utils/add_env_key_value.c\
+		sources/utils/check_key_env.c \
 		sources/utils/count_elem.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/free_tokens.c\
