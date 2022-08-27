@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:27:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:01:44 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	exec_first_cmd(char **args, t_minishell *ms)
 	}
 	env = env_to_tab(ms);
 	path = make_path(token, ms);
+	printf("PATH LAST :%s\n", path);
 	token->pid = fork();
 	if (token->pid < 0)
 		return (1);
@@ -99,14 +100,15 @@ int	exec_last(char **args, t_token *last, t_token *token, t_minishell *ms)
 	if (token->pid == 0)
 	{
 		init_execute(token, ms);
-		env = env_to_tab(ms);
-		path = make_path(token, ms);
 		redir_in(token, last);
 		if (token->have_out)
 		{
 			if (dup2(token->outputfile, 1) == -1)
 				perror("minishell 13 :");
 		}
+		ft_putstr_fd("IS CMD : ", 2);
+		ft_putstr_fd(token->cmd, 2);
+		ft_putstr_fd("\n",2);
 		if (path)
 			execve(path, args, env);
 		perror("minishell 10 :");
@@ -151,6 +153,9 @@ int	browse_cmd(t_minishell *ms)
 	}
 	if (count_token(ms->t_head) > 1)
 	{
+		ft_putstr_fd("LAST CMD IS CMD : ", 2);
+		ft_putstr_fd(token->cmd, 2);
+		ft_putstr_fd("\n",2);
 		args = args_to_tab(token, ms);
 		exec_last(args, last, token, ms);
 	}
