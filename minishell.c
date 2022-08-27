@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:29:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 15:37:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	main(int argc, char **argv, char **envp)
 		if (g_mode ==  5)
 			g_mode = 0;
 		s = readline(get_prompt(&ms, 2));
-		if (!s || ft_strncmp("exit", s, 4) == 0)
-			exit(0);
 		if (parsing(s, &ms) != 0)
 			continue ;
 		expand(&ms);
