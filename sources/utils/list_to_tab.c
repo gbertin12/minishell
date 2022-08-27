@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 10:44:31 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 13:35:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	**env_to_tab(t_minishell *ms)
 	while (tmp != NULL)
 	{
 		s_tmp = ft_strjoin(tmp->key, "=", ms);
-		ret_v[i] = ft_strjoin(s_tmp, tmp->value, ms);
+		ret_v[i] = ft_strjoin(
+				s_tmp, string_ternary(tmp->value != NULL, tmp->value, ""), ms);
 		ft_free(s_tmp, ms);
 		tmp = tmp->next;
 		i++;
