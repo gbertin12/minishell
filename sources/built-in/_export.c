@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 20:57:32 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:03:14 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_env	*biggest(t_minishell *ms)
 	ret_v = ms->e_head;
 	while (env)
 	{
-		if (strcmp(env->key, ret_v->key) > 0)
+		if (ft_strncmp(env->key, ret_v->key, ft_strlen(env->key)) > 0)
 			ret_v = env;
 		env = env->next;
 	}
@@ -46,7 +46,8 @@ static t_env	*next_declare(t_minishell *ms, t_env *last)
 		}
 		else
 		{
-			if (strcmp(env->key, last->key) > 0 && strcmp(env->key, ret_v->key) < 0)
+			if (ft_strncmp(env->key, last->key, ft_strlen(env->key)) > 0
+				&& ft_strncmp(env->key, ret_v->key, ft_strlen(env->key)) < 0)
 				ret_v = env;
 		}
 		env = env->next;
