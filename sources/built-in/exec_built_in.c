@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:39:59 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 13:02:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 13:45:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	exec_env(t_token *token, t_minishell *ms)
 
 int	exec_pwd(t_token *token, t_minishell *ms)
 {
-	if (token->arg_head)
-		return (1);
 	if (token->next)
 	{
 		if (pipe(token->pipefd))
@@ -51,12 +49,8 @@ int	exec_pwd(t_token *token, t_minishell *ms)
 	{
 		init_execute(token, ms);
 		redir_out(token);
-		if (_pwd())
-		{
-			strerror(18);
-			ft_putstr_fd("FAILURE\n", 2);
+		if (_pwd(token))
 			exit(1);
-		}
 		exit(0);
 	}
 	return (1);
