@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 12:51:11 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 14:36:51 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 static char	*get_pwd(t_minishell *ms)
 {
-	char	v_print[50];
+	char	*v_print;
 	char	*v_ret;
 
+	v_print = NULL;
 	v_ret = NULL;
-	if (getcwd(v_print, 50) == NULL)
+	v_print = getcwd(NULL, 0);
+	if (v_print == NULL)
 		strerror(errno);
 	v_ret = ft_strdup(v_print, ms);
 	return (v_ret);
@@ -62,10 +64,15 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	char	*value_oldpwd;
 	
 	value_oldpwd = get_pwd(ms);
+	if (access(path, 0))
+	{
+		printf("cd: no such file or directory: %s\n", path);
+		return (0);
+	}
 	if (chdir(path) == -1)
 	{
 		strerror(errno);
-		return (1);
+		return (0);
 	}
 	replace_pwd_in_env(value_oldpwd, ms);
 	return (0);
@@ -80,12 +87,12 @@ char	_cd(t_token *token, t_minishell *ms)
 	if (home_path == NULL)
 		home_path = "/home";
 	nb_arg = count_arg(token->arg_head);
-	if (nb_arg > 1)
-	{
-		ft_putstr_fd("cd: too many arguments\n", 2);
-		return (1);
-	}
-	ft_putstr_fd(home_path, 2);
+	// if (nb_arg > 1)
+	// {
+	// 	ft_putstr_fd("cd: too many arguments\n", 2);
+	// 	return (1);
+	// }
+	//ft_putstr_fd(home_path, 2);
 	if (nb_arg == 0)
 		return (exec_chdir(home_path, ms));
 	return (exec_chdir(token->arg_head->value, ms));

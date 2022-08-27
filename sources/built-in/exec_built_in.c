@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:39:59 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 13:45:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 14:34:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,39 @@ int	exec_echo(t_token *token, t_minishell *ms)
 
 int	exec_export(t_token *token, t_minishell *ms)
 {
-	if (_export(token, ms))
+	if (token->next)
 	{
-		ms->l_retv = 1;
-		return (1);
+		if (pipe(token->pipefd))
+			perror("minishell ");
+		token->pid = fork();
+		if (token->pid == -1)
+			perror("minishell ");
+		if (token->pid == 0)
+		{
+			init_execute(token, ms);
+			redir_out(token);
+			if (token->arg_head == NULL)
+			{
+				if (_export(token, ms))
+					exit (1);
+				exit (0);
+			}
+		}
+	}
+	if (token->arg_head != NULL)
+	{
+		init_execute(token, ms);
+		if (token->have_out)
+		{
+			if (dup2(token->outputfile, 1))
+				perror("minishell ");
+			close(token->outputfile);
+		}
+		if (_export(token, ms))
+		{
+			ms->l_retv = 1;
+			return (1);
+		}
 	}
 	ms->l_retv = 0;
 	return (1);

@@ -19,6 +19,7 @@ SRCS = minishell.c\
 		sources/built-in/_cd.c\
 		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
+		sources/built-in/_exit.c\
 		sources/built-in/_export.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
@@ -44,6 +45,7 @@ SRCS = minishell.c\
 		sources/utils/count_elem.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/free_tokens.c\
+		sources/utils/ft_atoll.c\
 		sources/utils/ft_malloc.c\
 		sources/utils/ft_strcmp.c\
 		sources/utils/ft_superjoin.c\

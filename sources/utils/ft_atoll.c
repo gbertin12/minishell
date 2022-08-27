@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _pwd.c                                             :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:27:49 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/26 16:44:51 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/26 16:48:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	_pwd(t_token *token)
+long long	ft_atoll(const char *str)
 {
-	char	v_print[1000];
+	int				i;
+	int				negative;
+	long long int	val;
 
-	if (count_arg(token->arg_head))
+	i = 0;
+	negative = 1;
+	val = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		ft_putstr_fd("pwd: too many arguments\n", 2);
-		return (1);
+		if (str[i] == '-')
+			negative = -1;
+		i++;
 	}
-	if (getcwd(v_print, 50) == NULL)
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		strerror(errno);
-		return (1);
+		val = val * 10 + (str[i] - '0');
+		i++;
 	}
-	if (*v_print)
-	{
-		ft_putstr_fd(v_print, 2);
-		ft_putstr_fd("\n", 2);
-	}
-	return (EXIT_SUCCESS);
+	return (val * negative);
 }

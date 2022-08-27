@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 15:58:04 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:27:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,13 @@ int	browse_cmd(t_minishell *ms)
 	tmpout = (dup(1));
 	g_mode = 1;
 	token = ms->t_head;
-	if (token->cmd == NULL)
+	if (!token)
 		return (1);
 	ms->path_absolute = get_path_env(ms);
 	last = NULL;
 	args = args_to_tab(token, ms);
 	if (check_is_built_in(token, ms))
-	{
-		ms->l_retv = 0;
-	}
+		;
 	else
 		exec_first_cmd(args, ms);
 	last = token;
@@ -171,6 +169,7 @@ int	browse_cmd(t_minishell *ms)
 	dup2(tmpout, 1);
 	close(tmpin);
 	close(tmpout);
+	g_mode = 0;
 	ms->l_retv = WEXITSTATUS(status);
 	printf("RETURN STATUS : %d\n", WEXITSTATUS(status));
 	return (1);

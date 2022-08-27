@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 11:21:32 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/26 16:47:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char		char_ternary(char condition, char true, char false);
 
 int			ft_strcmp(char *str1, char *str2);
 int			check_key_env(char *s);
+long long	ft_lliota(long long n, t_minishell *ms);
+long long	ft_atoll(const char *str);
 void		*ft_malloc(size_t size, t_minishell *ms);
 
 #endif
