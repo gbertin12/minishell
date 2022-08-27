@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 14:48:30 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:54:05 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long long	get_size_of_cmd(char *cmd)
 	long long	i;
 	char		quote;
 
-	i = 0;
+	i = 1;
 	while (cmd[i] && !is_space(cmd[i]))
 	{
 		if (cmd[i] == '|')
@@ -50,24 +50,10 @@ long long	get_size_of_cmd(char *cmd)
 	return (i);
 }
 
-int	check_next_sep(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (is_space(s[i]))
-	{
-		if (s[i + 1] == '>' || s[i] == '<')
-			return (0);
-		if (ft_isprint(s[i + 1]))
-			return (1);
-	}
-	return (1);
-}
-
 long long	next_arg(char *s, t_token *token, t_minishell *ms)
 {
 	long long	size;
+	size_t		i;
 
 	if (s[0] == '>')
 		return (add_output(s, token, ms));
@@ -75,12 +61,15 @@ long long	next_arg(char *s, t_token *token, t_minishell *ms)
 		return (add_input(s, token, ms));
 	if (token->cmd == NULL)
 	{
-		size = get_size_of_cmd(s);
+		i = 0;
+		while (is_space(s[i]))
+			i++;
+		size = get_size_of_cmd(&s[i]);
 		if (size < 0)
 			return (-1);
-		token->cmd = ft_substr(s, 0, size, ms);
+		token->cmd = ft_substr(s, i, size, ms);
 	}
 	else
 		return (add_arg(s, token, ms));
-	return (size);
+	return (size + i);
 }
