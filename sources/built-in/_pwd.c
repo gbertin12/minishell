@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 14:30:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 13:59:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	_pwd(t_token *token)
 		strerror(errno);
 		return (1);
 	}
-	free(v_print);
 	if (*v_print)
 	{
 		ft_putstr_fd(v_print, 2);
