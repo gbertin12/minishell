@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 15:11:44 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:46:34 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_token	*new_token(t_token *token, t_minishell *ms)
 	if (!token)
 		return (NULL);
 	ft_memset(token, 0, sizeof(t_token));
+	token->cmd = NULL;
 	return (token);
 }
 
@@ -31,6 +32,13 @@ static size_t	skip_spaces(char *s)
 	while (is_space(s[ret_v]))
 		ret_v++;
 	return (ret_v);
+}
+
+static char	is_token_empty(t_token *token)
+{
+	if (!token)
+		return (0);
+	return ((!token->cmd || !token->cmd[0]) && !token->arg_head && !token->file_head);
 }
 
 char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
@@ -49,10 +57,14 @@ char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 			i++;
 		}
 		x = next_arg(&s[i], token, ms);
-		i += skip_spaces(&s[i]);
 		if (x < 0)
 			return (x);
 		i += (size_t)x;
+	}
+	if (is_token_empty(token) && s[0])
+	{
+		printf("minishell : syntax error near unexpected token `newline\"\n");
+		return (1);
 	}
 	add_end_token(token, ms);
 	return (0);

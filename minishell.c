@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:37:10 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:57:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	ms;
 	char		*s;
-	
+
 	init(&ms, envp, argc, argv);
 	while (1)
 	{
@@ -42,7 +42,11 @@ int	main(int argc, char **argv, char **envp)
 			g_mode = 0;
 		s = readline(get_prompt(&ms, 2));
 		if (parsing(s, &ms) != 0)
+		{
+			free(s);
+			free_tokens(&ms);
 			continue ;
+		}
 		expand(&ms);
 		if (s && *s)
 			add_history(s);
