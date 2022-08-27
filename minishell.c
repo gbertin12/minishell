@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 17:19:16 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 15:28:12 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		s = readline("\033[031m┌──\033[034m(\033[032mminishell\033[034m)\n\033[031m└─\033[032m$ \033[034m");
+		if (g_mode ==  5)
+			g_mode = 0;
+		s = readline(get_prompt(&ms, 2));
+		if (!s || ft_strncmp("exit", s, 4) == 0)
+			exit(0);
 		if (parsing(s, &ms) != 0)
 			continue ;
 		expand(&ms);

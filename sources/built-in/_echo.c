@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   _echo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 09:58:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/27 12:59:16 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/minishell.h"
 
@@ -44,6 +43,8 @@ int	_echo(t_token *token)
 	while (arg)
 	{
 		printf("%s", arg->value);
+		if (arg->next)
+			printf(" ");
 		arg = arg->next;
 	}
 	if (!flag)
