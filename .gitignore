@@ -7,3 +7,5 @@ for_makefile
 out.a
 out.b
 test.c
+out
+test*
