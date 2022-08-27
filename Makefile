@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/26 14:42:16 by ccambium         ###   ########.fr        #
+#    Updated: 2022/08/27 15:02:02 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ clean:
 			$(RM) $(OBJ)
 
 fclean: clean
-			$(MAKE) clean -C $(LIBFT_PATH)
+			$(MAKE) fclean -C $(LIBFT_PATH)
 			$(RM) $(NAME)
 
 re: fclean all
