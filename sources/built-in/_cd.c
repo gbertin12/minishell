@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 14:36:51 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/28 11:53:08 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	*get_pwd(t_minishell *ms)
 	if (v_print == NULL)
 		strerror(errno);
 	v_ret = ft_strdup(v_print, ms);
+	free(v_print);
 	return (v_ret);
 }
 
