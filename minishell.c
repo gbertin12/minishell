@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/28 12:13:46 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:31:34 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	main(int argc, char **argv, char **envp)
 			g_mode = 0;
 		}
 		s = readline(get_prompt(&ms, 2));
+		if (!s[0])
+		{
+			free(s);
+			continue ;
+		}
 		if (parsing(s, &ms) != 0)
 		{
 			free(s);

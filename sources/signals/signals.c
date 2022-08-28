@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 15:54:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:32:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	sigint_handler(int sig)
 	char	*pwd;
 
 	if (g_mode || sig != SIGINT)
+	{
+		g_mode = 5;
 		return ;
+	}
 	pwd = getcwd(NULL, 0);
 	printf("\n%s┌──%s(%sminishell%s)%s──%s[%s%s%s]\n", BLUE, YELLOW,
 		GREEN, YELLOW, BLUE, YELLOW, GREEN, pwd, YELLOW);
