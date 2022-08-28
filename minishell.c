@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 16:57:35 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/28 12:13:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ int	main(int argc, char **argv, char **envp)
 	init(&ms, envp, argc, argv);
 	while (1)
 	{
-		if (g_mode ==  5)
+		if (g_mode == 5)
+		{
+			ms.l_retv = 130;
 			g_mode = 0;
+		}
 		s = readline(get_prompt(&ms, 2));
 		if (parsing(s, &ms) != 0)
 		{
