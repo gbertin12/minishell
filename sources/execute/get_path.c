@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 08:42:16 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 16:01:27 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/28 13:04:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,23 @@ int	ft_search_char(char *str)
 	return (0);
 }
 
-char	*make_path(t_token *token, t_minishell *ms)
+char	*make_path(t_exec *exec, t_minishell *ms)
 {
 	int		i;
 	char	*tmp;
 	char	*path;
 
 	i = 0;
-	if (ms->path_absolute == NULL || ft_search_char(token->cmd))
+	if (exec->path_absolute == NULL || ft_search_char(exec->token->cmd))
 	{
-		if (access(token->cmd, 0) == 0)
-			return (ft_strdup(token->cmd, ms));
+		if (access(exec->token->cmd, 0) == 0)
+			return (ft_strdup(exec->token->cmd, ms));
 		return (NULL);
 	}
-	while (ms->path_absolute[i] != NULL)
+	while (exec->path_absolute[i] != NULL)
 	{
-		tmp = ft_strjoin(ms->path_absolute[i], "/", ms);
-		path = ft_strjoin(tmp, token->cmd, ms);
+		tmp = ft_strjoin(exec->path_absolute[i], "/", ms);
+		path = ft_strjoin(tmp, exec->token->cmd, ms);
 		if (access(path, 0) == 0)
 			return (path);
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 11:06:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:50:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,18 @@ typedef struct s_obj
 	struct s_obj	*next;
 }	t_obj;
 
-typedef struct s_builtin
+typedef struct s_exec
 {
-	char				*name;
-	int					(*f)(struct s_token, struct s_minishell);
-	struct s_builtin	*next;
-}	t_builtin;
+	int		err;
+	int		tmpin;
+	int		tmpout;
+	t_token	*token;
+	t_token *last;
+	char	*path;
+	char	**env;
+	char	**args;
+	char	**path_absolute;
+}	t_exec;
 
 /* 
  *  @param t_head head of token list from parsing
@@ -80,7 +86,6 @@ typedef struct s_minishell
 	struct s_obj	*o_head;
 	int				l_retv;
 	t_env			*e_head;
-	char			**path_absolute;
 	char			*l_input;
 }	t_minishell;
 

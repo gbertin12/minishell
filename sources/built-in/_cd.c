@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/28 11:53:08 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:38:26 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,6 @@ char	_cd(t_token *token, t_minishell *ms)
 	if (home_path == NULL)
 		home_path = "/home";
 	nb_arg = count_arg(token->arg_head);
-	// if (nb_arg > 1)
-	// {
-	// 	ft_putstr_fd("cd: too many arguments\n", 2);
-	// 	return (1);
-	// }
-	//ft_putstr_fd(home_path, 2);
 	if (nb_arg == 0)
 		return (exec_chdir(home_path, ms));
 	return (exec_chdir(token->arg_head->value, ms));
