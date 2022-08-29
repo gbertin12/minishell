@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/25 17:42:39 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:13:55 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,40 @@ static char	*ft_concate(char **tab, t_minishell *ms)
 	return (ret_v);
 }
 
+static char	get_char_target(char *s)
+{
+	char	ret_v;
+
+	ret_v = 0;
+	if (strchr(s, '"') && strchr(s, '\''))
+		ret_v = char_ternary(
+				strchr(s, '"') < strchr(s, '\''), '"', '\'');
+	else if (strchr(s, '"'))
+		ret_v = '"';
+	else if (strchr(s, '\''))
+		ret_v = '\'';
+	return (ret_v);
+}
+
 static char	*remove_quotes(char *s, t_minishell *ms)
 {
 	char	to_find;
 	char	**tmp;
 	char	*ret_v;
 	size_t	x;
-	size_t	z;
 
 	tmp = ft_malloc(sizeof(char *) * 4, ms);
 	if (!tmp)
 		return (s);
 	if (!strchr(s, '"') && !strchr(s, '\''))
 		return (s);
-	to_find = '\'';
-	if (strchr(s, '"') && strchr(s, '\''))
-		to_find = char_ternary(
-				strchr(s, '"') < strchr(s, '\''), '"', '\'');
-	else if (strchr(s, '"'))
-		to_find = '"';
+	to_find = get_char_target(s);
+	if (!to_find)
+		return (s);
 	x = size_t_ternary(strchr(s, to_find) - s > 0, strchr(s, to_find) - s, 0);
 	tmp[0] = ft_substr(s, 0, x, ms);
-	//printf("delete_quote : tmp[0] = %s\n", tmp[0]);
-	z = (ft_strrchr(s, to_find) - s) - x;
-	tmp[1] = ft_substr(s, x + 1, z - 1, ms);
-	// printf("delete_quote : tmp[1] = %s\n", tmp[1]);
+	tmp[1] = ft_substr(s, x + 1, (ft_strrchr(s, to_find) - s) - x, ms);
 	tmp[2] = ft_substr(s, ft_strrchr(s, to_find) - s + 1, ft_strlen(s), ms);
-	// printf("delete_quote : tmp[2] = %s\n", tmp[2]);
 	tmp[3] = NULL;
 	ret_v = ft_concate(tmp, ms);
 	ft_free(tmp[0], ms);
@@ -66,7 +73,6 @@ static char	*remove_quotes(char *s, t_minishell *ms)
 	ft_free(tmp[2], ms);
 	ft_free(tmp, ms);
 	ft_free(s, ms);
-	// printf("delete quote : ret_v = %s\n", ret_v);
 	return (ret_v);
 }
 
