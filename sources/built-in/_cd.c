@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:17:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 12:32:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	char	*value_oldpwd;
 	
 	value_oldpwd = get_pwd(ms);
-	if (access(path, 0))
+	if (access(path, 0) == -1)
 	{
 		printf("cd: no such file or directory: %s\n", path);
 		return (0);
