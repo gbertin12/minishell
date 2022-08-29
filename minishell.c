@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 12:48:51 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:57:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ int	main(int argc, char **argv, char **envp)
 			free_tokens(&ms);
 			continue ;
 		}
+		if (ms.t_head && ms.t_head->arg_head && ms.t_head->file_head)
+			printf("cmd = %s\narg = %s\n file = %s\n", ms.t_head->cmd, ms.t_head->arg_head->value, ms.t_head->file_head->path);
+		else if (ms.t_head && ms.t_head->arg_head)
+			printf("cmd = %s\narg = %s\n", ms.t_head->cmd, ms.t_head->arg_head->value);
+		else if (ms.t_head && ms.t_head->file_head)
+			printf("cmd = %s\nfile = %s\n", ms.t_head->cmd, ms.t_head->file_head->path);
+		else if (ms.t_head)
+			printf("cmd = %s\n", ms.t_head->cmd);
 		expand(&ms);
 		if (s && *s)
 			add_history(s);

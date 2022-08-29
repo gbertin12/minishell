@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:23:40 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 14:00:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long long	get_size_of_cmd(char *cmd)
 	i = 0;
 	while (cmd[i] && !is_space(cmd[i]))
 	{
-		if (cmd[i] == '|')
+		if (cmd[i] == '|' || !ft_isalnum(cmd[i]))
 			return (i);
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 		{
