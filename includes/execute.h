@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 16:30:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 09:52:32 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 char	**get_path_env(t_minishell *ms);
 int		ft_search_char(char *str);
-char	*make_path(t_token *token, t_minishell *ms);
+char	*make_path(t_exec *exec, t_minishell *ms);
 int		init_execute(t_token *token, t_minishell *ms);
 int		execute_cmd(t_token *token, int pipefd[2], char **args, t_minishell *ms);
 int		browse_cmd(t_minishell *ms);
@@ -33,6 +33,14 @@ int		exec_pwd(t_token *token, t_minishell *ms);
 int		exec_env(t_token *token, t_minishell *ms);
 int		exec_export(t_token *token, t_minishell *ms);
 int		exec_unset(t_token *token, t_minishell *ms);
+
+int		exec_first_cmd(t_exec *exec, t_minishell *ms);
+int		exec_middle(char **args, t_exec *exec, t_minishell *ms);
+int		exec_last(char **args, t_exec *exec, t_minishell *ms);
+
+t_exec	*first(t_exec *exec, t_minishell *ms);
+t_exec	*middle(t_exec *exec, t_minishell *ms);
+t_exec	*last (t_exec *exec, t_minishell *ms);
 
 int		redir_out(t_token *token);
 int		redir_in(t_token *token, t_token *last);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 13:18:20 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:03:56 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,17 @@ int	heredoc(char *limiter)
 		append = readline("heredoc>");
 	}
 	free(append);
+	unlink(".tmp");
 	return (fd);
+}
+
+static void	put_error_fd(t_file *file)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file->path, 2);
+	ft_putstr_fd(": ", 2);
+	strerror(errno);
+	ft_putchar_fd('\n', 2);
 }
 
 int	open_output(t_token *token)
@@ -65,13 +75,7 @@ int	open_output(t_token *token)
 		else
 			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(file->path, 2);
-			ft_putstr_fd(": ", 2);
-			strerror(errno);
-			ft_putchar_fd('\n', 2);
-		}
+			put_error_fd(file);
 		file = file->next;
 		if (check_have_next_type(file, 1))
 			return (fd);
@@ -83,14 +87,11 @@ int	open_input(t_token *token, t_minishell *ms)
 {
 	t_file	*file;
 	int		fd;
-	int		i;
 
-	i = 0;
 	file = token->file_head;
 	fd = 1;
 	while (file)
 	{
-		i++;
 		if (fd > 0 && fd != 1)
 			close(fd);
 		if (file->type)
@@ -99,21 +100,11 @@ int	open_input(t_token *token, t_minishell *ms)
 			continue ;
 		}
 		if (file->append)
-		{
 			fd = heredoc(file->path);
-			unlink(".tmp");
-		}
 		else
 			fd = open(file->path, O_RDONLY, 0644);
 		if (fd < 0)
-		{
-			ft_putstr_fd("NB FILE ", 2);
-			ft_putstr_fd(ft_itoa(i, ms), 2);
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(file->path, 2);
-			ft_putstr_fd(": ", 2);
-			strerror(errno);
-		}
+			put_error_fd(file);
 		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);
