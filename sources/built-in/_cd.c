@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:38:26 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:17:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,14 @@ char	_cd(t_token *token, t_minishell *ms)
 	if (nb_arg == 0)
 		return (exec_chdir(home_path, ms));
 	return (exec_chdir(token->arg_head->value, ms));
+}
+
+int	exec_cd(t_token *token, t_minishell *ms)
+{
+	if (count_token(ms->t_head) == 1)
+	{
+		if (_cd(token, ms))
+			return (0);
+	}
+	return (1);
 }
