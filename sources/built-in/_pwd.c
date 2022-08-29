@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 15:27:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:00:51 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,23 @@ int	_pwd(t_token *token)
 		ft_putstr_fd("\n", 2);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	exec_pwd(t_token *token)
+{
+	if (token->next)
+	{
+		if (pipe(token->pipefd))
+			return (1);
+	}
+	token->pid = fork();
+	if (token->pid == 0)
+	{
+		init_execute(token);
+		redir_out(token);
+		if (_pwd(token))
+			exit(1);
+		exit(0);
+	}
+	return (1);
 }

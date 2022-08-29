@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/26 11:40:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 10:57:55 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,25 @@ int	_unset(char *key, t_minishell *ms)
 		e_before = e_env;
 		e_env = e_env->next;
 	}
+	return (0);
+}
+
+int	exec_unset(t_token *token, t_minishell *ms)
+{
+	init_execute(token);
+	if (token->next)
+	{
+		if (pipe(token->pipefd))
+			perror("minishell ");
+	}
+	if (token->arg_head)
+	{
+		if (_unset(token->arg_head->value, ms))
+		{
+			ms->l_retv = 1;
+			return (1);
+		}
+	}
+	ms->l_retv = 0;
 	return (0);
 }
