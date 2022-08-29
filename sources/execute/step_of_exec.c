@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 09:58:12 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:28:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
-	ft_putstr_fd(exec->token->cmd, 2);
 	exec->args = args_to_tab(exec->token, ms);
 	if (check_is_built_in(exec->token, ms))
 		;
