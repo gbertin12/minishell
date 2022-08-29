@@ -6,156 +6,22 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:39:59 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/27 16:38:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:00:47 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	exec_env(t_token *token, t_minishell *ms)
-{
-	if (token->arg_head)
-		return (1);
-	if (token->next)
-	{
-		if (pipe(token->pipefd))
-		{
-			perror("");
-			return (1);
-		}
-	}
-	token->pid = fork();
-	if (token->pid == 0)
-	{	
-		ft_putstr_fd("IN CHILD\n", 2);
-		init_execute(token, ms);
-		redir_out(token);
-		if (_env(ms))
-			exit(1);
-		exit(0);
-	}
-	return (1);
-}
-
-int	exec_pwd(t_token *token, t_minishell *ms)
-{
-	if (token->next)
-	{
-		if (pipe(token->pipefd))
-			return (1);
-	}
-	token->pid = fork();
-	if (token->pid == 0)
-	{
-		init_execute(token, ms);
-		redir_out(token);
-		if (_pwd(token))
-			exit(1);
-		exit(0);
-	}
-	return (1);
-}
-
-int	exec_cd(t_token *token, t_minishell *ms)
-{
-	if (count_token(ms->t_head) == 1)
-	{
-		if (_cd(token, ms))
-			return (0);
-	}
-	return (1);
-}
-
-int	exec_echo(t_token *token, t_minishell *ms)
-{
-	if (token->next)
-	{
-		if (pipe(token->pipefd))
-			return (0);
-	}
-	token->pid = fork();
-	if (token->pid == 0)
-	{
-		init_execute(token, ms);
-		redir_out(token);
-		if (_echo(token))
-			exit(1);
-		exit(0);
-	}
-	return (1);
-}
-
-int	exec_export(t_token *token, t_minishell *ms)
-{
-	if (token->next)
-	{
-		if (pipe(token->pipefd))
-			perror("minishell ");
-		token->pid = fork();
-		if (token->pid == -1)
-			perror("minishell ");
-		if (token->pid == 0)
-		{
-			init_execute(token, ms);
-			redir_out(token);
-			if (token->arg_head == NULL)
-			{
-				if (_export(token, ms))
-					exit (1);
-				exit (0);
-			}
-		}
-	}
-	if (token->arg_head != NULL)
-	{
-		init_execute(token, ms);
-		if (token->have_out)
-		{
-			if (dup2(token->outputfile, 1))
-				perror("minishell ");
-			close(token->outputfile);
-		}
-		if (_export(token, ms))
-		{
-			ms->l_retv = 1;
-			return (1);
-		}
-	}
-	ms->l_retv = 0;
-	return (1);
-}
-
-int	exec_unset(t_token *token, t_minishell *ms)
-{
-	init_execute(token, ms);
-	if (token->next)
-	{
-		if (pipe(token->pipefd))
-			perror("minishell ");
-	}
-	if (token->arg_head)
-	{
-		if (_unset(token->arg_head->value, ms))
-		{
-			ms->l_retv = 1;
-			return (1);
-		}
-	}
-	
-	ms->l_retv = 0;
-	return (0);
-}
 
 int	check_is_built_in(t_token *token, t_minishell *ms)
 {
 	if (ft_strcmp(token->cmd, "env"))
 		return (exec_env(token, ms));
 	if (ft_strcmp(token->cmd, "pwd"))
-		return (exec_pwd(token, ms));
+		return (exec_pwd(token));
 	if (ft_strcmp(token->cmd, "cd"))
 		return (exec_cd(token, ms));
 	if (ft_strcmp(token->cmd, "echo"))
-		return (exec_echo(token, ms));
+		return (exec_echo(token));
 	if (ft_strcmp(token->cmd, "export"))
 		return (exec_export(token, ms));
 	if (ft_strcmp(token->cmd, "unset"))

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:03:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 10:55:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	open_output(t_token *token)
 	return (fd);
 }
 
-int	open_input(t_token *token, t_minishell *ms)
+int	open_input(t_token *token)
 {
 	t_file	*file;
 	int		fd;

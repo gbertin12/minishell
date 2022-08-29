@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _echo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/27 12:59:16 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:59:49 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,23 @@ int	_echo(t_token *token)
 	if (!flag)
 		printf("\n");
 	return (0);
+}
+
+int	exec_echo(t_token *token)
+{
+	if (token->next)
+	{
+		if (pipe(token->pipefd))
+			return (0);
+	}
+	token->pid = fork();
+	if (token->pid == 0)
+	{
+		init_execute(token);
+		redir_out(token);
+		if (_echo(token))
+			exit(1);
+		exit(0);
+	}
+	return (1);
 }

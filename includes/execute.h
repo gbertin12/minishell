@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 09:52:32 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:00:55 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 char	**get_path_env(t_minishell *ms);
 int		ft_search_char(char *str);
 char	*make_path(t_exec *exec, t_minishell *ms);
-int		init_execute(t_token *token, t_minishell *ms);
+int		init_execute(t_token *token);
 int		execute_cmd(t_token *token, int pipefd[2], char **args, t_minishell *ms);
 int		browse_cmd(t_minishell *ms);
 
-int		open_input(t_token *token, t_minishell *ms);
+int		open_input(t_token *token);
 int		open_output(t_token *token);
 int		have_infile(t_token *token);
 int		have_outfile(t_token *token);
 
-int		exec_echo(t_token *token, t_minishell *ms);
+int		exec_echo(t_token *token);
 int		exec_cd(t_token *token, t_minishell *ms);
-int		exec_pwd(t_token *token, t_minishell *ms);
+int		exec_pwd(t_token *token);
 int		exec_env(t_token *token, t_minishell *ms);
 int		exec_export(t_token *token, t_minishell *ms);
 int		exec_unset(t_token *token, t_minishell *ms);
