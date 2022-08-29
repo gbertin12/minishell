@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _exit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:36:40 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:19:56 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ int	check_arg(t_token *token, t_minishell *ms)
 }
 
 int	b_exit(t_token *token, t_minishell *ms)
-{
-	int	i;
-
-	i = -1;
+{;
 	printf("exit\n");
 	if (token->arg_head)
 	{

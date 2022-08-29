@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 11:13:55 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:27:17 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*remove_quotes(char *s, t_minishell *ms)
 		return (s);
 	x = size_t_ternary(strchr(s, to_find) - s > 0, strchr(s, to_find) - s, 0);
 	tmp[0] = ft_substr(s, 0, x, ms);
-	tmp[1] = ft_substr(s, x + 1, (ft_strrchr(s, to_find) - s) - x, ms);
+	tmp[1] = ft_substr(s, x + 1, (ft_strrchr(s, to_find) - s) - x - 1, ms);
 	tmp[2] = ft_substr(s, ft_strrchr(s, to_find) - s + 1, ft_strlen(s), ms);
 	tmp[3] = NULL;
 	ret_v = ft_concate(tmp, ms);

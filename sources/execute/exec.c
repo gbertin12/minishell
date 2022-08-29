@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:58:43 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:21:17 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 {
-	t_token	*token;
-
-	token = exec->token;
 	exec->path = make_path(exec, ms);
 	exec->token->pid = fork();
 	if (exec->token->pid < 0)
