@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 13:01:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:24:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*cmd;
-	int 			pid;
+	int				pid;
 	int				pipefd[2];
 	int				have_in;
 	int				have_out;
@@ -64,7 +64,7 @@ typedef struct s_exec
 	int		tmpin;
 	int		tmpout;
 	t_token	*token;
-	t_token *last;
+	t_token	*last;
 	char	*path;
 	char	**env;
 	char	**args;
@@ -72,10 +72,11 @@ typedef struct s_exec
 }	t_exec;
 
 /* 
- *  @param t_head head of token list from parsing
- *  @param o_head head of objects list from ft_malloc
- *  @param l_retv last return value returned from tokens
- *  @param e_head head of env list from exports
+ * @param t_head head of token list from parsing
+ * @param o_head head of objects list from ft_malloc
+ * @param l_retv last return value returned from tokens
+ * @param e_head head of env list from exports
+ * @param l_input last input
  */
 
 typedef struct s_minishell

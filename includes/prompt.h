@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:47:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 15:53:48 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:42:56 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 # define WHITE "\033[037m"
 # define RESET "\033(B\033[m"
 
-char	*get_prompt(t_minishell *ms, int x);
+char	*get_prompt(t_minishell *ms);
 
 #endif
