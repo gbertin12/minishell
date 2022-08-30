@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/22 19:15:05 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:05:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static size_t	largest_arg(t_arg *arg_hard)
 	tmp = arg_hard;
 	while (tmp)
 	{
-		tmp_size = ft_strlen(tmp->value);
+		tmp_size = strlen(tmp->value);
 		largest = size_t_ternary(tmp_size > largest, tmp_size, largest);
 		tmp = tmp->next;
 	}
@@ -61,7 +61,7 @@ static size_t	largest_file(t_file *arg_hard)
 	tmp = arg_hard;
 	while (tmp)
 	{
-		tmp_size = ft_strlen(tmp->path);
+		tmp_size = strlen(tmp->path);
 		largest = size_t_ternary(tmp_size > largest, tmp_size, largest);
 		tmp = tmp->next;
 	}
@@ -86,8 +86,8 @@ void	print_token(t_token *token)
 	nb_file = count_file(token->file_head);
 	nb_lines = size_t_ternary(nb_arg > nb_file, nb_arg, nb_file);
 	nb_cln_arg = largest_arg(token->arg_head);
-	nb_cln_file = largest_file(token->file_head);
-	nb_cln_cmd = ft_strlen(token->cmd);
+	nb_cln_file = largest_file(token->file_head) + 4;
+	nb_cln_cmd = strlen(token->cmd);
 	nb_cln_cmd = size_t_ternary(nb_cln_cmd > 5, nb_cln_cmd, 5);
 	nb_cln_arg = size_t_ternary(nb_cln_arg > 6, nb_cln_arg, 6);
 	nb_cln_file = size_t_ternary(nb_cln_file > 7, nb_cln_file, 7) + 4;
@@ -95,11 +95,13 @@ void	print_token(t_token *token)
 	while (x < nb_cln_max)
 	{
 		if (x == 0)
-			printf("%c", '|');
+			printf("%s", TOP_LEFT);
 		else if (x == nb_cln_max - 1)
-			printf("%c", '|');
+			printf("%s", TOP_RIGHT);
+		else if (x == (nb_cln_arg + nb_cln_cmd) || x == nb_cln_cmd || x ==  (nb_cln_arg + nb_cln_cmd + nb_cln_file))
+			printf("%s", T_SHAPE);
 		else
-			printf("%c", '-');
+			printf("%s", LINK);
 		x++;
 	}
 	x = 0;
@@ -107,7 +109,7 @@ void	print_token(t_token *token)
 	while (x < nb_cln_cmd)
 	{
 		if (x == 0 || x == nb_cln_cmd - 1)
-			printf("%c", '|');
+			printf("%s", VLINK);
 		else if (x == 1)
 		{
 			printf(" CMD ");
@@ -122,7 +124,7 @@ void	print_token(t_token *token)
 	while (x < nb_cln_arg)
 	{
 		if (x == 0 || x == nb_cln_arg - 1)
-			printf("%c", '|');
+			printf("%s", VLINK);
 		else if (x == 1)
 		{
 			printf(" ARGS ");
@@ -137,7 +139,7 @@ void	print_token(t_token *token)
 	while (x < nb_cln_file)
 	{
 		if (x == 0 || x == nb_cln_file - 1)
-			printf("%c", '|');
+			printf("%s", VLINK);
 		else if (x == 1)
 		{
 			printf(" FILES ");
@@ -148,6 +150,7 @@ void	print_token(t_token *token)
 			printf(" ");
 		x++;
 	}
+	printf("\n");
 }
 
 int	main(void)
