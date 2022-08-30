@@ -57,6 +57,7 @@ SRCS = minishell.c\
 		sources/utils/init_minishell.c\
 		sources/utils/is_space.c\
 		sources/utils/list_to_tab.c\
+		sources/utils/modify_env.c\
 		sources/utils/next_arg_parsing.c\
 		sources/utils/replace_env_value.c\
 		sources/utils/ternaries.c\
