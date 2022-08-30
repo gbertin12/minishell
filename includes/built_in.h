@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 11:00:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:12:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILT_IN_H
 # define BUILT_IN_H
-# include "minishell.h"
 
 char	_cd(t_token *token, t_minishell *ms);
 int		_env(t_minishell *ms);

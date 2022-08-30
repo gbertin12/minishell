@@ -6,13 +6,12 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:29:08 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 12:39:31 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:12:41 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-# include "minishell.h"
 
 char			parsing(char *s, t_minishell *ms);
 

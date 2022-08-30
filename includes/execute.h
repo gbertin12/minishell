@@ -6,14 +6,12 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 13:07:56 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:12:23 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
-
-# include "minishell.h"
 
 char	**get_path_env(t_minishell *ms);
 

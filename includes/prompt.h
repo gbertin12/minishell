@@ -6,14 +6,16 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:47:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 12:42:56 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:17:01 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROMPT_H
 # define PROMPT_H
-# include "minishell.h"
 
+# include "structures.h"
+# include <stddef.h>
+# include "../sources/libs/libft/libft.h"
 //colors
 # define BLUE "\033[036m"
 # define RED "\033[031m"
