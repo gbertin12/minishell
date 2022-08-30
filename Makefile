@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/29 10:46:40 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/30 10:03:37 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc 
-FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include -g3 -fsanitize=leak
+FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -44,6 +44,7 @@ SRCS = minishell.c\
 		sources/signals/signals.c\
 		sources/utils/add_end_list.c\
 		sources/utils/add_env_key_value.c\
+		sources/utils/add_key_with_empty_value.c\
 		sources/utils/check_key_env.c \
 		sources/utils/count_elem.c\
 		sources/utils/do_env_key_exist.c\
@@ -72,7 +73,7 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib  -fsanitize=address -g3
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
 
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)

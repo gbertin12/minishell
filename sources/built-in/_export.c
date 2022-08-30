@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 11:29:42 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 09:57:36 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,6 @@ static int	declaration(t_minishell *ms)
 		env = next_declare(ms, env);
 	}
 	return (EXIT_SUCCESS);
-}
-
-static void	add_key_with_empty_value(char *s, t_minishell *ms)
-{
-	if (do_env_key_exist(s, ms))
-		replace_env_value(s, NULL, ms);
-	else
-		add_env_key_value(s, NULL, ms);
 }
 
 static int	_export2(t_arg *arg, t_minishell *ms)
