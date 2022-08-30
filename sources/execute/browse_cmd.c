@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 10:25:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:09:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@ int	init_execute(t_token *token)
 	if (token->have_in)
 	{
 		token->inputfile = open_input(token);
-		// ft_putstr_fd("INPUT : ", 2);
-		// ft_putstr_fd(token->inputfile->path, 2);
-		// ft_putstr_fd("\n", 2); 
+		if (token->inputfile < 0)
+			return (1);
 	}
 	if (token->have_out)
 	{
 		token->outputfile = open_output(token);
-		ft_putstr_fd("OUTPUT : ", 2);
-		ft_putstr_fd(token->outputfile->path, 2);
-		ft_putstr_fd("\n", 2); 
+		if (token->outputfile < 0)
+			return (1);
 	}
 	return (0);
 }

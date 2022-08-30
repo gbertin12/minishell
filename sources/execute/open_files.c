@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 10:15:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:59:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,46 +53,48 @@ static void	put_error_fd(t_file *file)
 	ft_putstr_fd(file->path, 2);
 	ft_putstr_fd(": ", 2);
 	perror("");
-	file->usable = 1;
 	ft_putchar_fd('\n', 2);
 }
 
-t_file	*open_output(t_token *token)
+int	open_output(t_token *token)
 {
 	t_file	*file;
+	int		fd;
 
 	file = token->file_head;
+	fd = 1;
 	while (file)
 	{
-		if (file->fd > 0 && file->fd != 1)
-			close(file->fd);
+		if (fd > 0 &&fd != 1)
+			close(fd);
 		if (!file->type)
 		{
 			file = file->next;
 			continue ;
 		}
 		if (file->append)
-			file->fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			file->fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (file->fd < 0)
+			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd < 0)
 			put_error_fd(file);
 		if (check_have_next_type(file, 1))
-			return (file);
+			return (fd);
 		file = file->next;
 	}
-	return (file);
+	return (fd);
 }
 
-t_file	*open_input(t_token *token)
+int	open_input(t_token *token)
 {
 	t_file	*file;
-
+	int		fd;
+	
 	file = token->file_head;
-	file->fd = 1;
+	fd = 1;
 	while (file)
 	{
-		if (file->fd > 0 && file->fd != 1)
+		if (fd > 0 && fd != 1)
 			close(file->fd);
 		if (file->type)
 		{
@@ -100,19 +102,19 @@ t_file	*open_input(t_token *token)
 			continue ;
 		}
 		if (file->append)
-			file->fd = heredoc(file->path);
+			fd = heredoc(file->path);
 		else
-			file->fd = open(file->path, O_RDONLY, 0644);
-		if (file->fd < 0)
+			fd = open(file->path, O_RDONLY, 0644);
+		if (fd < 0)
 			put_error_fd(file);
 		ft_putstr_fd(file->path, 2);
 		ft_putstr_fd("\n", 2);
 		if (check_have_next_type(file, 0))
 		{
 			ft_putstr_fd("IN CHECK HAVE FILE\n", 2);
-			return (file);
+			return (fd);
 		}
 		file = file->next;
 	}
-	return (file);
+	return (fd);
 }

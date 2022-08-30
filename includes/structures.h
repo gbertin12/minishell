@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 10:24:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:09:56 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct s_token
 	int				pipefd[2];
 	int				have_in;
 	int				have_out;
-	t_file			*inputfile;
-	t_file			*outputfile;
+	int				inputfile;
+	int				outputfile;
 	t_file			*file_head;
 	struct s_arg	*arg_head;
 	struct s_token	*next;
