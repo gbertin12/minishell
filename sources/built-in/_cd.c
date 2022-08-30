@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:17:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:09:57 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static char	*get_pwd(t_minishell *ms)
-{
-	char	*v_print;
-	char	*v_ret;
-
-	v_print = NULL;
-	v_ret = NULL;
-	v_print = getcwd(NULL, 0);
-	if (v_print == NULL)
-		strerror(errno);
-	v_ret = ft_strdup(v_print, ms);
-	free(v_print);
-	return (v_ret);
-}
 
 void	check_err(int err, char *msg_err)
 {
@@ -63,7 +48,7 @@ static char	replace_pwd_in_env(char *value_oldpwd, t_minishell *ms)
 static char	exec_chdir(char *path, t_minishell *ms)
 {
 	char	*value_oldpwd;
-	
+
 	value_oldpwd = get_pwd(ms);
 	if (access(path, 0))
 	{
