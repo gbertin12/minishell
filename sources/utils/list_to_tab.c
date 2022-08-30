@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/27 13:35:24 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:26:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,13 @@ char	**env_to_tab(t_minishell *ms)
 	return (ret_v);
 }
 
-char	**args_to_tab(t_token *token, t_minishell *ms)
+static char	**fill_tab(int nb_element, t_token *token, t_minishell *ms)
 {
 	char	**ret_v;
-	size_t	nb_element;
-	size_t	i;
 	t_arg	*arg;
+	size_t	i;
 
-	nb_element = 0;
-	arg = NULL;
-	if (token->arg_head)
-	{
-		arg = token->arg_head;
-		if (!arg)
-			return (NULL);
-		nb_element = count_arg(token->arg_head);
-	}
+	arg = token->arg_head;
 	ret_v = ft_malloc(sizeof(char *) * (nb_element + 2), ms);
 	if (!ret_v)
 		return (ret_v);
@@ -68,4 +59,21 @@ char	**args_to_tab(t_token *token, t_minishell *ms)
 	}
 	ret_v[i] = NULL;
 	return (ret_v);
+}
+
+char	**args_to_tab(t_token *token, t_minishell *ms)
+{
+	size_t	nb_element;
+	t_arg	*arg;
+
+	nb_element = 0;
+	arg = NULL;
+	if (token->arg_head)
+	{
+		arg = token->arg_head;
+		if (!arg)
+			return (NULL);
+		nb_element = count_arg(token->arg_head);
+	}
+	return (fill_tab(nb_element, token, ms));
 }

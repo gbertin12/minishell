@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:19:46 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:19:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:27:59 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_key_env(char *s)
 			ft_putstr_fd("   IN ISALNUM\n", 2);
 			return (1);
 		}
-
 	}
 	return (0);
 }

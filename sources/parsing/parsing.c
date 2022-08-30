@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/27 16:46:34 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:14:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static char	is_token_empty(t_token *token)
 {
 	if (!token)
 		return (0);
-	return ((!token->cmd || !token->cmd[0]) && !token->arg_head && !token->file_head);
+	return ((!token->cmd || !token->cmd[0])
+		&& !token->arg_head && !token->file_head);
 }
 
 char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
