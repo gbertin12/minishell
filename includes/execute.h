@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:00:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 13:03:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		init_execute(t_token *token);
 int		execute_cmd(t_token *token, int pipefd[2], char **args, t_minishell *ms);
 int		browse_cmd(t_minishell *ms);
 
-int		open_input(t_token *token);
-int		open_output(t_token *token);
+t_file	*open_input(t_token *token);
+t_file	*open_output(t_token *token);
 int		have_infile(t_token *token);
 int		have_outfile(t_token *token);
 

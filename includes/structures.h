@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/27 19:50:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/29 13:01:50 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,17 @@ typedef struct s_minishell	t_minishell;
 typedef struct s_file
 {
 	char			*path;
-	int				*fd;
+	int				fd;
 	char			type;
 	char			append;
-	char			exist;
-	char			apos;
+	char			usable;
 	struct s_file	*next;
 }	t_file;
 
 typedef struct s_arg
 {
 	char			*value;
-	struct s_arg	*next;	
-	char			apos;
+	struct s_arg	*next;
 }	t_arg;
 
 typedef struct s_env
@@ -47,8 +45,8 @@ typedef struct s_token
 	int				pipefd[2];
 	int				have_in;
 	int				have_out;
-	int				inputfile;
-	int				outputfile;
+	t_file			*inputfile;
+	t_file			*outputfile;
 	t_file			*file_head;
 	struct s_arg	*arg_head;
 	struct s_token	*next;

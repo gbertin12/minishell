@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:55:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:15:52 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	check_have_next_type(t_file *file, int type)
 {
+	if (!file->next)
+		return (1);
 	while (file)
 	{
 		if (file->type == type)
@@ -50,64 +52,67 @@ static void	put_error_fd(t_file *file)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(file->path, 2);
 	ft_putstr_fd(": ", 2);
-	strerror(errno);
+	perror("");
+	file->usable = 1;
 	ft_putchar_fd('\n', 2);
 }
 
-int	open_output(t_token *token)
+t_file	*open_output(t_token *token)
 {
 	t_file	*file;
-	int		fd;
 
 	file = token->file_head;
-	fd = 1;
 	while (file)
 	{
-		if (fd > 0 && fd != 1)
-			close(fd);
+		if (file->fd > 0 && file->fd != 1)
+			close(file->fd);
 		if (!file->type)
 		{
 			file = file->next;
 			continue ;
 		}
 		if (file->append)
-			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			file->fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
+			file->fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (file->fd < 0)
 			put_error_fd(file);
-		file = file->next;
 		if (check_have_next_type(file, 1))
-			return (fd);
+			return (file);
+		file = file->next;
 	}
-	return (fd);
+	return (file);
 }
 
-int	open_input(t_token *token)
+t_file	*open_input(t_token *token)
 {
 	t_file	*file;
-	int		fd;
 
 	file = token->file_head;
-	fd = 1;
+	file->fd = 1;
 	while (file)
 	{
-		if (fd > 0 && fd != 1)
-			close(fd);
+		if (file->fd > 0 && file->fd != 1)
+			close(file->fd);
 		if (file->type)
 		{
 			file = file->next;
 			continue ;
 		}
 		if (file->append)
-			fd = heredoc(file->path);
+			file->fd = heredoc(file->path);
 		else
-			fd = open(file->path, O_RDONLY, 0644);
-		if (fd < 0)
+			file->fd = open(file->path, O_RDONLY, 0644);
+		if (file->fd < 0)
 			put_error_fd(file);
-		file = file->next;
+		ft_putstr_fd(file->path, 2);
+		ft_putstr_fd("\n", 2);
 		if (check_have_next_type(file, 0))
-			return (fd);
+		{
+			ft_putstr_fd("IN CHECK HAVE FILE\n", 2);
+			return (file);
+		}
+		file = file->next;
 	}
-	return (fd);
+	return (file);
 }
