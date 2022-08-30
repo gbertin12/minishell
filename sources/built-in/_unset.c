@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:57:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:57:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,43 @@ static void	unset_elem(t_env *before, t_env *after, t_env *head)
 		before->next = after;
 }
 
+static int	_unset2(char *key, t_env *e_before, t_env *e_env, t_minishell *ms)
+{
+	if (!ft_strncmp(key, e_env->key, ft_strlen(key)))
+	{
+		unset_elem(e_before, e_env->next, ms->e_head);
+		ft_free(e_env->key, ms);
+		ft_free(e_env->value, ms);
+		return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
+}
+
 int	_unset(char *key, t_minishell *ms)
 {
 	t_env	*e_env;
 	t_env	*e_before;
+	char	*msg;
 
 	e_before = NULL;
 	e_env = ms->e_head;
 	if (check_key_env(key))
 	{
-		ft_putstr_fd("unset: ", 2);
+		ft_putstr_fd("minishell: unset: \"", 2);
 		ft_putstr_fd(key, 2);
-		ft_putstr_fd(": invalid parameter name\n", 2);
-		return (1);
+		ft_putstr_fd("` not a valid identifier\n", 2);
+		return (EXIT_FAILURE);
 	}
-	if (!e_env)
-		return (0);
-	if (!do_env_key_exist(key, ms))
-		return (0);
+	if (!e_env || !do_env_key_exist(key, ms))
+		return (EXIT_SUCCESS);
 	while (e_env)
 	{
-		if (!ft_strncmp(key, e_env->key, ft_strlen(key)))
-		{
-			unset_elem(e_before, e_env->next, ms->e_head);
-			ft_free(e_env->key, ms);
-			ft_free(e_env->value, ms);
-			return (1);
-		}
+		if (!_unset2)
+			return (EXIT_SUCCESS);
 		e_before = e_env;
 		e_env = e_env->next;
 	}
-	return (0);
+	return (EXIT_FAILURE);
 }
 
 int	exec_unset(t_token *token, t_minishell *ms)

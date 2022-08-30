@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 09:57:36 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:50:44 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,23 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	char	*key;
 	char	*value;
 	char	**tmp;
+	char	*msg;
 
-	if (ft_strchr(arg->value, '=') == NULL)
-	{
-		add_key_with_empty_value(arg->value, ms);
-		return (EXIT_SUCCESS);
-	}
 	tmp = ft_split(arg->value, '=', ms);
 	key = ft_strtrim(tmp[0], " \t\n\r\f\v", ms);
 	ft_free(tmp[0], ms);
 	if (check_key_env(key))
 	{
-		ft_putstr_fd("export: not an identifier: ", 2);
+		ft_putstr_fd("minishell: export: `", 2);
 		ft_putstr_fd(arg->value, 2);
-		ft_putstr_fd("\n", 2);
-		return (1);
+		ft_putstr_fd("\" not a valid identifier", 2);
+		return (EXIT_FAILURE);
 	}
 	value = ft_superjoin(tmp, ms);
 	if (do_env_key_exist(key, ms))
 		replace_env_value(key, value, ms);
 	else
 		add_env_key_value(key, value, ms);
-	arg = arg->next;
 	ft_free(tmp, ms);
 	return (EXIT_SUCCESS);
 }
@@ -115,6 +110,11 @@ int	_export(t_token *token, t_minishell *ms)
 	error = 0;
 	while (arg != NULL)
 	{
+		if (ft_strchr(arg->value, '=') == NULL)
+		{
+			add_key_with_empty_value(arg->value, ms);
+			return (EXIT_SUCCESS);
+		}
 		if (_export2(arg, ms))
 			error = 1;
 		arg = arg->next;

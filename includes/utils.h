@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 12:13:00 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:41:02 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char		between_quote(char *s, size_t x);
 char		do_env_key_exist(char *key, t_minishell *ms);
 char		char_ternary(char condition, char true, char false);
 
+int			ft_error(char *msg);
 int			check_key_env(char *s);
 int			ft_strcmp(char *str1, char *str2);
 

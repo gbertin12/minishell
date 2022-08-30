@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:01:37 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:24:36 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int	exec_in_parent(t_token *token, t_minishell *ms)
 		ms->l_retv = 1;
 		return (1);
 	}
-		
 	if (token->have_out)
 	{
 		if (dup2(token->outputfile, 1))
