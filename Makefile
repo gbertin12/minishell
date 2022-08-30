@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/30 10:03:37 by ccambium         ###   ########.fr        #
+#    Updated: 2022/08/30 12:13:41 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS = minishell.c\
 		sources/utils/ft_strcmp.c\
 		sources/utils/ft_superjoin.c\
 		sources/utils/get_env_value.c\
+		sources/utils/get_pwd.c\
 		sources/utils/init_minishell.c\
 		sources/utils/is_space.c\
 		sources/utils/list_to_tab.c\
