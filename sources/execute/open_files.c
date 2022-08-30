@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 10:55:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:59:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	check_have_next_type(t_file *file, int type)
 {
+	if (!file->next)
+		return (1);
 	while (file)
 	{
 		if (file->type == type)
@@ -50,7 +52,7 @@ static void	put_error_fd(t_file *file)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(file->path, 2);
 	ft_putstr_fd(": ", 2);
-	strerror(errno);
+	perror("");
 	ft_putchar_fd('\n', 2);
 }
 
@@ -63,7 +65,7 @@ int	open_output(t_token *token)
 	fd = 1;
 	while (file)
 	{
-		if (fd > 0 && fd != 1)
+		if (fd > 0 &&fd != 1)
 			close(fd);
 		if (!file->type)
 		{
@@ -76,9 +78,9 @@ int	open_output(t_token *token)
 			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
 			put_error_fd(file);
-		file = file->next;
 		if (check_have_next_type(file, 1))
 			return (fd);
+		file = file->next;
 	}
 	return (fd);
 }
@@ -87,13 +89,13 @@ int	open_input(t_token *token)
 {
 	t_file	*file;
 	int		fd;
-
+	
 	file = token->file_head;
 	fd = 1;
 	while (file)
 	{
 		if (fd > 0 && fd != 1)
-			close(fd);
+			close(file->fd);
 		if (file->type)
 		{
 			file = file->next;
@@ -105,9 +107,14 @@ int	open_input(t_token *token)
 			fd = open(file->path, O_RDONLY, 0644);
 		if (fd < 0)
 			put_error_fd(file);
-		file = file->next;
+		ft_putstr_fd(file->path, 2);
+		ft_putstr_fd("\n", 2);
 		if (check_have_next_type(file, 0))
+		{
+			ft_putstr_fd("IN CHECK HAVE FILE\n", 2);
 			return (fd);
+		}
+		file = file->next;
 	}
 	return (fd);
 }

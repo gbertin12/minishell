@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 12:33:36 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:09:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 	if (exec->token->pid == 0)
 	{
 		if (init_execute(exec->token))
-			return (1);
+			exit (1);
 		if (exec->token->have_in)
 		{
 			if (dup2(exec->token->inputfile, 0) == -1)
