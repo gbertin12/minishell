@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 09:08:36 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/30 09:49:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static long long	in_quotes(char	*cmd, long long i)
 {
 	char		quote;
 
-	quote = cmd[0];
+	quote = cmd[i];
 	if (ft_strchr(&cmd[++i], quote))
 	{
 		while (cmd[i] != quote)
@@ -46,6 +46,8 @@ long long	get_size_of_cmd(char *cmd)
 	{
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 			i = in_quotes(cmd, i);
+		if (i == -1)
+			return (-1);
 		if (cmd[i] == '|' || cmd[i] == '<' || cmd[i] == '>')
 			return (i);
 		i++;
