@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:12:35 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:11:02 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,19 @@ int	heredoc(char *limiter)
 	char	*append;
 	int		fd;
 
-	ft_putstr_fd(limiter, 2);
 	fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd < 0)
-		return (-1);
+		return (fd);
 	signal(SIGINT, sigint_heredoc);
-	append = readline("heredoc>");
+	append = readline(">");
 	while (!ft_strcmp(append, limiter))
 	{
+		printf("fd = %d append = %s\n", fd, append);
 		ft_putstr_fd(append, fd);
 		free(append);
-		append = readline("heredoc>");
+		append = readline(">");
 	}
 	free(append);
-	unlink(".tmp");
 	return (fd);
 }
 
@@ -107,6 +106,7 @@ int	open_input(t_token *token)
 			fd = open(file->path, O_RDONLY, 0644);
 		if (fd < 0)
 			put_error_fd(file);
+		printf("new fd = %d\n", fd);
 		if (check_have_next_type(file, 0))
 			return (fd);
 		file = file->next;

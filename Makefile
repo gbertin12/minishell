@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/30 10:25:26 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/31 09:23:31 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS = minishell.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/built-in/exec_built_in.c\
-		sources/check/check_files.c \
 		sources/execute/if_type_file_exist.c \
 		sources/execute/browse_cmd.c \
 		sources/execute/exec.c \

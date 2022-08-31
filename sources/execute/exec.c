@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:09:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:59:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 			exit (1);
 		if (exec->token->have_in)
 		{
+			ft_putstr_fd("IN DUP2 IN FILE FD = ", 2);
+			ft_putstr_fd(ft_itoa(exec->token->inputfile, ms), 2);
+			ft_putstr_fd("\n", 2);
 			if (dup2(exec->token->inputfile, 0) == -1)
 				perror("minishell ");
 		}
@@ -31,6 +34,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		if (exec->path)
 			execve(exec->path, exec->args, exec->env);
 		perror("minishell ");
+		free_all(ms);
 		exit (127);
 	}
 	return (0);
@@ -55,6 +59,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 		if (path)
 			execve(path, args, exec->env);
 		perror("minishell ");
+		free_all(ms);
 		exit (127);
 	}
 	return (0);
@@ -80,6 +85,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		if (path)
 			execve(path, args, exec->env);
 		perror("minishell ");
+		free_all(ms);
 		exit (127);
 	}
 	return (0);

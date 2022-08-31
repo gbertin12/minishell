@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:44:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:02:47 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 12:52:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	redir_out(t_token *token)
 {
 	if (token->have_out)
 	{
-		ft_putstr_fd("REDDIR WITH OUT FILE\n", 2);
 		if (dup2(token->outputfile, 1) == -1)
 			perror("minishell 6 : ");
 	}
