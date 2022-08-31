@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:11:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/31 12:24:07 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int	heredoc(char *limiter)
 	{
 		printf("fd = %d append = %s\n", fd, append);
 		ft_putstr_fd(append, fd);
+		ft_putstr_fd("\n", fd);
 		free(append);
 		append = readline(">");
 	}
 	free(append);
+	unlink(".tmp");
 	return (fd);
 }
 
@@ -94,7 +96,7 @@ int	open_input(t_token *token)
 	while (file)
 	{
 		if (fd > 0 && fd != 1)
-			close(file->fd);
+			close(fd);
 		if (file->type)
 		{
 			file = file->next;
@@ -106,7 +108,6 @@ int	open_input(t_token *token)
 			fd = open(file->path, O_RDONLY, 0644);
 		if (fd < 0)
 			put_error_fd(file);
-		printf("new fd = %d\n", fd);
 		if (check_have_next_type(file, 0))
 			return (fd);
 		file = file->next;

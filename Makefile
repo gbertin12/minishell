@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/31 09:23:31 by gbertin          ###   ########.fr        #
+#    Updated: 2022/08/31 12:09:23 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = minishell.c\
 		sources/execute/exec.c \
 		sources/execute/get_path.c \
 		sources/execute/open_files.c \
+		sources/execute/open_all.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
 		sources/expand/between_quote.c \

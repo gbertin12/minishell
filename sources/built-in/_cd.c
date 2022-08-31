@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 10:36:20 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/31 19:21:43 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,29 @@ static char	exec_chdir(char *path, t_minishell *ms)
 {
 	char	*value_oldpwd;
 	char	*n_path;
-	
+	char	**all_cdpath;
+
 	value_oldpwd = get_pwd(ms);
 	if (do_env_key_exist("CDPATH", ms) && (path[0] != '.' && path[1] != '.'))
 	{
-		n_path = ft_strjoin(get_env_value("CDPATH", ms), "/", ms);
-		n_path = ft_strjoin(n_path, path, ms);
-		if (access(n_path, 0) != -1)
+		all_cdpath = ft_split(get_env_value("CDPATH", ms), ':', ms);
+		while (*all_cdpath)
 		{
-			if (chdir(n_path) == -1)
+			n_path = ft_strjoin(*all_cdpath, "/", ms);
+			n_path = ft_strjoin(n_path, path, ms);
+			if (access(n_path, 0) != -1)
 			{
-				perror("minishell ");
-				return (1);
+				if (chdir(n_path) == -1)
+				{
+					perror("minishell ");
+					return (1);
+				}
+				replace_pwd_in_env(value_oldpwd, n_path, ms);
+				printf("%s\n", n_path);
+				return (0);
 			}
-			replace_pwd_in_env(value_oldpwd, n_path, ms);
-			printf("%s\n", n_path);
-			return (0);
+			ft_free(n_path, ms);
+			all_cdpath++;
 		}
 	}
 	if (access(path, 0) == -1)
