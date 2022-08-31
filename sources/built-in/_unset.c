@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:57:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:04:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	_unset(char *key, t_minishell *ms)
 {
 	t_env	*e_env;
 	t_env	*e_before;
-	char	*msg;
 
 	e_before = NULL;
 	e_env = ms->e_head;
@@ -55,7 +54,7 @@ int	_unset(char *key, t_minishell *ms)
 		return (EXIT_SUCCESS);
 	while (e_env)
 	{
-		if (!_unset2)
+		if (!_unset2(key, e_before, e_env, ms))
 			return (EXIT_SUCCESS);
 		e_before = e_env;
 		e_env = e_env->next;

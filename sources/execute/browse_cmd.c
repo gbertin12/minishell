@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:09:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:46:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	init_execute(t_token *token)
 	if (token->have_in)
 	{
 		token->inputfile = open_input(token);
+		
 		if (token->inputfile < 0)
 			return (1);
 	}
@@ -72,6 +73,7 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 	close(exec->tmpout);
 	g_mode = 0;
 	printf("RETURN STATUS : %d\n", WEXITSTATUS(status));
+	unlink(".tmp");
 	ms->l_retv = WEXITSTATUS(status);
 	return (0);
 }

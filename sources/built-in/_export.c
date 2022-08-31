@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 12:50:44 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:03:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	char	*key;
 	char	*value;
 	char	**tmp;
-	char	*msg;
 
 	tmp = ft_split(arg->value, '=', ms);
 	key = ft_strtrim(tmp[0], " \t\n\r\f\v", ms);
