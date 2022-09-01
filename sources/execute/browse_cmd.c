@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 14:46:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/31 12:08:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int	init_execute(t_token *token)
 {
-	token->inputfile = 0;
-	token->outputfile = 0;
-	token->have_in = have_infile(token);
-	token->have_out = have_outfile(token);
+// 	token->inputfile = 0;
+// 	token->outputfile = 0;
+// 	token->have_in = have_infile(token);
+// 	token->have_out = have_outfile(token);
 	if (token->have_in)
 	{
-		token->inputfile = open_input(token);
+		//token->inputfile = open_input(token);
 		
 		if (token->inputfile < 0)
 			return (1);
 	}
 	if (token->have_out)
 	{
-		token->outputfile = open_output(token);
+		//token->outputfile = open_output(token);
 		if (token->outputfile < 0)
 			return (1);
 	}
@@ -48,6 +48,7 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	exec->tmpin = (dup(0));
 	exec->tmpout = (dup(1));
 	g_mode = 1;
+	open_all(ms);
 	exec->path_absolute = get_path_env(ms);
 	return (exec);
 }
@@ -73,7 +74,6 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 	close(exec->tmpout);
 	g_mode = 0;
 	printf("RETURN STATUS : %d\n", WEXITSTATUS(status));
-	unlink(".tmp");
 	ms->l_retv = WEXITSTATUS(status);
 	return (0);
 }
