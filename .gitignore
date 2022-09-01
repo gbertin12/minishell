@@ -1,14 +1,6 @@
+badfile
 
 *.o
-minishell
 .vscode
-*.out
-for_makefile
-out.a
-out.b
-test.c
+minishell
 test
-out
-test*
-
-.nfs0000000002ed0ccd000009f6

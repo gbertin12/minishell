@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/08/31 11:30:05 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/01 14:30:40 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,17 +25,18 @@ SRCS = minishell.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/built-in/exec_built_in.c\
-		sources/check/check_files.c \
 		sources/execute/if_type_file_exist.c \
 		sources/execute/browse_cmd.c \
 		sources/execute/exec.c \
 		sources/execute/get_path.c \
 		sources/execute/open_files.c \
+		sources/execute/open_all.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
 		sources/expand/between_quote.c \
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
+		sources/expand/heredoc_expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
 		sources/parsing/parsing.c\

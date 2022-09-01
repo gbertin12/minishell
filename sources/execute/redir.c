@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:44:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 11:53:30 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:31:41 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	redir_out(t_token *token)
 {
 	if (token->have_out)
 	{
-		ft_putstr_fd("REDDIR WITH OUT FILE\n", 2);
 		if (dup2(token->outputfile, 1) == -1)
 			perror("minishell 6 : ");
 	}

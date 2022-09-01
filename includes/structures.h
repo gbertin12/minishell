@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/31 11:35:57 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:32:37 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,11 @@ typedef struct s_minishell
 	t_env			*e_head;
 	char			*l_input;
 }	t_minishell;
+
+typedef struct s_heredoc
+{
+	char				*str;
+	struct s_heredoc	*next;
+}	t_heredoc;
 
 #endif

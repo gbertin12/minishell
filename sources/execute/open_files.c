@@ -6,7 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/31 11:51:32 by ccambium         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/01 13:26:43 by ccambium         ###   ########.fr       */
+>>>>>>> c56d9c8449493aecc29782ec948b65bd9f49c084
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +29,36 @@ int	check_have_next_type(t_file *file, int type)
 	return (1);
 }
 
-int	heredoc(char *limiter)
+int	heredoc(char *limiter, t_minishell *ms)
 {
 	char	*append;
 	int		fd;
+	int		pid;
 
-	ft_putstr_fd(limiter, 2);
-	fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	fd = open(".tmp", O_TRUNC | O_CREAT | O_RDWR , 0644);
 	if (fd < 0)
+		return (fd);
+	pid = fork();
+	if (pid < 0)
 		return (-1);
-	signal(SIGINT, sigint_heredoc);
-	append = readline("heredoc>");
-	while (!ft_strcmp(append, limiter))
+	if (pid == 0)
 	{
-		ft_putstr_fd(append, fd);
+		signal(SIGINT, sigint_heredoc);
+		append = readline(">");
+		while (!ft_strcmp(append, limiter))
+		{
+			append = heredoc_expand(append, ms);
+			ft_putstr_fd(append, fd);
+			ft_putstr_fd("\n", fd);
+			free(append);
+			append = readline(">");
+		}
 		free(append);
-		append = readline("heredoc>");
+		exit(0);
 	}
-	free(append);
+	waitpid(pid, NULL, 0);
+	close(fd);
+	fd = open(".tmp", O_RDONLY);
 	unlink(".tmp");
 	return (fd);
 }
@@ -85,7 +101,7 @@ int	open_output(t_token *token)
 	return (fd);
 }
 
-int	open_input(t_token *token)
+int	open_input(t_token *token, t_minishell *ms)
 {
 	int		fd;
 	t_file	*file;
@@ -102,7 +118,7 @@ int	open_input(t_token *token)
 			continue ;
 		}
 		if (file->append)
-			fd = heredoc(file->path);
+			fd = heredoc(file->path, ms);
 		else
 			fd = open(file->path, O_RDONLY);
 		if (fd < 0)

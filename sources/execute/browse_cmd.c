@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 11:44:15 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:31:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	init_execute(t_token *token)
 {
-	token->inputfile = 0;
-	token->outputfile = 0;
-	token->have_in = have_infile(token);
-	token->have_out = have_outfile(token);
+// 	token->inputfile = 0;
+// 	token->outputfile = 0;
+// 	token->have_in = have_infile(token);
+// 	token->have_out = have_outfile(token);
 	if (token->have_in)
 	{
-		token->inputfile = open_input(token);
+		//token->inputfile = open_input(token);
 		if (token->inputfile < 0)
 			return (1);
 	}
 	if (token->have_out)
 	{
-		token->outputfile = open_output(token);
+		//token->outputfile = open_output(token);
 		if (token->outputfile < 0)
 			return (1);
 	}
@@ -47,6 +47,7 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	exec->tmpin = (dup(0));
 	exec->tmpout = (dup(1));
 	g_mode = 1;
+	open_all(ms);
 	exec->path_absolute = get_path_env(ms);
 	return (exec);
 }

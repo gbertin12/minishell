@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:21:19 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:28:51 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		browse_cmd(t_minishell *ms);
 int		have_infile(t_token *token);
 int		have_outfile(t_token *token);
 int		open_output(t_token *token);
-int		open_input(t_token *token);
+int		open_input(t_token *token, t_minishell *ms);
 
 int		init_execute(t_token *token);
 int		redir_in(t_token *token, t_token *last);
@@ -41,6 +41,7 @@ int		exec_last(char **args, t_exec *exec, t_minishell *ms);
 int		execute_cmd(t_token *token, int pipefd[2], char **args,
 			t_minishell *ms);
 
+void	open_all(t_minishell *ms);
 t_exec	*first(t_exec *exec, t_minishell *ms);
 t_exec	*middle(t_exec *exec, t_minishell *ms);
 t_exec	*last(t_exec *exec, t_minishell *ms);

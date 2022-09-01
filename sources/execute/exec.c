@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 11:55:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:31:23 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 				perror("minishell ");
 		}
 		redir_out(exec->token);
-		if (exec->path)
-			execve(exec->path, exec->args, exec->env);
-		perror("minishell ");
+		if (!exec->path)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(exec->token->cmd, 2);
+			ft_putstr_fd(": command not found\n", 2);
+			exit(127);
+		}
+		execve(exec->path, exec->args, exec->env);
+		perror("minishell");
+		free_all(ms);
 		exit (127);
 	}
 	return (0);
@@ -53,10 +60,17 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 			return (1);
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
-		if (path)
-			execve(path, args, exec->env);
+		if (!exec->path)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(exec->token->cmd, 2);
+			ft_putstr_fd(": command not found\n", 2);
+			exit(127);
+		}
+		execve(path, args, exec->env);
 		perror("minishell ");
-		exit (127);
+		free_all(ms);
+		exit (errno);
 	}
 	return (0);
 }
@@ -78,10 +92,17 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 			if (dup2(exec->token->outputfile, 1) == -1)
 				perror("minishell ");
 		}
-		if (path)
-			execve(path, args, exec->env);
+		if (!exec->path)
+		{
+			ft_putstr_fd("minishell:", 2);
+			ft_putstr_fd(exec->token->cmd, 2);
+			ft_putstr_fd(": command not found\n", 2);
+			exit(127);
+		}
+		execve(path, args, exec->env);
 		perror("minishell ");
-		exit (127);
+		free_all(ms);
+		exit (errno);
 	}
 	return (0);
 }
