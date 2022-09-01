@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 12:04:19 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 13:26:43 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	check_have_next_type(t_file *file, int type)
 	return (1);
 }
 
-int	heredoc(char *limiter)
+int	heredoc(char *limiter, t_minishell *ms)
 {
 	char	*append;
 	int		fd;
 	int		pid;
-	
+
 	fd = open(".tmp", O_TRUNC | O_CREAT | O_RDWR , 0644);
 	if (fd < 0)
 		return (fd);
@@ -43,6 +43,7 @@ int	heredoc(char *limiter)
 		append = readline(">");
 		while (!ft_strcmp(append, limiter))
 		{
+			append = heredoc_expand(append, ms);
 			ft_putstr_fd(append, fd);
 			ft_putstr_fd("\n", fd);
 			free(append);
@@ -96,7 +97,7 @@ int	open_output(t_token *token)
 	return (fd);
 }
 
-int	open_input(t_token *token)
+int	open_input(t_token *token, t_minishell *ms)
 {
 	t_file	*file;
 	int		fd;
@@ -113,7 +114,7 @@ int	open_input(t_token *token)
 			continue ;
 		}
 		if (file->append)
-			fd = heredoc(file->path);
+			fd = heredoc(file->path, ms);
 		else
 			fd = open(file->path, O_RDONLY, 0644);
 		if (fd < 0)

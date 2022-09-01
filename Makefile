@@ -16,8 +16,6 @@ FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include -g3
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
-		get_next_line.c \
-		get_next_line_utils.c \
 		sources/built-in/_cd.c\
 		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
@@ -38,6 +36,7 @@ SRCS = minishell.c\
 		sources/expand/between_quote.c \
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
+		sources/expand/heredoc_expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
 		sources/parsing/parsing.c\

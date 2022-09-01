@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 09:55:13 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 13:28:51 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		browse_cmd(t_minishell *ms);
 int		have_infile(t_token *token);
 int		have_outfile(t_token *token);
 int		open_output(t_token *token);
-int		open_input(t_token *token);
+int		open_input(t_token *token, t_minishell *ms);
 
 int		init_execute(t_token *token);
 int		redir_in(t_token *token, t_token *last);

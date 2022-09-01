@@ -1,32 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_all.c                                         :+:      :+:    :+:   */
+/*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 13:26:57 by ccambium         ###   ########.fr       */
+/*   Created: 2022/09/01 13:21:53 by ccambium          #+#    #+#             */
+/*   Updated: 2022/09/01 13:33:23 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	open_all(t_minishell *ms)
+static size_t	next_var(char *s)
 {
-	t_token	*token;
+	size_t	i;
 
-	token = ms->t_head;
-	while (token)
+	i = 0;
+	while (s && s[i] && (between_quote(s, i) || s[i] != '$'))
+		i++;
+	return (i);
+}
+
+char	*heredoc_expand(char *s, t_minishell *ms)
+{
+	char	*tmp;
+	size_t	i;
+
+	if (s == NULL)
+		return (s);
+	i = next_var(s);
+	while (s[i])
 	{
-		token->inputfile = 0;
-		token->outputfile = 0;
-		token->have_in = have_infile(token);
-		token->have_out = have_outfile(token);
-		if (token->have_in)
-			token->inputfile = open_input(token, ms);
-		if (token->have_out)
-			token->outputfile = open_output(token);
-		token = token->next;	
+		tmp = s;
+		s = replace_var(s, i, ms);
+		if (!s)
+			s = tmp;
+		else
+			ft_free(tmp, ms);
+		i = next_var(s);
 	}
+	return (s);
 }
