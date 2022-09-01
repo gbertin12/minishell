@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 12:32:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:48:03 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path, t_minishell *ms
 		value_pwd = get_pwd(ms);
 	key_oldpwd = ft_strdup("OLDPWD", ms);
 	if (!key_oldpwd)
-		return (0);
+		return (1);
 	if (do_env_key_exist(key_oldpwd, ms))
 		replace_env_value(key_oldpwd, value_oldpwd, ms);
 	else
 		add_env_key_value(key_oldpwd, value_oldpwd, ms);
 	key_pwd = ft_strdup("PWD", ms);
 	if (!key_pwd)
-		return (0);
+		return (1);
 	if (do_env_key_exist(key_pwd, ms))
 		replace_env_value(key_pwd, value_pwd, ms);
 	else
@@ -80,12 +80,12 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	if (access(path, 0) == -1)
 	{
 		printf("cd: no such file or directory: %s\n", path);
-		return (0);
+		return (1);
 	}
 	if (chdir(path) == -1)
 	{
 		strerror(errno);
-		return (0);
+		return (1);
 	}
 	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	return (0);
@@ -110,9 +110,9 @@ int	exec_cd(t_token *token, t_minishell *ms)
 	if (count_token(ms->t_head) == 1)
 	{
 		if (_cd(token, ms))
-			ms->l_retv = 1;
+			return (1);
 		else
-			ms->l_retv = 0;
+			return (0);
 	}
 	return (1);
 }
