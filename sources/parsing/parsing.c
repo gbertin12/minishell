@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/31 12:34:23 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:43:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	check_input(char *s)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			&& !flag)
 			flag = 1;
-		if (!between_quote(s, i)
+		else if (!between_quote(s, i)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			&& flag)
 		{
@@ -33,7 +33,7 @@ static char	check_input(char *s)
 				s[i]);
 			return (1);
 		}
-		if ((s[i] == '"' || s[i] == '\'') && ft_isalnum(s[i]) && flag)
+		else if ((s[i] == '"' || s[i] == '\'' || ft_isalnum(s[i])) && flag)
 			flag = 0;
 		i++;
 	}
@@ -110,6 +110,8 @@ char	parsing(char *s, t_minishell *ms)
 	long long		i;
 
 	token = new_token(NULL, ms);
+	if (check_input(s))
+		return (1);
 	if (!token || !s)
 		return (0);
 	i = next_arg(s, token, ms);
