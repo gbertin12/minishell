@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 12:08:22 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 11:44:26 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	init_execute(t_token *token)
 	if (token->have_in)
 	{
 		//token->inputfile = open_input(token);
-		
 		if (token->inputfile < 0)
 			return (1);
 	}

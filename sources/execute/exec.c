@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 09:51:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 10:04:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		}
 		if (!exec->path)
 		{
-			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd("minishell:", 2);
 			ft_putstr_fd(exec->token->cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			exit(127);

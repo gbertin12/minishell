@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 12:24:07 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:04:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,31 @@ int	heredoc(char *limiter)
 {
 	char	*append;
 	int		fd;
-
-	fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	int		pid;
+	
+	fd = open(".tmp", O_TRUNC | O_CREAT | O_RDWR , 0644);
 	if (fd < 0)
 		return (fd);
-	signal(SIGINT, sigint_heredoc);
-	append = readline(">");
-	while (!ft_strcmp(append, limiter))
+	pid = fork();
+	if (pid < 0)
+		return (-1);
+	if (pid == 0)
 	{
-		printf("fd = %d append = %s\n", fd, append);
-		ft_putstr_fd(append, fd);
-		ft_putstr_fd("\n", fd);
-		free(append);
+		signal(SIGINT, sigint_heredoc);
 		append = readline(">");
+		while (!ft_strcmp(append, limiter))
+		{
+			ft_putstr_fd(append, fd);
+			ft_putstr_fd("\n", fd);
+			free(append);
+			append = readline(">");
+		}
+		free(append);
+		exit(0);
 	}
-	free(append);
+	waitpid(pid, NULL, 0);
+	close(fd);
+	fd = open(".tmp", O_RDONLY);
 	unlink(".tmp");
 	return (fd);
 }
