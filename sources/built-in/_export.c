@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/31 11:03:09 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:06:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	{
 		ft_putstr_fd("minishell: export: `", 2);
 		ft_putstr_fd(arg->value, 2);
-		ft_putstr_fd("\" not a valid identifier", 2);
+		ft_putstr_fd("\" not a valid identifier\n", 2);
 		return (EXIT_FAILURE);
 	}
 	value = ft_superjoin(tmp, ms);
