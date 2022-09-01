@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/01 09:54:53 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/01 12:07:50 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include -g3
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
+		get_next_line.c \
+		get_next_line_utils.c \
 		sources/built-in/_cd.c\
 		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
