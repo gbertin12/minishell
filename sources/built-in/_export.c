@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 14:32:09 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:16:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	tmp = ft_split(arg->value, '=', ms);
 	key = ft_strtrim(tmp[0], " \t\n\r\f\v", ms);
 	ft_free(tmp[0], ms);
-	if (check_key_env(key))
+	if (check_key_env(key) || arg->value[0] == '=')
 	{
 		ft_putstr_fd("minishell: export: `", 2);
 		ft_putstr_fd(arg->value, 2);
