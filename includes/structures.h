@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 12:09:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:35:57 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ typedef struct s_minishell	t_minishell;
 typedef struct s_file
 {
 	char			*path;
-	int				fd;
 	char			type;
 	char			append;
-	char			usable;
 	struct s_file	*next;
 }	t_file;
 

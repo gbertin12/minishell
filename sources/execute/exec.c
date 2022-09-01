@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:09:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:55:42 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 			exit (1);
 		if (exec->token->have_in)
 		{
+			printf("%d\n", exec->token->inputfile);
 			if (dup2(exec->token->inputfile, 0) == -1)
 				perror("minishell ");
 		}

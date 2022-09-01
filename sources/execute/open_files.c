@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:12:35 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:51:32 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ int	open_output(t_token *token)
 
 int	open_input(t_token *token)
 {
-	t_file	*file;
 	int		fd;
+	t_file	*file;
 
 	file = token->file_head;
 	fd = 1;
 	while (file)
 	{
 		if (fd > 0 && fd != 1)
-			close(file->fd);
+			close(fd);
 		if (file->type)
 		{
 			file = file->next;
@@ -104,7 +104,7 @@ int	open_input(t_token *token)
 		if (file->append)
 			fd = heredoc(file->path);
 		else
-			fd = open(file->path, O_RDONLY, 0644);
+			fd = open(file->path, O_RDONLY);
 		if (fd < 0)
 			put_error_fd(file);
 		if (check_have_next_type(file, 0))
