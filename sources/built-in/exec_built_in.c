@@ -6,13 +6,30 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:39:59 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:00:47 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:06:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_is_built_in(t_token *token, t_minishell *ms)
+int	check_is_built_in(t_token *token)
+{
+	if (ft_strcmp(token->cmd, "env"))
+		return (1);
+	if (ft_strcmp(token->cmd, "pwd"))
+		return (1);
+	if (ft_strcmp(token->cmd, "cd"))
+		return (1);
+	if (ft_strcmp(token->cmd, "echo"))
+		return (1);
+	if (ft_strcmp(token->cmd, "export"))
+		return (1);
+	if (ft_strcmp(token->cmd, "unset"))
+		return (1);
+	return (0);
+}
+
+int	exec_builtin(t_token *token, t_minishell *ms)
 {
 	if (ft_strcmp(token->cmd, "env"))
 		return (exec_env(token, ms));

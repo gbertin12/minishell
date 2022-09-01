@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 11:20:44 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:42:06 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_exec
 	char	*path;
 	char	**env;
 	char	**args;
+	int		l_retv;
 	char	**path_absolute;
 }	t_exec;
 

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:28:21 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:11:18 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
 	exec->args = args_to_tab(exec->token, ms);
-	if (check_is_built_in(exec->token, ms))
-		;
+	if (check_is_built_in(exec->token))
+		exec->l_retv = exec_builtin(exec->token, ms);
 	else
 	{
 		if (exec->token->next)
@@ -37,7 +37,7 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 t_exec	*middle(t_exec *exec, t_minishell *ms)
 {
 	exec->args = args_to_tab(exec->token, ms);
-	if (check_is_built_in(exec->token, ms))
+	if (check_is_built_in(exec->token))
 		;
 	else
 		exec_middle(exec->args, exec, ms);
@@ -51,7 +51,7 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 t_exec	*last(t_exec *exec, t_minishell *ms)
 {
 	exec->args = args_to_tab(exec->token, ms);
-	if (check_is_built_in(exec->token, ms))
+	if (check_is_built_in(exec->token))
 		;
 	else
 		exec_last(exec->args, exec, ms);

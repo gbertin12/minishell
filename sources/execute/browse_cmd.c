@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 11:44:26 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:37:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	exec = ft_malloc(sizeof(t_exec), ms);
 	if (!ms->t_head)
 		return (NULL);
+	exec->l_retv = 0;
 	exec->err = 0;
 	exec->last = NULL;
 	exec->env = env_to_tab(ms);
@@ -50,6 +51,17 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	open_all(ms);
 	exec->path_absolute = get_path_env(ms);
 	return (exec);
+}
+
+int	have_child(t_token *token)
+{
+	while (token)
+	{
+		if (token->pid != 0)
+			return (1);
+		token = token->next;
+	}
+	return (0);
 }
 
 int	end_browse_cmd(t_exec *exec, t_minishell *ms)
@@ -67,13 +79,15 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 		waitpid(exec->token->pid, &status, 0);
 		exec->token = exec->token->next;
 	}
+	if (have_child(ms->t_head))
+		exec->l_retv = WEXITSTATUS(status);
 	dup2(exec->tmpin, 0);
 	dup2(exec->tmpout, 1);
 	close(exec->tmpin);
 	close(exec->tmpout);
 	g_mode = 0;
-	printf("RETURN STATUS : %d\n", WEXITSTATUS(status));
-	ms->l_retv = WEXITSTATUS(status);
+	printf("RETURN STATUS : %d\n", exec->l_retv);
+	ms->l_retv = exec->l_retv;
 	return (0);
 }
 

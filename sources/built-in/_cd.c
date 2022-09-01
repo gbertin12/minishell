@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 09:55:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:32:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ int	exec_cd(t_token *token, t_minishell *ms)
 	if (count_token(ms->t_head) == 1)
 	{
 		if (_cd(token, ms))
-			return (0);
+			ms->l_retv = 1;
+		else
+			ms->l_retv = 0;
 	}
 	return (1);
 }
