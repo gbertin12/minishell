@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 13:22:11 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 14:36:41 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	exec_chdir(char *path, t_minishell *ms)
 		all_cdpath = ft_split(get_env_value("CDPATH", ms), ':', ms);
 		n_path = check_cd_path(path, all_cdpath, ms);
 		if (n_path)
-			replace_pwd_in_env(value_oldpwd, n_path, ms);
+			return (replace_pwd_in_env(value_oldpwd, n_path, ms));
 	}
 	if (access(path, 0) == -1)
 	{

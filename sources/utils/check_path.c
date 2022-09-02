@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:59:00 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/02 13:24:12 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 14:37:21 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*check_cd_path(char *path, char **all_cdpath, t_minishell *ms)
 		{
 			if (chdir(n_path) == -1)
 				return (NULL);
+			printf("%s\n", n_path);
 			return (n_path);
 		}
 		ft_free(n_path, ms);
