@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 12:50:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/03 00:47:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!s || !s[0])
 		{
 			reset(&ms, s);
-			continue ;
+			break ;
 		}
 		if (parsing(s, &ms) != 0)
 		{

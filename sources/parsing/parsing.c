@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/03 00:24:26 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/03 00:57:52 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,22 @@ static char	check_input(char *s)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			&& !flag)
 		{
-			if (s[i + 1] == '<' || s[i + 1] == '>')
-				i++;
 			flag = 1;
 			if (s[i] == '|')
 				flag = 2;
+			if ((s[i + 1] == '<' || s[i + 1] == '>') && flag == 1)
+				i++;
 		}
 		else if (!between_quote(s, i)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
-			&& flag == 1)
+			&& flag)
 		{
-			printf("minishell : syntax error near unexpected token `%c'\n",
-				s[i]);
-			return (1);
+			if (flag != 2 && s[i] != '|')
+			{
+				printf("minishell : syntax error near unexpected token `%c'\n",
+					s[i]);
+				return (1);
+			}
 		}
 		else if ((s[i] == '"' || s[i] == '\'' || ft_isalnum(s[i])) && flag)
 			flag = 0;
