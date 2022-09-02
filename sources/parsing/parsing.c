@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/02 11:24:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/03 00:24:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static char	check_input(char *s)
 			if (s[i + 1] == '<' || s[i + 1] == '>')
 				i++;
 			flag = 1;
+			if (s[i] == '|')
+				flag = 2;
 		}
 		else if (!between_quote(s, i)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
-			&& flag)
+			&& flag == 1)
 		{
 			printf("minishell : syntax error near unexpected token `%c'\n",
 				s[i]);
