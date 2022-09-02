@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 12:46:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:56:18 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		have_infile(t_token *token);
 int		have_outfile(t_token *token);
 int		open_output(t_token *token);
 int		open_input(t_token *token, t_minishell *ms);
+int		heredoc(char *limiter, t_minishell *ms);
 
 int		init_execute(t_token *token);
 int		redir_in(t_token *token, t_token *last);
@@ -40,6 +41,7 @@ int		exec_middle(char **args, t_exec *exec, t_minishell *ms);
 int		exec_last(char **args, t_exec *exec, t_minishell *ms);
 int		execute_cmd(t_token *token, int pipefd[2], char **args,
 			t_minishell *ms);
+char	*get_last_arg(t_token *token);
 
 void	open_all(t_minishell *ms);
 t_exec	*first(t_exec *exec, t_minishell *ms);

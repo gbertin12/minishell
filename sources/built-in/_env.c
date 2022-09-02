@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:52:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 14:27:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:57:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	_env(t_minishell *ms)
 
 int	exec_env(t_token *token, t_minishell *ms)
 {
+	modify_env("_", get_last_arg(token), ms);
 	if (token->arg_head)
 		return (1);
 	if (token->next)
