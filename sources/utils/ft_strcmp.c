@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:59:55 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/25 15:00:27 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:52:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strcmp(char *str1, char *str2)
 
 	i = 0;
 	if (!str1 || !str2)
-		return (1);
+		return (0);
 	while (str1[i] || str2[i])
 	{
 		if (str1[i] == '\n' && str2[i] == '\0')

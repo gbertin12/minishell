@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 14:36:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:12:52 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 	value_pwd = get_pwd(ms);
 	if (n_path)
 		value_pwd = n_path;
+	else
+		value_pwd = get_pwd(ms);
 	modify_env("OLDPWD", value_oldpwd, ms);
 	modify_env("PWD", value_pwd, ms);
 	return (0);
@@ -48,12 +50,12 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	if (access(path, 0) == -1)
 	{
 		printf("cd: no such file or directory: %s\n", path);
-		return (0);
+		return (1);
 	}
 	if (chdir(path) == -1)
 	{
 		strerror(errno);
-		return (0);
+		return (1);
 	}
 	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	return (0);
@@ -78,6 +80,8 @@ int	exec_cd(t_token *token, t_minishell *ms)
 	if (count_token(ms->t_head) == 1)
 	{
 		if (_cd(token, ms))
+			return (1);
+		else
 			return (0);
 	}
 	return (1);

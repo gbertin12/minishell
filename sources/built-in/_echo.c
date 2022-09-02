@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 10:59:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:49:15 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	exec_echo(t_token *token)
 	if (token->next)
 	{
 		if (pipe(token->pipefd))
-			return (0);
+			return (1);
 	}
 	token->pid = fork();
 	if (token->pid == 0)

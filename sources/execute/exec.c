@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 14:31:23 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 14:16:36 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_path(t_exec *exec)
+{
+	if (!exec->path)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(exec->token->cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		return (1);
+	}
+	return (0);
+}
 
 int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 {
@@ -24,22 +36,16 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 			exit (1);
 		if (exec->token->have_in)
 		{
-			printf("%d\n", exec->token->inputfile);
 			if (dup2(exec->token->inputfile, 0) == -1)
 				perror("minishell ");
 		}
 		redir_out(exec->token);
-		if (!exec->path)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(exec->token->cmd, 2);
-			ft_putstr_fd(": command not found\n", 2);
+		if (check_path(exec))
 			exit(127);
-		}
 		execve(exec->path, exec->args, exec->env);
 		perror("minishell");
 		free_all(ms);
-		exit (127);
+		exit (errno);
 	}
 	return (0);
 }
@@ -60,13 +66,8 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 			return (1);
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
-		if (!exec->path)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(exec->token->cmd, 2);
-			ft_putstr_fd(": command not found\n", 2);
+		if (check_path(exec))
 			exit(127);
-		}
 		execve(path, args, exec->env);
 		perror("minishell ");
 		free_all(ms);
@@ -92,13 +93,8 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 			if (dup2(exec->token->outputfile, 1) == -1)
 				perror("minishell ");
 		}
-		if (!exec->path)
-		{
-			ft_putstr_fd("minishell:", 2);
-			ft_putstr_fd(exec->token->cmd, 2);
-			ft_putstr_fd(": command not found\n", 2);
+		if (check_path(exec))
 			exit(127);
-		}
 		execve(path, args, exec->env);
 		perror("minishell ");
 		free_all(ms);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 13:26:57 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 14:24:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	open_all(t_minishell *ms)
 			token->inputfile = open_input(token, ms);
 		if (token->have_out)
 			token->outputfile = open_output(token);
-		token = token->next;	
+		token = token->next;
 	}
 }

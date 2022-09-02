@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _env.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:52:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:24:24 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:57:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	_env(t_minishell *ms)
 
 int	exec_env(t_token *token, t_minishell *ms)
 {
+	modify_env("_", get_last_arg(token), ms);
 	if (token->arg_head)
 		return (1);
 	if (token->next)
@@ -40,13 +41,12 @@ int	exec_env(t_token *token, t_minishell *ms)
 	}
 	token->pid = fork();
 	if (token->pid == 0)
-	{	
-		ft_putstr_fd("IN CHILD\n", 2);
+	{
 		init_execute(token);
 		redir_out(token);
 		if (_env(ms))
 			exit(1);
 		exit(0);
 	}
-	return (1);
+	return (0);
 }

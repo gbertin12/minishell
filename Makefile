@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/02 13:34:08 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/02 17:09:08 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = minishell.c\
 		sources/execute/browse_cmd.c \
 		sources/execute/exec.c \
 		sources/execute/get_path.c \
+		sources/execute/heredoc.c \
 		sources/execute/open_files.c \
 		sources/execute/open_all.c \
 		sources/execute/redir.c \

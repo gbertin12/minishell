@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 12:12:25 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:50:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(s);
 		if (ft_strcmp(ms.t_head->cmd, "exit") && count_token(ms.t_head) == 1)
 		{
+			printf("enter in exit\n");
 			if (b_exit(ms.t_head, &ms))
 			{
 				reset(&ms, s);

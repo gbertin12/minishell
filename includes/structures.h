@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 14:32:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 14:46:49 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_exec
 	char	*path;
 	char	**env;
 	char	**args;
+	int		l_retv;
 	char	**path_absolute;
 }	t_exec;
 
