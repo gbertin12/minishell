@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 14:43:10 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 11:24:37 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ static char	check_input(char *s)
 		if (!between_quote(s, i)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			&& !flag)
+		{
+			if (s[i + 1] == '<' || s[i + 1] == '>')
+				i++;
 			flag = 1;
+		}
 		else if (!between_quote(s, i)
 			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			&& flag)
@@ -67,14 +71,6 @@ static size_t	skip_spaces(char *s)
 	return (ret_v);
 }
 
-static char	is_token_empty(t_token *token)
-{
-	if (!token)
-		return (0);
-	return ((!token->cmd || !token->cmd[0])
-		&& !token->arg_head && !token->file_head);
-}
-
 char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 {
 	long long	x;
@@ -94,11 +90,6 @@ char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 		if (x < 0)
 			return (x);
 		i += (size_t)x;
-	}
-	if (is_token_empty(token) && s[0])
-	{
-		printf("minishell : syntax error near unexpected token `newline'\n");
-		return (1);
 	}
 	add_end_token(token, ms);
 	return (0);
