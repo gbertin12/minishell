@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/03 00:47:06 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/03 01:02:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	main(int argc, char **argv, char **envp)
 		if (!s || !s[0])
 		{
 			reset(&ms, s);
-			break ;
+			if (!s)
+				break ;
+			continue ;
 		}
 		if (parsing(s, &ms) != 0)
 		{
