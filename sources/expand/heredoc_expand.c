@@ -1,41 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   if_type_file_exist.c                               :+:      :+:    :+:   */
+/*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 17:59:20 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/31 10:37:39 by ccambium         ###   ########.fr       */
+/*   Created: 2022/09/01 13:21:53 by ccambium          #+#    #+#             */
+/*   Updated: 2022/09/01 13:33:23 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	have_infile(t_token *token)
+static size_t	next_var(char *s)
 {
-	t_file	*file;
+	size_t	i;
 
-	file = token->file_head;
-	while (file)
-	{
-		if (file->type == 0)
-			return (1);
-		file = file->next;
-	}
-	return (0);
+	i = 0;
+	while (s && s[i] && (between_quote(s, i) || s[i] != '$'))
+		i++;
+	return (i);
 }
 
-int	have_outfile(t_token *token)
+char	*heredoc_expand(char *s, t_minishell *ms)
 {
-	t_file	*file;
+	char	*tmp;
+	size_t	i;
 
-	file = token->file_head;
-	while (file)
+	if (s == NULL)
+		return (s);
+	i = next_var(s);
+	while (s[i])
 	{
-		if (file->type == 1)
-			return (1);
-		file = file->next;
+		tmp = s;
+		s = replace_var(s, i, ms);
+		if (!s)
+			s = tmp;
+		else
+			ft_free(tmp, ms);
+		i = next_var(s);
 	}
-	return (0);
+	return (s);
 }

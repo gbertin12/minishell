@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_key_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:19:46 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/30 12:27:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:14:19 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ int	check_key_env(char *s)
 	while (s[++i])
 	{
 		if (!ft_isalnum(s[i]) && s[i] != '_')
-		{
-			ft_putchar_fd(s[i], 2);
-			ft_putstr_fd("   IN ISALNUM\n", 2);
 			return (1);
-		}
 	}
 	return (0);
 }

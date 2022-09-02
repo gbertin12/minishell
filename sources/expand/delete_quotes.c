@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 11:27:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:14:30 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*remove_quotes(char *s, t_minishell *ms)
 	tmp = ft_malloc(sizeof(char *) * 4, ms);
 	if (!tmp)
 		return (s);
-	if (!strchr(s, '"') && !strchr(s, '\''))
+	if (!s || (!strchr(s, '"') && !strchr(s, '\'')))
 		return (s);
 	to_find = get_char_target(s);
 	if (!to_find)

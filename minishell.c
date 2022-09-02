@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 13:57:46 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:50:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static void reset(t_minishell *ms, char *s)
 {
 	free_tokens(ms);
 	ms->t_head = NULL;
-	free(s);
+	if (s)
+		free(s);
+	else
+		printf("\n");
 	g_mode = 0;
 }
 
@@ -44,15 +47,14 @@ int	main(int argc, char **argv, char **envp)
 			g_mode = 0;
 		}
 		s = readline(get_prompt(&ms));
-		if (!s[0])
+		if (!s || !s[0])
 		{
-			free(s);
+			reset(&ms, s);
 			continue ;
 		}
 		if (parsing(s, &ms) != 0)
 		{
-			free(s);
-			free_tokens(&ms);
+			reset(&ms, s);
 			continue ;
 		}
 		if (ms.t_head && ms.t_head->arg_head && ms.t_head->file_head)
@@ -68,6 +70,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(s);
 		if (ft_strcmp(ms.t_head->cmd, "exit") && count_token(ms.t_head) == 1)
 		{
+			printf("enter in exit\n");
 			if (b_exit(ms.t_head, &ms))
 			{
 				reset(&ms, s);

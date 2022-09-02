@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 12:14:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:24:37 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	check_input(char *s)
+{
+	size_t	i;
+	char	flag;
+
+	i = 0;
+	flag = 0;
+	while (s[i])
+	{
+		if (!between_quote(s, i)
+			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
+			&& !flag)
+		{
+			if (s[i + 1] == '<' || s[i + 1] == '>')
+				i++;
+			flag = 1;
+		}
+		else if (!between_quote(s, i)
+			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
+			&& flag)
+		{
+			printf("minishell : syntax error near unexpected token `%c'\n",
+				s[i]);
+			return (1);
+		}
+		else if ((s[i] == '"' || s[i] == '\'' || ft_isalnum(s[i])) && flag)
+			flag = 0;
+		i++;
+	}
+	if (flag)
+	{
+		printf("minishell : syntax error near unexpected token `newline'\n");
+		return (1);
+	}
+	return (0);
+}
 
 static t_token	*new_token(t_token *token, t_minishell *ms)
 {
@@ -34,14 +71,6 @@ static size_t	skip_spaces(char *s)
 	return (ret_v);
 }
 
-static char	is_token_empty(t_token *token)
-{
-	if (!token)
-		return (0);
-	return ((!token->cmd || !token->cmd[0])
-		&& !token->arg_head && !token->file_head);
-}
-
 char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 {
 	long long	x;
@@ -62,11 +91,6 @@ char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 			return (x);
 		i += (size_t)x;
 	}
-	if (is_token_empty(token) && s[0])
-	{
-		printf("minishell : syntax error near unexpected token `newline\"\n");
-		return (1);
-	}
 	add_end_token(token, ms);
 	return (0);
 }
@@ -77,6 +101,8 @@ char	parsing(char *s, t_minishell *ms)
 	long long		i;
 
 	token = new_token(NULL, ms);
+	if (check_input(s))
+		return (1);
 	if (!token || !s)
 		return (0);
 	i = next_arg(s, token, ms);

@@ -1,3 +1,6 @@
 badfile
 
 *.o
+.vscode
+minishell
+test

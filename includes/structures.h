@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 12:42:06 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/02 12:46:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ typedef struct s_minishell	t_minishell;
 typedef struct s_file
 {
 	char			*path;
-	int				fd;
 	char			type;
 	char			append;
-	char			usable;
 	struct s_file	*next;
 }	t_file;
 

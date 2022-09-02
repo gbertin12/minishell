@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 14:37:34 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/02 12:59:07 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,18 @@ int	browse_cmd(t_minishell *ms)
 	exec = start_browse_cmd(ms);
 	if (!exec)
 		return (1);
-	exec = first(exec, ms);
+	if (exec->token->cmd)
+		exec = first(exec, ms);
 	if (exec->err)
 		return (end_browse_cmd(exec, ms));
 	token = exec->token;
 	while (token->next)
 	{
-		exec = middle(exec, ms);
+		if (exec->token->cmd)
+			exec = middle(exec, ms);
 		token = exec->token;
 	}
-	if (count_token(ms->t_head) > 1)
+	if (count_token(ms->t_head) > 1 && exec->token->cmd)
 		exec = last(exec, ms);
 	return (end_browse_cmd(exec, ms));
 }
