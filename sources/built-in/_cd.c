@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 09:55:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/02 13:22:11 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,16 @@ void	check_err(int err, char *msg_err)
 		perror(msg_err);
 }
 
-static char	replace_pwd_in_env(char *value_oldpwd, char *n_path, t_minishell *ms)
+static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
+								t_minishell *ms)
 {
-	char	*key_pwd;
-	char	*key_oldpwd;
 	char	*value_pwd;
 
-	key_pwd = NULL;
-	key_oldpwd = NULL;
-	value_pwd = NULL;
+	value_pwd = get_pwd(ms);
 	if (n_path)
 		value_pwd = n_path;
-	else
-		value_pwd = get_pwd(ms);
-	key_oldpwd = ft_strdup("OLDPWD", ms);
-	if (!key_oldpwd)
-		return (0);
-	if (do_env_key_exist(key_oldpwd, ms))
-		replace_env_value(key_oldpwd, value_oldpwd, ms);
-	else
-		add_env_key_value(key_oldpwd, value_oldpwd, ms);
-	key_pwd = ft_strdup("PWD", ms);
-	if (!key_pwd)
-		return (0);
-	if (do_env_key_exist(key_pwd, ms))
-		replace_env_value(key_pwd, value_pwd, ms);
-	else
-		add_env_key_value(key_pwd, value_pwd, ms);
+	modify_env("OLDPWD", value_oldpwd, ms);
+	modify_env("PWD", value_pwd, ms);
 	return (0);
 }
 
@@ -58,24 +41,9 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	if (do_env_key_exist("CDPATH", ms) && (path[0] != '.' && path[1] != '.'))
 	{
 		all_cdpath = ft_split(get_env_value("CDPATH", ms), ':', ms);
-		while (*all_cdpath)
-		{
-			n_path = ft_strjoin(*all_cdpath, "/", ms);
-			n_path = ft_strjoin(n_path, path, ms);
-			if (access(n_path, 0) != -1)
-			{
-				if (chdir(n_path) == -1)
-				{
-					perror("minishell ");
-					return (1);
-				}
-				replace_pwd_in_env(value_oldpwd, n_path, ms);
-				printf("%s\n", n_path);
-				return (0);
-			}
-			ft_free(n_path, ms);
-			all_cdpath++;
-		}
+		n_path = check_cd_path(path, all_cdpath, ms);
+		if (n_path)
+			replace_pwd_in_env(value_oldpwd, n_path, ms);
 	}
 	if (access(path, 0) == -1)
 	{

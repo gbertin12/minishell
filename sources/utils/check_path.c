@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_env_key_value.c                                :+:      :+:    :+:   */
+/*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 15:09:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 13:24:36 by ccambium         ###   ########.fr       */
+/*   Created: 2022/09/02 12:59:00 by ccambium          #+#    #+#             */
+/*   Updated: 2022/09/02 13:24:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_env_key_value(char *key, char *value, t_minishell *ms)
+char	*check_cd_path(char *path, char **all_cdpath, t_minishell *ms)
 {
-	t_env	*env;
-	t_env	*e_tmp;
+	char	*n_path;
 
-	env = ms->e_head;
-	e_tmp = ft_malloc(sizeof(t_env), ms);
-	if (!e_tmp)
-		return ;
-	e_tmp->key = ft_strdup(key, ms);
-	e_tmp->value = ft_strdup(value, ms);
-	e_tmp->next = NULL;
-	if (env == NULL)
-		ms->e_head = e_tmp;
-	else
+	while (*all_cdpath)
 	{
-		while (env->next != NULL)
-			env = env->next;
-		env->next = e_tmp;
+		n_path = ft_strjoin(*all_cdpath, "/", ms);
+		n_path = ft_strjoin(n_path, path, ms);
+		if (access(n_path, 0) != -1)
+		{
+			if (chdir(n_path) == -1)
+				return (NULL);
+			return (n_path);
+		}
+		ft_free(n_path, ms);
+		all_cdpath++;
 	}
+	return (NULL);
 }

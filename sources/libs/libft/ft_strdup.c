@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s, t_minishell *ms)
 	char	*v;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	v = ft_malloc(len + 1, ms);
 	if (v == NULL)

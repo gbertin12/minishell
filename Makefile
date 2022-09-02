@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/02 11:24:03 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/02 13:34:08 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS = minishell.c\
 		sources/utils/add_env_key_value.c\
 		sources/utils/add_key_with_empty_value.c\
 		sources/utils/check_key_env.c \
+		sources/utils/check_path.c\
 		sources/utils/count_elem.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/free_tokens.c\
