@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 17:04:40 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/06 15:50:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ char	*get_last_arg(t_token *token)
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
+	if (!exec->token->cmd)
+	{
+		exec->token = exec->token->next;
+		return (exec);
+	}
 	exec->args = args_to_tab(exec->token, ms);
 	if (check_is_built_in(exec->token))
 		exec->l_retv = exec_builtin(exec->token, ms);

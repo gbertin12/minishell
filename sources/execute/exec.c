@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 14:16:36 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/06 15:10:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_path(t_exec *exec)
 {
 	if (!exec->path)
 	{
-		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("minishell1: ", 2);
 		ft_putstr_fd(exec->token->cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
 		return (1);
@@ -34,16 +34,17 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 	{
 		if (init_execute(exec->token))
 			exit (1);
-		if (exec->token->have_in)
+		if (exec->token->have_in && exec->token->cmd)
 		{
 			if (dup2(exec->token->inputfile, 0) == -1)
-				perror("minishell ");
+				perror("minishell2 ");
 		}
 		redir_out(exec->token);
 		if (check_path(exec))
 			exit(127);
 		execve(exec->path, exec->args, exec->env);
-		perror("minishell");
+		if (exec->token->cmd != NULL)
+			perror("minishelll3");
 		free_all(ms);
 		exit (errno);
 	}
@@ -56,7 +57,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 
 	path = make_path(exec, ms);
 	if (pipe(exec->token->pipefd))
-		perror("minishell ");
+		perror("minishell4 ");
 	exec->token->pid = fork();
 	if (exec->token->pid < 0)
 		return (1);
@@ -69,7 +70,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 		if (check_path(exec))
 			exit(127);
 		execve(path, args, exec->env);
-		perror("minishell ");
+		perror("minishell5 ");
 		free_all(ms);
 		exit (errno);
 	}
@@ -91,12 +92,12 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		if (exec->token->have_out)
 		{
 			if (dup2(exec->token->outputfile, 1) == -1)
-				perror("minishell ");
+				perror("minishell7");
 		}
 		if (check_path(exec))
 			exit(127);
 		execve(path, args, exec->env);
-		perror("minishell ");
+		perror("minishell6");
 		free_all(ms);
 		exit (errno);
 	}

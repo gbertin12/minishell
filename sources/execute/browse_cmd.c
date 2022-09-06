@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/05 10:42:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:52:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ int	browse_cmd(t_minishell *ms)
 	exec = start_browse_cmd(ms);
 	if (!exec)
 		return (1);
-	if (exec->token->cmd)
+	if (exec->token)
 		exec = first(exec, ms);
+	ft_putstr_fd("vkrzvzv\n", 2);
 	if (exec->err)
 		return (end_browse_cmd(exec, ms));
 	token = exec->token;
+	printf("token cmd2 : %s\n", token->cmd);
 	while (token->next)
 	{
 		if (exec->token->cmd)
