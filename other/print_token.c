@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 12:05:10 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:16:08 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	print_token(t_token *token)
 	size_t	nb_cln_arg;
 	size_t	nb_cln_cmd;
 	size_t	nb_cln_max;
+	t_arg	*a;
+	t_file	*f;
 
 	x = 0;
 	y = 0;
@@ -86,19 +88,19 @@ void	print_token(t_token *token)
 	nb_file = count_file(token->file_head);
 	nb_lines = size_t_ternary(nb_arg > nb_file, nb_arg, nb_file);
 	nb_cln_arg = largest_arg(token->arg_head);
-	nb_cln_file = largest_file(token->file_head) + 4;
-	nb_cln_cmd = strlen(token->cmd);
-	nb_cln_cmd = size_t_ternary(nb_cln_cmd > 5, nb_cln_cmd, 5);
-	nb_cln_arg = size_t_ternary(nb_cln_arg > 6, nb_cln_arg, 6);
-	nb_cln_file = size_t_ternary(nb_cln_file > 7, nb_cln_file, 7) + 4;
-	nb_cln_max = nb_cln_cmd + nb_cln_arg + nb_cln_file + 10;
-	while (x < nb_cln_max)
+	nb_cln_file = largest_file(token->file_head);
+	nb_cln_cmd = strlen(token->cmd) + 3;
+	nb_cln_cmd = size_t_ternary(nb_cln_cmd > 5, nb_cln_cmd, 5 + 3);
+	nb_cln_arg = size_t_ternary(nb_cln_arg + 2 > 6, nb_cln_arg + 2, 6);
+	nb_cln_file = size_t_ternary(nb_cln_file + 2 > 7, nb_cln_file + 2, 7) + 3;
+	nb_cln_max = nb_cln_cmd + nb_cln_arg + nb_cln_file;
+	while (x <= nb_cln_max + 2)
 	{
 		if (x == 0)
 			printf("%s", TOP_LEFT);
-		else if (x == nb_cln_max - 1)
+		else if (x == nb_cln_max + 2)
 			printf("%s", TOP_RIGHT);
-		else if (x == (nb_cln_arg + nb_cln_cmd) || x == nb_cln_cmd || x ==  (nb_cln_arg + nb_cln_cmd + nb_cln_file))
+		else if (x == (nb_cln_arg + nb_cln_cmd + 1) || x == nb_cln_cmd || x == (nb_cln_arg + nb_cln_cmd + nb_cln_file + 2))
 			printf("%s", T_SHAPE);
 		else
 			printf("%s", LINK);
@@ -106,9 +108,9 @@ void	print_token(t_token *token)
 	}
 	x = 0;
 	printf("%c", '\n');
-	while (x < nb_cln_cmd)
+	while (x <= nb_cln_cmd)
 	{
-		if (x == 0 || x == nb_cln_cmd - 1)
+		if (x == 0 || x == nb_cln_cmd)
 			printf("%s", VLINK);
 		else if (x == 1)
 		{
@@ -121,11 +123,11 @@ void	print_token(t_token *token)
 		x++;
 	}
 	x = 0;
-	while (x < nb_cln_arg)
+	while (x <= nb_cln_arg)
 	{
-		if (x == 0 || x == nb_cln_arg - 1)
+		if (x == nb_cln_arg)
 			printf("%s", VLINK);
-		else if (x == 1)
+		else if (x == 0)
 		{
 			printf(" ARGS ");
 			x += 6;
@@ -136,11 +138,11 @@ void	print_token(t_token *token)
 		x++;
 	}
 	x = 0;
-	while (x < nb_cln_file)
+	while (x <= nb_cln_file)
 	{
-		if (x == 0 || x == nb_cln_file - 1)
+		if (x == nb_cln_file)
 			printf("%s", VLINK);
-		else if (x == 1)
+		else if (x == 0)
 		{
 			printf(" FILES ");
 			x += 7;
@@ -150,7 +152,71 @@ void	print_token(t_token *token)
 			printf(" ");
 		x++;
 	}
+	x = 0;
 	printf("\n");
+	while (x <= nb_cln_max + 2)
+	{
+		if (x == 0)
+			printf("%s", LITTLE_T);
+		else if (x == nb_cln_max + 2)
+			printf("%s", REVERSE_LITTLE_T);
+		else if (x == (nb_cln_arg + nb_cln_cmd + 1) || x == nb_cln_cmd || x == (nb_cln_arg + nb_cln_cmd + nb_cln_file + 2))
+			printf("%s", PLUS);
+		else
+			printf("%s", LINK);
+		x++;
+	}
+	printf("\n");
+	y = 0;
+	a = token->arg_head;
+	f = token->file_head;
+	while (a || f)
+	{
+		if (y == 0)
+		{
+			if (a && f)
+			{
+				printf("%s %s %s %s %s %s %s %s", VLINK, token->cmd, VLINK, a->value, VLINK, f->path, f->type ? "IN " : "OUT", VLINK );
+				f = f->next;
+				a = a->next;
+			}
+			else if (a)
+			{
+				printf("%s %s %s %s %s %s %s %s", VLINK, token->cmd, VLINK, a->value, VLINK, "        ", "   ", VLINK );
+				a = a->next;
+			}
+			else if (f)
+			{
+				printf("%s %s %s %s %s %s %s %s", VLINK, token->cmd, VLINK, "      ", VLINK, f->path, f->type ? "IN " : "OUT", VLINK );
+				f = f->next;
+			}
+			else
+				printf("%s %s %s %s %s %s %s %s", VLINK, token->cmd, VLINK, "      ", VLINK, "        ", "   ", VLINK);
+			y = 1;
+		}
+		else
+		{
+			if (a && f)
+			{
+				printf("%s %*c %s %s %s %s %s %s", VLINK, ' ', nb_cln_cmd - 1, VLINK, a->value, VLINK, f->path, f->type ? "IN " : "OUT", VLINK );
+				f = f->next;
+				a = a->next;
+			}
+			else if (a)
+			{
+				printf("%s %*c %s %s %s %s %s %s", VLINK, ' ', nb_cln_cmd - 1, VLINK, a->value, VLINK, "        ", "   ", VLINK );
+				a = a->next;
+			}
+			else if (f)
+			{
+				printf("%s %*c %s %s %s %s %s %s", VLINK, ' ', nb_cln_cmd - 1, VLINK, "      ", VLINK, f->path, f->type ? "IN " : "OUT", VLINK );
+				f = f->next;
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+
 }
 
 int	main(void)
