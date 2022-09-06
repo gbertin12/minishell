@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/05 14:16:08 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:36:44 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	print_token(t_token *token)
 	nb_cln_cmd = strlen(token->cmd) + 3;
 	nb_cln_cmd = size_t_ternary(nb_cln_cmd > 5, nb_cln_cmd, 5 + 3);
 	nb_cln_arg = size_t_ternary(nb_cln_arg + 2 > 6, nb_cln_arg + 2, 6);
-	nb_cln_file = size_t_ternary(nb_cln_file + 2 > 7, nb_cln_file + 2, 7) + 3;
+	nb_cln_file = size_t_ternary(nb_cln_file + 2 > 7, nb_cln_file + 2, 7) + 4;
 	nb_cln_max = nb_cln_cmd + nb_cln_arg + nb_cln_file;
 	while (x <= nb_cln_max + 2)
 	{
@@ -118,7 +118,7 @@ void	print_token(t_token *token)
 			x += 5;
 			continue ;
 		}
-		else 
+		else
 			printf(" ");
 		x++;
 	}
@@ -133,7 +133,7 @@ void	print_token(t_token *token)
 			x += 6;
 			continue ;
 		}
-		else 
+		else
 			printf(" ");
 		x++;
 	}
@@ -148,7 +148,7 @@ void	print_token(t_token *token)
 			x += 7;
 			continue ;
 		}
-		else 
+		else
 			printf(" ");
 		x++;
 	}
@@ -198,18 +198,18 @@ void	print_token(t_token *token)
 		{
 			if (a && f)
 			{
-				printf("%s %*c %s %s %s %s %s %s", VLINK, ' ', nb_cln_cmd - 1, VLINK, a->value, VLINK, f->path, f->type ? "IN " : "OUT", VLINK );
+				printf("%s %*c %s %s %s %s %s %s", VLINK, ((int) nb_cln_cmd - 3), ' ', VLINK, a->value, VLINK, f->path, f->type ? "IN " : "OUT ", VLINK );
 				f = f->next;
 				a = a->next;
 			}
 			else if (a)
 			{
-				printf("%s %*c %s %s %s %s %s %s", VLINK, ' ', nb_cln_cmd - 1, VLINK, a->value, VLINK, "        ", "   ", VLINK );
+				printf("%s %*c %s %s %s %*c %s %s", VLINK, ((int) nb_cln_cmd - 3), ' ', VLINK, a->value, VLINK, (int) nb_cln_file - 3, ' ',"   ", VLINK );
 				a = a->next;
 			}
 			else if (f)
 			{
-				printf("%s %*c %s %s %s %s %s %s", VLINK, ' ', nb_cln_cmd - 1, VLINK, "      ", VLINK, f->path, f->type ? "IN " : "OUT", VLINK );
+				printf("%s %*c %s %*c %s %s %s %s", VLINK, ((int) nb_cln_cmd - 3), ' ', VLINK, (int) nb_cln_arg - 2, ' ',VLINK, f->path, f->type ? "IN " : "OUT ", VLINK );
 				f = f->next;
 			}
 		}
