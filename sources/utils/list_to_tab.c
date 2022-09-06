@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 14:16:51 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/06 09:25:22 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	**env_to_tab(t_minishell *ms)
 			ret_v[i] = ft_strjoin(s_tmp, tmp->value, ms);
 			ft_free(s_tmp, ms);
 		}
+		else
+			ret_v[i] = ft_strdup(tmp->key, ms);
 		tmp = tmp->next;
 		i++;
 	}

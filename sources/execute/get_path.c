@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 08:42:16 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/28 13:04:27 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/05 15:31:34 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,13 @@
 char	**get_path_env(t_minishell *ms)
 {
 	char	**all_path;
-	char	**env;
-	size_t	i;
+	char	*tmp;
 
-	i = 0;
-	env = env_to_tab(ms);
-	if (!env)
+	tmp = get_env_value("PATH", ms);
+	if (!tmp)
 		return (NULL);
-	while (env[i])
-	{
-		if (ft_strncmp("PATH", env[i], 4) == 0)
-		{
-			while (*env[i] != '/' && *env[i] != '\0')
-				env[i]++;
-			all_path = ft_split(env[i], ':', ms);
-			if (!all_path)
-				return (NULL);
-			return (all_path);
-		}
-		i++;
-	}
-	return (NULL);
+	all_path = ft_split(tmp, ':', ms);
+	return (all_path);
 }
 
 int	ft_search_char(char *str)
