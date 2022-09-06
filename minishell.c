@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/03 01:02:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:47:07 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void reset(t_minishell *ms, char *s)
 		free(s);
 	else
 		printf("\n");
-	g_mode = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -41,17 +40,18 @@ int	main(int argc, char **argv, char **envp)
 	init(&ms, envp, argc, argv);
 	while (1)
 	{
-		if (g_mode == 5)
+		if (g_mode)
 		{
-			ms.l_retv = 130;
+			if (g_mode == 2)
+				ms.l_retv = 130;
 			g_mode = 0;
 		}
 		s = readline(get_prompt(&ms));
 		if (!s || !s[0])
 		{
-			reset(&ms, s);
 			if (!s)
 				break ;
+			reset(&ms, s);
 			continue ;
 		}
 		if (parsing(s, &ms) != 0)
