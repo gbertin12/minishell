@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/02 17:09:08 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/06 14:50:49 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
