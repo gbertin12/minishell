@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 09:42:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/07 10:20:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 
 int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 {
-	char	*path;
-
-	path = make_path(exec, ms);
+	exec->path = make_path(exec, ms);
 	if (pipe(exec->token->pipefd))
 		perror("minishell ");
 	exec->token->pid = fork();
@@ -66,7 +64,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 		redir_out(exec->token);
 		if (check_path(exec))
 			exit(127);
-		execve(path, args, exec->env);
+		execve(exec->path, args, exec->env);
 		perror("minishell ");
 		free_all(ms);
 		exit (errno);
@@ -76,9 +74,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 
 int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 {
-	char	*path;
-
-	path = make_path(exec, ms);
+	exec->path = make_path(exec, ms);
 	exec->token->pid = fork();
 	if (exec->token->pid < 0)
 		return (1);
@@ -93,7 +89,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		}
 		if (check_path(exec))
 			exit(127);
-		execve(path, args, exec->env);
+		execve(exec->path, args, exec->env);
 		perror("minishell ");
 		free_all(ms);
 		exit (errno);
