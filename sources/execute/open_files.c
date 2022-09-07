@@ -6,16 +6,14 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/06 15:32:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:55:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_have_next_type(t_file *file, int type)
+static int	check_have_next_type(t_file *file, char type)
 {
-	if (!file->next)
-		return (1);
 	while (file)
 	{
 		if (file->type == type)
@@ -72,9 +70,9 @@ int	open_output(t_token *token)
 			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
 			put_error_fd(file, token->file_head);
+		file = file->next;
 		if (check_have_next_type(file, 1))
 			return (fd);
-		file = file->next;
 	}
 	return (fd);
 }
@@ -101,9 +99,9 @@ int	open_input(t_token *token, t_minishell *ms)
 			fd = open(file->path, O_RDONLY);
 		if (fd < 0)
 			put_error_fd(file, token->file_head);
+		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);
-		file = file->next;
 	}
 	return (fd);
 }
