@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 11:55:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:04:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_have_next_type(t_file *file, char type)
 
 static char	did_print(t_file *file, t_file *head)
 {
-	t_file *f;
+	t_file	*f;
 
 	f = head;
 	while (f && f != file)
