@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _echo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/06 15:12:32 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:06:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	exec_echo(t_token *token)
 	token->pid = fork();
 	if (token->pid == 0)
 	{
-		init_execute(token);
+		if (init_execute(token))
+			exit(1);
 		redir_out(token);
 		if (_echo(token))
 			exit(1);
