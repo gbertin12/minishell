@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:44:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 08:42:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/07 09:07:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 int	redir_out(t_token *token)
 {
 	if (token->have_out)
-	{
-		if (dup2(token->outputfile, 1) == -1)
-			perror("minishell 6 : ");
-	}
+		dup2(token->outputfile, 1);
 	else if (token->next)
 	{
 		close(token->pipefd[0]);
-		if (dup2(token->pipefd[1], 1) == -1)
-			perror("minishell 7 : ");
+		dup2(token->pipefd[1], 1);
 	}
 	return (0);
 }
@@ -38,14 +34,12 @@ int	redir_in(t_token *token, t_token *last)
 			close(last->pipefd[0]);
 		if (last->pipefd[1])
 			close(last->pipefd[1]);
-		if (dup2(token->inputfile, 0))
-			perror("minishell 4 : ");
+		dup2(token->inputfile, 0);
 	}
 	else
 	{
 		close(last->pipefd[1]);
-		if (dup2(last->pipefd[0], 0))
-			perror("minishell 5 : ");
+		dup2(last->pipefd[0], 0);
 	}
 	return (0);
 }

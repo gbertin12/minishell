@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 08:41:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/07 10:07:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 		{
 			if (exec->token->next)
 			{
-				if (pipe(exec->token->pipefd))
-					perror(" minishell ");
+				if (pipe(exec->token->pipefd) == -1)
+					return (exec);
 			}
 			exec_first_cmd(exec, ms);
 		}

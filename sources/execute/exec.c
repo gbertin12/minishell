@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 14:16:36 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/07 09:42:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 {
 	exec->path = make_path(exec, ms);
 	exec->token->pid = fork();
+	printf("infile : %d \n", exec->token->inputfile);
 	if (exec->token->pid < 0)
 		return (1);
 	if (exec->token->pid == 0)
@@ -35,10 +36,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		if (init_execute(exec->token))
 			exit (1);
 		if (exec->token->have_in)
-		{
-			if (dup2(exec->token->inputfile, 0) == -1)
-				perror("minishell ");
-		}
+			dup2(exec->token->inputfile, 0);
 		redir_out(exec->token);
 		if (check_path(exec))
 			exit(127);

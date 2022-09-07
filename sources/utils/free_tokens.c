@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:09:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/24 10:12:19 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/07 10:09:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	free_tokens(t_minishell *ms)
 	token = ms->t_head;
 	while (token)
 	{
+		if (token->inputfile)
+			close (token->inputfile);
+		if (token->outputfile)
+			close (token->outputfile);
 		free_files(token->file_head, ms);
 		free_args(token->arg_head, ms);
 		ft_free(token->cmd, ms);
