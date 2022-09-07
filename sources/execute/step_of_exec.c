@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 17:04:40 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/07 08:41:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,22 @@ char	*get_last_arg(t_token *token)
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
-	exec->args = args_to_tab(exec->token, ms);
-	if (check_is_built_in(exec->token))
-		exec->l_retv = exec_builtin(exec->token, ms);
-	else
+	if (exec->token->cmd != NULL)
 	{
-		if (exec->token->next)
+		exec->args = args_to_tab(exec->token, ms);
+		if (check_is_built_in(exec->token))
+			exec->l_retv = exec_builtin(exec->token, ms);
+		else
 		{
-			if (pipe(exec->token->pipefd))
-				perror(" minishell ");
+			if (exec->token->next)
+			{
+				if (pipe(exec->token->pipefd))
+					perror(" minishell ");
+			}
+			exec_first_cmd(exec, ms);
 		}
-		exec_first_cmd(exec, ms);
+		modify_env("_", get_last_arg(exec->token), ms);
 	}
-	modify_env("_", get_last_arg(exec->token), ms);
 	exec->last = exec->token;
 	if (count_token(ms->t_head) > 1)
 		exec->token = exec->token->next;
@@ -49,14 +52,17 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 
 t_exec	*middle(t_exec *exec, t_minishell *ms)
 {
-	exec->args = args_to_tab(exec->token, ms);
-	if (check_is_built_in(exec->token))
-		exec->l_retv = exec_builtin(exec->token, ms);
-	else
-		exec_middle(exec->args, exec, ms);
-	modify_env("_", get_last_arg(exec->token), ms);
-	close(exec->last->pipefd[0]);
-	close(exec->last->pipefd[1]);
+	if (exec->token->cmd != NULL)
+	{
+		exec->args = args_to_tab(exec->token, ms);
+		if (check_is_built_in(exec->token))
+			exec->l_retv = exec_builtin(exec->token, ms);
+		else
+			exec_middle(exec->args, exec, ms);
+		modify_env("_", get_last_arg(exec->token), ms);
+		close(exec->last->pipefd[0]);
+		close(exec->last->pipefd[1]);
+	}
 	exec->last = exec->token;
 	exec->token = exec->token->next;
 	return (exec);
@@ -64,11 +70,14 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 
 t_exec	*last(t_exec *exec, t_minishell *ms)
 {
-	exec->args = args_to_tab(exec->token, ms);
-	if (check_is_built_in(exec->token))
-		exec->l_retv = exec_builtin(exec->token, ms);
-	else
-		exec_last(exec->args, exec, ms);
-	modify_env("_", get_last_arg(exec->token), ms);
+	if (exec->token->cmd != NULL)
+	{
+		exec->args = args_to_tab(exec->token, ms);
+		if (check_is_built_in(exec->token))
+			exec->l_retv = exec_builtin(exec->token, ms);
+		else
+			exec_last(exec->args, exec, ms);
+		modify_env("_", get_last_arg(exec->token), ms);
+	}
 	return (exec);
 }

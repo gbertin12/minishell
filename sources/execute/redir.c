@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:44:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 14:31:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/07 08:42:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	redir_out(t_token *token)
 
 int	redir_in(t_token *token, t_token *last)
 {
+	if (last->cmd == NULL)
+		return (0);
 	if (token->have_in == 1)
 	{
 		if (last->pipefd[0])

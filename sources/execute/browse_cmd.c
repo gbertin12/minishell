@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/05 10:42:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/07 08:38:11 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	have_child(t_token *token)
+{
+	while (token)
+	{
+		if (token->pid != 0)
+			return (1);
+		token = token->next;
+	}
+	return (0);
+}
 
 int	init_execute(t_token *token)
 {
@@ -47,17 +58,6 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	return (exec);
 }
 
-int	have_child(t_token *token)
-{
-	while (token)
-	{
-		if (token->pid != 0)
-			return (1);
-		token = token->next;
-	}
-	return (0);
-}
-
 int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 {
 	int		status;
@@ -92,7 +92,7 @@ int	browse_cmd(t_minishell *ms)
 	exec = start_browse_cmd(ms);
 	if (!exec)
 		return (1);
-	if (exec->token->cmd)
+	if (exec->token)
 		exec = first(exec, ms);
 	if (exec->err)
 		return (end_browse_cmd(exec, ms));
