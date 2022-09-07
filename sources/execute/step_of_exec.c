@@ -6,11 +6,26 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 10:07:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/07 17:20:02 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+static int		check_have_char(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (!cmd)
+		return (0);
+	while (cmd[i])
+	{
+		if (ft_isprint(cmd[i]) && !is_space(cmd[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 char	*get_last_arg(t_token *token)
 {
@@ -26,7 +41,7 @@ char	*get_last_arg(t_token *token)
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
-	if (exec->token->cmd != NULL)
+	if (check_have_char(exec->token->cmd))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -52,7 +67,7 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 
 t_exec	*middle(t_exec *exec, t_minishell *ms)
 {
-	if (exec->token->cmd != NULL)
+	if (check_have_char(exec->token->cmd))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -70,7 +85,7 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 
 t_exec	*last(t_exec *exec, t_minishell *ms)
 {
-	if (exec->token->cmd != NULL)
+	if (check_have_char(exec->token->cmd))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
