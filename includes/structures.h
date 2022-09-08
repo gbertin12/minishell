@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/02 14:46:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/08 11:47:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ typedef struct s_exec
 	char	**path_absolute;
 }	t_exec;
 
+typedef struct	s_file_error
+{
+	char					*err;
+	struct	s_file_error	*next;
+}	t_file_error;
+
 /* 
  * @param t_head head of token list from parsing
  * @param o_head head of objects list from ft_malloc
@@ -85,6 +91,7 @@ typedef struct s_minishell
 	int				l_retv;
 	t_env			*e_head;
 	char			*l_input;
+	t_file_error	*err_head;
 }	t_minishell;
 
 typedef struct s_heredoc

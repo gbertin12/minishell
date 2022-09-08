@@ -3,19 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   open_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 11:55:18 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:03:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	print_err(t_minishell *ms)
+{
+	t_file_error *err;
+	
+	err = ms->err_head;
+	if (err)
+	{	
+		while (err)
+		{
+			ft_putstr_fd(err->err, 2);
+			err = err->next;
+		}
+	}
+}
+
 void	open_all(t_minishell *ms)
 {
-	t_token	*token;
+	t_token			*token;
 
+	ms->err_head = NULL;
 	token = ms->t_head;
 	while (token)
 	{
@@ -26,7 +42,8 @@ void	open_all(t_minishell *ms)
 		if (token->have_in)
 			token->inputfile = open_input(token, ms);
 		if (token->have_out)
-			token->outputfile = open_output(token);
+			token->outputfile = open_output(token, ms);
 		token = token->next;
 	}
+	print_err(ms);
 }

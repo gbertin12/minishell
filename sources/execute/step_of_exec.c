@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/08 08:58:10 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:01:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		check_have_char(char *cmd)
 		return (0);
 	while (cmd[i])
 	{
-		if (ft_isprint(cmd[i]) && !is_space(cmd[i]))
+		if (ft_isprint(cmd[i]) || is_space(cmd[i]))
 			return (1);
 		i++;
 	}

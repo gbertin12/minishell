@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 12:04:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:14:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,30 @@ static char	did_print(t_file *file, t_file *head)
 	return (0);
 }
 
-static void	put_error_fd(t_file *file, t_file *head)
+static void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 {
+	t_file_error	*new_err;
+	
 	if (did_print(file, head))
 		return ;
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(file->path, 2);
-	ft_putstr_fd(": ", 2);
-	perror("");
-	ft_putchar_fd('\n', 2);
+	if (ms->err_head == NULL)
+	{
+		new_err = ft_malloc(sizeof(t_file_error), ms);
+		ms->err_head = new_err;
+	}
+	else
+	{
+		new_err = ft_malloc(sizeof(t_file_error), ms);
+		add_end_err(ms->err_head, new_err);
+	}
+	new_err->next = NULL;
+	new_err->err = ft_strjoin("minishell: ", file->path, ms);
+	new_err->err = ft_strjoin(new_err->err, ": ", ms);
+	new_err->err = ft_strjoin(new_err->err, strerror(errno), ms);
+	new_err->err = ft_strjoin(new_err->err, "\n", ms);
 }
 
-int	open_output(t_token *token)
+int	open_output(t_token *token, t_minishell *ms)
 {
 	t_file	*file;
 	int		fd;
@@ -69,7 +81,7 @@ int	open_output(t_token *token)
 		else
 			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
-			put_error_fd(file, token->file_head);
+			put_error_fd(file, token->file_head, ms);
 		file = file->next;
 		if (check_have_next_type(file, 1))
 			return (fd);
@@ -98,7 +110,7 @@ int	open_input(t_token *token, t_minishell *ms)
 		else
 			fd = open(file->path, O_RDONLY);
 		if (fd < 0)
-			put_error_fd(file, token->file_head);
+			put_error_fd(file, token->file_head, ms);
 		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);

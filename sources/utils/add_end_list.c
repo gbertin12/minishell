@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_end_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 21:08:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/18 15:19:53 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/08 11:53:43 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ void	add_end_file(t_token *token, t_file *obj)
 		token->file_head = obj;
 		return ;
 	}
+	while (x->next != NULL)
+		x = x->next;
+	x->next = obj;
+}
+
+void	add_end_err(t_file_error *head, t_file_error *obj)
+{
+	t_file_error	*x;
+
+	x = head;
 	while (x->next != NULL)
 		x = x->next;
 	x->next = obj;
