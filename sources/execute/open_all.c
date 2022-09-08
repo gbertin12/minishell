@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/08 12:03:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/08 16:49:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_err(t_minishell *ms)
 {
-	t_file_error *err;
-	
+	t_file_error	*err;
+
 	err = ms->err_head;
 	if (err)
 	{	

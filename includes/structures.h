@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/08 11:47:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/08 16:50:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ typedef struct s_exec
 	char	**path_absolute;
 }	t_exec;
 
-typedef struct	s_file_error
+typedef struct s_file_error
 {
 	char					*err;
-	struct	s_file_error	*next;
+	struct s_file_error		*next;
 }	t_file_error;
 
 /* 

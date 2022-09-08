@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/07 11:30:47 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/08 17:04:26 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = minishell.c\
 		sources/built-in/_env.c\
 		sources/built-in/_exit.c\
 		sources/built-in/_export.c\
+		sources/built-in/_export2.c\
 		sources/built-in/_export_exec.c \
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
