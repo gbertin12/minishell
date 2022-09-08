@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:03:43 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/08 13:40:53 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:03:31 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ static char	token_is_empty(t_token *t)
 
 static void	error_file(t_file *f)
 {
-	if (f->type)
+	if (f->next->type)
 	{
-		if (f->append)
+		if (f->next->append)
 			create_error("syntax error near unexpected token `>>'");
 		else
 			create_error("syntax error near unexpected token `>'");
 	}
 	else
 	{
-		if (f->append)
+		if (f->next->append)
 			create_error("syntax error near unexpected token `<<'");
 		else
 			create_error("syntax error near unexpected token `<'");
@@ -104,7 +104,10 @@ static char	check_file(t_file *head)
 	{
 		if (!f->path || !*f->path)
 		{
-			error_file(f);
+			if (f->next)
+				error_file(f);
+			else
+				create_error("syntax error near unexpected token `|'");
 			return (1);
 		}
 		f = f->next;
