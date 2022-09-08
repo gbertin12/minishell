@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/07 12:04:27 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:30:42 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 		i += (size_t)x;
 	}
 	add_end_token(token, ms);
+	if (check_input(ms->t_head))
+		return (1);
 	return (0);
 }
 
@@ -64,8 +66,6 @@ char	parsing(char *s, t_minishell *ms)
 	long long		i;
 
 	token = new_token(NULL, ms);
-	if (check_input(s))
-		return (1);
 	if (!token || !s)
 		return (0);
 	i = next_arg(s, token, ms);
