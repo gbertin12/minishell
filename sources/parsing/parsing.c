@@ -6,53 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:15:11 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/03 00:57:52 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:30:42 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static char	check_input(char *s)
-{
-	size_t	i;
-	char	flag;
-
-	i = 0;
-	flag = 0;
-	while (s[i])
-	{
-		if (!between_quote(s, i)
-			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
-			&& !flag)
-		{
-			flag = 1;
-			if (s[i] == '|')
-				flag = 2;
-			if ((s[i + 1] == '<' || s[i + 1] == '>') && flag == 1)
-				i++;
-		}
-		else if (!between_quote(s, i)
-			&& (s[i] == '<' || s[i] == '>' || s[i] == '|')
-			&& flag)
-		{
-			if (flag != 2 && s[i] != '|')
-			{
-				printf("minishell : syntax error near unexpected token `%c'\n",
-					s[i]);
-				return (1);
-			}
-		}
-		else if ((s[i] == '"' || s[i] == '\'' || ft_isalnum(s[i])) && flag)
-			flag = 0;
-		i++;
-	}
-	if (flag)
-	{
-		printf("minishell : syntax error near unexpected token `newline'\n");
-		return (1);
-	}
-	return (0);
-}
 
 static t_token	*new_token(t_token *token, t_minishell *ms)
 {
@@ -97,6 +55,8 @@ char	parsing2(char *s, size_t i, t_token *token, t_minishell *ms)
 		i += (size_t)x;
 	}
 	add_end_token(token, ms);
+	if (check_input(ms->t_head))
+		return (1);
 	return (0);
 }
 
@@ -106,8 +66,6 @@ char	parsing(char *s, t_minishell *ms)
 	long long		i;
 
 	token = new_token(NULL, ms);
-	if (check_input(s))
-		return (1);
 	if (!token || !s)
 		return (0);
 	i = next_arg(s, token, ms);
