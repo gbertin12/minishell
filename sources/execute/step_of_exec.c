@@ -6,11 +6,12 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 17:20:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/08 08:58:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 static int		check_have_char(char *cmd)
 {
 	int	i;
