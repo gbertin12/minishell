@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:03:43 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/08 14:03:31 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/09 08:51:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,6 @@ static void	create_error(char *s)
 	ft_putchar_fd('\n', 2);
 }
 
-static char	token_is_empty(t_token *t)
-{
-	if ((!t->cmd || !*t->cmd)
-		&& (!t->arg_head || !*t->arg_head->value)
-		&& (!t->file_head || !*t->file_head->path))
-		return (1);
-	return (0);
-}
-
 static void	error_file(t_file *f)
 {
 	if (f->next->type)
@@ -115,10 +106,12 @@ static char	check_file(t_file *head)
 	return (0);
 }
 
-static char	check_token(t_token *t)
+static char	check_token(t_token *t, t_token *head)
 {
 	if (token_is_empty(t))
 	{
+		if (count_token(head) == 1)
+			return (1);
 		if (t->next)
 			create_error("syntax error near unexpected token `|'");
 		else
@@ -137,7 +130,7 @@ char	check_input(t_token *head)
 	t = head;
 	while (t)
 	{
-		if (check_token(t))
+		if (check_token(t, head))
 			return (1);
 		t = t->next;
 	}

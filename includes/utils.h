@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/08 11:54:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/09 09:09:30 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ long long	ft_lliota(long long n, t_minishell *ms);
 long long	next_arg(char *s, t_token *token, t_minishell *ms);
 
 char		is_space(char c);
+char		token_is_empty(t_token *t);
 char		between_quote(char *s, size_t x);
 char		do_env_key_exist(char *key, t_minishell *ms);
 char		char_ternary(char condition, char true, char false);
