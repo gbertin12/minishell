@@ -33,6 +33,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strdup(const char *s, t_minishell *ms);
 char	**ft_split(char const *s, char c, t_minishell *ms);
+char	**ft_split_set(char const *s, char *set, t_minishell *ms);
 char	*ft_strjoin(char const *s1, char const *s2, t_minishell *ms);
 char	*ft_strtrim(char const *s1, char const *set, t_minishell *ms);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);

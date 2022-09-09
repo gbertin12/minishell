@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/07 12:07:44 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/09 12:10:43 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = minishell.c\
 		sources/expand/between_quote.c \
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
+		sources/expand/expand_arg.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
@@ -66,6 +67,7 @@ SRCS = minishell.c\
 		sources/utils/next_arg_parsing.c\
 		sources/utils/replace_env_value.c\
 		sources/utils/ternaries.c\
+		sources/utils/token_is_empty.c\
 		sources/copy_env.c
 
 HEAD = includes/minishell.h
