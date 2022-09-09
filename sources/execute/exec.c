@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/09 11:10:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:47:48 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 int	check_path(t_exec *exec)
 {
+	if (strchr(exec->token->cmd, '/'))
+	{
+		if (access(exec->token->cmd, 0) == -1)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(exec->token->cmd, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+			return (1);
+		}
+	}
 	if (exec->token->cmd[0] == '\0' || !exec->path)
 	{
 		ft_putstr_fd("minishell: ", 2);
