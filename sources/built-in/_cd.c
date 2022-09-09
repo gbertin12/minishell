@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 17:12:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/09 09:26:12 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	}
 	if (chdir(path) == -1)
 	{
-		strerror(errno);
+		perror("minishell");
 		return (1);
 	}
 	replace_pwd_in_env(value_oldpwd, NULL, ms);

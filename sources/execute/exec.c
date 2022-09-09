@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 12:34:15 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/09 11:10:00 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_path(t_exec *exec)
 {
-	if (!exec->path)
+	if (exec->token->cmd[0] == '\0' || !exec->path)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(exec->token->cmd, 2);
@@ -42,7 +42,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		execve(exec->path, exec->args, exec->env);
 		perror("minishell1");
 		free_all(ms);
-		exit (errno);
+		exit (126);
 	}
 	return (0);
 }
@@ -66,7 +66,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 		execve(exec->path, args, exec->env);
 		perror("minishell3 ");
 		free_all(ms);
-		exit (errno);
+		exit (126);
 	}
 	return (0);
 }
@@ -95,7 +95,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		execve(exec->path, args, exec->env);
 		perror("minishell4 ");
 		free_all(ms);
-		exit (errno);
+		exit (126);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 08:42:16 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/08 12:32:19 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/09 10:29:00 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ char	*make_path(t_exec *exec, t_minishell *ms)
 	i = 0;
 	if (exec->path_absolute == NULL || ft_search_char(exec->token->cmd))
 	{
-		ft_putstr_fd(exec->token->cmd, 2);
-		ft_putstr_fd("\n", 2);
 		if (access(exec->token->cmd, 0) == 0)
 			return (ft_strdup(exec->token->cmd, ms));
 		return (NULL);
