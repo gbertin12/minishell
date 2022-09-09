@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/09 09:25:21 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/09 13:04:27 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -I  /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I  /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -38,6 +38,7 @@ SRCS = minishell.c\
 		sources/expand/between_quote.c \
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
+		sources/expand/expand_arg.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
