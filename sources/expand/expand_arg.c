@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/09 12:08:06 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:59:57 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	expand_arg_multi(t_arg *arg, char **argv, char *w, t_minishell *ms)
 	i = 0;
 	arg->value = replace_var_multi(arg->value, (size_t)(w - arg->value), argv[0], ms);
 	tmp = ft_substr(arg->value, (size_t)(w - arg->value), ft_strlen(w), ms);
-	arg->value = ft_substr(arg->value, 0,(size_t)(w - arg->value), ms);
+	arg->value = ft_substr(arg->value, 0, (size_t)(w - arg->value), ms);
 	a = ft_malloc(sizeof(t_arg), ms);
 	ft_bzero(a, sizeof(t_arg));
 	while (argv[++i])
@@ -103,8 +103,11 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	char	*i;
 	char	*key;
 	char	**arg_value;
+	char	*tmp;
 
 	arg = token->arg_head;
+	if (!arg)
+		return (0);
 	i = strchr(arg->value, '$');
 	while (arg)
 	{
@@ -116,16 +119,28 @@ char	expand_arg(t_token *token, t_minishell *ms)
 		key = read_var(++i, ms);
 		if (!key || !*key)
 			printf("$%c : not a valid identifier\n", *i);
-		arg_value = ft_split_set(get_env_value(key, ms), " \n\r\v\t\f", ms);
+		tmp = get_env_value(key, ms);
+		if (!tmp)
+			tmp = ft_strdup("", ms);
+		arg_value = ft_split_set(tmp, " \n\r\v\t\f", ms);
 		if (count_tab(arg_value) == 1)
 		{
-			arg->value = replace_var_multi(arg->value, i - arg->value,
-					arg_value[0], ms);
+			if (arg_value)
+				arg->value = replace_var_multi(arg->value, --i - arg->value,
+						arg_value[0], ms);
 			return (0);
 		}
-		else
+		else if (count_tab(arg_value) > 1)
+		{
 			if (expand_arg_multi(arg, arg_value, --i, ms))
 				return (1);
+		}
+		else
+		{
+			arg->value = replace_var_multi(arg->value, --i - arg->value,
+					"", ms);
+			return (0);
+		}
 		i = strchr(arg->value, '$');
 	}
 	return (0);
