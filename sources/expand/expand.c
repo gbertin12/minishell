@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/26 13:29:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/09 10:09:11 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,29 @@ static size_t	next_var(char *s)
 	return (i);
 }
 
-static void	expand_arg(t_token *token, t_minishell *ms)
-{
-	t_arg	*arg;
-	size_t	i;
-	char	*tmp;
+// static void	expand_arg(t_token *token, t_minishell *ms)
+// {
+// 	t_arg	*arg;
+// 	size_t	i;
+// 	char	*tmp;
 
-	arg = token->arg_head;
-	while (arg)
-	{
-		i = next_var(arg->value);
-		while (arg->value[i])
-		{
-			tmp = arg->value;
-			arg->value = replace_var(arg->value, i, ms);
-			if (!arg->value)
-				arg->value = tmp;
-			else
-				ft_free(tmp, ms);
-			i = next_var(arg->value);
-		}
-		arg = arg->next;
-	}
-}
+// 	arg = token->arg_head;
+// 	while (arg)
+// 	{
+// 		i = next_var(arg->value);
+// 		while (arg->value[i])
+// 		{
+// 			tmp = arg->value;
+// 			arg->value = replace_var(arg->value, i, ms);
+// 			if (!arg->value)
+// 				arg->value = tmp;
+// 			else
+// 				ft_free(tmp, ms);
+// 			i = next_var(arg->value);
+// 		}
+// 		arg = arg->next;
+// 	}
+// }
 
 static void	expand_file(t_token *token, t_minishell *ms)
 {
