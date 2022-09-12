@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/07 12:12:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/12 10:07:42 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,17 @@ char	**env_to_tab2(char **ret_v, t_env *tmp, t_minishell *ms)
 		if (tmp->value)
 		{
 			s_tmp = ft_strjoin(tmp->key, "=", ms);
+			if (!s_tmp)
+			{
+				tmp = tmp->next;
+				continue ;
+			}
 			ret_v[i] = ft_strjoin(s_tmp, tmp->value, ms);
+			if (!ret_v[i])
+			{
+				tmp = tmp->next;
+				continue ;
+			}
 			ft_free(s_tmp, ms);
 		}
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:59:00 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/02 14:37:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:01:55 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ char	*check_cd_path(char *path, char **all_cdpath, t_minishell *ms)
 	while (*all_cdpath)
 	{
 		n_path = ft_strjoin(*all_cdpath, "/", ms);
+		if (!n_path)
+			return (NULL);
 		n_path = ft_strjoin(n_path, path, ms);
+		if (!n_path)
+			return (NULL);
 		if (access(n_path, 0) != -1)
 		{
 			if (chdir(n_path) == -1)

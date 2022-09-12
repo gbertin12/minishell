@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/02 12:14:30 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:00:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static char	*ft_concate(char **tab, t_minishell *ms)
 	if (!tab[0])
 		return (ft_strdup("", ms));
 	ret_v = ft_strjoin("", tab[0], ms);
+	if (!ret_v)
+		return (NULL);
 	while (tab[++i] != NULL)
 	{
 		tmp = ft_strjoin(ret_v, tab[i], ms);
@@ -82,16 +84,23 @@ void	delete_quotes(t_token *token, t_minishell *ms)
 	t_file	*file;
 
 	token->cmd = remove_quotes(token->cmd, ms);
+	if (!token->cmd)
+		return ;
 	arg = token->arg_head;
 	file = token->file_head;
 	while (arg)
 	{
 		arg->value = remove_quotes(arg->value, ms);
+		if (!arg->value)
+			return ;
 		arg = arg->next;
 	}
 	while (file)
 	{
 		file->path = remove_quotes(file->path, ms);
+		if (!file->path)
+			return ;
 		file = file->next;
 	}
 }
+

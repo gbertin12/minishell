@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/08 16:48:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/12 09:19:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,14 @@ static void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 	}
 	new_err->next = NULL;
 	new_err->err = ft_strjoin("minishell: ", file->path, ms);
+	if (!new_err->err)
+		return ;
 	new_err->err = ft_strjoin(new_err->err, ": ", ms);
+	if (!new_err->err)
+		return ;
 	new_err->err = ft_strjoin(new_err->err, strerror(errno), ms);
+	if (!new_err->err)
+		return ;
 	new_err->err = ft_strjoin(new_err->err, "\n", ms);
 }
 
