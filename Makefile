@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/09 13:04:27 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/12 14:57:35 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS = minishell.c\
  		sources/expand/expand.c\
 		sources/expand/expand_arg.c\
 		sources/expand/heredoc_expand.c\
+		sources/expand/read_var.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
 		sources/parsing/check_input.c\

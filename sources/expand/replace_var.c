@@ -6,27 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:41:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 12:30:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:48:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static char	*read_var(char *s, t_minishell *ms)
-{
-	size_t	i;
-	char	*ret_v;
-
-	i = 0;
-	if (s[i] == '?')
-		return (ft_strdup("?", ms));
-	if (!ft_isalpha(s[i]) && s[i] != '_')
-		return (ft_strdup("", ms));
-	while (s[i] && !is_space(s[i]) && s[i] != '$')
-		i++;
-	ret_v = ft_substr(s, 0, i, ms);
-	return (ret_v);
-}
 
 char	*replace_var(char *s, size_t x, t_minishell *ms)
 {
