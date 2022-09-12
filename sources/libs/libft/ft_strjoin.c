@@ -21,7 +21,16 @@ char	*ft_strjoin(char const *s1, char const *s2, t_minishell *ms)
 	sv = ft_malloc(nlen, ms);
 	if (sv == NULL)
 		return (NULL);
-	ft_strlcpy(sv, s1, ft_strlen(s1) + 1);
-	ft_strlcat(sv, s2, nlen + 1);
+	if (s1 && s2)
+	{
+		ft_strlcpy(sv, s1, ft_strlen(s1) + 1);
+		ft_strlcat(sv, s2, nlen + 1);
+	}
+	else if (s1)
+		ft_strlcpy(sv, s1, ft_strlen(s1) + 1);
+	else if (s2)
+		ft_strlcpy(sv, s2, ft_strlen(s2) + 1);
+	else
+		*sv = 0;
 	return (sv);
 }
