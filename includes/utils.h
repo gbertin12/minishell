@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/13 14:05:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:16:07 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ char		*get_env_value(char *key, t_minishell *ms);
 char		*string_ternary(char condition, char *true, char *false);
 char		*check_cd_path(char *path, char **all_cdpath, t_minishell *ms);
 
+void		create_error(char *s);
 void		free_all(t_minishell *ms);
 void		free_tokens(t_minishell *ms);
 void		init_minishell(t_minishell *ms);
-
 void		ft_free(void *ptr, t_minishell *ms);
 void		add_end_arg(t_arg *head, t_arg *obj);
 void		add_end_obj(t_obj *head, t_obj *obj);
 void		add_end_file(t_token *token, t_file *obj);
 void		add_end_token(t_token *obj, t_minishell *ms);
 void		add_end_err(t_file_error *head, t_file_error *obj);
-
-int			add_key_with_empty_value(char *s, t_minishell *ms);
 void		modify_env(char *key, char *value, t_minishell *ms);
 void		replace_env_value(char *key, char *value, t_minishell *ms);
 void		add_env_key_value(char *key, char *value, t_minishell *ms);

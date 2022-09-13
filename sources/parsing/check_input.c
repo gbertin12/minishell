@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:03:43 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/09 08:51:28 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:14:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@
 // 	}
 // 	return (0);
 // }
-
-static void	create_error(char *s)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(s, 2);
-	ft_putchar_fd('\n', 2);
-}
 
 static void	error_file(t_file *f)
 {
