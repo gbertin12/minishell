@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_elem.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:04:14 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/23 15:00:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 13:28:55 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,16 @@ size_t	count_file(t_file *ptr)
 		tmp = tmp->next;
 	}
 	return (ret_v);
+}
+
+size_t	count_tab(char **tab)
+{
+	size_t	i;
+
+	if (!tab)
+		return (0);
+	i = -1;
+	while (tab[++i])
+		;
+	return (i);
 }

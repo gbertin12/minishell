@@ -6,24 +6,39 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/12 14:56:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:37:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	expand_arg2(t_arg *arg);
-
-static size_t	count_tab(char **tab)
+static char	expand_arg2(t_arg *arg, char *key, char *i, t_minishell *ms)
 {
-	size_t	i;
+	char	*tmp;
+	char	**arg_value;
 
-	if (!tab)
+	tmp = get_env_value(key, ms);
+	if (!tmp)
+		tmp = ft_strdup("", ms);
+	arg_value = ft_split_set(tmp, " \n\r\v\t\f", ms);
+	if (count_tab(arg_value) == 1)
+	{
+		if (arg_value)
+			arg->value = replace_var_multi(arg->value, --i - arg->value,
+					arg_value[0], ms);
 		return (0);
-	i = -1;
-	while (tab[++i])
-		;
-	return (i);
+	}
+	else if (count_tab(arg_value) > 1)
+	{
+		if (expand_arg_multi(arg, arg_value, --i, ms))
+			return (1);
+	}
+	else
+	{
+		arg->value = replace_var_multi(arg->value, --i - arg->value,
+				"", ms);
+		return (0);
+	}
 }
 
 static char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms)
@@ -46,6 +61,36 @@ static char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms)
 	return (ret_v);
 }
 
+static char	expand_arg_multi2(char **argv, t_minishell *ms,
+			t_arg **first, t_arg **last)
+{
+	size_t	i;
+	t_arg	*a;
+
+	i = 0;
+	a = ft_malloc(sizeof(t_arg), ms);
+	if (!a)
+		return (1);
+	ft_bzero(a, sizeof(t_arg));
+	while (argv[++i])
+	{
+		a->value = ft_strdup(argv[i], ms);
+		if (i == 1)
+			*first = a;
+		if (argv[i + 1])
+		{
+			a->next = ft_malloc(sizeof(t_arg), ms);
+			if (!a)
+				return (1);
+			ft_bzero(a->next, sizeof(t_arg));
+			a = a->next;
+			continue ;
+		}
+		else
+			*last = a;
+	}
+}
+
 static char	expand_arg_multi(t_arg *arg, char **argv, char *w, t_minishell *ms)
 {
 	t_arg	*first;
@@ -55,26 +100,12 @@ static char	expand_arg_multi(t_arg *arg, char **argv, char *w, t_minishell *ms)
 	size_t	i;
 
 	i = 0;
-	arg->value = replace_var_multi(arg->value, (size_t)(w - arg->value), argv[0], ms);
+	arg->value = replace_var_multi(arg->value, (size_t)(w - arg->value),
+			argv[0], ms);
 	tmp = ft_substr(arg->value, (size_t)(w - arg->value), ft_strlen(w), ms);
 	arg->value = ft_substr(arg->value, 0, (size_t)(w - arg->value), ms);
-	a = ft_malloc(sizeof(t_arg), ms);
-	ft_bzero(a, sizeof(t_arg));
-	while (argv[++i])
-	{
-		a->value = ft_strdup(argv[i], ms);
-		if (i == 1)
-			first = a;
-		if (argv[i + 1])
-		{
-			a->next = ft_malloc(sizeof(t_arg), ms);
-			ft_bzero(a->next, sizeof(t_arg));
-			a = a->next;
-			continue ;
-		}
-		else
-			last = a;
-	}
+	if (expand_arg_multi2(argv, ms, &first, &last))
+		return (EXIT_FAILURE);
 	last->value = ft_strjoin(last->value, tmp, ms);
 	last->next = arg->next;
 	arg->next = first;
@@ -86,8 +117,6 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	t_arg	*arg;
 	char	*i;
 	char	*key;
-	char	**arg_value;
-	char	*tmp;
 
 	arg = token->arg_head;
 	if (!arg)
@@ -103,28 +132,8 @@ char	expand_arg(t_token *token, t_minishell *ms)
 		key = read_var(++i, ms);
 		if (!key || !*key)
 			printf("$%c : not a valid identifier\n", *i);
-		tmp = get_env_value(key, ms);
-		if (!tmp)
-			tmp = ft_strdup("", ms);
-		arg_value = ft_split_set(tmp, " \n\r\v\t\f", ms);
-		if (count_tab(arg_value) == 1)
-		{
-			if (arg_value)
-				arg->value = replace_var_multi(arg->value, --i - arg->value,
-						arg_value[0], ms);
-			return (0);
-		}
-		else if (count_tab(arg_value) > 1)
-		{
-			if (expand_arg_multi(arg, arg_value, --i, ms))
-				return (1);
-		}
-		else
-		{
-			arg->value = replace_var_multi(arg->value, --i - arg->value,
-					"", ms);
-			return (0);
-		}
+		if (expand_arg2(arg, key, i, ms))
+			return (1);
 		i = strchr(arg->value, '$');
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:00:40 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/12 10:07:42 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 14:04:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ char	**env_to_tab2(char **ret_v, t_env *tmp, t_minishell *ms)
 	char	*s_tmp;
 	size_t	i;
 
+	ret_v = ft_malloc(sizeof(char *) * (count_env(ms->e_head) + 1), ms);
+	if (!ret_v)
+		return (ret_v);
 	i = 0;
 	while (tmp != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/09 10:09:11 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:02:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ static void	expand_file(t_token *token, t_minishell *ms)
 	file = token->file_head;
 	while (file)
 	{
+		if (file->type && file->append)
+		{
+			file = file->next;
+			continue ;
+		}
 		i = next_var(file->path);
 		while (file->path[i])
 		{
