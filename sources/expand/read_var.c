@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replace_env_value.c                                :+:      :+:    :+:   */
+/*   read_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 14:38:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 14:11:51 by ccambium         ###   ########.fr       */
+/*   Created: 2022/09/12 14:11:46 by ccambium          #+#    #+#             */
+/*   Updated: 2022/09/12 14:13:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	replace_env_value(char *key, char *value, t_minishell *ms)
+char	*read_var(char *s, t_minishell *ms)
 {
-	t_env	*env;
+	size_t	i;
+	char	*ret_v;
 
-	if (!value)
-		return ;
-	env = ms->e_head;
-	while (env != NULL)
-	{
-		if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
-		{
-			ft_free(env->value, ms);
-			env->value = ft_strdup(value, ms);
-			ft_free(env->key, ms);
-			env->key = ft_strdup(key, ms);
-			return ;
-		}
-		env = env->next;
-	}
+	i = 0;
+	if (s[i] == '?')
+		return (ft_strdup("?", ms));
+	if (!ft_isalpha(s[i]) && s[i] != '_')
+		return (ft_strdup("", ms));
+	while (s[i] && !is_space(s[i]) && s[i] != '$')
+		i++;
+	ret_v = ft_substr(s, 0, i, ms);
+	return (ret_v);
 }

@@ -6,15 +6,16 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/12 14:14:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:43:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-size_t		count_env(t_env *ptr);
 size_t		count_arg(t_arg *ptr);
+size_t		count_env(t_env *ptr);
+size_t		count_tab(char **tab);
 size_t		count_file(t_file *ptr);
 size_t		count_token(t_token *ptr);
 size_t		size_t_ternary(char condition, size_t a, size_t b);
@@ -28,18 +29,16 @@ char		*get_env_value(char *key, t_minishell *ms);
 char		*string_ternary(char condition, char *true, char *false);
 char		*check_cd_path(char *path, char **all_cdpath, t_minishell *ms);
 
+void		create_error(char *s);
 void		free_all(t_minishell *ms);
 void		free_tokens(t_minishell *ms);
 void		init_minishell(t_minishell *ms);
-
 void		ft_free(void *ptr, t_minishell *ms);
 void		add_end_arg(t_arg *head, t_arg *obj);
 void		add_end_obj(t_obj *head, t_obj *obj);
 void		add_end_file(t_token *token, t_file *obj);
 void		add_end_token(t_token *obj, t_minishell *ms);
 void		add_end_err(t_file_error *head, t_file_error *obj);
-
-int			add_key_with_empty_value(char *s, t_minishell *ms);
 void		modify_env(char *key, char *value, t_minishell *ms);
 void		replace_env_value(char *key, char *value, t_minishell *ms);
 void		add_env_key_value(char *key, char *value, t_minishell *ms);
@@ -59,7 +58,10 @@ t_arg		*add_front_arg(t_arg *begin, char *value, t_minishell *ms);
 int			ft_error(char *msg);
 int			check_key_env(char *s);
 int			ft_strcmp(char *str1, char *str2);
+
 int			check_is_directory(t_exec *exec, int printable);
+int			add_key_with_empty_value(char *s, t_minishell *ms);
+
 void		*ft_malloc(size_t size, t_minishell *ms);
 
 #endif

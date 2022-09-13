@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/13 10:11:22 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:47:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static size_t	next_var(char *s)
 // 	t_file	*file;
 // 	size_t	i;
 // 	char	*tmp;
-
 // 	file = token->file_head;
 // 	while (file)
 // 	{

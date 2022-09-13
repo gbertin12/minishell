@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/08 17:04:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:47:03 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,31 @@ t_env	*get_node_env(char *key, t_minishell *ms)
 	return (NULL);
 }
 
+int	append_export2(char *key, char *value, t_minishell *ms)
+{
+	t_env	*env_node;
+
+	env_node = get_node_env(key, ms);
+	if (env_node != NULL)
+	{
+		if (env_node->value != NULL)
+		{
+			if (value != NULL)
+				env_node->value = ft_strjoin(env_node->value, value, ms);
+		}
+		else if (value != NULL)
+			env_node->value = value;
+	}
+	else
+		modify_env(key, value, ms);
+	return (0);
+}
+
 int	append_export(t_arg *arg, t_minishell *ms)
 {
 	char	*key;
 	char	*value;
 	int		len_key;
-	t_env	*env_node;
 
 	len_key = 0;
 	while (arg->value[len_key] != '+')
@@ -63,18 +82,5 @@ int	append_export(t_arg *arg, t_minishell *ms)
 		value = ft_split(arg->value, '=', ms)[1];
 	else
 		value = NULL;
-	env_node = get_node_env(key, ms);
-	if (env_node != NULL)
-	{
-		if (env_node->value != NULL)
-		{
-			if (value != NULL)
-				env_node->value = ft_strjoin(env_node->value, value, ms);
-		}
-		else if (value != NULL)
-			env_node->value = value;
-	}
-	else
-		modify_env(key, value, ms);
-	return (0);
+	return (append_export2(key, value, ms));
 }

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 14:59:37 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:43:36 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		if (check_path(exec))
 			exit(127);
 		execve(exec->path, args, exec->env);
-		perror("minishell4 ");
+		perror("minishell");
 		free_all(ms);
 		exit (126);
 	}

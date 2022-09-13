@@ -6,13 +6,13 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/13 09:13:32 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/13 15:44:29 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I  /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -41,6 +41,7 @@ SRCS = minishell.c\
  		sources/expand/expand.c\
 		sources/expand/expand_arg.c\
 		sources/expand/heredoc_expand.c\
+		sources/expand/read_var.c\
 		sources/expand/replace_var.c\
 		sources/parsing/add_param.c\
 		sources/parsing/check_input.c\
