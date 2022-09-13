@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 11:25:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 13:19:51 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		if (check_path(exec))
 			exit(127);
 		execve(exec->path, args, exec->env);
-		perror("minishell ");
+		perror("minishell");
 		free_all(ms);
 		exit (errno);
 	}
