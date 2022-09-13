@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 14:38:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/09 13:08:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 14:11:51 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	replace_env_value(char *key, char *value, t_minishell *ms)
 {
 	t_env	*env;
+
 	if (!value)
 		return ;
 	env = ms->e_head;
