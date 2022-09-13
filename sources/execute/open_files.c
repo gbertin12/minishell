@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/12 09:19:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:22:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,20 @@ int	open_output(t_token *token, t_minishell *ms)
 			file = file->next;
 			continue ;
 		}
+		if (ft_strchr(file->path, '$'))
+		{
+			file->path = expand_file(file->path, ms);
+			if (!file->path)
+			{
+				fd = -1;
+				printf("path = %s\n", file->path);
+				file = file->next;
+				if (check_have_next_type(file, 1))
+					return (fd);
+				continue ;
+			}
+		}
+		printf("path = %s\n", file->path);
 		if (file->append)
 			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
@@ -110,6 +124,18 @@ int	open_input(t_token *token, t_minishell *ms)
 		{
 			file = file->next;
 			continue ;
+		}
+		if (ft_strchr(file->path, '$'))
+		{
+			file->path = expand_file(file->path, ms);
+			if (!file->path)
+			{
+				fd = -1;
+				file = file->next;
+				if (check_have_next_type(file, 0))
+					return (fd);
+				continue ;
+			}
 		}
 		if (file->append)
 			fd = heredoc(file->path, ms);

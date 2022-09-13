@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/07 08:38:11 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:03:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	have_child(t_token *token)
 {
-	while (token)
-	{
-		if (token->pid != 0)
-			return (1);
+	while (token->next)
 		token = token->next;
-	}
+	if (token->pid != 0)
+		return (1);
 	return (0);
 }
 

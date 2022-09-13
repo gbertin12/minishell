@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/09 13:04:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:14:59 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ char		between_quote(char *s, size_t x);
 char		do_env_key_exist(char *key, t_minishell *ms);
 char		char_ternary(char condition, char true, char false);
 
+t_arg		*add_front_arg(t_arg *begin, char *value, t_minishell *ms);
 int			ft_error(char *msg);
 int			check_key_env(char *s);
 int			ft_strcmp(char *str1, char *str2);
-
+int			check_is_directory(t_exec *exec, int printable);
 void		*ft_malloc(size_t size, t_minishell *ms);
 
 #endif

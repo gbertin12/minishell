@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/09 13:04:27 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/13 09:13:32 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = minishell.c\
 		sources/execute/if_type_file_exist.c \
 		sources/execute/browse_cmd.c \
 		sources/execute/exec.c \
+		sources/execute/expand_file.c \
 		sources/execute/get_path.c \
 		sources/execute/heredoc.c \
 		sources/execute/open_files.c \
@@ -49,7 +50,9 @@ SRCS = minishell.c\
 		sources/signals/signals.c\
 		sources/utils/add_end_list.c\
 		sources/utils/add_env_key_value.c\
+		sources/utils/add_front.c\
 		sources/utils/add_key_with_empty_value.c\
+		sources/utils/check_is_directory.c\
 		sources/utils/check_key_env.c \
 		sources/utils/check_path.c\
 		sources/utils/count_elem.c\

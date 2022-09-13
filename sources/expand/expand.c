@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/09 10:09:11 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/13 10:11:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,29 @@ static size_t	next_var(char *s)
 // 	}
 // }
 
-static void	expand_file(t_token *token, t_minishell *ms)
-{
-	t_file	*file;
-	size_t	i;
-	char	*tmp;
+// static void	expand_file(t_token *token, t_minishell *ms)
+// {
+// 	t_file	*file;
+// 	size_t	i;
+// 	char	*tmp;
 
-	file = token->file_head;
-	while (file)
-	{
-		i = next_var(file->path);
-		while (file->path[i])
-		{
-			tmp = file->path;
-			file->path = replace_var(file->path, i, ms);
-			if (!file->path)
-				file->path = tmp;
-			else
-				ft_free(tmp, ms);
-			i = next_var(file->path);
-		}
-		file = file->next;
-	}
-}
+// 	file = token->file_head;
+// 	while (file)
+// 	{
+// 		i = next_var(file->path);
+// 		while (file->path[i])
+// 		{
+// 			tmp = file->path;
+// 			file->path = replace_var(file->path, i, ms);
+// 			if (!file->path)
+// 				file->path = tmp;
+// 			else
+// 				ft_free(tmp, ms);
+// 			i = next_var(file->path);
+// 		}
+// 		file = file->next;
+// 	}
+// }
 
 static void	expand_cmd(t_token *token, t_minishell *ms)
 {
@@ -101,7 +101,7 @@ void	expand(t_minishell *ms)
 	{
 		expand_cmd(token, ms);
 		expand_arg(token, ms);
-		expand_file(token, ms);
+		//expand_file(token, ms);
 		delete_quotes(token, ms);
 		token = token->next;
 	}
