@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/13 15:44:29 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/13 16:07:16 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I /opt/homebrew/opt/readline/include
+CC = clang
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -57,6 +57,7 @@ SRCS = minishell.c\
 		sources/utils/check_key_env.c \
 		sources/utils/check_path.c\
 		sources/utils/count_elem.c\
+		sources/utils/create_error.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/free_tokens.c\
 		sources/utils/ft_atoll.c\
@@ -87,7 +88,11 @@ all: $(NAME)
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
 			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
-
+			
+malloc_test: $(OBJ)
+			$(MAKE) -C $(LIBFT_PATH)
+			$(CC) $(FLAGS) -fsanitize=undefined -rdynamic -o $@ $(OBJ) -lreadline $(LIBFT_PATH)/libft.a -lm -lmallocator -L.
+	
 clean: 
 			$(MAKE) clean -C $(LIBFT_PATH)
 			$(RM) $(OBJ)

@@ -10,3 +10,5 @@ a.out
 out
 text
 infile
+ft_mallocator
+malloc_test
