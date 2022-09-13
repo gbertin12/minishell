@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/12 15:24:56 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:02:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	expand(t_minishell *ms)
 	{
 		expand_cmd(token, ms);
 		expand_arg(token, ms);
-		// expand_file(token, ms); -> will be moce somewhere else
+		expand_file(token, ms);
 		delete_quotes(token, ms);
 		token = token->next;
 	}
