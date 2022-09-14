@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 15:41:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 08:21:48 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 int	check_ambiguous(char *path, char *print, t_minishell *ms)
 {
 	char	**split;
+	int		flag;
 
-	if (path)
+	flag = 0;
+	if (path && path[0] != '\0')
 	{
-		split = ft_split_set(path,  " \n\r\v\t\f", ms);
+		split = ft_split_set(path, " \n\r\v\t\f", ms);
 		if (!split)
 			return (1);
+		if (split[1])
+			flag = 1;
 	}
-	if (!path || split[1])
+	if (!path || flag || path[0] == '\0')
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(print, 2);
@@ -64,14 +68,13 @@ static char	*bad_key(char *badkey, t_minishell *ms)
 			i++;
 		}
 	}
-	printf("ret v = %s\n", ret_v);
-	return (ret_v);	
+	return (ret_v);
 }
 
 static char	*good_key(char	*goodkey, t_minishell *ms)
 {
-	char *ret_v;
-	
+	char	*ret_v;
+
 	ret_v = get_env_value(goodkey, ms);
 	return (ret_v);
 }
@@ -80,6 +83,7 @@ static char	*replace_value_file(char **split, int flag, t_minishell *ms)
 {
 	char	*ret_v;
 	int		i;
+	char	*tmp;
 
 	i = 0;
 	ret_v = "";
@@ -91,7 +95,11 @@ static char	*replace_value_file(char **split, int flag, t_minishell *ms)
 	while (split[i] != NULL)
 	{
 		if (check_key_env(split[i]))
-			ret_v = ft_strjoin(ret_v, bad_key(split[i], ms), ms);
+		{
+			tmp = bad_key(split[i], ms);
+			if (tmp)
+				ret_v = ft_strjoin(ret_v, bad_key(split[i], ms), ms);
+		}
 		else
 			ret_v = ft_strjoin(ret_v, good_key(split[i], ms), ms);
 		if (!ret_v)

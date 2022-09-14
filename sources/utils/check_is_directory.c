@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:33:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/12 10:47:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 09:09:38 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_is_directory(t_exec *exec, int printable)
 {
-	DIR *dir;
-	
+	DIR	*dir;
+
 	dir = opendir(exec->token->cmd);
 	if (dir != NULL)
 	{

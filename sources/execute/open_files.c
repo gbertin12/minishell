@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 15:43:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 08:17:18 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,12 @@ int	open_output(t_token *token, t_minishell *ms)
 			if (!file->path)
 			{
 				fd = -1;
-				printf("path = %s\n", file->path);
 				file = file->next;
 				if (check_have_next_type(file, 1))
 					return (fd);
 				continue ;
 			}
 		}
-		printf("path = %s\n", file->path);
 		if (file->append)
 			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
