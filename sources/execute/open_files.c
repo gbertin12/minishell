@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:17:18 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 20:17:01 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,26 @@ static void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 	new_err->err = ft_strjoin(new_err->err, "\n", ms);
 }
 
+static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
+{
+	int	fd;
+	
+	fd = 0;
+	if (ft_strchr(file->path, '$'))
+	{
+		file->path = expand_file(file->path, ms);
+		if (!file->path)
+			return (-1);
+	}
+	if (file->append)
+		fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	put_error_fd(file, token->file_head, ms);
+	return (fd);
+}
+
 int	open_output(t_token *token, t_minishell *ms)
 {
 	t_file	*file;
@@ -82,28 +102,31 @@ int	open_output(t_token *token, t_minishell *ms)
 			file = file->next;
 			continue ;
 		}
-		if (ft_strchr(file->path, '$'))
-		{
-			file->path = expand_file(file->path, ms);
-			if (!file->path)
-			{
-				fd = -1;
-				file = file->next;
-				if (check_have_next_type(file, 1))
-					return (fd);
-				continue ;
-			}
-		}
-		if (file->append)
-			fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else
-			fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-			put_error_fd(file, token->file_head, ms);
+		fd = open_output2(file, token, ms);
 		file = file->next;
 		if (check_have_next_type(file, 1))
 			return (fd);
 	}
+	return (fd);
+}
+
+static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
+{
+	int	fd;
+	
+	fd = 0;
+	if (ft_strchr(file->path, '$'))
+	{
+		file->path = expand_file(file->path, ms);
+		if (!file->path)
+			return (-1);
+	}
+		if (file->append)
+			fd = heredoc(file->path, ms);
+		else
+			fd = open(file->path, O_RDONLY);
+		if (fd < 0)
+			put_error_fd(file, token->file_head, ms);	
 	return (fd);
 }
 
@@ -123,24 +146,7 @@ int	open_input(t_token *token, t_minishell *ms)
 			file = file->next;
 			continue ;
 		}
-		if (ft_strchr(file->path, '$'))
-		{
-			file->path = expand_file(file->path, ms);
-			if (!file->path)
-			{
-				fd = -1;
-				file = file->next;
-				if (check_have_next_type(file, 0))
-					return (fd);
-				continue ;
-			}
-		}
-		if (file->append)
-			fd = heredoc(file->path, ms);
-		else
-			fd = open(file->path, O_RDONLY);
-		if (fd < 0)
-			put_error_fd(file, token->file_head, ms);
+		fd = open_input2(file, token, ms);
 		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);

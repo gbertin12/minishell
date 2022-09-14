@@ -6,34 +6,31 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:21:48 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 19:20:37 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_ambiguous(char *path, char *print, t_minishell *ms)
+static char	*fault_in_key(char *badkey, t_minishell *ms)
 {
-	char	**split;
-	int		flag;
+	char	*ret_v;
+	int		i;
 
-	flag = 0;
-	if (path && path[0] != '\0')
+	i = 0;
+	while (badkey[i] != '\0')
 	{
-		split = ft_split_set(path, " \n\r\v\t\f", ms);
-		if (!split)
-			return (1);
-		if (split[1])
-			flag = 1;
+		if (!ft_isalnum(badkey[i]) && badkey[i] != '_')
+		{
+			ret_v = ft_malloc(sizeof(char) * ft_strlen(badkey) - i + 1, ms);
+			if (ret_v)
+				ft_strlcpy(ret_v, &badkey[i], ft_strlen(badkey) - i + 1);
+			if (!ret_v)
+				return (NULL);
+		}
+		i++;
 	}
-	if (!path || flag || path[0] == '\0')
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(print, 2);
-		ft_putstr_fd(": ambiguous redirect\n", 2);
-		return (0);
-	}
-	return (1);
+	return (ret_v);
 }
 
 static char	*bad_key(char *badkey, t_minishell *ms)
@@ -54,20 +51,7 @@ static char	*bad_key(char *badkey, t_minishell *ms)
 			return (NULL);
 	}
 	else
-	{
-		while (badkey[i] != '\0')
-		{
-			if (!ft_isalnum(badkey[i]) && badkey[i] != '_')
-			{
-				ret_v = ft_malloc(sizeof(char) * ft_strlen(badkey) - i + 1, ms);
-				if (ret_v)
-					ft_strlcpy(ret_v, &badkey[i], ft_strlen(badkey) - i + 1);
-				if (!ret_v)
-					return (NULL);
-			}
-			i++;
-		}
-	}
+		return (fault_in_key(badkey, ms));
 	return (ret_v);
 }
 
@@ -82,29 +66,27 @@ static char	*good_key(char	*goodkey, t_minishell *ms)
 static char	*replace_value_file(char **split, int flag, t_minishell *ms)
 {
 	char	*ret_v;
-	int		i;
 	char	*tmp;
 
-	i = 0;
 	ret_v = "";
 	if (flag)
 	{
-		ret_v = ft_strjoin(ret_v, split[0], ms);
-		i++;
+		ret_v = ft_strjoin(ret_v, *split, ms);
+		split++;
 	}
-	while (split[i] != NULL)
+	while (*split != NULL)
 	{
-		if (check_key_env(split[i]))
+		if (check_key_env(*split))
 		{
-			tmp = bad_key(split[i], ms);
+			tmp = bad_key(*split, ms);
 			if (tmp)
-				ret_v = ft_strjoin(ret_v, bad_key(split[i], ms), ms);
+				ret_v = ft_strjoin(ret_v, bad_key(*split, ms), ms);
 		}
 		else
-			ret_v = ft_strjoin(ret_v, good_key(split[i], ms), ms);
+			ret_v = ft_strjoin(ret_v, good_key(*split, ms), ms);
 		if (!ret_v)
 			return (NULL);
-		i++;
+		split++;
 	}
 	return (ret_v);
 }
