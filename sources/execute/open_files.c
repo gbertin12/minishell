@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 20:17:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 20:21:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 {
 	int	fd;
-	
+
 	fd = 0;
 	if (ft_strchr(file->path, '$'))
 	{
@@ -82,7 +82,7 @@ static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 	else
 		fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
-	put_error_fd(file, token->file_head, ms);
+		put_error_fd(file, token->file_head, ms);
 	return (fd);
 }
 
@@ -113,7 +113,7 @@ int	open_output(t_token *token, t_minishell *ms)
 static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 {
 	int	fd;
-	
+
 	fd = 0;
 	if (ft_strchr(file->path, '$'))
 	{
@@ -121,12 +121,12 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 		if (!file->path)
 			return (-1);
 	}
-		if (file->append)
-			fd = heredoc(file->path, ms);
-		else
-			fd = open(file->path, O_RDONLY);
-		if (fd < 0)
-			put_error_fd(file, token->file_head, ms);	
+	if (file->append)
+		fd = heredoc(file->path, ms);
+	else
+		fd = open(file->path, O_RDONLY);
+	if (fd < 0)
+		put_error_fd(file, token->file_head, ms);
 	return (fd);
 }
 
