@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/13 16:09:40 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/14 10:05:14 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms)
 	return (ret_v);
 }
 
-
 static char	expand_arg_multi2(char **argv, t_minishell *ms,
 			t_arg **first, t_arg **last)
 {
@@ -43,7 +42,6 @@ static char	expand_arg_multi2(char **argv, t_minishell *ms,
 	a = ft_malloc(sizeof(t_arg), ms);
 	if (!a)
 		return (1);
-	ft_bzero(a, sizeof(t_arg));
 	while (argv[++i])
 	{
 		a->value = ft_strdup(argv[i], ms);
@@ -52,9 +50,8 @@ static char	expand_arg_multi2(char **argv, t_minishell *ms,
 		if (argv[i + 1])
 		{
 			a->next = ft_malloc(sizeof(t_arg), ms);
-			if (!a)
+			if (!a->next)
 				return (1);
-			ft_bzero(a->next, sizeof(t_arg));
 			a = a->next;
 			continue ;
 		}
