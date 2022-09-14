@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:43:45 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 09:55:04 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/14 10:06:00 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	*ft_malloc(size_t size, t_minishell *ms)
 		free(ptr);
 		return (NULL);
 	}
+	ft_bzero(ptr, size);
 	obj->ptr = ptr;
 	obj->next = NULL;
 	if (ms->o_head != NULL)
