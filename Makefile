@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/14 19:19:30 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/15 08:55:28 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,9 @@ SRCS = minishell.c\
 		sources/built-in/_pwd.c\
 		sources/built-in/_unset.c\
 		sources/built-in/exec_built_in.c\
-		sources/execute/if_type_file_exist.c \
 		sources/execute/browse_cmd.c \
-		sources/execute/check_ambiguous.c\
 		sources/execute/exec.c \
-		sources/execute/expand_file.c \
 		sources/execute/get_path.c \
-		sources/execute/heredoc.c \
-		sources/execute/open_files.c \
-		sources/execute/open_all.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
 		sources/expand/between_quote.c \
@@ -44,6 +38,12 @@ SRCS = minishell.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/read_var.c\
 		sources/expand/replace_var.c\
+		sources/open/check_ambiguous.c\
+		sources/open/expand_file.c\
+		sources/open/heredoc.c \
+		sources/open/if_type_file_exist.c\
+		sources/open/open_files.c \
+		sources/open/open_all.c \
 		sources/parsing/add_param.c\
 		sources/parsing/check_input.c\
 		sources/parsing/parsing.c\
