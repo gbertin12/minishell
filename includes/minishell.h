@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 12:06:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 08:50:26 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "signals.h"
 # include "execute.h"
 # include "prompt.h"
+#include "open.h"
 
 void	copy_env(t_minishell *ms, char **env);
 

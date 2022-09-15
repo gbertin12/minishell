@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 14:10:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 08:51:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@ char	*make_path(t_exec *exec, t_minishell *ms);
 
 int		ft_search_char(char *str);
 int		browse_cmd(t_minishell *ms);
-
-int		have_infile(t_token *token);
-int		have_outfile(t_token *token);
-int		open_output(t_token *token, t_minishell *ms);
-int		open_input(t_token *token, t_minishell *ms);
-int		heredoc(char *limiter, t_minishell *ms);
-
-int		check_ambiguous(char *path, char *print, t_minishell *ms);
-char	*expand_file(char *path, t_minishell *ms);
 
 int		init_execute(t_token *token);
 int		redir_in(t_token *token, t_token *last);
@@ -46,7 +37,6 @@ int		execute_cmd(t_token *token, int pipefd[2], char **args,
 			t_minishell *ms);
 char	*get_last_arg(t_token *token);
 
-void	open_all(t_minishell *ms);
 t_exec	*first(t_exec *exec, t_minishell *ms);
 t_exec	*middle(t_exec *exec, t_minishell *ms);
 t_exec	*last(t_exec *exec, t_minishell *ms);
