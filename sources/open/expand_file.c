@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 19:20:37 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 09:41:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,21 @@ static char	*replace_value_file(char **split, int flag, t_minishell *ms)
 
 char	*expand_file(char *path, t_minishell *ms)
 {
+	int		i;
 	int		flag;
-	char	**split;
 	char	*tmp;
+	char	*new_path;
 
+	i = 0;
 	tmp = ft_strdup(path, ms);
+	if (!tmp)
+		tmp = "";
 	flag = 0;
-	if (path[0] != '$')
-		flag = 1;
-	split = ft_split(path, '$', ms);
-	if (!split)
-		return (NULL);
-	path = replace_value_file(split, flag, ms);
+	while (path[i])
+	{
+		
+		i++;
+	}
 	if (!check_ambiguous(path, tmp, ms))
 		return (NULL);
 	return (path);

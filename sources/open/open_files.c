@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/15 08:59:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 09:27:35 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	if (ft_strchr(file->path, '$'))
+	printf("file = %s\n", file->path);
+	if (ft_strchr(file->path, '$') && !file->append)
 	{
 		file->path = expand_file(file->path, ms);
 		if (!file->path)
