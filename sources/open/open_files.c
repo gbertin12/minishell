@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 20:21:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 08:59:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,6 @@ static int	check_have_next_type(t_file *file, char type)
 		file = file->next;
 	}
 	return (1);
-}
-
-static char	did_print(t_file *file, t_file *head)
-{
-	t_file	*f;
-
-	f = head;
-	while (f && f != file)
-	{
-		if (!ft_strncmp(f->path, file->path, ft_strlen(f->path)))
-			return (1);
-		f = f->next;
-	}
-	return (0);
-}
-
-static void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
-{
-	t_file_error	*new_err;
-
-	if (did_print(file, head))
-		return ;
-	if (ms->err_head == NULL)
-	{
-		new_err = ft_malloc(sizeof(t_file_error), ms);
-		ms->err_head = new_err;
-	}
-	else
-	{
-		new_err = ft_malloc(sizeof(t_file_error), ms);
-		add_end_err(ms->err_head, new_err);
-	}
-	new_err->next = NULL;
-	new_err->err = ft_strjoin("minishell: ", file->path, ms);
-	if (!new_err->err)
-		return ;
-	new_err->err = ft_strjoin(new_err->err, ": ", ms);
-	if (!new_err->err)
-		return ;
-	new_err->err = ft_strjoin(new_err->err, strerror(errno), ms);
-	if (!new_err->err)
-		return ;
-	new_err->err = ft_strjoin(new_err->err, "\n", ms);
 }
 
 static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
