@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:59:02 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/02 14:35:12 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:26:39 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ long long	next_arg(char *s, t_token *token, t_minishell *ms)
 		if (size < 0)
 			return (-1);
 		token->cmd = ft_substr(s, i, size, ms);
+		if (!token->cmd)
+			return (-1);
 	}
 	else
 		return (add_arg(s, token, ms));

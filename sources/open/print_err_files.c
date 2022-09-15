@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_err_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:58:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/15 08:59:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:25:19 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 	if (ms->err_head == NULL)
 	{
 		new_err = ft_malloc(sizeof(t_file_error), ms);
+		if (!new_err)
+			return ;
 		ms->err_head = new_err;
 	}
 	else
 	{
 		new_err = ft_malloc(sizeof(t_file_error), ms);
+		if (!new_err)
+			return ;
 		add_end_err(ms->err_head, new_err);
 	}
 	new_err->next = NULL;
@@ -53,4 +57,6 @@ void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 	if (!new_err->err)
 		return ;
 	new_err->err = ft_strjoin(new_err->err, "\n", ms);
+	if (!new_err->err)
+		return ;
 }

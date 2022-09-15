@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 10:37:27 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:25:29 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 
 	ret_v = 1;
 	file = ft_malloc(sizeof(t_file), ms);
+	if (!file)
+		return (-1);
 	ft_memset(file, 0, sizeof(t_file));
 	if (s[ret_v] == '>')
 	{
@@ -58,6 +60,8 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 	if (size < 0)
 		return (-1);
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
+	if (!file->path)
+		return (-1);
 	file->type = 1;
 	add_end_file(token, file);
 	ret_v += size;
@@ -72,6 +76,8 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 
 	ret_v = 1;
 	file = ft_malloc(sizeof(t_file), ms);
+	if (!file)
+		return (-1);
 	ft_memset(file, 0, sizeof(t_file));
 	if (s[ret_v] == '<')
 	{
@@ -84,6 +90,8 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 		ret_v++;
 	size = get_size_of_cmd(&s[ret_v]);
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
+	if (!file->path)
+		return (-1);
 	add_end_file(token, file);
 	ret_v += size;
 	return (ret_v);
