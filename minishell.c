@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/09 10:50:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 11:54:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	init_signals();
 }
 
-static void reset(t_minishell *ms, char *s)
+static void	reset(t_minishell *ms, char *s)
 {
 	free_tokens(ms);
 	ms->t_head = NULL;
@@ -70,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 		expand(&ms);
 		if (s && *s)
 			add_history(s);
-		if (ft_strcmp(ms.t_head->cmd, "exit") && count_token(ms.t_head) == 1)
+		if (ms.t_head && !ft_strncmp(ms.t_head->cmd, "exit", ft_strlen(ms.t_head->cmd)) && count_token(ms.t_head) == 1)
 		{
 			if (b_exit(ms.t_head, &ms))
 			{

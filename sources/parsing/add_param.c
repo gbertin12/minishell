@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 11:20:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 10:37:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ long long	add_arg(char *s, t_token *token, t_minishell *ms)
 	if (size < 0)
 		return (-1);
 	n_arg = ft_malloc(sizeof(t_arg), ms);
+	if (!n_arg)
+		return (-1);
 	n_arg->value = ft_substr(s, 0, size, ms);
+	if (!n_arg->value)
+		return (-1);
 	n_arg->next = NULL;
 	if (token->arg_head == NULL)
 		token->arg_head = n_arg;

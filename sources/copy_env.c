@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:31:02 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/29 13:10:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/14 10:25:37 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	copy_env(t_minishell *ms, char **env)
 		if (ms->e_head == NULL)
 			ms->e_head = e_tmp;
 		s = ft_split(env[i], '=', ms);
+		if (!s)
+			return ;
 		e_tmp->key = s[0];
 		e_tmp->value = ft_superjoin(s, ms);
 		ft_free(s, ms);

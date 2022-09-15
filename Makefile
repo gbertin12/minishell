@@ -6,13 +6,13 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/13 16:07:16 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/14 10:15:52 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = clang
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -g -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
