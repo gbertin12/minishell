@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/22 11:20:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 18:25:29 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ long long	add_arg(char *s, t_token *token, t_minishell *ms)
 	if (size < 0)
 		return (-1);
 	n_arg = ft_malloc(sizeof(t_arg), ms);
+	if (!n_arg)
+		return (-1);
 	n_arg->value = ft_substr(s, 0, size, ms);
+	if (!n_arg->value)
+		return (-1);
 	n_arg->next = NULL;
 	if (token->arg_head == NULL)
 		token->arg_head = n_arg;
@@ -40,6 +44,8 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 
 	ret_v = 1;
 	file = ft_malloc(sizeof(t_file), ms);
+	if (!file)
+		return (-1);
 	ft_memset(file, 0, sizeof(t_file));
 	if (s[ret_v] == '>')
 	{
@@ -54,6 +60,8 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 	if (size < 0)
 		return (-1);
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
+	if (!file->path)
+		return (-1);
 	file->type = 1;
 	add_end_file(token, file);
 	ret_v += size;
@@ -68,6 +76,8 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 
 	ret_v = 1;
 	file = ft_malloc(sizeof(t_file), ms);
+	if (!file)
+		return (-1);
 	ft_memset(file, 0, sizeof(t_file));
 	if (s[ret_v] == '<')
 	{
@@ -80,6 +90,8 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 		ret_v++;
 	size = get_size_of_cmd(&s[ret_v]);
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
+	if (!file->path)
+		return (-1);
 	add_end_file(token, file);
 	ret_v += size;
 	return (ret_v);

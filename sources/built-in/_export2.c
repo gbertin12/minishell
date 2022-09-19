@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 16:05:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:03:01 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ int	append_export(t_arg *arg, t_minishell *ms)
 {
 	char	*key;
 	char	*value;
+	char	**tmp;
 	int		len_key;
 
 	len_key = 0;
 	while (arg->value[len_key] != '+')
 		len_key++;
 	key = ft_malloc(sizeof(char) * len_key + 1, ms);
+	if (!key)
+		return (EXIT_FAILURE);
 	ft_strlcpy(key, arg->value, len_key + 1);
 	if (check_key_env(key))
 	{
@@ -79,7 +82,12 @@ int	append_export(t_arg *arg, t_minishell *ms)
 		return (1);
 	}
 	if (arg->value[len_key + 2])
-		value = ft_split(arg->value, '=', ms)[1];
+	{
+		tmp = ft_split(arg->value, '=', ms);
+		if (!tmp)
+			return (EXIT_FAILURE);
+		value = tmp[1];
+	}
 	else
 		value = NULL;
 	return (append_export2(key, value, ms));

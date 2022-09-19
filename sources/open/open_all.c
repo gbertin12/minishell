@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 14:51:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:34:58 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_err(t_minishell *ms)
 	t_file_error	*err;
 
 	err = ms->err_head;
-	if (err)
+	if (err && err->err)
 	{	
 		while (err)
 		{

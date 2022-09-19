@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/13 15:03:10 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/14 10:28:52 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	t_exec	*exec;
 
 	exec = ft_malloc(sizeof(t_exec), ms);
-	if (!ms->t_head)
+	if (!ms->t_head || !exec)
 		return (NULL);
 	exec->l_retv = 0;
 	exec->err = 0;
