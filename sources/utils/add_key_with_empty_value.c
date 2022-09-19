@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:58:13 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/05 15:39:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:52:57 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	add_key_with_empty_value(char *s, t_minishell *ms)
 		return (EXIT_FAILURE);
 	}
 	if (do_env_key_exist(s, ms))
-		replace_env_value(s, NULL, ms);
+		return (EXIT_SUCCESS);
 	else
 		add_env_key_value(s, NULL, ms);
 	return (EXIT_SUCCESS);

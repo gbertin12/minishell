@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/14 10:05:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:00:01 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	i = strchr(arg->value, '$');
 	while (arg)
 	{
-		if (!i)
+		i = strchr(arg->value, '$');
+		if (!i || between_quote(arg->value, (i - arg->value)))
 		{
 			arg = arg->next;
 			continue ;
@@ -129,7 +130,8 @@ char	expand_arg(t_token *token, t_minishell *ms)
 			printf("$%c : not a valid identifier\n", *i);
 		if (expand_arg2(arg, key, i, ms))
 			return (1);
-		i = strchr(arg->value, '$');
+		else
+			arg = token->arg_head;
 	}
 	return (0);
 }
