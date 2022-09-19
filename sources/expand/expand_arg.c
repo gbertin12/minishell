@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/19 15:00:01 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:35:19 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,6 @@ char	expand_arg(t_token *token, t_minishell *ms)
 			printf("$%c : not a valid identifier\n", *i);
 		if (expand_arg2(arg, key, i, ms))
 			return (1);
-		else
-			arg = token->arg_head;
 	}
 	return (0);
 }

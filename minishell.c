@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 17:44:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/19 17:45:57 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	main2(t_minishell *ms, char *s)
 		if (b_exit(ms->t_head, ms))
 		{
 			reset(ms, s);
-			return ;
+			exit(ms->l_retv);
 		}
 		return ;
 	}
