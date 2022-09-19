@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/15 17:03:01 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:48:35 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	append_export2(char *key, char *value, t_minishell *ms)
 {
 	t_env	*env_node;
 
+	printf("past here\n");
 	env_node = get_node_env(key, ms);
 	if (env_node != NULL)
 	{
@@ -57,7 +58,7 @@ int	append_export2(char *key, char *value, t_minishell *ms)
 	}
 	else
 		modify_env(key, value, ms);
-	return (0);
+	return (1);
 }
 
 int	append_export(t_arg *arg, t_minishell *ms)

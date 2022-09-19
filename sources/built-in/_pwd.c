@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 11:00:51 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/19 12:29:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	_pwd(t_token *token)
 
 	if (count_arg(token->arg_head))
 	{
-		ft_putstr_fd("pwd: too many arguments\n", 2);
+		ft_putstr_fd("minishell: pwd: too many arguments\n", 2);
 		return (1);
 	}
 	if (getcwd(v_print, 50) == NULL)
@@ -28,8 +28,8 @@ int	_pwd(t_token *token)
 	}
 	if (*v_print)
 	{
-		ft_putstr_fd(v_print, 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd(v_print, 1);
+		ft_putstr_fd("\n", 1);
 	}
 	return (EXIT_SUCCESS);
 }

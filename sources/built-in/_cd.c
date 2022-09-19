@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/09 09:26:12 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/19 11:58:49 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	}
 	if (access(path, 0) == -1)
 	{
-		printf("cd: no such file or directory: %s\n", path);
+		printf("minishell: cd: %s: No such file or directory\n", path);
 		return (1);
 	}
 	if (chdir(path) == -1)

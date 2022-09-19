@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _exit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/08/29 12:34:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:08:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	check_max_int(char *nbr, t_minishell *ms)
 	if (!ft_check_int(i, nbr, max))
 	{
 		ms->l_retv = 2;
-		printf("bash: exit: %s: numeric argument required\n", nbr);
+		printf("minishell: exit: %s: numeric argument required\n", nbr);
 		return (1);
 	}
 	return (0);
@@ -79,7 +79,7 @@ int	check_arg(t_token *token, t_minishell *ms)
 	if (count_arg(ms->t_head->arg_head) > 1)
 	{
 		ms->l_retv = 1;
-		printf("bash: exit: too many arguments\n");
+		printf("minishell: exit: too many arguments\n");
 		return (1);
 	}
 	if (check_max_int(token->arg_head->value, ms))
