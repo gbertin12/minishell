@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:31:02 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/19 16:59:24 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:13:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static t_env	*copy_env2(t_minishell *ms, char **env, size_t i)
 {
 	t_env	*e_tmp;
-	char	*s;
+	char	**s;
 
-	ft_malloc(sizeof(t_env), ms);
+	e_tmp = ft_malloc(sizeof(t_env), ms);
 	if (!e_tmp)
 		return (NULL);
 	if (ms->e_head == NULL)
@@ -34,7 +34,6 @@ static t_env	*copy_env2(t_minishell *ms, char **env, size_t i)
 void	copy_env(t_minishell *ms, char **env)
 {
 	size_t	i;
-	char	**s;
 	t_env	*e_tmp;
 	t_env	*last;
 
