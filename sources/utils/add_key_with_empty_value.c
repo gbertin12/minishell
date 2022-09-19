@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_key_with_empty_value.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:58:13 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/19 17:36:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:50:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	add_key_with_empty_value(char *s, t_minishell *ms)
 {
+	printf("value arg = %s\n", s);
 	if (check_key_env(s) || s[0] == '=')
 	{
 		ft_putstr_fd("minishell: export: `", 2);
