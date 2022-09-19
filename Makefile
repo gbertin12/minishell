@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/15 09:00:37 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/19 09:14:21 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,15 @@ SRCS = minishell.c\
 		sources/expand/read_var.c\
 		sources/expand/replace_var.c\
 		sources/open/check_ambiguous.c\
+		sources/open/complex_var.c\
 		sources/open/expand_file.c\
+		sources/open/expand_simple_var.c\
 		sources/open/heredoc.c \
 		sources/open/if_type_file_exist.c\
 		sources/open/open_files.c \
 		sources/open/open_all.c \
 		sources/open/print_err_files.c\
+		sources/open/replace_value_key.c\
 		sources/parsing/add_param.c\
 		sources/parsing/check_input.c\
 		sources/parsing/parsing.c\

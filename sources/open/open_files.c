@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/15 08:59:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:22:08 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,9 @@ static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	if (ft_strchr(file->path, '$'))
-	{
-		file->path = expand_file(file->path, ms);
-		if (!file->path)
-			return (-1);
-	}
+	file->path = expand_file(file->path, ms);
+	if (!file->path)
+		return (-1);
 	if (file->append)
 		fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else

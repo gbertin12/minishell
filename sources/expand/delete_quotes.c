@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/13 14:30:47 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:20:07 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,5 @@ void	delete_quotes(t_token *token, t_minishell *ms)
 		if (!arg->value)
 			return ;
 		arg = arg->next;
-	}
-	while (file)
-	{
-		file->path = remove_quotes(file->path, ms);
-		if (!file->path)
-			return ;
-		file = file->next;
 	}
 }
