@@ -6,11 +6,30 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:31:02 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/14 10:25:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:59:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static t_env	*copy_env2(t_minishell *ms, char **env, size_t i)
+{
+	t_env	*e_tmp;
+	char	*s;
+
+	ft_malloc(sizeof(t_env), ms);
+	if (!e_tmp)
+		return (NULL);
+	if (ms->e_head == NULL)
+		ms->e_head = e_tmp;
+	s = ft_split(env[i], '=', ms);
+	if (!s)
+		return (NULL);
+	e_tmp->key = s[0];
+	e_tmp->value = ft_superjoin(s, ms);
+	ft_free(s, ms);
+	return (e_tmp);
+}
 
 void	copy_env(t_minishell *ms, char **env)
 {
@@ -25,17 +44,9 @@ void	copy_env(t_minishell *ms, char **env)
 		return ;
 	while (env[++i])
 	{
-		e_tmp = ft_malloc(sizeof(t_env), ms);
+		e_tmp = copy_env2(ms, env, i);
 		if (!e_tmp)
 			return ;
-		if (ms->e_head == NULL)
-			ms->e_head = e_tmp;
-		s = ft_split(env[i], '=', ms);
-		if (!s)
-			return ;
-		e_tmp->key = s[0];
-		e_tmp->value = ft_superjoin(s, ms);
-		ft_free(s, ms);
 		if (last != NULL)
 			last->next = e_tmp;
 		e_tmp->next = NULL;
