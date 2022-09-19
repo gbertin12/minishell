@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 12:48:35 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/19 17:36:43 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	append_export2(char *key, char *value, t_minishell *ms)
 {
 	t_env	*env_node;
 
-	printf("past here\n");
 	env_node = get_node_env(key, ms);
 	if (env_node != NULL)
 	{

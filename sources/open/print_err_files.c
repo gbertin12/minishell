@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_err_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:58:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 09:40:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/19 16:53:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,23 @@ char	did_print(t_file *file, t_file *head)
 		f = f->next;
 	}
 	return (0);
+}
+
+static void	put_error_fd2(t_file *file, t_minishell *ms, t_file_error *new_err)
+{
+	new_err->next = NULL;
+	new_err->err = ft_strjoin("minishell: ", file->path, ms);
+	if (!new_err->err)
+		return ;
+	new_err->err = ft_strjoin(new_err->err, ": ", ms);
+	if (!new_err->err)
+		return ;
+	new_err->err = ft_strjoin(new_err->err, strerror(errno), ms);
+	if (!new_err->err)
+		return ;
+	new_err->err = ft_strjoin(new_err->err, "\n", ms);
+	if (!new_err->err)
+		return ;
 }
 
 void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
@@ -46,17 +63,5 @@ void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 			return ;
 		add_end_err(ms->err_head, new_err);
 	}
-	new_err->next = NULL;
-	new_err->err = ft_strjoin("minishell: ", file->path, ms);
-	if (!new_err->err)
-		return ;
-	new_err->err = ft_strjoin(new_err->err, ": ", ms);
-	if (!new_err->err)
-		return ;
-	new_err->err = ft_strjoin(new_err->err, strerror(errno), ms);
-	if (!new_err->err)
-		return ;
-	new_err->err = ft_strjoin(new_err->err, "\n", ms);
-	if (!new_err->err)
-		return ;
+	put_error_fd2(file, ms, new_err);
 }

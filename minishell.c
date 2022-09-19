@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 11:32:08 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/19 17:38:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,30 @@ static void	reset(t_minishell *ms, char *s)
 		free(s);
 	else
 		printf("\n");
+}
+
+static void	main2(t_minishell *ms, char *s)
+{
+	if (parsing(s, ms) != 0)
+	{
+		reset(ms, s);
+		return ;
+	}
+	expand(ms);
+	if (s && *s)
+		add_history(s);
+	if (ms->t_head && !ft_strncmp(ms->t_head->cmd, "exit",
+			ft_strlen(ms->t_head->cmd)) && count_token(ms->t_head) == 1)
+	{
+		if (b_exit(ms->t_head, ms))
+		{
+			reset(ms, s);
+			return ;
+		}
+		return ;
+	}
+	browse_cmd(ms);
+	reset(ms, s);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -56,34 +80,9 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 		 	add_history(s);
-		if (parsing(s, &ms) != 0)
-		{
-			reset(&ms, s);
-			continue ;
-		}
-		// if (ms.t_head && ms.t_head->arg_head && ms.t_head->file_head)
-		// 	printf("cmd = %s\narg = %s\n file = %s\n", ms.t_head->cmd, ms.t_head->arg_head->value, ms.t_head->file_head->path);
-		// else if (ms.t_head && ms.t_head->arg_head)
-		// 	printf("cmd = %s\narg = %s\n", ms.t_head->cmd, ms.t_head->arg_head->value);
-		// else if (ms.t_head && ms.t_head->file_head)
-		// 	printf("cmd = %s\nfile = %s\n", ms.t_head->cmd, ms.t_head->file_head->path);
-		// else if (ms.t_head)
-		// 	printf("cmd = %s\n", ms.t_head->cmd);
-		expand(&ms);
-		if (ms.t_head && !ft_strncmp(ms.t_head->cmd, "exit", ft_strlen(ms.t_head->cmd)) && count_token(ms.t_head) == 1)
-		{
-			if (b_exit(ms.t_head, &ms))
-			{
-				reset(&ms, s);
-				continue ;
-			}
-			break ;
-		}
-		browse_cmd(&ms);
-		reset(&ms, s);
+		main2(&ms, s);
 	}
-	if (s)
-		free(s);
+	reset(&ms, s);
 	free_all(&ms);
 	return (ms.l_retv);
 }
