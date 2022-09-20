@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/19 17:35:19 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:22:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	char	*key;
 
 	arg = token->arg_head;
-	if (!arg)
+	if (!arg || !arg->value)
 		return (0);
-	i = strchr(arg->value, '$');
+	i = ft_strchr(arg->value, '$');
 	while (arg)
 	{
-		i = strchr(arg->value, '$');
+		i = ft_strchr(arg->value, '$');
 		if (!i || between_quote(arg->value, (i - arg->value)))
 		{
 			arg = arg->next;

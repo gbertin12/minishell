@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:41:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/12 14:48:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:37:22 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ char	*replace_var(char *s, size_t x, t_minishell *ms)
 	if (!s || s[x] == 0)
 		return (s);
 	tmp2 = read_var(&s[x + 1], ms);
-	if (!tmp2 || !tmp2[0])
-		printf("$%c : not a valid identifier\n", s[x + 1]);
 	tmp = get_env_value(tmp2, ms);
 	ft_free(tmp2, ms);
 	tmp = string_ternary(tmp == NULL, ft_strdup("", ms), tmp);
