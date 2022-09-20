@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 12:12:53 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:47:49 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	if (!key)
 		return (EXIT_FAILURE);
 	if (check_key_env(key) || arg->value[0] == '=')
-		return (print_not_valid_identifier(arg->value));
+		return (print_not_valid_identifier("export", arg->value));
 	ft_free(tmp[0], ms);
-	value = ft_superjoin(tmp, ms);
+	value = ft_superjoin(arg->value, tmp, ms);
 	if (do_env_key_exist(key, ms))
 		replace_env_value(key, value, ms);
 	else
@@ -108,12 +108,8 @@ int	_export(t_token *token, t_minishell *ms)
 	error = 0;
 	while (arg != NULL)
 	{
-		if (!arg->value[1])
-			return (print_not_valid_identifier(arg->value));
 		if (check_append_export(arg->value) && append_export(arg, ms))
 				error = 1;
-		else if (!ft_strchr(arg->value, '='))
-			return (EXIT_SUCCESS);
 		else if (_export2(arg, ms))
 			error = 1;
 		arg = arg->next;

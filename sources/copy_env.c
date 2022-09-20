@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:31:02 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/19 17:13:24 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:48:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_env	*copy_env2(t_minishell *ms, char **env, size_t i)
 	if (!s)
 		return (NULL);
 	e_tmp->key = s[0];
-	e_tmp->value = ft_superjoin(s, ms);
+	e_tmp->value = ft_superjoin(NULL, s, ms);
 	ft_free(s, ms);
 	return (e_tmp);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_superjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:35:41 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/27 13:25:40 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:49:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_superjoin(char **s, t_minishell *ms)
+char	*ft_superjoin(char *export, char **s, t_minishell *ms)
 {
 	char	*ret_v;
 	char	*tmp;
@@ -20,8 +20,10 @@ char	*ft_superjoin(char **s, t_minishell *ms)
 
 	i = 0;
 	ret_v = NULL;
-	if (!s[1])
+	if (!s[1] && (export && ft_strchr(export, '=')))
 		return (ft_strdup("", ms));
+	else if (!s[1])
+		return (NULL);
 	while (s[++i] != NULL)
 	{
 		tmp = ft_strjoin(string_ternary(ret_v != NULL, ret_v, ""), s[i], ms);
