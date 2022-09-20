@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:21:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 12:04:38 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*get_last_arg(t_token *token)
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
-	exec->token = check_no_arg(exec->token, ms);
 	if (exec->token->cmd != NULL && check_is_directory(exec, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
