@@ -13,3 +13,4 @@ infile
 ft_mallocator
 malloc_test
 stdin
+addresses.tmp

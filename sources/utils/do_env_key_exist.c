@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:44:00 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/16 11:10:53 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:06:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	do_env_key_exist(char *key, t_minishell *ms)
 	env = ms->e_head;
 	while (env != NULL)
 	{
-		if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
+		if (ft_strncmp(env->key, key, ft_strlen(env->key) + 1) == 0)
 			return (1);
 		env = env->next;
 	}
