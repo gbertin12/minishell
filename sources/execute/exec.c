@@ -6,15 +6,15 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 12:06:11 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 12:24:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_path(t_exec *exec)
+int	check_path(t_exec *exec, t_minishell *ms)
 {
-	if (strchr(exec->token->cmd, '/'))
+	if (strchr(exec->token->cmd, '/') || !do_env_key_exist("PATH", ms))
 	{
 		if (access(exec->token->cmd, 0) == -1)
 		{
@@ -33,7 +33,6 @@ int	check_path(t_exec *exec)
 	}
 	return (0);
 }
-
 int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 {
 	exec->path = make_path(exec, ms);
@@ -47,7 +46,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		if (exec->token->have_in)
 			dup2(exec->token->inputfile, 0);
 		redir_out(exec->token);
-		if (check_path(exec))
+		if (check_path(exec, ms))
 			exit(127);
 		execve(exec->path, exec->args, exec->env);
 		perror("minishell");
@@ -71,7 +70,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 			return (1);
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
-		if (check_path(exec))
+		if (check_path(exec, ms))
 			exit(127);
 		execve(exec->path, args, exec->env);
 		perror("minishell");
@@ -100,7 +99,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 			}
 			dup2(exec->token->outputfile, 1);
 		}
-		if (check_path(exec))
+		if (check_path(exec, ms))
 			exit(127);
 		execve(exec->path, args, exec->env);
 		perror("minishell");
