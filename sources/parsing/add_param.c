@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 16:48:19 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:40:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 		ret_v++;
 		file->append = 1;
 	}
+	while (is_space(s[ret_v]))
+		ret_v++;
 	size = get_size_of_cmd(&s[ret_v]);
 	if ((!ft_isprint(s[ret_v]) && !is_space(s[ret_v])) || size < 0)
 		return (-1);
-	while (is_space(s[ret_v]))
-		ret_v++;
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
 	if (!file->path)
 		return (-1);
@@ -88,11 +88,11 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 		ret_v++;
 		file->append = 1;
 	}
+	while (is_space(s[ret_v]))
+		ret_v++;
 	size = get_size_of_cmd(&s[ret_v]);
 	if ((!ft_isprint(s[ret_v]) && !is_space(s[ret_v])) || size < 0)
 		return (-1);
-	while (is_space(s[ret_v]))
-		ret_v++;
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
 	if (!file->path)
 		return (-1);
