@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 14:38:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 17:41:13 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:14:29 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	replace_env_value(char *key, char *value, t_minishell *ms)
 {
 	t_env	*env;
 
-	if (!value || !*value)
+	if (!value)
 		return ;
 	env = ms->e_head;
 	while (env != NULL)
