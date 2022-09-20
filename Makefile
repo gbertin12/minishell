@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/19 09:41:18 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/20 12:30:35 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS = minishell.c\
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
 		sources/expand/expand_arg.c\
+		sources/expand/expand_cmd.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/read_var.c\
 		sources/expand/replace_var.c\
@@ -64,6 +65,7 @@ SRCS = minishell.c\
 		sources/utils/count_elem.c\
 		sources/utils/create_error.c\
 		sources/utils/do_env_key_exist.c\
+		sources/utils/free_split.c\
 		sources/utils/free_tokens.c\
 		sources/utils/ft_atoll.c\
 		sources/utils/ft_malloc.c\
