@@ -6,11 +6,19 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 17:36:43 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 09:50:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	print_not_valid_identifier(char *print)
+{
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(print, 2);
+	ft_putstr_fd("\" not a valid identifier\n", 2);
+	return (1);
+}
 
 int	check_append_export(char *export)
 {
@@ -75,12 +83,7 @@ int	append_export(t_arg *arg, t_minishell *ms)
 		return (EXIT_FAILURE);
 	ft_strlcpy(key, arg->value, len_key + 1);
 	if (check_key_env(key))
-	{
-		ft_putstr_fd("minishell: export: `", 2);
-		ft_putstr_fd(arg->value, 2);
-		ft_putstr_fd("\" not a valid identifier\n", 2);
-		return (1);
-	}
+		return (print_not_valid_identifier(arg->value));
 	if (arg->value[len_key + 2])
 	{
 		tmp = ft_split(arg->value, '=', ms);

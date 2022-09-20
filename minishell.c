@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 17:48:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 10:10:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ static void	main2(t_minishell *ms, char *s)
 	expand(ms);
 	if (s && *s)
 		add_history(s);
-	if (ms->t_head && !ft_strncmp(ms->t_head->cmd, "exit",
-			ft_strlen(ms->t_head->cmd)) && count_token(ms->t_head) == 1)
+	if (ms->t_head && ft_strcmp(ms->t_head->cmd, "exit")
+		&& count_token(ms->t_head) == 1)
 	{
 		if (b_exit(ms->t_head, ms))
 		{
 			reset(ms, s);
 			exit(ms->l_retv);
 		}
-		return ;
+		exit(ms->l_retv);
 	}
 	browse_cmd(ms);
 	reset(ms, s);
@@ -78,8 +78,6 @@ int	main(int argc, char **argv, char **envp)
 			reset(&ms, s);
 			continue ;
 		}
-		else
-		 	add_history(s);
 		main2(&ms, s);
 	}
 	reset(&ms, s);

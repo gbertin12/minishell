@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/08 16:58:21 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 09:52:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		b_exit(t_token *token, t_minishell *ms);
 int		check_is_built_in(t_token *token);
 int		exec_builtin(t_token *token, t_minishell *ms);
 int		exec_env(t_token *token, t_minishell *ms);
+int		print_not_valid_identifier(char *print);
 
 #endif
