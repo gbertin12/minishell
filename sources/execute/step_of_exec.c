@@ -6,13 +6,13 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 12:04:38 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 12:17:50 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_token	*check_no_arg(t_token *token, t_minishell *ms)
+t_token	*check_no_arg(t_token *token, t_minishell *ms)
 {
 	int		i;
 	char	**split;

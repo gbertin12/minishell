@@ -58,12 +58,6 @@ else
 	WHITE        := ""
 	RESET        := ""
 endif
-TITLE="\n $(BLUE) ██████  ██████  █████  ███    ███ ██████  ██ ██    ██ ███    ███\n"\
-	"$(BLUE)██      ██      ██   ██ ████  ████ ██   ██ ██ ██    ██ ████  ████\n"\
-	"$(BLUE)██      ██      ███████ ██ ████ ██ ██████  ██ ██    ██ ██ ████ ██\n"\
-	"$(BLUE)██      ██      ██   ██ ██  ██  ██ ██   ██ ██ ██    ██ ██  ██  ██\n"\
-	"$(BLUE) ██████  ██████ ██   ██ ██      ██ ██████  ██  ██████  ██      ██\n"\
-	"\n\n $(PURPLE)ᐅ $(YELLOW)Making something like $(GREEN)$(NAME) $(YELLOW)or a shitty thing $(RED)(╯°□°)╯︵ ┻━┻ $(RESET)\n\n"
 
 .SILENT:
 
