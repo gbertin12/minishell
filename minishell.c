@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 10:10:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 11:48:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	main2(t_minishell *ms, char *s)
 		reset(ms, s);
 		return ;
 	}
+	printf("cmd 1 = %s\n", ms->t_head->cmd);
 	expand(ms);
 	if (s && *s)
 		add_history(s);
@@ -52,6 +53,7 @@ static void	main2(t_minishell *ms, char *s)
 		}
 		exit(ms->l_retv);
 	}
+	printf("cmd 2 = %s\n", ms->t_head->cmd);
 	browse_cmd(ms);
 	reset(ms, s);
 }
