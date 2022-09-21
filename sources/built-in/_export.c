@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 17:47:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 08:37:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static t_env	*next_declare(t_minishell *ms, t_env *last)
 		}
 		else
 		{
-			if (ft_strncmp(env->key, last->key, ft_strlen(env->key)) > 0
-				&& ft_strncmp(env->key, ret_v->key, ft_strlen(env->key)) < 0)
+			if (ft_strncmp(env->key, last->key, ft_strlen(env->key) + 1) > 0
+				&& ft_strncmp(env->key, ret_v->key, ft_strlen(env->key) + 1) < 0)
 				ret_v = env;
 		}
 		env = env->next;
