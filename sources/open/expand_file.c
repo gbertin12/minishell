@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 09:37:25 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 12:31:15 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*get_next_var(char *path, t_minishell *ms)
 	i = 0;
 	ret_v = NULL;
 	if (path[i] != '$' && path[i] != '\"' && path[i])
-		ret_v = simple_var(path);
+		ret_v = simple_var(path, ms);
 	else if (path[i] == '$')
 		ret_v = get_value_key(&path[i], ms);
 	else
