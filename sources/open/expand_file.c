@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 15:33:31 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 15:36:38 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	*get_next_var(char *path, t_minishell *ms)
 
 static int	is_ambiguous(char *value, t_minishell *ms)
 {
-	char **split;
+	char	**split;
 
 	if (!value)
 		return (1);
