@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 12:32:20 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:48:00 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char		**env_to_tab(t_minishell *ms);
 char		**args_to_tab(t_token *token, t_minishell *ms);
 
 char		*get_pwd(t_minishell *ms);
-char		*ft_superjoin(char **s, t_minishell *ms);
+char		*ft_superjoin(char *export, char **s, t_minishell *ms);
 char		*get_env_value(char *key, t_minishell *ms);
 char		*string_ternary(char condition, char *true, char *false);
 char		*check_cd_path(char *path, char **all_cdpath, t_minishell *ms);

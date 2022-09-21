@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/01 16:26:01 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:22:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,32 @@ static int	_unset2(char *key, t_env *e_before, t_env *e_env, t_minishell *ms)
 	return (EXIT_FAILURE);
 }
 
-int	_unset(char *key, t_minishell *ms)
+int	_unset(t_arg *arg, t_minishell *ms)
 {
 	t_env	*e_env;
 	t_env	*e_before;
+	int		flag;
 
-	e_before = NULL;
-	e_env = ms->e_head;
-	if (check_key_env(key))
+	flag = 0;
+	while (arg)
 	{
-		ft_putstr_fd("minishell: unset: \"", 2);
-		ft_putstr_fd(key, 2);
-		ft_putstr_fd("` not a valid identifier\n", 2);
-		return (EXIT_FAILURE);
+		e_before = NULL;
+		e_env = ms->e_head;
+		if (check_key_env(arg->value))
+		{
+			print_not_valid_identifier("unset", arg->value);
+			flag = 1;
+		}
+		while (e_env)
+		{
+			_unset2(arg->value, e_before, e_env, ms);
+			e_before = e_env;
+			e_env = e_env->next;
+		}
+		arg = arg->next;
 	}
-	if (!e_env || !do_env_key_exist(key, ms))
+	if (flag == 0)
 		return (EXIT_SUCCESS);
-	while (e_env)
-	{
-		if (!_unset2(key, e_before, e_env, ms))
-			return (EXIT_SUCCESS);
-		e_before = e_env;
-		e_env = e_env->next;
-	}
 	return (EXIT_FAILURE);
 }
 
@@ -72,7 +75,7 @@ int	exec_unset(t_token *token, t_minishell *ms)
 	}
 	if (token->arg_head)
 	{
-		if (_unset(token->arg_head->value, ms))
+		if (_unset(token->arg_head, ms))
 		{
 			ms->l_retv = 1;
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 12:17:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/17 10:36:54 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 08:40:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static size_t	get_size_simple(char *path)
 			break ;
 		i++;
 	}
-	printf("size = %zu\n", size);
 	return (size);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 12:24:22 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/20 13:49:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	check_path(t_exec *exec, t_minishell *ms)
 	}
 	return (0);
 }
+
 int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 {
 	exec->path = make_path(exec, ms);
