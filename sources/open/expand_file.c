@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 12:25:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 09:37:25 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ char	*expand_file(char *path, t_minishell *ms)
 	ambiguous = 0;
 	new_path = "";
 	save = ft_strdup(path, ms);
+	if (!save)
+		return (NULL);
 	while (path[i])
 	{
 		tmp = get_next_var(&path[i], ms);
