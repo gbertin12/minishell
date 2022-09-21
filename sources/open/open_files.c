@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 09:40:42 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 09:26:52 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 	fd = 0;
 	file->path = expand_file(file->path, ms);
 	if (!file->path)
-		return (-1);
+		return (-2);
 	if (file->append)
 		fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
@@ -57,6 +57,8 @@ int	open_output(t_token *token, t_minishell *ms)
 			continue ;
 		}
 		fd = open_output2(file, token, ms);
+		if (fd == -2)
+			break ;
 		file = file->next;
 		if (check_have_next_type(file, 1))
 			return (fd);
@@ -69,13 +71,9 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	printf("file = %s\n", file->path);
-	if (ft_strchr(file->path, '$') && !file->append)
-	{
-		file->path = expand_file(file->path, ms);
-		if (!file->path)
-			return (-1);
-	}
+	file->path = expand_file(file->path, ms);
+	if (!file->path)
+		return (-2);
 	if (file->append)
 		fd = heredoc(file->path, ms);
 	else
@@ -102,6 +100,8 @@ int	open_input(t_token *token, t_minishell *ms)
 			continue ;
 		}
 		fd = open_input2(file, token, ms);
+		if (fd == -2)
+			break ;
 		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);
