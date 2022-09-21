@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 16:06:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:52:18 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	main2(t_minishell *ms, char *s)
 		reset(ms, s);
 		return ;
 	}
-	expand(ms);
+	if (expand(ms))
+		return ;
 	if (ms->t_head && ft_strcmp(ms->t_head->cmd, "exit")
 		&& count_token(ms->t_head) == 1)
 	{

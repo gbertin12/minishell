@@ -22,6 +22,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len,
 	if (start > slen)
 	{
 		v = ft_malloc(1, ms);
+		if (!v)
+			return (NULL);
 		*v = '\0';
 		return (v);
 	}

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 14:53:07 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/21 08:45:07 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,24 @@ static void	split_cmd(t_token *token, t_minishell *ms)
 	}
 }
 
-void	expand_cmd(t_token *token, t_minishell *ms)
+char	expand_cmd(t_token *token, t_minishell *ms)
 {
-	char	*tmp;
 	size_t	i;
 	char	flag;
 
 	flag = 0;
 	if (token->cmd == NULL)
-		return ;
+		return (1);
 	i = next_var(token->cmd);
 	while (token->cmd[i])
 	{
 		flag = 1;
-		tmp = token->cmd;
 		token->cmd = replace_var(token->cmd, i, ms);
 		if (!token->cmd)
-			token->cmd = tmp;
-		else
-			ft_free(tmp, ms);
+			return (1);
 		i = next_var(token->cmd);
 	}
 	if (flag)
 		split_cmd(token, ms);
+	return (EXIT_SUCCESS);
 }
