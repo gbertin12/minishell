@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 14:11:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 11:27:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:08:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*read_var(char *s, t_minishell *ms)
 	i = 0;
 	if (s[i] == '?')
 		return (ft_strdup("?", ms));
-	if (!ft_isalpha(s[i]) && s[i] != '_')
+	if ((!ft_isalpha(s[i]) && s[i] != '_') || !*s)
 		return (ft_strdup("", ms));
 	while (s[i] && !is_space(s[i]) && s[i] != '$')
 		i++;

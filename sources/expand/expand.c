@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 12:20:04 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 12:21:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -25,7 +26,6 @@ static void	remove_first_arg(t_token *token, t_minishell *ms)
 
 static void	replace_cmd(t_token *token, t_minishell *ms)
 {
-	
 	while (!token->cmd || token->cmd[0] == '\0')
 	{
 		if (token->arg_head)
