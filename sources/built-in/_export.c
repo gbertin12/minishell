@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 10:58:07 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 15:39:43 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	_export(t_token *token, t_minishell *ms)
 	while (arg != NULL)
 	{
 		if (check_append_export(arg->value) && append_export(arg, ms))
-				error = 1;
+				error = 0;
 		else if (_export2(arg, ms))
 			error = 1;
 		arg = arg->next;

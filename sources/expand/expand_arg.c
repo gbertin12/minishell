@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 12:05:04 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:54:46 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,6 @@ char	expand_arg(t_token *token, t_minishell *ms)
 			continue ;
 		}
 		key = read_var(++i, ms);
-		if (!key || !*key)
-			printf("$%c : not a valid identifier\n", *i);
 		if (expand_arg2(arg, key, i, ms))
 			return (1);
 	}

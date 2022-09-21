@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 17:40:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 15:41:48 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	append_export(t_arg *arg, t_minishell *ms)
 		return (EXIT_FAILURE);
 	ft_strlcpy(key, arg->value, len_key + 1);
 	if (check_key_env(key))
-		return (print_not_valid_identifier("export3", arg->value));
+		return (print_not_valid_identifier("export", arg->value));
 	if (arg->value[len_key + 2])
 	{
 		tmp = ft_split(arg->value, '=', ms);
