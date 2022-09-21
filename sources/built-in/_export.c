@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 08:37:09 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 09:22:32 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_env	*next_declare(t_minishell *ms, t_env *last)
 	{
 		if (!last)
 		{
-			if (strcmp(env->key, ret_v->key) < 0)
+			if (ft_strncmp(env->key, ret_v->key, ft_strlen(env->key) + 1) < 0)
 				ret_v = env;
 		}
 		else
