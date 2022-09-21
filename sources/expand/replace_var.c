@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:41:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 08:42:23 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:52:48 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@ char	*replace_var(char *s, size_t x, t_minishell *ms)
 		return (s);
 	tmp2 = read_var(&s[x + 1], ms);
 	tmp = get_env_value(tmp2, ms);
+	ret_v = ft_strjoin(ft_substr(s, 0, x, ms), tmp, ms);
 	ft_free(tmp2, ms);
-	tmp = string_ternary(tmp == NULL, ft_strdup("", ms), tmp);
-	ret_v = ft_strjoin(tmp2, tmp, ms);
-	if (!ret_v)
-		return (NULL);
-	ft_free(tmp2, ms);
-	ft_free(tmp, ms);
 	i = x + 1;
 	while (s[i] && ft_isalnum(s[i]))
 		i++;
