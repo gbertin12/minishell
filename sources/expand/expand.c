@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 12:03:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 12:20:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@ static void	remove_first_arg(t_token *token, t_minishell *ms)
 
 static void	replace_cmd(t_token *token, t_minishell *ms)
 {
+	
 	while (!token->cmd || token->cmd[0] == '\0')
 	{
-		token->cmd = token->arg_head->value;
-		remove_first_arg(token, ms);
+		if (token->arg_head)
+		{
+			token->cmd = token->arg_head->value;
+			remove_first_arg(token, ms);
+		}
+		else
+			break ;
 	}
 }
 
