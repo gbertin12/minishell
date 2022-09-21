@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 12:31:15 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 14:26:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_value_key(char *path, t_minishell *ms)
 	key[size] = '\0';
 	ret_v = replace_value_file(key, ms);
 	if (!ret_v)
-		return (NULL);
+		ret_v = ft_strdup("", ms);
 	ft_free(key, ms);
 	return (ret_v);
 }
@@ -70,6 +70,7 @@ static char	*get_next_var(char *path, t_minishell *ms)
 
 	i = 0;
 	ret_v = NULL;
+	printf("PATH = %s\n", path);
 	if (path[i] != '$' && path[i] != '\"' && path[i])
 		ret_v = simple_var(path, ms);
 	else if (path[i] == '$')
@@ -81,6 +82,7 @@ static char	*get_next_var(char *path, t_minishell *ms)
 
 static int	is_ambiguous(char *value, t_minishell *ms)
 {
+	// problem
 	if (ft_split_set(value, " \n\r\v\t\f", ms)[1])
 		return (1);
 	return (0);
