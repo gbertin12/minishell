@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 12:17:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 11:00:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 
 t_exec	*middle(t_exec *exec, t_minishell *ms)
 {
-	exec->token = check_no_arg(exec->token, ms);
 	if (exec->token->cmd != NULL && check_is_directory(exec, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
@@ -101,7 +100,6 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 
 t_exec	*last(t_exec *exec, t_minishell *ms)
 {
-	exec->token = check_no_arg(exec->token, ms);
 	if (exec->token->cmd != NULL && check_is_directory(exec, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
