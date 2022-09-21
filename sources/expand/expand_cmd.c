@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 16:42:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 08:51:13 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,24 @@ void	expand_cmd2(char flag, t_token *token, t_minishell *ms)
 	}
 }
 
-void	expand_cmd(t_token *token, t_minishell *ms)
+char	expand_cmd(t_token *token, t_minishell *ms)
 {
-	char	*tmp;
 	size_t	i;
 	char	flag;
 
 	flag = 0;
 	if (token->cmd == NULL)
-		return ;
+		return (1);
 	i = next_var(token->cmd);
 	while (token->cmd[i])
 	{
 		flag = 1;
-		tmp = token->cmd;
 		token->cmd = replace_var(token->cmd, i, ms);
 		if (!token->cmd)
-			token->cmd = tmp;
-		else
-			ft_free(tmp, ms);
+			return (1);
 		i = next_var(token->cmd);
 	}
-	expand_cmd2(flag, token, ms);
+	if (flag)
+		split_cmd(token, ms);
+	return (EXIT_SUCCESS);
 }

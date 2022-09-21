@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 13:49:10 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 09:21:47 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_path(t_exec *exec, t_minishell *ms)
 {
-	if (strchr(exec->token->cmd, '/') || !do_env_key_exist("PATH", ms))
+	if (ft_strchr(exec->token->cmd, '/') || !do_env_key_exist("PATH", ms))
 	{
 		if (access(exec->token->cmd, 0) == -1)
 		{

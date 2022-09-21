@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 14:22:10 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/21 08:39:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms)
 	char	*ret_v;
 
 	tmp2 = ft_substr(s, 0, x, ms);
+	if (!tmp2)
+		return (NULL);
 	ret_v = ft_strjoin(tmp2, value, ms);
 	ft_free(tmp2, ms);
 	i = x + 1;
@@ -27,7 +29,11 @@ static char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms)
 		i++;
 	i = size_t_ternary(!ft_isalpha(s[x + 1]) && s[x + 1] != '_', x + 2, i);
 	tmp = ft_substr(s, i, ft_strlen(&s[i]), ms);
+	if (!tmp)
+		return (NULL);
 	ret_v = ft_strjoin(ret_v, tmp, ms);
+	if (!ret_v)
+		return (tmp);
 	ft_free(tmp, ms);
 	return (ret_v);
 }
@@ -69,11 +75,19 @@ static char	expand_arg_multi(t_arg *arg, char **argv, char *w, t_minishell *ms)
 
 	arg->value = replace_var_multi(arg->value, (size_t)(w - arg->value),
 			argv[0], ms);
+	if (!arg->value)
+		return (1);
 	tmp = ft_substr(arg->value, (size_t)(w - arg->value), ft_strlen(w), ms);
+	if (!tmp)
+		return (1);
 	arg->value = ft_substr(arg->value, 0, (size_t)(w - arg->value), ms);
+	if (!arg->value)
+		return (1);
 	if (expand_arg_multi2(argv, ms, &first, &last))
 		return (EXIT_FAILURE);
 	last->value = ft_strjoin(last->value, tmp, ms);
+	if (!last->value)
+		return (1);
 	last->next = arg->next;
 	arg->next = first;
 	return (0);
