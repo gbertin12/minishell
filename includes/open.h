@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:49:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 10:45:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 11:27:15 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_value_key(char *path, t_minishell *ms);
 int		get_size_key(char *path);
 
 void	open_all(t_minishell *ms);
+int		check_have_next_type(t_file *file, char type);
 
 int		have_infile(t_token *token);
 int		have_outfile(t_token *token);

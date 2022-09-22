@@ -6,22 +6,26 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:33:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 10:40:45 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 11:06:28 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_is_directory(t_exec *exec, int printable)
+int	check_is_directory(char *path, int printable)
 {
 	DIR	*dir;
 
-	dir = opendir(exec->token->cmd);
+	dir = opendir(path);
 	if (dir != NULL)
 	{
 		closedir(dir);
 		if (printable)
-			printf("minishell: %s: Is a directory\n", exec->token->cmd);
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(path, 2);
+			ft_putstr_fd(": Is a directory\n", 2);
+		}
 		return (0);
 	}
 	return (1);

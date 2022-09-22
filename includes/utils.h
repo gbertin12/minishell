@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 17:48:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 11:06:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ft_error(char *msg);
 int			check_key_env(char *s);
 int			ft_strcmp(char *str1, char *str2);
 
-int			check_is_directory(t_exec *exec, int printable);
+int			check_is_directory(char *path, int printable);
 int			add_key_with_empty_value(char *s, t_minishell *ms);
 
 void		*ft_malloc(size_t size, t_minishell *ms);
