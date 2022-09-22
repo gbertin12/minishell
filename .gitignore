@@ -1,5 +1,5 @@
 badfile
-
+*.d
 *.o
 .vscode
 minishell
