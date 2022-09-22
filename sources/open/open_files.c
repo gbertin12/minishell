@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 09:26:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 10:44:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	file->path = expand_file(file->path, ms);
+	file->path = expand_file(file->path, file, ms);
 	if (!file->path)
 		return (-2);
 	if (file->append)
@@ -71,7 +71,7 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	file->path = expand_file(file->path, ms);
+	file->path = expand_file(file->path, file, ms);
 	if (!file->path)
 		return (-2);
 	if (file->append)

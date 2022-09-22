@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 15:36:38 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 10:44:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	is_ambiguous(char *value, t_minishell *ms)
 	return (0);
 }
 
-char	*expand_file(char *path, t_minishell *ms)
+char	*expand_file(char *path, t_file *file, t_minishell *ms)
 {
 	char	*new_path;
 	char	*save;
@@ -117,7 +117,7 @@ char	*expand_file(char *path, t_minishell *ms)
 			break ;
 		i += pos_next_var(&path[i]);
 	}
-	if (!check_ambiguous(new_path, save, ambiguous))
+	if (!check_ambiguous(new_path, save, file, ambiguous))
 		return (NULL);
 	return (new_path);
 }

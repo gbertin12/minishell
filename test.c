@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_is_directory.c                               :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 10:33:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 10:40:45 by gbertin          ###   ########.fr       */
+/*   Created: 2022/08/18 10:32:13 by gbertin           #+#    #+#             */
+/*   Updated: 2022/08/18 12:11:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "includes/minishell.h"
 
-int	check_is_directory(t_exec *exec, int printable)
+int	main(void)
 {
-	DIR	*dir;
+	char 			*path;
+	DIR				*dir;
+	struct dirent	*read_dir;
 
-	dir = opendir(exec->token->cmd);
-	if (dir != NULL)
-	{
-		closedir(dir);
-		if (printable)
-			printf("minishell: %s: Is a directory\n", exec->token->cmd);
-		return (0);
-	}
-	return (1);
+	// path = getcwd(path, 0);
+	// printf("%s\n", path);
+	// dir = opendir("../");
+	// read_dir = readdir(dir);
+	// while(read_dir)
+	// {
+	// 	printf("File : %s\n", read_dir->d_name);
+	// 	read_dir = readdir(dir);
+	// }
+	// closedir(dir);
+	chdir("../");
+	return (0);
 }

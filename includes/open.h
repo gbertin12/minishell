@@ -6,15 +6,15 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:49:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 12:30:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 10:45:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPEN_H
 # define OPEN_H
 
-int		check_ambiguous(char *path, char *print, int ambiguous);
-char	*expand_file(char *path, t_minishell *ms);
+int		check_ambiguous(char *path, char *print, t_file *file, int ambiguous);
+char	*expand_file(char *path, t_file *file, t_minishell *ms);
 char	*simple_var(char *path, t_minishell *ms);
 char	*replace_value_file(char *key, t_minishell *ms);
 char	*complexe_var(char *path, t_minishell *ms);
