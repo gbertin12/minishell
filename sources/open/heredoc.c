@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 14:19:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:28:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int	heredoc(char *limiter, t_minishell *ms)
 	pid = fork();
 	if (pid < 0)
 		return (-1);
+	g_mode = 1;
 	if (pid == 0)
 	{
-		signal(SIGINT, sigint_heredoc);
 		print_in_file(fd, limiter, ms);
 		exit(0);
 	}
 	waitpid(pid, NULL, 0);
+	g_mode = 0;
 	close(fd);
 	fd = open(".tmp", O_RDONLY);
 	unlink(".tmp");
