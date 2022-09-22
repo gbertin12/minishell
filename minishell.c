@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 17:52:18 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:35:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ static void	main2(t_minishell *ms, char *s)
 	if (ms->t_head && ft_strcmp(ms->t_head->cmd, "exit")
 		&& count_token(ms->t_head) == 1)
 	{
+		free_all(ms);
 		if (b_exit(ms->t_head, ms))
-		{
-			reset(ms, s);
 			exit(ms->l_retv);
-		}
 		exit(ms->l_retv);
 	}
 	browse_cmd(ms);
