@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 16:19:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 10:21:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static char	exec_chdir(char *path, t_minishell *ms)
 	char	**all_cdpath;
 
 	value_oldpwd = get_pwd(ms);
-	if (do_env_key_exist("CDPATH", ms) && (path[0] != '.' && path[1] != '.' && path[0] != '/'))
+	if (do_env_key_exist("CDPATH", ms) && (path[0] != '.'
+			&& path[1] != '.' && path[0] != '/'))
 	{
 		all_cdpath = ft_split(get_env_value("CDPATH", ms), ':', ms);
 		n_path = check_cd_path(path, all_cdpath, ms);
