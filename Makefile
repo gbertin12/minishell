@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/22 11:33:26 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/22 14:59:41 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,8 +83,7 @@ SRCS = minishell.c\
 		sources/utils/token_is_empty.c\
 		sources/copy_env.c
 
-HEAD = includes/minishell.h
-
+DEPENDS := $(patsubst %.c,%.d,$(SRCS))
 OBJ=$(SRCS:.c=.o)
 
 ifneq (,$(findstring xterm,${TERM}))
@@ -119,14 +118,16 @@ TITLE = "\n $(BLUE)███    ███ ██ ███    ██ ██ █�
 
 .SILENT:
 
-all: title $(NAME)
+all: title depending $(NAME)
 
-%.o: %.c $(HEAD)
-			$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
+-include $(DEPENDS)
 
-$(NAME): compiling $(OBJ)
+%.o: %.c Makefile
+			$(CC) $(FLAGS) -MMD -MP -c $< -o $@
+
+$(NAME): compiling $(OBJ) 
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
+			$(CC) $(FLAGS) $(OBJ) -o $@ -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
 			
 malloc_test: $(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
@@ -134,10 +135,11 @@ malloc_test: $(OBJ)
 	
 clean: cleaning
 			$(MAKE) clean -C $(LIBFT_PATH)
-			$(RM) $(OBJ)
+			$(RM) $(OBJ) $(DEPENDS)
 
-fclean: clean
+fclean:
 			$(MAKE) fclean -C $(LIBFT_PATH)
+			$(RM) $(OBJ) $(DEPENDS)
 			$(RM) $(NAME)
 
 clear:
@@ -149,8 +151,12 @@ title: clear
 compiling:
 			echo "$(PURPLE)ᐅ $(YELLOW)Compiling ...$(RESET)"
 
+depending:
+			echo "$(PURPLE)ᐅ $(YELLOW)Generating dependencies ...$(RESET)"
+
 re: fclean all
 
 cleaning:
 			echo "$(PURPLE)ᐅ $(YELLOW)Cleaning ...$(RESET)"
-.PHONY: clean fclean all re
+
+.PHONY: clean fclean all re $(NAME)
