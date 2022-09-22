@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/22 14:59:41 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/22 15:13:50 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,7 @@ clean: cleaning
 			$(MAKE) clean -C $(LIBFT_PATH)
 			$(RM) $(OBJ) $(DEPENDS)
 
-fclean:
+fclean: cleaning
 			$(MAKE) fclean -C $(LIBFT_PATH)
 			$(RM) $(OBJ) $(DEPENDS)
 			$(RM) $(NAME)
