@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:03:43 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/22 14:16:03 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:42:33 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	check_token(t_token *t, t_token *head, char *s)
 	{
 		if (count_token(head) == 1 && !*s)
 			return (1);
-		else
+		if (count_token(head) == 1)
 			return (check_file(t, t->file_head));
 		if (t->next)
 			create_error("syntax error near unexpected token `|'");
