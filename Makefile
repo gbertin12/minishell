@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/21 12:15:17 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/22 11:33:26 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,12 +87,44 @@ HEAD = includes/minishell.h
 
 OBJ=$(SRCS:.c=.o)
 
-all: $(NAME)
+ifneq (,$(findstring xterm,${TERM}))
+	BLACK        := $(shell tput -Txterm setaf 0)
+	RED          := $(shell tput -Txterm setaf 1)
+	GREEN        := $(shell tput -Txterm setaf 2)
+	YELLOW       := $(shell tput -Txterm setaf 3)
+	LIGHTPURPLE  := $(shell tput -Txterm setaf 4)
+	PURPLE       := $(shell tput -Txterm setaf 5)
+	BLUE         := $(shell tput -Txterm setaf 6)
+	WHITE        := $(shell tput -Txterm setaf 7)
+	RESET := $(shell tput -Txterm sgr0)
+else
+	BLACK        := ""
+	RED          := ""
+	GREEN        := ""
+	YELLOW       := ""
+	LIGHTPURPLE  := ""
+	PURPLE       := ""
+	BLUE         := ""
+	WHITE        := ""
+	RESET        := ""
+endif
+
+TITLE = "\n $(BLUE)███    ███ ██ ███    ██ ██ ███████ ██   ██ ███████ ██      ██     \n"\
+		"$(BLUE)████  ████ ██ ████   ██ ██ ██      ██   ██ ██      ██      ██  \n"\
+		"$(BLUE)██ ████ ██ ██ ██ ██  ██ ██ ███████ ███████ █████   ██      ██      \n"\
+		"$(BLUE)██  ██  ██ ██ ██  ██ ██ ██      ██ ██   ██ ██      ██      ██      \n"\
+		"$(BLUE)██      ██ ██ ██   ████ ██ ███████ ██   ██ ███████ ███████ ███████\n"\
+        "\n\n $(PURPLE)ᐅ $(YELLOW)Making something like $(GREEN)$(NAME) $(YELLOW)or a shitty thing $(RED)(╯°□°)╯︵ ┻━┻ $(RESET)\n\n"                                                   
+
+
+.SILENT:
+
+all: title $(NAME)
 
 %.o: %.c $(HEAD)
 			$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
 
-$(NAME):$(OBJ)
+$(NAME): compiling $(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
 			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
 			
@@ -100,7 +132,7 @@ malloc_test: $(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
 			$(CC) $(FLAGS) -fsanitize=undefined -rdynamic -o $@ $(OBJ) -lreadline $(LIBFT_PATH)/libft.a -lm -lmallocator -L.
 	
-clean: 
+clean: cleaning
 			$(MAKE) clean -C $(LIBFT_PATH)
 			$(RM) $(OBJ)
 
@@ -108,6 +140,17 @@ fclean: clean
 			$(MAKE) fclean -C $(LIBFT_PATH)
 			$(RM) $(NAME)
 
+clear:
+			clear
+
+title: clear
+			echo $(TITLE)
+
+compiling:
+			echo "$(PURPLE)ᐅ $(YELLOW)Compiling ...$(RESET)"
+
 re: fclean all
 
+cleaning:
+			echo "$(PURPLE)ᐅ $(YELLOW)Cleaning ...$(RESET)"
 .PHONY: clean fclean all re
