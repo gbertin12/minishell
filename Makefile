@@ -12,7 +12,7 @@
 
 NAME = minishell
 CC = clang
-FLAGS = -Wall -Wextra -Werror -g3 -I /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -g -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -94,7 +94,7 @@ all: $(NAME)
 
 $(NAME):$(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -fsanitize=address -lreadline -L /opt/homebrew/opt/readline/lib
+			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
 			
 malloc_test: $(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)

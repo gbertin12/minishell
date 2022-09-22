@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 15:54:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 16:14:09 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	while (arg)
 	{
 		i = ft_strchr(arg->value, '$');
-		if (!i || between_quote(arg->value, (i - arg->value)))
+		if (!i || between_quote(arg->value, (i - arg->value))
+			|| i[1] == '\0' || is_space(i[1]) || i[1] == '$')
 		{
 			arg = arg->next;
 			continue ;

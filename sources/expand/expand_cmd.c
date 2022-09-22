@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 11:09:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 16:11:02 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ static size_t	next_var(char *s)
 	size_t	i;
 
 	i = 0;
-	while (s && s[i] && (between_quote(s, i) || s[i] != '$'))
+	while ((s && s[i]) || between_quote(s, i))
+	{
+		if (s[i] == '$' && !between_quote(s, i) && s[i + 1] != '\0'
+			&& !is_space(s[i + 1]) && s[i + 1] != '$')
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
