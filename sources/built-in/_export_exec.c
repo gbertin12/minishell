@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 14:10:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 16:19:13 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	exec_child(t_token *token, t_minishell *ms)
 		}
 		free_all(ms);
 		exit (0);
-	}
+	}	
 	return (0);
 }
 

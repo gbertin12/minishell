@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 14:50:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 16:22:38 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,7 @@ static int	exec_child(t_token *token, t_minishell *ms)
 		if (token->arg_head)
 		{
 			if (!check_arg(token, ms))
-			{
-				ft_putstr_fd("exit test\n", 2);
 				exit (ft_atoll(token->arg_head->value) % 256);
-			}
 		}
 		free_all(ms);
 		exit(ms->l_retv);
