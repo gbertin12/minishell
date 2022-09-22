@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_built_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:39:59 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/06 15:12:50 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:51:13 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	check_is_built_in(t_token *token)
 		return (1);
 	if (ft_strcmp(token->cmd, "unset"))
 		return (1);
+	if (ft_strcmp(token->cmd, "exit"))
+		return (1);
 	return (0);
 }
 
@@ -34,14 +36,16 @@ int	exec_builtin(t_token *token, t_minishell *ms)
 	if (ft_strcmp(token->cmd, "env"))
 		return (exec_env(token, ms));
 	if (ft_strcmp(token->cmd, "pwd"))
-		return (exec_pwd(token));
+		return (exec_pwd(token, ms));
 	if (ft_strcmp(token->cmd, "cd"))
 		return (exec_cd(token, ms));
 	if (ft_strcmp(token->cmd, "echo"))
-		return (exec_echo(token));
+		return (exec_echo(token, ms));
 	if (ft_strcmp(token->cmd, "export"))
 		return (exec_export(token, ms));
 	if (ft_strcmp(token->cmd, "unset"))
 		return (exec_unset(token, ms));
+	if (ft_strcmp(token->cmd, "exit"))
+		return (b_exit(token, ms));
 	return (0);
 }

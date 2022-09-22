@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 12:08:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 14:50:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,51 @@ int	check_arg(t_token *token, t_minishell *ms)
 	return (0);
 }
 
+static int	exec_child(t_token *token, t_minishell *ms)
+{
+	if (token->next)
+	{
+		if (pipe(token->pipefd))
+			return (1);
+	}
+	token->pid = fork();
+	if (token->pid == 0)
+	{
+		if (init_execute(token))
+		{
+			free_all(ms);
+			exit(1);
+		}
+		redir_out(token);
+		if (token->arg_head)
+		{
+			if (!check_arg(token, ms))
+			{
+				ft_putstr_fd("exit test\n", 2);
+				exit (ft_atoll(token->arg_head->value) % 256);
+			}
+		}
+		free_all(ms);
+		exit(ms->l_retv);
+	}
+	return (1);
+}
+
 int	b_exit(t_token *token, t_minishell *ms)
 {
-	printf("exit\n");
-	if (token->arg_head)
+	if (count_token(ms->t_head) > 1)
 	{
-		if (check_arg(token, ms))
-			return (1);
-		ms->l_retv = ft_atoll(token->arg_head->value) % 256;
+		exec_child(token, ms);
+	}
+	else
+	{
+		printf("exit\n");
+		if (token->arg_head)
+		{
+			if (check_arg(token, ms))
+				return (1);
+			ms->l_retv = ft_atoll(token->arg_head->value) % 256;
+		}
 	}
 	return (0);
 }
