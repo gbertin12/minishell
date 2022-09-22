@@ -59,6 +59,7 @@ else
 	RESET        := ""
 endif
 
+TITLE= "$(PURPLE)ᐅ $(YELLOW)Compiling $(RED)libft$(YELLOW)...$(RESET)"
 .SILENT:
 
 all : title $(OBJ) $(NAME)
@@ -69,19 +70,19 @@ $(NAME) : title $(OBJ)
 fclean : clean
 	rm -rf $(NAME)
 
-clean :
+clean : cleaning
 	rm -rf $(OBJ)
 
 re : fclean $(NAME)
 
-title:clear
+title:
 	echo $(TITLE)
-
-clear:
-	clear
 
 .o: .c
 	$(CC) -o $@ -c $< $(CFLAGS)
+
+cleaning:
+	echo "$(PURPLE)ᐅ $(YELLOW)Cleaning $(RED)libft$(YELLOW)...$(RESET)"
 
 mrproper: clean
 	rm -rf $(NAME)
