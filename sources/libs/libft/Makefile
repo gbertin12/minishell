@@ -62,9 +62,9 @@ endif
 TITLE= "$(PURPLE)ᐅ $(YELLOW)Compiling $(RED)libft$(YELLOW)...$(RESET)"
 .SILENT:
 
-all : title $(OBJ) $(NAME)
+all : title $(NAME)
 
-$(NAME) : title $(OBJ)
+$(NAME) : $(OBJ)
 	ar -cq $(NAME) $(OBJ)
 
 fclean : clean
