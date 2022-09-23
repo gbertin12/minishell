@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 16:22:38 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 10:07:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	b_exit(t_token *token, t_minishell *ms)
 {
 	if (count_token(ms->t_head) > 1)
 	{
+		printf("count token > 1\n");
+		ft_putstr_fd("exit in child\n", 2);
 		exec_child(token, ms);
 	}
 	else
