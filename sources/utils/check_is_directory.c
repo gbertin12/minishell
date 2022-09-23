@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_is_directory.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:33:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 11:06:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 16:50:20 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_is_directory(char *path, int printable)
 {
 	DIR	*dir;
 
+	if (!path)
+		return (1);
 	dir = opendir(path);
 	if (dir != NULL)
 	{
