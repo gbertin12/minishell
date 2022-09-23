@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 10:19:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 10:22:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	init_minishell(ms);
 	copy_env(ms, envp);
 	init_signals();
+	rl_clear_history();
+	g_mode = 0;
 }
 
 static void	reset(t_minishell *ms, char *s)
@@ -47,6 +49,7 @@ static void	main2(t_minishell *ms, char *s)
 		&& count_token(ms->t_head) == 1)
 	{
 		free_all(ms);
+		rl_clear_history();
 		if (b_exit(ms->t_head, ms))
 			exit(ms->l_retv);
 		exit(ms->l_retv);
@@ -69,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 				ms.l_retv = 130;
 			g_mode = 0;
 		}
-		s = readline("minishell >");
+		s = readline("minishell> ");
 		if (!s || !s[0])
 		{
 			if (!s)

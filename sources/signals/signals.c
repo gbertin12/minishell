@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/22 16:20:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/23 09:49:52 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@ void	sigint_heredoc(int sig)
 
 void	sigint_handler(int sig)
 {
-	char	*pwd;
-
 	if (g_mode || sig != SIGINT)
 	{
 		g_mode = 2;
 		return ;
 	}
-	pwd = getcwd(NULL, 0);
-	printf("\n%s┌──%s(%sminishell%s)%s──%s[%s%s%s]\n", BLUE, YELLOW,
-		GREEN, YELLOW, BLUE, YELLOW, GREEN, pwd, YELLOW);
-	free(pwd);
+	printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();

@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/23 10:14:36 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/23 10:22:44 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRCS = minishell.c\
 		sources/parsing/check_input.c\
 		sources/parsing/parsing.c\
 		sources/parsing/search_next_sep.c\
-		sources/prompt/get_prompt.c\
 		sources/signals/signals.c\
 		sources/utils/add_end_list.c\
 		sources/utils/add_env_key_value.c\
