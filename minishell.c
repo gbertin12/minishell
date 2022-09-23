@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 10:31:51 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 10:46:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static void	main2(t_minishell *ms, char *s)
 		&& count_token(ms->t_head) == 1)
 	{
 		if (b_exit(ms->t_head, ms))
+		{
+			reset(ms, s);
 			return ;
+		}
 	}
 	browse_cmd(ms);
 	reset(ms, s);

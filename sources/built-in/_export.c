@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/22 15:01:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 12:37:44 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,7 @@ int	_export(t_token *token, t_minishell *ms)
 
 	if (token == NULL)
 		return (EXIT_FAILURE);
-	if (count_token(ms->t_head) > 1)
-		return (0);
-	if (!token->arg_head)
+	if (!token->arg_head || !token->arg_head->value || !token->arg_head->value[0])
 		return (declaration(ms));
 	arg = token->arg_head;
 	error = 0;

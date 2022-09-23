@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/23 10:22:44 by gbertin          ###   ########.fr        #
+#    Updated: 2022/09/23 11:27:41 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = minishell.c\
 		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
 		sources/built-in/_exit.c\
+		sources/built-in/_exit2.c\
 		sources/built-in/_export.c\
 		sources/built-in/_export2.c\
 		sources/built-in/_export_exec.c \
