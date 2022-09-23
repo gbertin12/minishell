@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 10:07:45 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 10:41:48 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,21 +116,25 @@ static int	exec_child(t_token *token, t_minishell *ms)
 
 int	b_exit(t_token *token, t_minishell *ms)
 {
+	int	ret_v;
+
 	if (count_token(ms->t_head) > 1)
 	{
-		printf("count token > 1\n");
-		ft_putstr_fd("exit in child\n", 2);
 		exec_child(token, ms);
 	}
 	else
 	{
+		ret_v = ms->l_retv;
 		printf("exit\n");
 		if (token->arg_head)
 		{
 			if (check_arg(token, ms))
 				return (1);
-			ms->l_retv = ft_atoll(token->arg_head->value) % 256;
+			ret_v = ft_atoll(token->arg_head->value) % 256;
 		}
+		rl_clear_history();
+		free_all(ms);
+		exit(ret_v);
 	}
 	return (0);
 }

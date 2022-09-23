@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 10:22:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 10:31:51 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,8 @@ static void	main2(t_minishell *ms, char *s)
 	if (ms->t_head && ft_strcmp(ms->t_head->cmd, "exit")
 		&& count_token(ms->t_head) == 1)
 	{
-		free_all(ms);
-		rl_clear_history();
 		if (b_exit(ms->t_head, ms))
-			exit(ms->l_retv);
-		exit(ms->l_retv);
+			return ;
 	}
 	browse_cmd(ms);
 	reset(ms, s);
