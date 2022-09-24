@@ -6,11 +6,27 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:25:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 11:35:35 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 14:38:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	no_valid_arg(t_arg *arg)
+{
+	t_arg	*begin;
+
+	begin = arg;
+	if (!begin)
+		return (1);
+	while (begin)
+	{
+		if (ft_strlen(begin->value) > 0)
+			return (0);
+		begin = begin->next;
+	}
+	return (1);
+}
 
 static int	ft_check_int(int i, char *nbr, char *max)
 {

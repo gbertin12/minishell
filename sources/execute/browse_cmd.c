@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 11:58:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 14:48:32 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 	dup2(exec->tmpout, 1);
 	close(exec->tmpin);
 	close(exec->tmpout);
-	printf("RETURN STATUS : %d\n", exec->l_retv);
 	ms->l_retv = exec->l_retv;
 	return (0);
 }

@@ -6,34 +6,34 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 11:37:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 12:56:25 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void exec_child(t_token *token, t_minishell *ms)
+static void	exec_child(t_token *token, t_minishell *ms)
 {
 	if (init_execute(token))
+	{
+		free_all(ms);
+		exit(1);
+	}
+	redir_out(token);
+	if (token->arg_head)
+	{
+		if (!check_arg(token, ms))
 		{
 			free_all(ms);
-			exit(1);
+			exit (ft_atoll(token->arg_head->value) % 256);
 		}
-		redir_out(token);
-		if (token->arg_head)
-		{
-			if (!check_arg(token, ms))
-			{
-				free_all(ms);
-				exit (ft_atoll(token->arg_head->value) % 256);
-			}
-		}
+	}
 }
 
 static int	exec_in_child(t_token *token, t_minishell *ms)
 {
-	int ret_v;
-	
+	int	ret_v;
+
 	if (token->next)
 	{
 		if (pipe(token->pipefd))
