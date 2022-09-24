@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:47:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/30 12:17:01 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:45:18 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include <stddef.h>
 # include "../sources/libs/libft/libft.h"
 //colors
-# define BLUE "\033[036m"
-# define RED "\033[031m"
-# define GREEN "\033[032m"
-# define YELLOW "\033[033m"
-# define PURPLE "\033[035m"
-# define LIGHTPURPLE "\033[034m"
-# define WHITE "\033[037m"
-# define RESET "\033(B\033[m"
+# define BLUE "\1\e[0;36m\2"
+# define RED "\1\e[0;31m\2"
+# define GREEN "\1\e[0;32m\2"
+# define YELLOW "\1\e[0;33m\2"
+# define PURPLE "\1\e[0;35m\2"
+# define LIGHTPURPLE "\1\e[0;34m\2"
+# define WHITE "\1\e[0;37m\2"
+# define RESET "\1\e[0m\2"
 
 char	*get_prompt(t_minishell *ms);
 
