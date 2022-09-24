@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 10:38:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:33:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	init_minishell(ms);
 	copy_env(ms, envp);
 	init_signals();
-	rl_clear_history();
-	g_mode = 0;
 }
 
 static void	reset(t_minishell *ms, char *s)
@@ -72,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 				ms.l_retv = 130;
 			g_mode = 0;
 		}
-		s = readline("minishell> ");
+		s = readline(get_prompt(&ms));
 		if (!s || !s[0])
 		{
 			if (!s)
