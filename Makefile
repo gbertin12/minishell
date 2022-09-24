@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/22 15:13:50 by ccambium         ###   ########.fr        #
+#    Updated: 2022/09/24 13:17:08 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = minishell.c\
 		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
 		sources/built-in/_exit.c\
+		sources/built-in/_exit2.c\
 		sources/built-in/_export.c\
 		sources/built-in/_export2.c\
 		sources/built-in/_export_exec.c \
