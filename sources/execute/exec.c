@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/24 08:47:54 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/27 22:09:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		if (exec->token->have_in)
 			dup2(exec->token->inputfile, 0);
 		redir_out(exec->token);
-		if (null_cmd);
+		if (null_cmd(exec, ms))
 			exit (0);
 		if (check_path(exec, ms))
 			exit(127);
