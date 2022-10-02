@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/27 22:11:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/28 17:31:06 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 			return (1);
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
+		if (null_cmd(exec, ms))
+			exit (0);
 		if (check_path(exec, ms))
 			exit(127);
 		execve(exec->path, args, exec->env);
@@ -105,6 +107,8 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 	{
 		init_execute(exec->token);
 		redir_in(exec->token, exec->last);
+		if (null_cmd(exec, ms))
+			exit (0);
 		if (exec->token->have_out)
 		{
 			if (exec->token->outputfile == -1)
