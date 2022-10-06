@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/05 11:52:35 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 11:50:19 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	check_path(t_exec *exec, t_minishell *ms)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(exec->token->cmd, 2);
 			ft_putstr_fd(": No such file or directory\n", 2);
-			free_all(ms);
 			return (1);
 		}
 	}
@@ -30,7 +29,6 @@ int	check_path(t_exec *exec, t_minishell *ms)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(exec->token->cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
-		free_all(ms);
 		return (1);
 	}
 	return (0);

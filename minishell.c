@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/24 13:58:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:26:52 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	main2(t_minishell *ms, char *s)
 	}
 	if (parsing(s, ms) != 0)
 	{
+		ms->l_retv = 2;
 		reset(ms, s);
 		return ;
 	}
