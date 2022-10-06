@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/28 17:31:06 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/05 11:52:35 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,17 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 	if (exec->token->pid == 0)
 	{
 		if (init_execute(exec->token))
-			exit (1);
+			exit_child(1, ms);
 		if (exec->token->have_in)
 			dup2(exec->token->inputfile, 0);
 		redir_out(exec->token);
 		if (null_cmd(exec, ms))
-			exit (0);
+			exit_child(0, ms);
 		if (check_path(exec, ms))
-			exit(127);
+			exit_child(127, ms);
 		execve(exec->path, exec->args, exec->env);
 		perror("minishell");
-		free_all(ms);
-		exit (126);
+		exit_child(126, ms);
 	}
 	return (0);
 }
@@ -86,13 +85,12 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
 		if (null_cmd(exec, ms))
-			exit (0);
+			exit_child(0, ms);
 		if (check_path(exec, ms))
-			exit(127);
+			exit_child(127, ms);
 		execve(exec->path, args, exec->env);
 		perror("minishell");
-		free_all(ms);
-		exit (126);
+		exit_child(126, ms);
 	}
 	return (0);
 }
@@ -108,22 +106,18 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		init_execute(exec->token);
 		redir_in(exec->token, exec->last);
 		if (null_cmd(exec, ms))
-			exit (0);
+			exit_child(0, ms);
 		if (exec->token->have_out)
 		{
 			if (exec->token->outputfile == -1)
-			{
-				free_all(ms);
-				exit (1);
-			}
+				exit_child(1, ms);
 			dup2(exec->token->outputfile, 1);
 		}
 		if (check_path(exec, ms))
-			exit(127);
+			exit_child(127, ms);
 		execve(exec->path, args, exec->env);
 		perror("minishell");
-		free_all(ms);
-		exit (126);
+		exit_child(126, ms);
 	}
 	return (0);
 }

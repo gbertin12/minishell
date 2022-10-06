@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/24 13:17:08 by ccambium         ###   ########.fr        #
+#    Updated: 2022/10/05 11:56:16 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = minishell.c\
 		sources/built-in/exec_built_in.c\
 		sources/execute/browse_cmd.c \
 		sources/execute/exec.c \
+		sources/execute/exit_child.c \
 		sources/execute/get_path.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
@@ -39,6 +40,7 @@ SRCS = minishell.c\
 		sources/expand/expand_cmd.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/read_var.c\
+		sources/expand/remove_null.c\
 		sources/expand/replace_var.c\
 		sources/open/check_ambiguous.c\
 		sources/open/complex_var.c\
@@ -66,6 +68,7 @@ SRCS = minishell.c\
 		sources/utils/count_elem.c\
 		sources/utils/create_error.c\
 		sources/utils/do_env_key_exist.c\
+		sources/utils/free_arg.c\
 		sources/utils/free_split.c\
 		sources/utils/free_tokens.c\
 		sources/utils/ft_atoll.c\

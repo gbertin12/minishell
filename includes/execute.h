@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 14:03:48 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/05 11:47:00 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		exec_last(char **args, t_exec *exec, t_minishell *ms);
 int		execute_cmd(t_token *token, int pipefd[2], char **args,
 			t_minishell *ms);
 char	*get_last_arg(t_token *token);
+
+void	exit_child(int num_err, t_minishell *ms);
 
 t_exec	*first(t_exec *exec, t_minishell *ms);
 t_exec	*middle(t_exec *exec, t_minishell *ms);
