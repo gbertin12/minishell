@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _pwd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 14:00:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 12:10:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int	_pwd(t_token *token)
 {
-	char	v_print[1000];
+	char	*v_print;
 
 	if (count_arg(token->arg_head))
 	{
 		ft_putstr_fd("minishell: pwd: too many arguments\n", 2);
 		return (1);
 	}
-	if (getcwd(v_print, 50) == NULL)
+	v_print = getcwd(NULL, 0);
+	if (v_print == NULL)
 	{
 		strerror(errno);
 		return (1);
@@ -31,6 +32,7 @@ int	_pwd(t_token *token)
 		ft_putstr_fd(v_print, 1);
 		ft_putstr_fd("\n", 1);
 	}
+	free(v_print);
 	return (EXIT_SUCCESS);
 }
 
