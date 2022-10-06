@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_is_directory.c                               :+:      :+:    :+:   */
+/*   remove_null.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 10:33:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 16:50:20 by ccambium         ###   ########.fr       */
+/*   Created: 2022/10/03 13:21:46 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/03 13:37:45 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_is_directory(char *path, int printable)
+void	remove_null(t_token *token, t_minishell *ms)
 {
-	DIR	*dir;
+	t_arg	*arg;
+	t_arg	*last;
 
-	if (!path)
-		return (1);
-	dir = opendir(path);
-	if (dir != NULL)
+	arg = token->arg_head;
+	last = NULL;
+	while (arg)
 	{
-		closedir(dir);
-		if (printable)
+		if (!arg->value || !*arg->value)
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(path, 2);
-			ft_putstr_fd(": Is a directory\n", 2);
+			if (!last)
+				token->arg_head = arg->next;
+			else
+				last->next = arg->next;
+			free_arg(arg, ms);
+			arg = token->arg_head;
+			continue ;
 		}
-		return (0);
+		last = arg;
+		arg = arg->next;
 	}
-	return (1);
 }

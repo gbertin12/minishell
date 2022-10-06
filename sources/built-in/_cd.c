@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 10:21:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 09:17:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,24 @@ char	_cd(t_token *token, t_minishell *ms)
 	char	*home_path;
 
 	home_path = get_env_value("HOME", ms);
-	if (home_path == NULL)
-		home_path = "/home";
 	nb_arg = count_arg(token->arg_head);
-	if (nb_arg == 0)
+	if (nb_arg == 0 && home_path)
 		return (exec_chdir(home_path, ms));
+	else if (nb_arg == 0 && !home_path)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (1);
+	}
 	return (exec_chdir(token->arg_head->value, ms));
 }
 
 int	exec_cd(t_token *token, t_minishell *ms)
 {
-	if (count_token(ms->t_head) == 1)
+	DIR *dir;
+	
+	if (count_token(ms->t_head) == 1 && ms->t_head->arg_head
+		&& ms->t_head->arg_head->value
+		&& ms->t_head->arg_head->value[0] != '\0')
 	{
 		if (_cd(token, ms))
 			return (1);

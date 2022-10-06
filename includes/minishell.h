@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 12:02:01 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 10:33:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <dirent.h>
 # include <string.h>
 # include "../sources/libs/libft/libft.h"
+
+#include <dirent.h>
 
 //include minishell
 # include "structures.h"

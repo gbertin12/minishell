@@ -6,11 +6,32 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 15:17:36 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 16:19:13 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	exec_child(t_token *token, t_minishell *ms)
+{
+	if (init_execute(token))
+	{
+		free_all(ms);
+		exit (1);
+	}
+	redir_out(token);
+	if (token->arg_head == NULL)
+	{
+		if (_export(token, ms))
+		{
+			free_all(ms);
+			exit (1);
+		}
+		free_all(ms);
+		exit (0);
+	}	
+	return (0);
+}
 
 static int	exec_in_child(t_token *token, t_minishell *ms)
 {
@@ -26,16 +47,7 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 		return (1);
 	}
 	if (token->pid == 0)
-	{
-		init_execute(token);
-		redir_out(token);
-		if (token->arg_head == NULL)
-		{
-			if (_export(token, ms))
-				exit (1);
-			exit (0);
-		}
-	}
+		exec_child(token, ms);
 	return (1);
 }
 

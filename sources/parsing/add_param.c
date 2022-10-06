@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:06:39 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 15:40:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:54:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long long	add_arg(char *s, t_token *token, t_minishell *ms)
 }
 
 static long long int	add_output2(t_file *file, t_token *token,
-	long long ret_v, long long size)
+								long long ret_v, long long size)
 {
 	file->type = 1;
 	add_end_file(token, file);
@@ -64,7 +64,7 @@ long long int	add_output(char *s, t_token *token, t_minishell *ms)
 	while (is_space(s[ret_v]))
 		ret_v++;
 	size = get_size_of_cmd(&s[ret_v]);
-	if ((!ft_isprint(s[ret_v]) && !is_space(s[ret_v])) || size < 0)
+	if ((!ft_isprint(s[ret_v]) && !is_space(s[ret_v]) && s[ret_v]) || size < 0)
 		return (-1);
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
 	if (!file->path)
@@ -91,7 +91,7 @@ long long int	add_input(char *s, t_token *token, t_minishell *ms)
 	while (is_space(s[ret_v]))
 		ret_v++;
 	size = get_size_of_cmd(&s[ret_v]);
-	if ((!ft_isprint(s[ret_v]) && !is_space(s[ret_v])) || size < 0)
+	if ((!ft_isprint(s[ret_v]) && !is_space(s[ret_v]) && s[ret_v]) || size < 0)
 		return (-1);
 	file->path = ft_substr(s, (size_t)ret_v, size, ms);
 	if (!file->path)

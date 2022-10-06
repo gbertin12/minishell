@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   free_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 11:59:55 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 12:54:45 by gbertin          ###   ########.fr       */
+/*   Created: 2022/10/03 13:29:03 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/03 13:31:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_strcmp(char *str1, char *str2)
+void	free_arg(t_arg *arg, t_minishell *ms)
 {
-	int	i;
-
-	i = 0;
-	if (!str1 || !str2)
-		return (0);
-	while (str1[i] || str2[i])
-	{
-		if (str1[i] == '\n' && str2[i] == '\0')
-			return (1);
-		if (str1[i] != str2[i])
-			return (0);
-		i++;
-	}
-	return (1);
+	if (arg->value)
+		ft_free(arg->value, ms);
+	ft_free(arg, ms);
 }

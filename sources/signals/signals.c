@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/05 10:44:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/06 08:36:10 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,20 @@ void	init_signals(void)
 
 void	sigint_heredoc(int sig)
 {
-	unlink(".tmp");
+	rl_replace_line("", 0);
 	exit(sig);
 }
 
 void	sigint_handler(int sig)
 {
-	char	*pwd;
-
 	if (g_mode || sig != SIGINT)
 	{
 		g_mode = 2;
 		return ;
 	}
-	pwd = getcwd(NULL, 0);
-	printf("\n%s┌──%s(%sminishell%s)%s──%s[%s%s%s]\n", BLUE, YELLOW,
-		GREEN, YELLOW, BLUE, YELLOW, GREEN, pwd, YELLOW);
-	free(pwd);
-	rl_on_new_line();
+	printf("\n");
 	rl_replace_line("", 0);
+	rl_on_new_line();
 	rl_redisplay();
 }
 

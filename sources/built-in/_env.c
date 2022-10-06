@@ -6,11 +6,22 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:55:17 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 09:55:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/05 11:53:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	exec_child(t_token *token, t_minishell *ms)
+{
+	if (init_execute(token))
+		exit_child(1, ms);
+	redir_out(token);
+	if (_env(ms))
+		exit_child(1, ms);
+	exit_child(0, ms);
+	return (0);
+}
 
 int	_env(t_minishell *ms)
 {
@@ -41,12 +52,6 @@ int	exec_env(t_token *token, t_minishell *ms)
 	}
 	token->pid = fork();
 	if (token->pid == 0)
-	{
-		init_execute(token);
-		redir_out(token);
-		if (_env(ms))
-			exit(1);
-		exit(0);
-	}
+		exec_child(token, ms);
 	return (0);
 }

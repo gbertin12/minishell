@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:18:19 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 08:44:07 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:35:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXPAND_H
 
 void	delete_quotes(t_token *token, t_minishell *ms);
+void	remove_null(t_token *token, t_minishell *ms);
 
 char	*read_var(char *s, t_minishell *ms);
 char	*heredoc_expand(char *s, t_minishell *ms);
