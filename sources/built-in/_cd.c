@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 11:47:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 12:25:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ char	_cd(t_token *token, t_minishell *ms)
 
 int	exec_cd(t_token *token, t_minishell *ms)
 {
-	if (count_token(ms->t_head) == 1 && ms->t_head->arg_head
-		&& ms->t_head->arg_head->value
-		&& ms->t_head->arg_head->value[0] != '\0')
+	if (count_token(ms->t_head) == 1)
 	{
 		if (_cd(token, ms))
 			return (1);
