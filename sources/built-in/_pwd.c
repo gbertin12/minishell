@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 14:00:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:08:07 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	_pwd(t_token *token)
 {
 	char	v_print[1000];
 
+	printf("test\n");
 	if (count_arg(token->arg_head))
 	{
 		ft_putstr_fd("minishell: pwd: too many arguments\n", 2);
