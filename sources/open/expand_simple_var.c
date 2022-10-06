@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 12:17:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 08:40:22 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/21 12:29:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static size_t	get_size_simple(char *path)
 	return (size);
 }
 
-char	*simple_var(char *path)
+char	*simple_var(char *path, t_minishell *ms)
 {
 	char	*ret_v;
 	size_t	size;
@@ -49,7 +49,7 @@ char	*simple_var(char *path)
 
 	index = 0;
 	size = get_size_simple(path);
-	ret_v = malloc(sizeof(char) * size + 1);
+	ret_v = ft_malloc(sizeof(char) * size + 1, ms);
 	if (!ret_v)
 		return (NULL);
 	i = 0;

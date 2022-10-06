@@ -1,5 +1,5 @@
 badfile
-
+*.d
 *.o
 .vscode
 minishell
@@ -14,3 +14,7 @@ ft_mallocator
 malloc_test
 stdin
 addresses.tmp
+
+.ignore_readline
+.tmp
+Testers

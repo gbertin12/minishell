@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 16:42:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 16:46:45 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ static size_t	next_var(char *s)
 	size_t	i;
 
 	i = 0;
-	while (s && s[i] && (between_quote(s, i) || s[i] != '$'))
+	while ((s && s[i]) || between_quote(s, i))
+	{
+		if (s[i] == '$' && !between_quote(s, i) && s[i + 1] != '\0'
+			&& !is_space(s[i + 1]) && s[i + 1] != '$')
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -48,48 +53,24 @@ static void	split_cmd(t_token *token, t_minishell *ms)
 	}
 }
 
-void	remove_first_arg(t_token *token, t_minishell *ms)
+char	expand_cmd(t_token *token, t_minishell *ms)
 {
-	t_arg	*arg;
-
-	arg = token->arg_head;
-	arg = arg->next;
-	ft_free(token->arg_head->value, ms);
-	ft_free(token->arg_head, ms);
-	token->arg_head = arg;
-}
-
-void	expand_cmd2(char flag, t_token *token, t_minishell *ms)
-{
-	if (flag)
-		split_cmd(token, ms);
-	if (!token->cmd || token->cmd[0] == '\0')
-	{
-		token->cmd = token->arg_head->value;
-		remove_first_arg(token, ms);
-	}
-}
-
-void	expand_cmd(t_token *token, t_minishell *ms)
-{
-	char	*tmp;
 	size_t	i;
 	char	flag;
 
 	flag = 0;
 	if (token->cmd == NULL)
-		return ;
+		return (0);
 	i = next_var(token->cmd);
 	while (token->cmd[i])
 	{
 		flag = 1;
-		tmp = token->cmd;
 		token->cmd = replace_var(token->cmd, i, ms);
 		if (!token->cmd)
-			token->cmd = tmp;
-		else
-			ft_free(tmp, ms);
+			return (1);
 		i = next_var(token->cmd);
 	}
-	expand_cmd2(flag, token, ms);
+	if (flag)
+		split_cmd(token, ms);
+	return (EXIT_SUCCESS);
 }

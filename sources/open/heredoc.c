@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:38:47 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/05 11:48:06 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ int	heredoc(char *limiter, t_minishell *ms)
 {
 	int		fd;
 	int		pid;
+	char	*tmp_file;
 
-	fd = open(".tmp", O_TRUNC | O_CREAT | O_RDWR, 0644);
+	tmp_file = ".tmp";
+	if (!tmp_file)
+		return (-1);
+	fd = open(tmp_file, O_TRUNC | O_CREAT | O_RDWR, 0644);
 	if (fd < 0)
 		return (fd);
 	pid = fork();
@@ -42,12 +46,13 @@ int	heredoc(char *limiter, t_minishell *ms)
 		return (-1);
 	if (pid == 0)
 	{
+		signal(SIGINT, sigint_heredoc);
 		print_in_file(fd, limiter, ms);
-		exit(0);
+		exit_child(0, ms);
 	}
 	waitpid(pid, NULL, 0);
 	close(fd);
-	fd = open(".tmp", O_RDONLY);
-	unlink(".tmp");
+	fd = open(tmp_file, O_RDONLY);
+	unlink(tmp_file);
 	return (fd);
 }

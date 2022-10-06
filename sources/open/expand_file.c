@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 12:25:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 11:24:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_value_key(char *path, t_minishell *ms)
 	key[size] = '\0';
 	ret_v = replace_value_file(key, ms);
 	if (!ret_v)
-		return (NULL);
+		ret_v = ft_strdup("", ms);
 	ft_free(key, ms);
 	return (ret_v);
 }
@@ -71,7 +71,7 @@ static char	*get_next_var(char *path, t_minishell *ms)
 	i = 0;
 	ret_v = NULL;
 	if (path[i] != '$' && path[i] != '\"' && path[i])
-		ret_v = simple_var(path);
+		ret_v = simple_var(path, ms);
 	else if (path[i] == '$')
 		ret_v = get_value_key(&path[i], ms);
 	else
@@ -81,12 +81,19 @@ static char	*get_next_var(char *path, t_minishell *ms)
 
 static int	is_ambiguous(char *value, t_minishell *ms)
 {
-	if (ft_split_set(value, " \n\r\v\t\f", ms)[1])
+	char	**split;
+
+	if (!value)
+		return (1);
+	split = ft_split_set(value, " \n\r\v\t\f", ms);
+	if (!split)
+		return (1);
+	if (split[1])
 		return (1);
 	return (0);
 }
 
-char	*expand_file(char *path, t_minishell *ms)
+char	*expand_file(char *path, t_file *file, t_minishell *ms)
 {
 	char	*new_path;
 	char	*save;
@@ -98,6 +105,8 @@ char	*expand_file(char *path, t_minishell *ms)
 	ambiguous = 0;
 	new_path = "";
 	save = ft_strdup(path, ms);
+	if (!save)
+		return (NULL);
 	while (path[i])
 	{
 		tmp = get_next_var(&path[i], ms);
@@ -108,7 +117,7 @@ char	*expand_file(char *path, t_minishell *ms)
 			break ;
 		i += pos_next_var(&path[i]);
 	}
-	if (!check_ambiguous(new_path, save, ambiguous))
+	if (!check_ambiguous(new_path, save, file, ambiguous))
 		return (NULL);
 	return (new_path);
 }

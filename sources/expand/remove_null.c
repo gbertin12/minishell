@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_var.c                                         :+:      :+:    :+:   */
+/*   remove_null.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 14:11:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 12:08:35 by ccambium         ###   ########.fr       */
+/*   Created: 2022/10/03 13:21:46 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/03 13:37:45 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*read_var(char *s, t_minishell *ms)
+void	remove_null(t_token *token, t_minishell *ms)
 {
-	size_t	i;
-	char	*ret_v;
+	t_arg	*arg;
+	t_arg	*last;
 
-	i = 0;
-	if (s[i] == '?')
-		return (ft_strdup("?", ms));
-	if ((!ft_isalpha(s[i]) && s[i] != '_') || !*s)
-		return (ft_strdup("", ms));
-	while (s[i] && !is_space(s[i]) && s[i] != '$')
-		i++;
-	ret_v = ft_substr(s, 0, i, ms);
-	return (ret_v);
+	arg = token->arg_head;
+	last = NULL;
+	while (arg)
+	{
+		if (!arg->value || !*arg->value)
+		{
+			if (!last)
+				token->arg_head = arg->next;
+			else
+				last->next = arg->next;
+			free_arg(arg, ms);
+			arg = token->arg_head;
+			continue ;
+		}
+		last = arg;
+		arg = arg->next;
+	}
 }

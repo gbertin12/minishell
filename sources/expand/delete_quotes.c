@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/19 14:35:55 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:29:11 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*ft_concate(char **tab, t_minishell *ms)
 
 	i = 0;
 	ret_v = NULL;
-	if (!tab[0])
+	if (!tab || !tab[0])
 		return (ft_strdup("", ms));
 	ret_v = ft_strjoin("", tab[0], ms);
 	if (!ret_v)
@@ -28,6 +28,8 @@ static char	*ft_concate(char **tab, t_minishell *ms)
 	while (tab[++i] != NULL)
 	{
 		tmp = ft_strjoin(ret_v, tab[i], ms);
+		if (!tmp)
+			return (ret_v);
 		ft_free(ret_v, ms);
 		ret_v = tmp;
 	}
@@ -39,12 +41,12 @@ static char	get_char_target(char *s)
 	char	ret_v;
 
 	ret_v = 0;
-	if (strchr(s, '"') && strchr(s, '\''))
+	if (ft_strchr(s, '"') && ft_strchr(s, '\''))
 		ret_v = char_ternary(
-				strchr(s, '"') < strchr(s, '\''), '"', '\'');
-	else if (strchr(s, '"'))
+				ft_strchr(s, '"') < ft_strchr(s, '\''), '"', '\'');
+	else if (ft_strchr(s, '"'))
 		ret_v = '"';
-	else if (strchr(s, '\''))
+	else if (ft_strchr(s, '\''))
 		ret_v = '\'';
 	return (ret_v);
 }
@@ -57,24 +59,24 @@ static char	*remove_quotes(char *s, t_minishell *ms)
 	size_t	x;
 
 	tmp = ft_malloc(sizeof(char *) * 4, ms);
-	if (!tmp)
-		return (s);
-	if (!s || (!strchr(s, '"') && !strchr(s, '\'')))
+	if (!tmp || !s || (!ft_strchr(s, '"') && !ft_strchr(s, '\'')))
 		return (s);
 	to_find = get_char_target(s);
 	if (!to_find)
 		return (s);
-	x = size_t_ternary(strchr(s, to_find) - s > 0, strchr(s, to_find) - s, 0);
+	x = size_t_ternary(ft_strchr(s, to_find) - s > 0,
+			ft_strchr(s, to_find) - s, 0);
 	tmp[0] = ft_substr(s, 0, x, ms);
 	tmp[1] = ft_substr(s, x + 1, (ft_strrchr(s, to_find) - s) - x - 1, ms);
 	tmp[2] = ft_substr(s, ft_strrchr(s, to_find) - s + 1, ft_strlen(s), ms);
 	tmp[3] = NULL;
 	ret_v = ft_concate(tmp, ms);
-	ft_free(tmp[0], ms);
-	ft_free(tmp[1], ms);
-	ft_free(tmp[2], ms);
-	ft_free(tmp, ms);
+	if (!tmp[0] || !tmp[1] || !tmp[2] || !ret_v)
+		return (s);
+	free_split(tmp, ms);
 	ft_free(s, ms);
+	if (ft_strchr(ret_v, '"') || ft_strchr(ret_v, '\''))
+		return (remove_quotes(ret_v, ms));
 	return (ret_v);
 }
 

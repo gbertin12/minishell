@@ -6,13 +6,13 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/21 09:26:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 11:26:55 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_have_next_type(t_file *file, char type)
+int	check_have_next_type(t_file *file, char type)
 {
 	while (file)
 	{
@@ -28,8 +28,8 @@ static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	file->path = expand_file(file->path, ms);
-	if (!file->path)
+	file->path = expand_file(file->path, file, ms);
+	if (!file->path || !check_is_directory(file->path, 0))
 		return (-2);
 	if (file->append)
 		fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -71,7 +71,7 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 	int	fd;
 
 	fd = 0;
-	file->path = expand_file(file->path, ms);
+	file->path = expand_file(file->path, file, ms);
 	if (!file->path)
 		return (-2);
 	if (file->append)

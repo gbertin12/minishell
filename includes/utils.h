@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/20 17:48:00 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/03 13:35:36 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		init_minishell(t_minishell *ms);
 void		ft_free(void *ptr, t_minishell *ms);
 void		add_end_arg(t_arg *head, t_arg *obj);
 void		add_end_obj(t_obj *head, t_obj *obj);
+void		free_arg(t_arg *arg, t_minishell *ms);
 void		free_split(char **tab, t_minishell *ms);
 void		add_end_file(t_token *token, t_file *obj);
 void		add_end_token(t_token *obj, t_minishell *ms);
@@ -60,7 +61,7 @@ int			ft_error(char *msg);
 int			check_key_env(char *s);
 int			ft_strcmp(char *str1, char *str2);
 
-int			check_is_directory(t_exec *exec, int printable);
+int			check_is_directory(char *path, int printable);
 int			add_key_with_empty_value(char *s, t_minishell *ms);
 
 void		*ft_malloc(size_t size, t_minishell *ms);

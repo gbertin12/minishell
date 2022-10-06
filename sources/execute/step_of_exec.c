@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 12:17:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/22 11:10:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_last_arg(t_token *token)
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
-	if (exec->token->cmd != NULL && check_is_directory(exec, 0))
+	if (exec->token->cmd != NULL && check_is_directory(exec->token->cmd, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -69,7 +69,7 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 		modify_env("_", get_last_arg(exec->token), ms);
 	}
 	exec->last = exec->token;
-	if (!check_is_directory(exec, 1))
+	if (!check_is_directory(exec->token->cmd, 1))
 		exec->l_retv = 126;
 	if (count_token(ms->t_head) > 1)
 		exec->token = exec->token->next;
@@ -80,8 +80,7 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 
 t_exec	*middle(t_exec *exec, t_minishell *ms)
 {
-	exec->token = check_no_arg(exec->token, ms);
-	if (exec->token->cmd != NULL && check_is_directory(exec, 0))
+	if (exec->token->cmd != NULL && check_is_directory(exec->token->cmd, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -92,7 +91,7 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 		close(exec->last->pipefd[0]);
 		close(exec->last->pipefd[1]);
 	}
-	if (!check_is_directory(exec, 1))
+	if (!check_is_directory(exec->token->cmd, 1))
 		exec->l_retv = 126;
 	exec->last = exec->token;
 	exec->token = exec->token->next;
@@ -101,8 +100,7 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 
 t_exec	*last(t_exec *exec, t_minishell *ms)
 {
-	exec->token = check_no_arg(exec->token, ms);
-	if (exec->token->cmd != NULL && check_is_directory(exec, 0))
+	if (exec->token->cmd != NULL && check_is_directory(exec->token->cmd, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -111,7 +109,7 @@ t_exec	*last(t_exec *exec, t_minishell *ms)
 			exec_last(exec->args, exec, ms);
 		modify_env("_", get_last_arg(exec->token), ms);
 	}
-	if (!check_is_directory(exec, 1))
+	if (!check_is_directory(exec->token->cmd, 1))
 		exec->l_retv = 126;
 	return (exec);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/09/20 12:30:35 by ccambium         ###   ########.fr        #
+#    Updated: 2022/10/05 11:56:16 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = minishell.c\
 		sources/built-in/_echo.c\
 		sources/built-in/_env.c\
 		sources/built-in/_exit.c\
+		sources/built-in/_exit2.c\
 		sources/built-in/_export.c\
 		sources/built-in/_export2.c\
 		sources/built-in/_export_exec.c \
@@ -28,6 +29,7 @@ SRCS = minishell.c\
 		sources/built-in/exec_built_in.c\
 		sources/execute/browse_cmd.c \
 		sources/execute/exec.c \
+		sources/execute/exit_child.c \
 		sources/execute/get_path.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
@@ -38,6 +40,7 @@ SRCS = minishell.c\
 		sources/expand/expand_cmd.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/read_var.c\
+		sources/expand/remove_null.c\
 		sources/expand/replace_var.c\
 		sources/open/check_ambiguous.c\
 		sources/open/complex_var.c\
@@ -65,6 +68,7 @@ SRCS = minishell.c\
 		sources/utils/count_elem.c\
 		sources/utils/create_error.c\
 		sources/utils/do_env_key_exist.c\
+		sources/utils/free_arg.c\
 		sources/utils/free_split.c\
 		sources/utils/free_tokens.c\
 		sources/utils/ft_atoll.c\
@@ -83,31 +87,80 @@ SRCS = minishell.c\
 		sources/utils/token_is_empty.c\
 		sources/copy_env.c
 
-HEAD = includes/minishell.h
-
+DEPENDS := $(patsubst %.c,%.d,$(SRCS))
 OBJ=$(SRCS:.c=.o)
 
-all: $(NAME)
+ifneq (,$(findstring xterm,${TERM}))
+	BLACK        := $(shell tput -Txterm setaf 0)
+	RED          := $(shell tput -Txterm setaf 1)
+	GREEN        := $(shell tput -Txterm setaf 2)
+	YELLOW       := $(shell tput -Txterm setaf 3)
+	LIGHTPURPLE  := $(shell tput -Txterm setaf 4)
+	PURPLE       := $(shell tput -Txterm setaf 5)
+	BLUE         := $(shell tput -Txterm setaf 6)
+	WHITE        := $(shell tput -Txterm setaf 7)
+	RESET := $(shell tput -Txterm sgr0)
+else
+	BLACK        := ""
+	RED          := ""
+	GREEN        := ""
+	YELLOW       := ""
+	LIGHTPURPLE  := ""
+	PURPLE       := ""
+	BLUE         := ""
+	WHITE        := ""
+	RESET        := ""
+endif
 
-%.o: %.c $(HEAD)
-			$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
+TITLE = "\n $(BLUE)███    ███ ██ ███    ██ ██ ███████ ██   ██ ███████ ██      ██     \n"\
+		"$(BLUE)████  ████ ██ ████   ██ ██ ██      ██   ██ ██      ██      ██  \n"\
+		"$(BLUE)██ ████ ██ ██ ██ ██  ██ ██ ███████ ███████ █████   ██      ██      \n"\
+		"$(BLUE)██  ██  ██ ██ ██  ██ ██ ██      ██ ██   ██ ██      ██      ██      \n"\
+		"$(BLUE)██      ██ ██ ██   ████ ██ ███████ ██   ██ ███████ ███████ ███████\n"\
+        "\n\n $(PURPLE)ᐅ $(YELLOW)Making something like $(GREEN)$(NAME) $(YELLOW)or a shitty thing $(RED)(╯°□°)╯︵ ┻━┻ $(RESET)\n\n"                                                   
 
-$(NAME):$(OBJ)
+
+.SILENT:
+
+all: title depending $(NAME)
+
+-include $(DEPENDS)
+
+%.o: %.c Makefile
+			$(CC) $(FLAGS) -MMD -MP -c $< -o $@
+
+$(NAME): compiling $(OBJ) 
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
+			$(CC) $(FLAGS) $(OBJ) -o $@ -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
 			
 malloc_test: $(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)
 			$(CC) $(FLAGS) -fsanitize=undefined -rdynamic -o $@ $(OBJ) -lreadline $(LIBFT_PATH)/libft.a -lm -lmallocator -L.
 	
-clean: 
+clean: cleaning
 			$(MAKE) clean -C $(LIBFT_PATH)
-			$(RM) $(OBJ)
+			$(RM) $(OBJ) $(DEPENDS)
 
-fclean: clean
+fclean: cleaning
 			$(MAKE) fclean -C $(LIBFT_PATH)
+			$(RM) $(OBJ) $(DEPENDS)
 			$(RM) $(NAME)
+
+clear:
+			clear
+
+title: clear
+			echo $(TITLE)
+
+compiling:
+			echo "$(PURPLE)ᐅ $(YELLOW)Compiling ...$(RESET)"
+
+depending:
+			echo "$(PURPLE)ᐅ $(YELLOW)Generating dependencies ...$(RESET)"
 
 re: fclean all
 
-.PHONY: clean fclean all re
+cleaning:
+			echo "$(PURPLE)ᐅ $(YELLOW)Cleaning ...$(RESET)"
+
+.PHONY: clean fclean all re $(NAME)

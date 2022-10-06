@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/21 08:37:09 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 14:38:06 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ static t_env	*next_declare(t_minishell *ms, t_env *last)
 	{
 		if (!last)
 		{
-			if (strcmp(env->key, ret_v->key) < 0)
+			if (ft_strncmp(env->key, ret_v->key, ft_strlen(env->key) + 1) < 0)
 				ret_v = env;
 		}
 		else
 		{
 			if (ft_strncmp(env->key, last->key, ft_strlen(env->key) + 1) > 0
-				&& ft_strncmp(env->key, ret_v->key, ft_strlen(env->key) + 1) < 0)
+				&& ft_strncmp(env->key, ret_v->key,
+					ft_strlen(env->key) + 1) < 0)
 				ret_v = env;
 		}
 		env = env->next;
@@ -102,16 +103,19 @@ int	_export(t_token *token, t_minishell *ms)
 
 	if (token == NULL)
 		return (EXIT_FAILURE);
-	if (!token->arg_head)
+	if (no_valid_arg(token->arg_head))
 		return (declaration(ms));
 	arg = token->arg_head;
 	error = 0;
 	while (arg != NULL)
 	{
-		if (check_append_export(arg->value) && append_export(arg, ms))
+		if (arg->value && arg->value[0])
+		{
+			if (check_append_export(arg->value) && append_export(arg, ms))
+					error = 0;
+			else if (_export2(arg, ms))
 				error = 1;
-		else if (_export2(arg, ms))
-			error = 1;
+		}
 		arg = arg->next;
 	}
 	if (error)

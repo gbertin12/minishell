@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/20 17:22:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/09/23 12:56:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ static void	unset_elem(t_env *before, t_env *after, t_env *head)
 
 static int	_unset2(char *key, t_env *e_before, t_env *e_env, t_minishell *ms)
 {
-	if (!ft_strncmp(key, e_env->key, ft_strlen(key)))
+	if (!key || !key[0])
+		return (EXIT_SUCCESS);
+	if (!ft_strncmp(key, e_env->key, ft_strlen(key) + 1))
 	{
 		unset_elem(e_before, e_env->next, ms->e_head);
 		ft_free(e_env->key, ms);
@@ -47,7 +49,7 @@ int	_unset(t_arg *arg, t_minishell *ms)
 	{
 		e_before = NULL;
 		e_env = ms->e_head;
-		if (check_key_env(arg->value))
+		if (check_key_env(arg->value) && arg->value && arg->value[0])
 		{
 			print_not_valid_identifier("unset", arg->value);
 			flag = 1;
