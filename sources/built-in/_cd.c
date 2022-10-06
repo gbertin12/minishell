@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 10:35:26 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 11:47:03 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static int	check_err(char *path)
 	ft_putstr_fd("minishell: cd: ", 2);
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(": ", 2);
-	perror("");
+	if (errno == 116)
+		ft_putstr_fd("No such file or directory\n", 2);
+	else
+		perror("");
 	return (1);
 }
 
