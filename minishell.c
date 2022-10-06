@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 14:26:52 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:42:21 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	(void)argv;
 	(void)argc;
 	init_minishell(ms);
+	ms->pwd = get_pwd(ms);
 	copy_env(ms, envp);
 	init_signals();
 }
