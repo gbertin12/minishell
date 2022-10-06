@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 12:25:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:58:03 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 		value_pwd = get_pwd(ms);
 	modify_env("OLDPWD", value_oldpwd, ms);
 	modify_env("PWD", value_pwd, ms);
+	if (ms->pwd)
+		ft_free(ms->pwd, ms);
+	ms->pwd = ft_strdup(value_oldpwd, ms);
 	return (0);
 }
 

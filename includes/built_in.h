@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/23 14:38:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:38:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		_export(t_token *token, t_minishell *ms);
 int		check_append_export(char *export);
 t_env	*get_node_env(char *key, t_minishell *ms);
 int		append_export(t_arg *arg, t_minishell *ms);
-int		_pwd(t_token *token);
+int		_pwd(t_token *token, t_minishell *ms);
 int		_unset(t_arg *arg, t_minishell *ms);
 int		_echo(t_token *token);
 int		b_exit(t_token *token, t_minishell *ms);

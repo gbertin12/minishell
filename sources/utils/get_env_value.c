@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:36:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/06 12:03:05 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:44:56 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*get_env_value(char *key, t_minishell *ms)
 	char	*pwd;
 	char	*tmp;
 
+	tmp = NULL;
 	tmp = getcwd(NULL, 0);
 	pwd = ft_strdup(pwd, ms);
 	free(tmp);

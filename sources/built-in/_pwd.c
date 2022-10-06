@@ -6,13 +6,13 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 12:25:38 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:59:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	_pwd(t_token *token)
+int	_pwd(t_token *token, t_minishell *ms)
 {
 	char	*v_print;
 
@@ -27,11 +27,10 @@ int	_pwd(t_token *token)
 		strerror(errno);
 		return (1);
 	}
-	if (*v_print)
-	{
-		ft_putstr_fd(v_print, 1);
-		ft_putstr_fd("\n", 1);
-	}
+	if (v_print != NULL)
+		printf("%s\n", v_print);
+	else
+		printf("%s\n", ms->pwd);
 	free(v_print);
 	return (EXIT_SUCCESS);
 }
@@ -52,7 +51,7 @@ int	exec_pwd(t_token *token, t_minishell *ms)
 			exit (1);
 		}
 		redir_out(token);
-		if (_pwd(token))
+		if (_pwd(token, ms))
 		{
 			free_all(ms);
 			exit(1);
