@@ -6,11 +6,18 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:25:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 14:38:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/10 11:52:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	print_err_exit(char *cmd, char *msg)
+{
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(msg, 2);
+}
 
 int	no_valid_arg(t_arg *arg)
 {
@@ -63,7 +70,7 @@ static int	check_max_int(char *nbr, t_minishell *ms)
 	if (ft_check_int(i, nbr, max))
 	{
 		ms->l_retv = 2;
-		printf("minishell: exit: %s: numeric argument required\n", nbr);
+		print_err_exit(nbr, ": numeric argument required\n");
 		return (1);
 	}
 	return (0);
@@ -81,16 +88,10 @@ int	check_arg(t_token *token, t_minishell *ms)
 		if (!ft_isdigit(token->arg_head->value[i]))
 		{
 			ms->l_retv = 2;
-			printf("bash: exit: %s: numeric argument required\n",
-				token->arg_head->value);
+			print_err_exit(token->arg_head->value,
+				": numeric argument required\n");
 			return (1);
 		}
-	}
-	if (count_arg(ms->t_head->arg_head) > 1)
-	{
-		ms->l_retv = 1;
-		printf("minishell: exit: too many arguments\n");
-		return (1);
 	}
 	if (check_max_int(token->arg_head->value, ms))
 		return (1);

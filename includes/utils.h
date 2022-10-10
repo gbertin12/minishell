@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/03 13:35:36 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 08:30:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int			check_is_directory(char *path, int printable);
 int			add_key_with_empty_value(char *s, t_minishell *ms);
 
 void		*ft_malloc(size_t size, t_minishell *ms);
+
+void		print_err_cmd(char *cmd);
 
 #endif

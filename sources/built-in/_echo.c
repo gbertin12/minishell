@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/05 11:49:51 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/10 09:24:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ char	check_flag(char	*s)
 	if (!s || s[0] != '-' || !s[0])
 		return (0);
 	i = 0;
+	if (s[0] == '-' && !s[1])
+		return (0);
 	while (s[++i])
-		if (s[i] != 'n')
+		if (s[i] != 'n' && i > 1)
 			return (0);
 	return (1);
 }
