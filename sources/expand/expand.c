@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/10 11:09:28 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:27:31 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	split_cmd(t_token *token, t_minishell *ms)
 	char	**split;
 
 	split = ft_split_set(token->cmd, " \n\r\v\t\f", ms);
-	if (!split)
+	if (!split || !split[0])
 		return ;
 	if (split[1])
 	{
