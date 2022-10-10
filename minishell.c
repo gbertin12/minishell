@@ -6,7 +6,11 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/10 16:29:27 by gbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/10/10 16:01:47 by ccambium         ###   ########.fr       */
+>>>>>>> f775a1edb2b7ae412141bc597c085993b9f4f381
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +83,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	reset(&ms, ms.s);
 	free_all(&ms);
+	rl_clear_history();
 	return (ms.l_retv);
 }
