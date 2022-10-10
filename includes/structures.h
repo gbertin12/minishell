@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/06 14:20:33 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:16:13 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct s_minishell
 	char			*l_input;
 	t_file_error	*err_head;
 	char			*pwd;
+	t_exec			*exec;
+	char			*s;
 }	t_minishell;
 
 typedef struct s_heredoc

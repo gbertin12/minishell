@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/10 11:54:32 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/10 16:17:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	main2(t_minishell *ms, char *s)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	ms;
-	char		*s;
 	char		*prompt;
 
 	init(&ms, envp, argc, argv);
@@ -72,13 +71,13 @@ int	main(int argc, char **argv, char **envp)
 			ms.l_retv = 130;
 		g_mode = 0;
 		prompt = get_prompt(&ms);
-		s = readline(prompt);
+		ms.s = readline(prompt);
 		ft_free(prompt, &ms);
-		if (!s)
+		if (!ms.s)
 			break ;
-		main2(&ms, s);
+		main2(&ms, ms.s);
 	}
-	reset(&ms, s);
+	reset(&ms, ms.s);
 	free_all(&ms);
 	return (ms.l_retv);
 }

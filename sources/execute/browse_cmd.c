@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 14:48:32 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/10 16:22:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,20 @@ int	init_execute(t_token *token)
 
 t_exec	*start_browse_cmd(t_minishell *ms)
 {
-	t_exec	*exec;
-
-	exec = ft_malloc(sizeof(t_exec), ms);
-	if (!ms->t_head || !exec)
+	ms->exec = ft_malloc(sizeof(t_exec), ms);
+	if (!ms->t_head || !ms->exec)
 		return (NULL);
-	exec->l_retv = 0;
-	exec->err = 0;
-	exec->last = NULL;
-	exec->env = env_to_tab(ms);
-	exec->token = ms->t_head;
-	exec->tmpin = (dup(0));
-	exec->tmpout = (dup(1));
+	ms->exec->l_retv = 0;
+	ms->exec->err = 0;
+	ms->exec->last = NULL;
+	ms->exec->env = env_to_tab(ms);
+	ms->exec->token = ms->t_head;
+	ms->exec->tmpin = (dup(0));
+	ms->exec->tmpout = (dup(1));
 	g_mode = 1;
 	open_all(ms);
-	exec->path_absolute = get_path_env(ms);
-	return (exec);
+	ms->exec->path_absolute = get_path_env(ms);
+	return (ms->exec);
 }
 
 int	end_browse_cmd(t_exec *exec, t_minishell *ms)
