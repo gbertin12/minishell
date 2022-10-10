@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/10 08:31:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/10 12:43:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int	check_path(t_exec *exec, t_minishell *ms)
 	return (0);
 }
 
-static int	null_cmd(t_exec *exec, t_minishell *ms)
+static int	null_cmd(t_exec *exec)
 {
 	if (!exec->token->cmd || exec->token->cmd[0] == '\0')
 	{
-		free_all(ms);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(exec->token->cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
 		return (1);
 	}
 	return (0);
@@ -57,7 +59,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		if (exec->token->have_in)
 			dup2(exec->token->inputfile, 0);
 		redir_out(exec->token);
-		if (null_cmd(exec, ms))
+		if (null_cmd(exec))
 			exit_child(0, ms);
 		if (check_path(exec, ms))
 			exit_child(127, ms);
@@ -82,7 +84,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 			return (1);
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
-		if (null_cmd(exec, ms))
+		if (null_cmd(exec))
 			exit_child(0, ms);
 		if (check_path(exec, ms))
 			exit_child(127, ms);
@@ -103,7 +105,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 	{
 		init_execute(exec->token);
 		redir_in(exec->token, exec->last);
-		if (null_cmd(exec, ms))
+		if (null_cmd(exec))
 			exit_child(0, ms);
 		if (exec->token->have_out)
 		{
