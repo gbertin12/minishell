@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/06 15:34:27 by ccambium         ###   ########.fr        #
+#    Updated: 2022/10/10 08:29:34 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRCS = minishell.c\
 		sources/utils/list_to_tab.c\
 		sources/utils/modify_env.c\
 		sources/utils/next_arg_parsing.c\
+		sources/utils/print_err.c \
 		sources/utils/replace_env_value.c\
 		sources/utils/ternaries.c\
 		sources/utils/token_is_empty.c\

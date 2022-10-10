@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/10 11:12:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:43:46 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		if (check_path(exec, ms))
 			exit_child(127, ms);
 		execve(exec->path, exec->args, exec->env);
-		perror("minishell");
+		print_err_cmd(exec->token->cmd);
 		exit_child(126, ms);
 	}
 	return (0);
@@ -89,7 +89,7 @@ int	exec_middle(char **args, t_exec *exec, t_minishell *ms)
 		if (check_path(exec, ms))
 			exit_child(127, ms);
 		execve(exec->path, args, exec->env);
-		perror("minishell");
+		print_err_cmd(exec->token->cmd);
 		exit_child(126, ms);
 	}
 	return (0);
@@ -116,7 +116,7 @@ int	exec_last(char **args, t_exec *exec, t_minishell *ms)
 		if (check_path(exec, ms))
 			exit_child(127, ms);
 		execve(exec->path, args, exec->env);
-		perror("minishell");
+		print_err_cmd(exec->token->cmd);
 		exit_child(126, ms);
 	}
 	return (0);

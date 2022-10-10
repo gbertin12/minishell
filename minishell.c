@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 15:42:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:54:32 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static void	main2(t_minishell *ms, char *s)
 	if (parsing(s, ms) != 0)
 	{
 		ms->l_retv = 2;
-		reset(ms, s);
-		return ;
+		return (reset(ms, s));
 	}
 	if (expand(ms))
 		return ;
@@ -54,7 +53,7 @@ static void	main2(t_minishell *ms, char *s)
 		&& count_token(ms->t_head) == 1)
 	{
 		if (b_exit(ms->t_head, ms))
-			return ;
+			return (reset(ms, s));
 	}
 	browse_cmd(ms);
 	reset(ms, s);
