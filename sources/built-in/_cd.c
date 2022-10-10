@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 11:44:52 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 08:14:08 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static int	check_err(char *path)
 	ft_putstr_fd("minishell: cd: ", 2);
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(": ", 2);
-	perror("");
+	if (errno == 116)
+		ft_putstr_fd("no such file or directory\n", 2);
+	else
+		perror("");
 	return (1);
 }
 
@@ -33,6 +36,9 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 		value_pwd = get_pwd(ms);
 	modify_env("OLDPWD", value_oldpwd, ms);
 	modify_env("PWD", value_pwd, ms);
+	if (ms->pwd)
+		ft_free(ms->pwd, ms);
+	ms->pwd = ft_strdup(value_pwd, ms);
 	return (0);
 }
 

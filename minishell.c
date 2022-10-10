@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/24 13:58:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:54:32 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	(void)argv;
 	(void)argc;
 	init_minishell(ms);
+	ms->pwd = get_pwd(ms);
 	copy_env(ms, envp);
 	init_signals();
 }
@@ -43,8 +44,8 @@ static void	main2(t_minishell *ms, char *s)
 	}
 	if (parsing(s, ms) != 0)
 	{
-		reset(ms, s);
-		return ;
+		ms->l_retv = 2;
+		return (reset(ms, s));
 	}
 	if (expand(ms))
 		return ;
@@ -52,7 +53,7 @@ static void	main2(t_minishell *ms, char *s)
 		&& count_token(ms->t_head) == 1)
 	{
 		if (b_exit(ms->t_head, ms))
-			return ;
+			return (reset(ms, s));
 	}
 	browse_cmd(ms);
 	reset(ms, s);
