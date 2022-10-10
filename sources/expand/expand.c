@@ -6,11 +6,37 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/03 13:20:58 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:09:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	split_cmd(t_token *token, t_minishell *ms)
+{
+	int		i;
+	char	**split;
+
+	split = ft_split_set(token->cmd, " \n\r\v\t\f", ms);
+	if (!split)
+		return ;
+	if (split[1])
+	{
+		ft_free(token->cmd, ms);
+		token->cmd = split[0];
+		i = count_tab(split) - 1;
+		while (i > 0)
+		{
+			token->arg_head = add_front_arg(token->arg_head, split[i], ms);
+			if (token->arg_head == NULL)
+			{
+				free_split(split, ms);
+				return ;
+			}
+			i--;
+		}
+	}
+}
 
 static void	remove_first_arg(t_token *token, t_minishell *ms)
 {
@@ -51,6 +77,7 @@ char	expand(t_minishell *ms)
 		delete_quotes(token, ms);
 		replace_cmd(token, ms);
 		remove_null(token, ms);
+		split_cmd(token, ms);
 		token = token->next;
 	}
 	return (EXIT_SUCCESS);
