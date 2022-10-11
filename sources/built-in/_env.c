@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:55:17 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 11:33:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:51:40 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static int	exec_child(t_token *token, t_minishell *ms)
 {
+	if (ms->exec->last)
+	{
+		close(ms->exec->last->pipefd[0]);
+		close(ms->exec->last->pipefd[1]);
+	}
 	if (init_execute(token))
 		exit_child(1, ms);
 	redir_out(token);

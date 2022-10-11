@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 12:11:18 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:50:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ int	exec_pwd(t_token *token, t_minishell *ms)
 		return (1);
 	if (token->pid == 0)
 	{
+		if (ms->exec->last)
+		{
+			close(ms->exec->last->pipefd[0]);
+			close(ms->exec->last->pipefd[1]);
+		}
 		if (init_execute(token))
 			exit_child(1, ms);
 		redir_out(token);

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 11:28:53 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:50:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ int	exec_unset(t_token *token, t_minishell *ms)
 	}
 	if (token->arg_head)
 	{
+		if (ms->exec->last)
+		{
+			close(ms->exec->last->pipefd[0]);
+			close(ms->exec->last->pipefd[1]);
+		}
 		if (_unset(token->arg_head, ms))
 		{
 			ms->l_retv = 1;

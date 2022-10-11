@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 12:11:52 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:50:31 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 	{
 		perror("minishell ");
 		return (1);
+	}
+	if (ms->exec->last)
+	{
+		close(ms->exec->last->pipefd[0]);
+		close(ms->exec->last->pipefd[1]);
 	}
 	if (token->pid == 0)
 		exec_child(token, ms);
