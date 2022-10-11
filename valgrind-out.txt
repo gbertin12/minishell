@@ -1,80 +1,88 @@
-==17853== FILE DESCRIPTORS: 4 open at exit.
-==17853== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
-==17853==    <inherited from parent>
-==17853== 
-==17853== Open file descriptor 2: /dev/pts/1
-==17853==    <inherited from parent>
-==17853== 
-==17853== Open file descriptor 1: /dev/pts/1
-==17853==    <inherited from parent>
-==17853== 
-==17853== Open file descriptor 0: /dev/pts/1
-==17853==    <inherited from parent>
-==17853== 
-==17853== 
-==17865== FILE DESCRIPTORS: 4 open at exit.
-==17865== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
-==17865==    <inherited from parent>
-==17865== 
-==17865== Open file descriptor 2: /dev/pts/1
-==17865==    <inherited from parent>
-==17865== 
-==17865== Open file descriptor 1: /dev/pts/1
-==17865==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==17865==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
-==17865==    by 0x403C16: browse_cmd (browse_cmd.c:107)
-==17865==    by 0x401520: main2 (minishell.c:58)
-==17865==    by 0x401381: main (minishell.c:78)
-==17865== 
-==17865== Open file descriptor 0: /dev/pts/1
-==17865==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==17865==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
-==17865==    by 0x403C16: browse_cmd (browse_cmd.c:107)
-==17865==    by 0x401520: main2 (minishell.c:58)
-==17865==    by 0x401381: main (minishell.c:78)
-==17865== 
-==17865== 
-==17875== FILE DESCRIPTORS: 4 open at exit.
-==17875== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
-==17875==    <inherited from parent>
-==17875== 
-==17875== Open file descriptor 2: /dev/pts/1
-==17875==    <inherited from parent>
-==17875== 
-==17875== Open file descriptor 1: /dev/pts/1
-==17875==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==17875==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
-==17875==    by 0x403C16: browse_cmd (browse_cmd.c:107)
-==17875==    by 0x401520: main2 (minishell.c:58)
-==17875==    by 0x401381: main (minishell.c:78)
-==17875== 
-==17875== Open file descriptor 0: /dev/pts/1
-==17875==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==17875==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
-==17875==    by 0x403C16: browse_cmd (browse_cmd.c:107)
-==17875==    by 0x401520: main2 (minishell.c:58)
-==17875==    by 0x401381: main (minishell.c:78)
-==17875== 
-==17875== 
-==17895== FILE DESCRIPTORS: 4 open at exit.
-==17895== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
-==17895==    <inherited from parent>
-==17895== 
-==17895== Open file descriptor 2: /dev/pts/1
-==17895==    <inherited from parent>
-==17895== 
-==17895== Open file descriptor 1: /dev/pts/1
-==17895==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==17895==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
-==17895==    by 0x403C16: browse_cmd (browse_cmd.c:107)
-==17895==    by 0x401520: main2 (minishell.c:58)
-==17895==    by 0x401381: main (minishell.c:78)
-==17895== 
-==17895== Open file descriptor 0: /dev/pts/1
-==17895==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==17895==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
-==17895==    by 0x403C16: browse_cmd (browse_cmd.c:107)
-==17895==    by 0x401520: main2 (minishell.c:58)
-==17895==    by 0x401381: main (minishell.c:78)
-==17895== 
-==17895== 
+==19986== FILE DESCRIPTORS: 4 open at exit.
+==19986== Open file descriptor 0: /dev/pts/1
+==19986==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==19986==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
+==19986==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==19986==    by 0x401520: main2 (minishell.c:58)
+==19986==    by 0x401381: main (minishell.c:78)
+==19986== 
+==19986== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==19986==    <inherited from parent>
+==19986== 
+==19986== Open file descriptor 2: /dev/pts/1
+==19986==    <inherited from parent>
+==19986== 
+==19986== Open file descriptor 1: /dev/pts/1
+==19986==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==19986==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
+==19986==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==19986==    by 0x401520: main2 (minishell.c:58)
+==19986==    by 0x401381: main (minishell.c:78)
+==19986== 
+==19986== 
+==20120== FILE DESCRIPTORS: 4 open at exit.
+==20120== Open file descriptor 0: /dev/pts/1
+==20120==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==20120==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
+==20120==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==20120==    by 0x401520: main2 (minishell.c:58)
+==20120==    by 0x401381: main (minishell.c:78)
+==20120== 
+==20120== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==20120==    <inherited from parent>
+==20120== 
+==20120== Open file descriptor 2: /dev/pts/1
+==20120==    <inherited from parent>
+==20120== 
+==20120== Open file descriptor 1: /dev/pts/1
+==20120==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==20120==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
+==20120==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==20120==    by 0x401520: main2 (minishell.c:58)
+==20120==    by 0x401381: main (minishell.c:78)
+==20120== 
+==20120== 
+==20151== FILE DESCRIPTORS: 4 open at exit.
+==20151== Open file descriptor 0: /dev/pts/1
+==20151==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==20151==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
+==20151==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==20151==    by 0x401520: main2 (minishell.c:58)
+==20151==    by 0x401381: main (minishell.c:78)
+==20151== 
+==20151== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==20151==    <inherited from parent>
+==20151== 
+==20151== Open file descriptor 2: /dev/pts/1
+==20151==    <inherited from parent>
+==20151== 
+==20151== Open file descriptor 1: /dev/pts/1
+==20151==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==20151==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
+==20151==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==20151==    by 0x401520: main2 (minishell.c:58)
+==20151==    by 0x401381: main (minishell.c:78)
+==20151== 
+==20151== 
+==19950== FILE DESCRIPTORS: 4 open at exit.
+==19950== Open file descriptor 0: /dev/pts/1
+==19950==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==19950==    by 0x403A91: end_browse_cmd (browse_cmd.c:76)
+==19950==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==19950==    by 0x401520: main2 (minishell.c:58)
+==19950==    by 0x401381: main (minishell.c:78)
+==19950== 
+==19950== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==19950==    <inherited from parent>
+==19950== 
+==19950== Open file descriptor 2: /dev/pts/1
+==19950==    <inherited from parent>
+==19950== 
+==19950== Open file descriptor 1: /dev/pts/1
+==19950==    at 0x4B148CB: dup2 (syscall-template.S:78)
+==19950==    by 0x403AB7: end_browse_cmd (browse_cmd.c:78)
+==19950==    by 0x403B79: browse_cmd (browse_cmd.c:97)
+==19950==    by 0x401520: main2 (minishell.c:58)
+==19950==    by 0x401381: main (minishell.c:78)
+==19950== 
+==19950== 
