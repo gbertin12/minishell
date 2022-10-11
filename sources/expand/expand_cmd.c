@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/10 11:09:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:34:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,32 @@ static size_t	next_var(char *s)
 	return (i);
 }
 
+static void	split_cmd(t_token *token, t_minishell *ms)
+{
+	int		i;
+	char	**split;
+
+	split = ft_split_set(token->cmd, " \n\r\v\t\f", ms);
+	if (!split || !split[0])
+		return ;
+	if (split[1])
+	{
+		ft_free(token->cmd, ms);
+		token->cmd = split[0];
+		i = count_tab(split) - 1;
+		while (i > 0)
+		{
+			token->arg_head = add_front_arg(token->arg_head, split[i], ms);
+			if (token->arg_head == NULL)
+			{
+				free_split(split, ms);
+				return ;
+			}
+			i--;
+		}
+	}
+}
+
 char	expand_cmd(t_token *token, t_minishell *ms)
 {
 	size_t	i;
@@ -43,6 +69,11 @@ char	expand_cmd(t_token *token, t_minishell *ms)
 		if (!token->cmd)
 			return (1);
 		i = next_var(token->cmd);
+	}
+	if (flag)
+	{
+		delete_quotes(token, ms);
+		split_cmd(token, ms);
 	}
 	return (EXIT_SUCCESS);
 }
