@@ -1,38 +1,39 @@
-==374163== Invalid read of size 8
-==374163==    at 0x40908B: free_split (free_split.c:20)
-==374163==    by 0x404CD6: remove_quotes (delete_quotes.c:76)
-==374163==    by 0x404A93: delete_quotes (delete_quotes.c:93)
-==374163==    by 0x404F9A: expand (expand.c:51)
-==374163==    by 0x401477: main2 (minishell.c:50)
-==374163==    by 0x401381: main (minishell.c:78)
-==374163==  Address 0x4cbfbf8 is 8 bytes before a block of size 32 alloc'd
-==374163==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==374163==    by 0x409408: ft_malloc (ft_malloc.c:20)
-==374163==    by 0x404AED: remove_quotes (delete_quotes.c:61)
-==374163==    by 0x404A93: delete_quotes (delete_quotes.c:93)
-==374163==    by 0x404F9A: expand (expand.c:51)
-==374163==    by 0x401477: main2 (minishell.c:50)
-==374163==    by 0x401381: main (minishell.c:78)
-==374163== 
-==374163== FILE DESCRIPTORS: 4 open at exit.
-==374163== Open file descriptor 0: /dev/pts/2
-==374163==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==374163==    by 0x403921: end_browse_cmd (browse_cmd.c:74)
-==374163==    by 0x4039D9: browse_cmd (browse_cmd.c:93)
-==374163==    by 0x401503: main2 (minishell.c:58)
-==374163==    by 0x401381: main (minishell.c:78)
-==374163== 
-==374163== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
-==374163==    <inherited from parent>
-==374163== 
-==374163== Open file descriptor 2: /dev/pts/2
-==374163==    <inherited from parent>
-==374163== 
-==374163== Open file descriptor 1: /dev/pts/2
-==374163==    at 0x4B148CB: dup2 (syscall-template.S:78)
-==374163==    by 0x403932: end_browse_cmd (browse_cmd.c:75)
-==374163==    by 0x4039D9: browse_cmd (browse_cmd.c:93)
-==374163==    by 0x401503: main2 (minishell.c:58)
-==374163==    by 0x401381: main (minishell.c:78)
-==374163== 
-==374163== 
+==9960== FILE DESCRIPTORS: 4 open at exit.
+==9960== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==9960==    <inherited from parent>
+==9960== 
+==9960== Open file descriptor 2: /dev/pts/1
+==9960==    <inherited from parent>
+==9960== 
+==9960== Open file descriptor 1: /dev/pts/1
+==9960==    <inherited from parent>
+==9960== 
+==9960== Open file descriptor 0: /dev/pts/1
+==9960==    <inherited from parent>
+==9960== 
+==9960== 
+==9962== FILE DESCRIPTORS: 5 open at exit.
+==9962== Open file descriptor 6: /tmp/101
+==9962==    at 0x4B13D3B: open (open64.c:48)
+==9962==    by 0x406B48: heredoc (heredoc.c:59)
+==9962==    by 0x4070B0: open_input2 (open_files.c:78)
+==9962==    by 0x406FE9: open_input (open_files.c:102)
+==9962==    by 0x4071F2: open_all (open_all.c:43)
+==9962==    by 0x403857: start_browse_cmd (browse_cmd.c:54)
+==9962==    by 0x4039E4: browse_cmd (browse_cmd.c:91)
+==9962==    by 0x401520: main2 (minishell.c:58)
+==9962==    by 0x401381: main (minishell.c:78)
+==9962== 
+==9962== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==9962==    <inherited from parent>
+==9962== 
+==9962== Open file descriptor 2: /dev/pts/1
+==9962==    <inherited from parent>
+==9962== 
+==9962== Open file descriptor 1: /dev/pts/1
+==9962==    <inherited from parent>
+==9962== 
+==9962== Open file descriptor 0: /dev/pts/1
+==9962==    <inherited from parent>
+==9962== 
+==9962== 

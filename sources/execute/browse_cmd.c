@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/10 16:22:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 10:18:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	ms->exec = ft_malloc(sizeof(t_exec), ms);
 	if (!ms->t_head || !ms->exec)
 		return (NULL);
-	ms->exec->l_retv = 0;
-	ms->exec->err = 0;
-	ms->exec->last = NULL;
+	ft_memset(ms->exec, 0, sizeof(t_exec));
 	ms->exec->env = env_to_tab(ms);
 	ms->exec->token = ms->t_head;
-	ms->exec->tmpin = (dup(0));
-	ms->exec->tmpout = (dup(1));
+	ms->exec->tmpin = dup(0);
+	if (ms->exec->tmpin == -1)
+		return (NULL);
+	ms->exec->tmpout = dup(1);
+	if (ms->exec->tmpout == -1)
+		return (NULL);
 	g_mode = 1;
 	open_all(ms);
 	ms->exec->path_absolute = get_path_env(ms);
@@ -71,8 +73,10 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 	}
 	if (have_child(ms->t_head))
 		exec->l_retv = WEXITSTATUS(status);
-	dup2(exec->tmpin, 0);
-	dup2(exec->tmpout, 1);
+	if (dup2(exec->tmpin, 0) == -1)
+		return (1);
+	if (dup2(exec->tmpout, 1) == -1)
+		return (1);
 	close(exec->tmpin);
 	close(exec->tmpout);
 	ms->l_retv = exec->l_retv;

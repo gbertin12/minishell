@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:16:24 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/10 09:24:34 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 11:32:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,12 @@ int	exec_echo(t_token *token, t_minishell *ms)
 {
 	if (token->next)
 	{
-		if (pipe(token->pipefd))
+		if (pipe(token->pipefd) == -1)
 			return (1);
 	}
 	token->pid = fork();
+	if (token->pid < 0)
+		return (1);
 	if (token->pid == 0)
 	{
 		if (init_execute(token))

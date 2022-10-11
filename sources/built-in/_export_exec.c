@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 16:19:13 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 12:11:52 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,13 @@
 static int	exec_child(t_token *token, t_minishell *ms)
 {
 	if (init_execute(token))
-	{
-		free_all(ms);
-		exit (1);
-	}
+		exit_child(1, ms);
 	redir_out(token);
 	if (token->arg_head == NULL)
 	{
 		if (_export(token, ms))
-		{
-			free_all(ms);
-			exit (1);
-		}
-		free_all(ms);
-		exit (0);
+			exit_child(1, ms);
+		exit_child(0, ms);
 	}	
 	return (0);
 }
@@ -55,15 +48,7 @@ static int	exec_in_parent(t_token *token, t_minishell *ms)
 {
 	if (init_execute(token))
 		return (1);
-	if (token->have_out)
-	{
-		if (dup2(token->outputfile, 1))
-		{
-			perror("minishell ");
-			return (1);
-		}
-		close(token->outputfile);
-	}
+	redir_out(token);
 	if (_export(token, ms))
 		return (1);
 	return (0);

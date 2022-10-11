@@ -6,11 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/10 16:29:27 by gbertin          ###   ########.fr       */
-=======
-/*   Updated: 2022/10/10 16:01:47 by ccambium         ###   ########.fr       */
->>>>>>> f775a1edb2b7ae412141bc597c085993b9f4f381
+/*   Updated: 2022/10/10 17:06:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +17,7 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 {
 	(void)argv;
 	(void)argc;
-	init_minishell(ms);
+	ft_memset(ms, 0, sizeof(t_minishell));
 	ms->pwd = get_pwd(ms);
 	copy_env(ms, envp);
 	init_signals();

@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/10 08:29:34 by gbertin          ###   ########.fr        #
+#    Updated: 2022/10/11 13:59:58 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,6 @@ SRCS = minishell.c\
 		sources/utils/ft_superjoin.c\
 		sources/utils/get_env_value.c\
 		sources/utils/get_pwd.c\
-		sources/utils/init_minishell.c\
 		sources/utils/is_space.c\
 		sources/utils/list_to_tab.c\
 		sources/utils/modify_env.c\

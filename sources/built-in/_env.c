@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:55:17 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/05 11:53:53 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 11:33:56 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ int	exec_env(t_token *token, t_minishell *ms)
 		return (1);
 	if (token->next)
 	{
-		if (pipe(token->pipefd))
+		if (pipe(token->pipefd) == -1)
 		{
 			perror("");
 			return (1);
 		}
 	}
 	token->pid = fork();
+	if (token->pid < 0)
+		return (1);
 	if (token->pid == 0)
 		exec_child(token, ms);
 	return (0);
