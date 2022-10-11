@@ -36,6 +36,8 @@ SRC=ft_atoi.c\
 	ft_substr.c\
 	ft_tolower.c\
 	ft_toupper.c
+
+DEPENDS := $(patsubst %.c,%.d,$(SRC))
 OBJ= $(SRC:.c=.o)
 ifneq (,$(findstring xterm,${TERM}))
 	BLACK        := $(shell tput -Txterm setaf 0)
@@ -67,19 +69,24 @@ all : title $(NAME)
 $(NAME) : $(OBJ)
 	ar -cq $(NAME) $(OBJ)
 
+-include $(DEPENDS)
+
+%.o: %.c Makefile
+	$(CC) $(CFLAGS) -MMD -MP -o $@ -c $< 
+
 fclean : clean
 	rm -rf $(NAME)
 
 clean : cleaning
 	rm -rf $(OBJ)
+	rm -rf $(DEPENDS)
 
-re : fclean $(NAME)
+re : fclean all
 
 title:
 	echo $(TITLE)
 
-.o: .c
-	$(CC) -o $@ -c $< $(CFLAGS)
+
 
 cleaning:
 	echo "$(PURPLE)ᐅ $(YELLOW)Cleaning $(RED)libft$(YELLOW)...$(RESET)"
