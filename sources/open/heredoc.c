@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/12 16:39:45 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:06:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ static void	print_in_file(int fd, char *limiter, t_minishell *ms)
 	while (!ft_strcmp(append, limiter))
 	{
 		append = heredoc_expand(append, ms);
-		ft_putstr_fd(append, fd);
-		ft_putstr_fd("\n", fd);
+		if (append && *append)
+		{
+			ft_putstr_fd(append, fd);
+			ft_putstr_fd("\n", fd);	
+		}
 		ft_free(append, ms);
 		append = readline(">");
 	}
