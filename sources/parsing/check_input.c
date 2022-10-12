@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:03:43 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/10 15:08:48 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:10:22 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ static char	check_file(t_token *t, t_file *head)
 		f = f->next;
 	}
 	return (0);
-}
-
-static char	onlyspace(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (*(s + ++i))
-	{
-		if (!is_space(*(s + i)))
-			return (0);
-	}
-	return (1);
 }
 
 static char	check_token(t_token *t, t_token *head, char *s)

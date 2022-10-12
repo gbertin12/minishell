@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/10 16:16:13 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 16:53:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+# include <termios.h>
 
 typedef struct s_minishell	t_minishell;
+typedef struct termios		t_termios;
 
 typedef struct s_file
 {
@@ -76,25 +78,18 @@ typedef struct s_file_error
 	struct s_file_error		*next;
 }	t_file_error;
 
-/* 
- * @param t_head head of token list from parsing
- * @param o_head head of objects list from ft_malloc
- * @param l_retv last return value returned from tokens
- * @param e_head head of env list from exports
- * @param l_input last input
- */
-
 typedef struct s_minishell
 {
-	t_token			*t_head;
-	struct s_obj	*o_head;
 	int				l_retv;
-	t_env			*e_head;
-	char			*l_input;
-	t_file_error	*err_head;
-	char			*pwd;
-	t_exec			*exec;
 	char			*s;
+	char			*l_input;
+	char			*pwd;
+	t_env			*e_head;
+	t_exec			*exec;
+	t_token			*t_head;
+	t_termios		term;
+	struct s_obj	*o_head;
+	t_file_error	*err_head;
 }	t_minishell;
 
 typedef struct s_heredoc
