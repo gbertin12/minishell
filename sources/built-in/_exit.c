@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _exit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:49:18 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 17:22:27 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ int	b_exit(t_token *token, t_minishell *ms)
 		printf("exit\n");
 		if (token->arg_head)
 		{
-			if (check_too_many(token, ms))
-				return (1);
 			if (!check_arg(token, ms))
 				ret_v = ft_atoll(token->arg_head->value) % 256;
+			if (check_too_many(token, ms))
+				return (1);
 			else
 				ret_v = ms->l_retv;
 		}

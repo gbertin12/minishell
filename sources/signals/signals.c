@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/12 17:18:35 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:28:49 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
-	if (!g_mode || sig != SIGQUIT)
+	if (!g_mode || g_mode == 3 || sig != SIGQUIT)
 		return ;
 	printf("^\\Quit\n");
 }
