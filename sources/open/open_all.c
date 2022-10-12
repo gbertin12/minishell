@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 10:26:37 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 09:13:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ void	open_all(t_minishell *ms)
 		token->have_in = have_infile(token);
 		token->have_out = have_outfile(token);
 		if (token->have_in)
+		{
 			token->inputfile = open_input(token, ms);
+			if (token->inputfile == -1)
+				break ;
+		}
 		if (token->have_out)
 			token->outputfile = open_output(token, ms);
 		token = token->next;

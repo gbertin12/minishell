@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_err_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:58:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/19 16:53:26 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:26:59 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ char	did_print(t_file *file, t_file *head)
 static void	put_error_fd2(t_file *file, t_minishell *ms, t_file_error *new_err)
 {
 	new_err->next = NULL;
+	if (!file->path || !file->path[0])
+	{
+		new_err->err = "minishell: : No such file or directory\n";
+		return ;
+	}
 	new_err->err = ft_strjoin("minishell: ", file->path, ms);
 	if (!new_err->err)
 		return ;

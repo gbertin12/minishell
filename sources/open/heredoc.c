@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:56:56 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 08:56:57 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ static void	print_in_file(int fd, char *limiter, t_minishell *ms)
 		append = heredoc_expand(append, ms);
 		ft_putstr_fd(append, fd);
 		ft_putstr_fd("\n", fd);
-		free(append);
+		ft_free(append, ms);
 		append = readline(">");
 	}
-	free(append);
 }
 
 static void	heredoc_child(int fd, char *limiter, t_minishell *ms)

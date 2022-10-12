@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 15:01:42 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 08:52:38 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ char	_cd(t_token *token, t_minishell *ms)
 	size_t	nb_arg;
 	char	*home_path;
 
+	if (count_arg(token->arg_head) > 1)
+	{
+		ft_putstr_fd("minishell: pwd: too many arguments\n", 2);
+		return (1);
+	}
 	home_path = get_env_value("HOME", ms);
 	nb_arg = count_arg(token->arg_head);
 	if (nb_arg == 0 && home_path)

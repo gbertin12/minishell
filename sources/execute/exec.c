@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:06:08 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 09:20:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		{
 			if (dup2(exec->token->inputfile, 0) == -1)
 			{
-				perror("minishell");
+				perror("minishell1");
 				exit_child(1, ms);
 			}
 			if (exec->token->inputfile)
@@ -65,7 +65,7 @@ int	exec_middle(t_exec *exec, t_minishell *ms)
 {
 	exec->path = make_path(exec, ms);
 	if (pipe(exec->token->pipefd) == -1)
-		perror("minishell");
+		perror("minishell2");
 	exec->token->pid = fork();
 	if (exec->token->pid < 0)
 		return (1);
@@ -96,7 +96,7 @@ int	exec_last(t_exec *exec, t_minishell *ms)
 				exit_child(1, ms);
 			if (dup2(exec->token->outputfile, 1) == -1)
 			{
-				perror("minishell");
+				perror("minishell3");
 				exit_child(1, ms);
 			}
 		}
