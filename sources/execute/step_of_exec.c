@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 11:10:16 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 10:18:46 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 		if (check_is_built_in(exec->token))
 			exec->l_retv = exec_builtin(exec->token, ms);
 		else
-			exec_middle(exec->args, exec, ms);
+			exec_middle(exec, ms);
 		modify_env("_", get_last_arg(exec->token), ms);
 		close(exec->last->pipefd[0]);
 		close(exec->last->pipefd[1]);
@@ -106,7 +106,7 @@ t_exec	*last(t_exec *exec, t_minishell *ms)
 		if (check_is_built_in(exec->token))
 			exec->l_retv = exec_builtin(exec->token, ms);
 		else
-			exec_last(exec->args, exec, ms);
+			exec_last(exec, ms);
 		modify_env("_", get_last_arg(exec->token), ms);
 	}
 	if (!check_is_directory(exec->token->cmd, 1))

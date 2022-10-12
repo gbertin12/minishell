@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 15:58:03 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 16:07:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_err(char *path)
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(": ", 2);
 	if (errno == 116)
-		ft_putstr_fd("No such file or directory\n", 2);
+		ft_putstr_fd("no such file or directory\n", 2);
 	else
 		perror("");
 	return (1);
@@ -38,7 +38,7 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 	modify_env("PWD", value_pwd, ms);
 	if (ms->pwd)
 		ft_free(ms->pwd, ms);
-	ms->pwd = ft_strdup(value_oldpwd, ms);
+	ms->pwd = ft_strdup(value_pwd, ms);
 	return (0);
 }
 
@@ -70,6 +70,11 @@ char	_cd(t_token *token, t_minishell *ms)
 	size_t	nb_arg;
 	char	*home_path;
 
+	if (count_arg(token->arg_head) > 1)
+	{
+		ft_putstr_fd("minishell: pwd: too many arguments\n", 2);
+		return (1);
+	}
 	home_path = get_env_value("HOME", ms);
 	nb_arg = count_arg(token->arg_head);
 	if (nb_arg == 0 && home_path)
@@ -91,5 +96,5 @@ int	exec_cd(t_token *token, t_minishell *ms)
 		else
 			return (0);
 	}
-	return (1);
+	return (0);
 }

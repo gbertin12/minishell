@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 11:26:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:32:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	open_output2(t_file *file, t_token *token, t_minishell *ms)
 
 	fd = 0;
 	file->path = expand_file(file->path, file, ms);
-	if (!file->path || !check_is_directory(file->path, 0))
-		return (-2);
+	if (!file->path || !check_is_directory(file->path, 1))
+		return (-1);
 	if (file->append)
 		fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
@@ -57,7 +57,7 @@ int	open_output(t_token *token, t_minishell *ms)
 			continue ;
 		}
 		fd = open_output2(file, token, ms);
-		if (fd == -2)
+		if (fd == -1)
 			break ;
 		file = file->next;
 		if (check_have_next_type(file, 1))
@@ -72,8 +72,8 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 
 	fd = 0;
 	file->path = expand_file(file->path, file, ms);
-	if (!file->path)
-		return (-2);
+	if (!file->path || !check_is_directory(file->path, 1))
+		return (-1);
 	if (file->append)
 		fd = heredoc(file->path, ms);
 	else
@@ -100,8 +100,8 @@ int	open_input(t_token *token, t_minishell *ms)
 			continue ;
 		}
 		fd = open_input2(file, token, ms);
-		if (fd == -2)
-			break ;
+		if (fd < 0)
+			return (-1) ;
 		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);

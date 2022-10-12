@@ -6,13 +6,13 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/06 13:49:09 by gbertin          ###   ########.fr        #
+#    Updated: 2022/10/12 16:06:59 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = clang
-FLAGS = -Wall -Wextra -Werror -g -I /opt/homebrew/opt/readline/include
+FLAGS = -Wall -Wextra -Werror -g3 -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
 SRCS = minishell.c\
@@ -33,7 +33,7 @@ SRCS = minishell.c\
 		sources/execute/get_path.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
-		sources/expand/between_quote.c \
+		sources/expand/between_quote.c\
 		sources/expand/delete_quotes.c\
  		sources/expand/expand.c\
 		sources/expand/expand_arg.c\
@@ -77,11 +77,11 @@ SRCS = minishell.c\
 		sources/utils/ft_superjoin.c\
 		sources/utils/get_env_value.c\
 		sources/utils/get_pwd.c\
-		sources/utils/init_minishell.c\
 		sources/utils/is_space.c\
 		sources/utils/list_to_tab.c\
 		sources/utils/modify_env.c\
 		sources/utils/next_arg_parsing.c\
+		sources/utils/print_err.c \
 		sources/utils/replace_env_value.c\
 		sources/utils/ternaries.c\
 		sources/utils/token_is_empty.c\

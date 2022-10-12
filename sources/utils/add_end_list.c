@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_end_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 21:08:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/08 11:53:43 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:39:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	add_end_obj(t_obj *head, t_obj *obj)
 	t_obj	*x;
 
 	x = head;
+	if (x == NULL)
+		return ;
 	while (x->next != NULL)
 		x = x->next;
 	x->next = obj;

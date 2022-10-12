@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minishell.c                                   :+:      :+:    :+:   */
+/*   print_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 04:27:00 by ccambium          #+#    #+#             */
-/*   Updated: 2022/08/17 04:32:00 by ccambium         ###   ########.fr       */
+/*   Created: 2022/10/10 08:21:52 by gbertin           #+#    #+#             */
+/*   Updated: 2022/10/10 09:25:36 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_minishell(t_minishell *ms)
+void	print_err_cmd(char *cmd)
 {
-	ms->e_head = NULL;
-	ms->o_head = NULL;
-	ms->t_head = NULL;
-	ms->l_retv = 0;
-	ms->l_input = NULL;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n", 2);
 }

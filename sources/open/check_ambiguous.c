@@ -6,14 +6,17 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 19:18:31 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/22 11:27:35 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:26:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+
 int	check_ambiguous(char *path, char *print, t_file *file, int ambiguous)
 {
+	if ((!path || path[0] == '\0') && !ft_strchr(print, '$'))
+		return (1);
 	if (!path || ambiguous || path[0] == '\0')
 	{
 		ft_putstr_fd("minishell: ", 2);

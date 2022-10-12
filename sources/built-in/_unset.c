@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/09/23 12:56:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:50:29 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,16 @@ int	exec_unset(t_token *token, t_minishell *ms)
 	init_execute(token);
 	if (token->next)
 	{
-		if (pipe(token->pipefd))
+		if (pipe(token->pipefd) == -1)
 			perror("minishell ");
 	}
 	if (token->arg_head)
 	{
+		if (ms->exec->last)
+		{
+			close(ms->exec->last->pipefd[0]);
+			close(ms->exec->last->pipefd[1]);
+		}
 		if (_unset(token->arg_head, ms))
 		{
 			ms->l_retv = 1;

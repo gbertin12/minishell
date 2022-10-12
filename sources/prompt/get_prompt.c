@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:44:17 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/06 14:12:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:26:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ char	*get_prompt(t_minishell *ms)
 	if (do_env_key_exist("PS1", ms))
 		return (get_env_value("PS1", ms));
 	user = ft_strdup("minishell", ms);
-	pwd = get_pwd(ms);
+	pwd = get_env_value("PWD", ms);
+	if (!pwd)
+		pwd = get_pwd(ms);
+	if (!pwd)
+		pwd = ".";
 	tmp = ft_strjoin(GREEN, user, ms);
 	ft_free(user, ms);
 	ret_v = ft_strjoin(tmp, WHITE, ms);

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/22 16:46:45 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:34:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	split_cmd(t_token *token, t_minishell *ms)
 	char	**split;
 
 	split = ft_split_set(token->cmd, " \n\r\v\t\f", ms);
-	if (!split)
+	if (!split || !split[0])
 		return ;
 	if (split[1])
 	{
@@ -71,6 +71,9 @@ char	expand_cmd(t_token *token, t_minishell *ms)
 		i = next_var(token->cmd);
 	}
 	if (flag)
+	{
+		delete_quotes(token, ms);
 		split_cmd(token, ms);
+	}
 	return (EXIT_SUCCESS);
 }
