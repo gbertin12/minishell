@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/23 14:38:06 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 17:20:33 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static int	declaration(t_minishell *ms)
 	while (env)
 	{
 		if (env->value)
-			printf("declare -x %s=\"%s\"\n", env->key, env->value);
+			printf("export -x %s=\"%s\"\n", env->key, env->value);
 		else
-			printf("declare -x %s\n", env->key);
+			printf("export -x %s\n", env->key);
 		env = next_declare(ms, env);
 	}
 	return (EXIT_SUCCESS);
