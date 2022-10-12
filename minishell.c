@@ -35,7 +35,7 @@ static void	reset(t_minishell *ms, char *s)
 
 static void	main2(t_minishell *ms, char *s)
 {
-	if (*s)
+	if (*s && !onlyspace(s))
 		add_history(s);
 	else
 	{
