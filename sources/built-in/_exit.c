@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:49:18 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/14 08:42:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	check_too_many(t_token *token, t_minishell *ms)
 	if (count_arg(token->arg_head) > 1)
 	{
 		ms->l_retv = 1;
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		if (!check_arg(0, token, ms))
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
 	return (0);
@@ -32,14 +33,14 @@ static void	exec_child(t_token *token, t_minishell *ms)
 	redir_out(token);
 	if (token->arg_head)
 	{
-		if (!check_arg(token, ms))
+		if (!check_arg(1, token, ms))
 		{
 			ret_v = ms->l_retv;
 			if (token->arg_head)
 			{
-				if (check_too_many(token, ms))
+				if (check_too_many(token, ms) && check_arg(0, token, ms))
 					return ;
-				if (!check_arg(token, ms))
+				if (!check_arg(1, token, ms))
 					ret_v = ft_atoll(token->arg_head->value) % 256;
 				else
 					ret_v = ms->l_retv;
@@ -86,9 +87,9 @@ int	b_exit(t_token *token, t_minishell *ms)
 		printf("exit\n");
 		if (token->arg_head)
 		{
-			if (check_too_many(token, ms))
+			if (check_too_many(token, ms) && !check_arg(0, token, ms))
 				return (1);
-			if (!check_arg(token, ms))
+			else if (!check_arg(1, token, ms))
 				ret_v = ft_atoll(token->arg_head->value) % 256;
 			else
 				ret_v = ms->l_retv;

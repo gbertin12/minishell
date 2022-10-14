@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/12 16:06:59 by gbertin          ###   ########.fr        #
+#    Updated: 2022/10/14 08:25:52 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRCS = minishell.c\
 		sources/utils/list_to_tab.c\
 		sources/utils/modify_env.c\
 		sources/utils/next_arg_parsing.c\
+		sources/utils/onlyspace.c\
 		sources/utils/print_err.c \
 		sources/utils/replace_env_value.c\
 		sources/utils/ternaries.c\

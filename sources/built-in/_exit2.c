@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:25:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/10 11:52:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/14 08:38:22 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	check_max_int(char *nbr, t_minishell *ms)
 	return (0);
 }
 
-int	check_arg(t_token *token, t_minishell *ms)
+int	check_arg(int printable, t_token *token, t_minishell *ms)
 {
 	int	i;
 
@@ -88,8 +88,9 @@ int	check_arg(t_token *token, t_minishell *ms)
 		if (!ft_isdigit(token->arg_head->value[i]))
 		{
 			ms->l_retv = 2;
-			print_err_exit(token->arg_head->value,
-				": numeric argument required\n");
+			if (printable)
+				print_err_exit(token->arg_head->value,
+					": numeric argument required\n");
 			return (1);
 		}
 	}

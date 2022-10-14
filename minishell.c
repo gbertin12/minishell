@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:59:31 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:08:21 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	(void)argv;
 	(void)argc;
 	ft_memset(ms, 0, sizeof(t_minishell));
+	if (tcgetattr(0, &ms->term) == -1)
+		exit(1);
+	ms->term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(0, 0, &ms->term);
 	ms->pwd = get_pwd(ms);
 	copy_env(ms, envp);
 	init_signals();
@@ -35,7 +39,7 @@ static void	reset(t_minishell *ms, char *s)
 
 static void	main2(t_minishell *ms, char *s)
 {
-	if (*s)
+	if (*s && !onlyspace(s))
 		add_history(s);
 	else
 	{
