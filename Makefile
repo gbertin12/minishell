@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/17 11:02:32 by ccambium         ###   ########.fr        #
+#    Updated: 2022/10/14 08:25:52 by gbertin          ###   ########.fr        #mbium
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,7 @@ all: title depending $(NAME)
 
 $(NAME): compiling $(OBJ) 
 			$(MAKE) -C $(LIBFT_PATH)
-			$(CC) $(FLAGS) $(OBJ) -o $@ -lm $(LIBFT_PATH)/libft.a -lreadline -L /opt/homebrew/opt/readline/lib
+			$(CC) $(FLAGS) $(OBJ) -o $@ -lm $(LIBFT_PATH)/libft.a  -lreadline -L /opt/homebrew/opt/readline/lib
 			
 malloc_test: $(OBJ)
 			$(MAKE) -C $(LIBFT_PATH)

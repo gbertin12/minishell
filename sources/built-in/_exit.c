@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 10:42:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:24:22 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	check_too_many(t_token *token)
 	if (count_arg(token->arg_head) > 1)
 	{
 		g_lretv = 1;
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		if (!check_arg(0, token, ms))
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
 	return (0);
@@ -32,14 +33,14 @@ static void	exec_child(t_token *token, t_minishell *ms)
 	redir_out(token);
 	if (token->arg_head)
 	{
-		if (!check_arg(token))
+		if (!check_arg(1, token))
 		{
 			ret_v = g_lretv;
 			if (token->arg_head)
 			{
 				if (check_too_many(token))
 					return ;
-				if (!check_arg(token))
+				if (!check_arg(1, token))
 					ret_v = ft_atoll(token->arg_head->value) % 256;
 				else
 					ret_v = g_lretv;
@@ -86,9 +87,9 @@ int	b_exit(t_token *token, t_minishell *ms)
 		printf("exit\n");
 		if (token->arg_head)
 		{
-			if (check_too_many(token))
+			if (check_too_many(token) && !check_arg(0, token))
 				return (1);
-			if (!check_arg(token))
+			else if (!check_arg(1, token))
 				ret_v = ft_atoll(token->arg_head->value) % 256;
 			else
 				ret_v = g_lretv;
