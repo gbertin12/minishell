@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _exit2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:25:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 10:41:48 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:52:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	ft_check_int(int i, char *nbr, char *max)
 	return (0);
 }
 
-static int	check_max_int(char *nbr)
+static int	check_max_int(char *nbr, t_minishell *ms)
 {
 	char	*max;
 	int		i;
@@ -69,14 +69,14 @@ static int	check_max_int(char *nbr)
 	}
 	if (ft_check_int(i, nbr, max))
 	{
-		g_lretv = 2;
+		ms->l_retv = 2;
 		print_err_exit(nbr, ": numeric argument required\n");
 		return (1);
 	}
 	return (0);
 }
 
-int	check_arg(t_token *token)
+int	check_arg(t_token *token, t_minishell *ms)
 {
 	int	i;
 
@@ -87,13 +87,13 @@ int	check_arg(t_token *token)
 	{
 		if (!ft_isdigit(token->arg_head->value[i]))
 		{
-			g_lretv = 2;
+			ms->l_retv = 2;
 			print_err_exit(token->arg_head->value,
 				": numeric argument required\n");
 			return (1);
 		}
 	}
-	if (check_max_int(token->arg_head->value))
+	if (check_max_int(token->arg_head->value, ms))
 		return (1);
 	return (0);
 }

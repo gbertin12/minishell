@@ -6,11 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:44:17 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/17 10:44:12 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:26:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/prompt.h"
 
 static char	*get_prompt2(t_minishell *ms, char *pwd, char *ret_v, char *tmp)
 {
@@ -19,7 +19,7 @@ static char	*get_prompt2(t_minishell *ms, char *pwd, char *ret_v, char *tmp)
 	tmp = ft_strjoin(ret_v, pwd, ms);
 	ft_free(pwd, ms);
 	ft_free(ret_v, ms);
-	ret_v = ft_strjoin(tmp, string_ternary(g_lretv != 0, RED, GREEN), ms);
+	ret_v = ft_strjoin(tmp, string_ternary(ms->l_retv != 0, RED, GREEN), ms);
 	ft_free(tmp, ms);
 	tmp = ft_strjoin(ret_v, "$ ", ms);
 	ft_free(ret_v, ms);

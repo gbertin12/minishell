@@ -6,11 +6,13 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/17 11:08:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:18:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	g_mode;
 
 void	init_signals(void)
 {
@@ -18,25 +20,20 @@ void	init_signals(void)
 	signal(SIGQUIT, sigquit_handler);
 }
 
-
 void	sigint_heredoc(int sig)
 {
 	rl_replace_line("", 0);
 	exit(sig);
 }
 
-void	exec_signals(void)
-{
-	signal(SIGINT, sigint_exec);
-	signal(SIGQUIT, sigquit_exec);
-}
-
 void	sigint_handler(int sig)
 {
-	g_lretv = 130;
-	if (sig != SIGINT)
+	if (g_mode || sig != SIGINT)
+	{
+		g_mode = 2;
 		return ;
-	ft_putchar_fd('\n', 1);
+	}
+	printf("^C\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -44,9 +41,7 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
-	if (sig != SIGQUIT)
+	if (!g_mode || sig != SIGQUIT)
 		return ;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	printf("^\\Quit\n");
 }

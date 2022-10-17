@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/17 10:43:09 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/12 16:53:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_file_error
 
 typedef struct s_minishell
 {
+	int				l_retv;
 	char			*s;
 	char			*l_input;
 	char			*pwd;
