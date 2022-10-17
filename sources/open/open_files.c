@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/12 11:32:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/17 09:25:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	open_input(t_token *token, t_minishell *ms)
 		}
 		fd = open_input2(file, token, ms);
 		if (fd < 0)
-			return (-1) ;
+			return (-1);
 		file = file->next;
 		if (check_have_next_type(file, 0))
 			return (fd);
