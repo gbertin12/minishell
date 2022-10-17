@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:35:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/06 14:28:14 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:36:01 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include "prompt.h"
 # include "open.h"
 
-void	copy_env(t_minishell *ms, char **env);
+extern int	g_lretv;
 
+void	copy_env(t_minishell *ms, char **env);
 #endif

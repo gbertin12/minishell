@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_child.c                                       :+:      :+:    :+:   */
+/*   signals2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 11:45:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 10:15:02 by ccambium         ###   ########.fr       */
+/*   Created: 2022/10/17 11:00:45 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/17 11:07:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exit_child(int num_err, t_minishell *ms)
+
+void	sigint_exec(int sig)
 {
-	if (ms->exec)
-	{
-		close(ms->exec->tmpin);
-		close(ms->exec->tmpout);
-	}
-	free(ms->s);
-	free_all(ms);
-	rl_clear_history();
-	exit(num_err);
+	if (sig != SIGINT)
+		return ;
+	g_lretv = 130;
+	ft_putchar_fd('\n', 1);
+}
+
+void	sigquit_exec(int sig)
+{
+	if (sig != SIGQUIT)
+		return ;
+	g_lretv = 131;
+	printf("^\\Quit (core dumped)\n");
 }

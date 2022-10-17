@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:36:27 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/06 15:44:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:39:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_env_value(char *key, t_minishell *ms)
 	if (!key)
 		return (NULL);
 	if (!ft_strncmp(key, "?", ft_strlen(key) + 1))
-		return (ft_itoa(ms->l_retv, ms));
+		return (ft_itoa(g_lretv, ms));
 	if (!ft_strncmp(key, "PWD", ft_strlen(key) + 1)
 		&& !do_env_key_exist(key, ms))
 		return (pwd);

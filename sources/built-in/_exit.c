@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   _exit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/14 08:42:45 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/17 11:24:22 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_too_many(t_token *token, t_minishell *ms)
+static int	check_too_many(t_token *token)
 {
 	if (count_arg(token->arg_head) > 1)
 	{
-		ms->l_retv = 1;
+		g_lretv = 1;
 		if (!check_arg(0, token, ms))
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
@@ -33,17 +33,17 @@ static void	exec_child(t_token *token, t_minishell *ms)
 	redir_out(token);
 	if (token->arg_head)
 	{
-		if (!check_arg(1, token, ms))
+		if (!check_arg(1, token))
 		{
-			ret_v = ms->l_retv;
+			ret_v = g_lretv;
 			if (token->arg_head)
 			{
-				if (check_too_many(token, ms) && check_arg(0, token, ms))
+				if (check_too_many(token))
 					return ;
-				if (!check_arg(1, token, ms))
+				if (!check_arg(1, token))
 					ret_v = ft_atoll(token->arg_head->value) % 256;
 				else
-					ret_v = ms->l_retv;
+					ret_v = g_lretv;
 			}
 			free_all(ms);
 			exit (ret_v);
@@ -69,7 +69,7 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 			close(ms->exec->last->pipefd[1]);
 		}
 		exec_child(token, ms);
-		ret_v = ms->l_retv;
+		ret_v = g_lretv;
 		exit_child(ret_v, ms);
 	}
 	return (1);
@@ -83,16 +83,16 @@ int	b_exit(t_token *token, t_minishell *ms)
 		exec_in_child(token, ms);
 	else
 	{
-		ret_v = ms->l_retv;
+		ret_v = g_lretv;
 		printf("exit\n");
 		if (token->arg_head)
 		{
-			if (check_too_many(token, ms) && !check_arg(0, token, ms))
+			if (check_too_many(token) && !check_arg(0, token))
 				return (1);
-			else if (!check_arg(1, token, ms))
+			else if (!check_arg(1, token))
 				ret_v = ft_atoll(token->arg_head->value) % 256;
 			else
-				ret_v = ms->l_retv;
+				ret_v = g_lretv;
 		}
 		rl_clear_history();
 		exit_child(ret_v, ms);
