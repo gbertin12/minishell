@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 11:24:22 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 12:55:35 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_too_many(t_token *token)
 	if (count_arg(token->arg_head) > 1)
 	{
 		g_lretv = 1;
-		if (!check_arg(0, token, ms))
+		if (!check_arg(0, token))
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
