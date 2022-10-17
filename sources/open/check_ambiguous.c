@@ -6,12 +6,11 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 19:18:31 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/12 11:26:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/17 09:26:12 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 int	check_ambiguous(char *path, char *print, t_file *file, int ambiguous)
 {

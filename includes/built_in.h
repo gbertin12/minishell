@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/14 08:39:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/17 11:20:15 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int		check_is_built_in(t_token *token);
 int		exec_builtin(t_token *token, t_minishell *ms);
 int		exec_env(t_token *token, t_minishell *ms);
 int		print_not_valid_identifier(char *function, char *print);
-
-int		check_arg(int printable, t_token *token, t_minishell *ms);
+int		check_arg(int printable, t_token *token);
 int		no_valid_arg(t_arg *arg);
 
 #endif

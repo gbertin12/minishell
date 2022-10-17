@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 12:41:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/17 12:42:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_execute(t_token *token)
 
 t_exec	*start_browse_cmd(t_minishell *ms)
 {
+	exec_signals();
 	ms->exec = ft_malloc(sizeof(t_exec), ms);
 	if (!ms->t_head || !ms->exec)
 		return (NULL);
@@ -50,7 +51,6 @@ t_exec	*start_browse_cmd(t_minishell *ms)
 	ms->exec->tmpout = dup(1);
 	if (ms->exec->tmpout == -1)
 		return (NULL);
-	g_mode = 1;
 	open_all(ms);
 	ms->exec->path_absolute = get_path_env(ms);
 	return (ms->exec);
@@ -84,7 +84,7 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 		return (1);
 	close(exec->tmpin);
 	close(exec->tmpout);
-	ms->l_retv = exec->l_retv;
+	g_lretv = exec->l_retv;
 	return (0);
 }
 
