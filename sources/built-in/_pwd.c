@@ -6,13 +6,13 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/12 17:19:29 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 08:55:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	_pwd(t_token *token, t_minishell *ms)
+int	_pwd(t_minishell *ms)
 {
 	ft_putstr_fd(ms->pwd, 1);
 	ft_putchar_fd('\n', 1);
@@ -39,7 +39,7 @@ int	exec_pwd(t_token *token, t_minishell *ms)
 		if (init_execute(token))
 			exit_child(1, ms);
 		redir_out(token);
-		if (_pwd(token, ms))
+		if (_pwd(ms))
 			exit_child(1, ms);
 		exit_child(0, ms);
 	}

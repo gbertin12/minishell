@@ -6,12 +6,14 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/12 17:08:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:11:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <stdlib.h>
+
+int	g_lretv = 0;
 
 static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 {
@@ -21,10 +23,10 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	if (tcgetattr(0, &ms->term) == -1)
 		exit(1);
 	ms->term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(0, 0, &ms->term);
+	if (tcsetattr(0, 0, &ms->term))
+		exit(1);
 	ms->pwd = get_pwd(ms);
 	copy_env(ms, envp);
-	init_signals();
 }
 
 static void	reset(t_minishell *ms, char *s)
@@ -48,7 +50,7 @@ static void	main2(t_minishell *ms, char *s)
 	}
 	if (parsing(s, ms) != 0)
 	{
-		ms->l_retv = 2;
+		g_lretv = 2;
 		return (reset(ms, s));
 	}
 	if (expand(ms))
@@ -71,9 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	init(&ms, envp, argc, argv);
 	while (1)
 	{
-		if (g_mode == 2)
-			ms.l_retv = 130;
-		g_mode = 0;
+		init_signals();
 		prompt = get_prompt(&ms);
 		ms.s = readline(prompt);
 		ft_free(prompt, &ms);
@@ -84,5 +84,8 @@ int	main(int argc, char **argv, char **envp)
 	reset(&ms, ms.s);
 	free_all(&ms);
 	rl_clear_history();
-	return (ms.l_retv);
+	ms.term.c_lflag &= ~(ECHOCTL);
+	if (tcsetattr(0, 0, &ms.term))
+		exit(g_lretv);
+	return (g_lretv);
 }

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:58:16 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/06 15:27:30 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:42:18 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		_export(t_token *token, t_minishell *ms);
 int		check_append_export(char *export);
 t_env	*get_node_env(char *key, t_minishell *ms);
 int		append_export(t_arg *arg, t_minishell *ms);
-int		_pwd(t_token *token, t_minishell *ms);
+int		_pwd(t_minishell *ms);
 int		_unset(t_arg *arg, t_minishell *ms);
 int		_echo(t_token *token);
 int		b_exit(t_token *token, t_minishell *ms);
@@ -29,7 +29,7 @@ int		exec_builtin(t_token *token, t_minishell *ms);
 int		exec_env(t_token *token, t_minishell *ms);
 int		print_not_valid_identifier(char *function, char *print);
 
-int		check_arg(t_token *token, t_minishell *ms);
+int		check_arg(t_token *token);
 int		no_valid_arg(t_arg *arg);
 
 #endif
