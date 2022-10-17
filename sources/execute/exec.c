@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 09:38:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/12 09:20:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 static int	null_cmd(t_exec *exec)
 {
 	if (!exec->token->cmd || exec->token->cmd[0] == '\0')
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(exec->token->cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
 		return (1);
+	}
 	return (0);
 }
 

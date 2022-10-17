@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:25:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 11:22:18 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:41:48 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	check_max_int(char *nbr)
 	return (0);
 }
 
-int	check_arg(int printable, t_token *token)
+int	check_arg(t_token *token)
 {
 	int	i;
 
@@ -88,9 +88,8 @@ int	check_arg(int printable, t_token *token)
 		if (!ft_isdigit(token->arg_head->value[i]))
 		{
 			g_lretv = 2;
-			if (printable)
-				print_err_exit(token->arg_head->value,
-					": numeric argument required\n");
+			print_err_exit(token->arg_head->value,
+				": numeric argument required\n");
 			return (1);
 		}
 	}
