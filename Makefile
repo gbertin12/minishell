@@ -6,7 +6,7 @@
 #    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/12 17:13:33 by ccambium         ###   ########.fr        #
+#    Updated: 2022/10/17 11:02:32 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCS = minishell.c\
 		sources/parsing/search_next_sep.c\
 		sources/prompt/get_prompt.c\
 		sources/signals/signals.c\
+		sources/signals/signals2.c\
 		sources/utils/add_end_list.c\
 		sources/utils/add_env_key_value.c\
 		sources/utils/add_front.c\

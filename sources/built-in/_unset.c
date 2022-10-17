@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:50:29 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:39:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ int	exec_unset(t_token *token, t_minishell *ms)
 		}
 		if (_unset(token->arg_head, ms))
 		{
-			ms->l_retv = 1;
+			g_lretv = 1;
 			return (1);
 		}
 	}
-	ms->l_retv = 0;
+	g_lretv = 0;
 	return (0);
 }
