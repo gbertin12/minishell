@@ -110,7 +110,7 @@ fi
 if is_active "export"
 then
 
-	test_str 'export a="1 2 3"; echo $a 4 5 6'
+	test_str 'export a="1 2 3"'
 	test_str 'export 8="12"'
 	test_str 'export fred=toto 8=12 jon=tutu'
 
@@ -126,8 +126,6 @@ then
 	test_str 'echo "$"'
 	test_str 'echo "\\\"'
 	test_str 'export a="\\"'
-	test_str 'export a="\\\\"; echo "$a"'
-	test_str 'export a="\\\\"; echo $a'
 fi
 
 #### TEST HD ####
@@ -152,7 +150,6 @@ then
 	test_str 'echo toto | "$var" | cat'
 	test_str '$var $var'
 	test_str '$var echo toto'
-	test_str "'\$var'"
 fi
 
 ### TEST CD TOKI ####
@@ -292,6 +289,8 @@ test_str "exit 9223372036854775808"
 test_str "exit -9223372036854775808"
 test_str "exit -9223372036854775809"
 test_str "exit 9999999999999999999999999999"
+test_str "exit c2 2"
+test_str "exit 2 2"
 test_str "unset PATH\nexit"
 fi
 
@@ -488,11 +487,6 @@ test_str "export var=test\$var\necho \$var"
 unset CMD
 fi
 
-if is_active "delslash-toki"
-then
-test_str "echo \" a \"bc\" def ghij\"klmno\" \"pqrstuv\"wxyz0123 456789abc\"defghijklm\"nopqrstuvwxyz \""
-fi
-
 if is_active "parsing-toki"
 then
 	test_str "\"\""
@@ -569,32 +563,6 @@ then
 	cd ..
 fi
 
-if is_active "star-toki"
-then
-	cd $SUB_DIR_TEST
-	test_str "echo *"
-	test_str "echo .*"
-	test_str "echo *a"
-	test_str "echo a*"
-	test_str "echo a*bc"
-	test_str	"export TMP=*\nls | grep \$TMP"
-	test_str	"export TMP=*\ncd ..\nls | grep \$TMP"
-	test_str	"echo ****a*****b****c****d****"
-	test_str "echo a"
-	test_str "*"
-	test_str "mkdir t1\ncd t1\nrm -rf ../t1\necho *"
-	test_str "mkdir t1\ncd t1\nrm -rf ../t1\necho .*"
-	test_str "echo \"ab\"*"
-	test_str "echo \"a \"*"
-	test_str "echo \'ab\'*"
-	test_str "echo \'a \'*"
-	test_str "echo a\"b\"*"
-	test_str "echo a\" b\"*"
-	test_str "echo *\"b\""
-	test_str "echo *\"b\"*"
-	cd ..
-fi
-
 if is_active "hd-toki"
 then
 	cd $SUB_DIR_TEST
@@ -633,169 +601,6 @@ then
 	cd ../
 fi
 
-if is_active "and-toki"
-then
-	test_str "ls && uname"
-	test_str "ls && cat fesfjseoi && pwd"
-	test_str "ls && ls -a && ls -l && ls -la && ls -fesfs && ls"
-	test_str "ls | grep a && ls"
-	test_str "ls | grep z && ls"
-	test_str "ls && sleep 0.1 && pwd"
-	test_str "sleep 0.1 && ls && sleep 0.1 && pwd"
-	test_str "sleep -1 && ls"
-	test_str "ls -fsenifs && ls -fseifkse && ls && ls"
-fi
-
-if is_active "or-toki"
-then
-	test_str "ls || uname"
-	test_str "uname || cat doesnotexist"
-	test_str "cat doesnotexist || uname"
-	test_str "cat doesnotexist || cat doesnotexist || cat doesnotexist || uname"
-	test_str "cat doesnotexist || uname || cat doesnotexist || uname"
-	test_str "touch toto\n ls | grep toto || uname\n rm toto"
-	test_str "ls | grep toto || uname"
-	test_str "cat doesnotexist | ls || uname"
-	test_str "cat doesnotexist | cat stillnotexist || uname"
-	test_str "touch toto\n uname || ls | grep toto \nrm toto"
-fi
-
-if is_active "andor-toki"
-then
-	test_str "echo a && echo b || echo c"
-	test_str "echo a || echo b && echo c"
-	test_str "cat toto && echo b || echo c"
-	test_str "cat toto || echo b && echo c"
-	test_str "echo a && cat toto || echo c"
-	test_str "echo a || cat toto && echo c"
-	test_str "echo a && echo b || cat toto"
-	test_str "echo a || echo b && cat toto"
-	test_str "echo a || echo b || echo c && echo d"
-	test_str "echo a || echo b && echo c || echo d"
-	test_str "echo a && echo b || echo c || echo d"
-	test_str "cat toto || echo b || echo c && echo d"
-	test_str "cat toto || echo b && echo c || echo d"
-	test_str "cat toto && echo b || echo c || echo d"
-	test_str "echo a || cat toto || echo c && echo d"
-	test_str "echo a || cat toto && echo c || echo d"
-	test_str "echo a && cat toto || echo c || echo d"
-	test_str "echo a || echo b || cat toto && echo d"
-	test_str "echo a || echo b && cat toto || echo d"
-	test_str "echo a && echo b || cat toto || echo d"
-	test_str "echo a || echo b || echo c && cat toto"
-	test_str "echo a || echo b && echo c || cat toto"
-	test_str "echo a && echo b || echo c || cat toto"
-	test_str "echo a || echo b && echo c && echo d"
-	test_str "echo a && echo b || echo c && echo d"
-	test_str "echo a && echo b && echo c || echo d"
-	test_str "cat toto || echo b && echo c && echo d"
-	test_str "cat toto && echo b || echo c && echo d"
-	test_str "cat toto && echo b && echo c || echo d"
-	test_str "echo a || cat toto && echo c && echo d"
-	test_str "echo a && cat toto || echo c && echo d"
-	test_str "echo a && cat toto && echo c || echo d"
-	test_str "echo a || echo b && cat toto && echo d"
-	test_str "echo a && echo b || cat toto && echo d"
-	test_str "echo a && echo b && cat toto || echo d"
-	test_str "echo a || echo b && echo c && cat toto"
-	test_str "echo a && echo b || echo c && cat toto"
-	test_str "echo a && echo b && echo c || cat toto"
-fi
-
-if is_active "sub-toki"
-then
-	test_str "(ls && pwd || uname)"
-	test_str "(ls && (ls && (ls && (ls && (ls && ls)))))"
-	test_str "ls -fesgse && (uname | cat) || pwd"
-	test_str "ls && (uname | cat) || pwd"
-	test_str "ls -fsfdfds || (uname | cat) && pwd"
-	test_str "ls || (uname | cat) && pwd"
-fi
-
-if is_active "fix"
-then
-	test_str "export toto=12 ; export to=32 ; export | grep -v _="
-	test_str "export toto; export toto=tata ; export | grep -v _="
-	test_str "export he hehe ha haha ; export | grep -v _="
-	test_str "exit yeye 456"
-	test_str "unset ye="
-	test_str "export CDPATH=/tmp ; cd . ; pwd"
-	test_str "export CDPATH=/tmp ; cd .. ; pwd"
-	test_str "export CDPATH=/tmp ; cd .. ; pwd"
-	test_str "unset PATH ; ls"
-	test_str "export CDPATHT=/ ; cd tmp ; pwd"
-	test_str "export PATHT=\$PATH ; unset PATH ; ls"
-	test_str "unset 1a"
-	test_str "unset a+"
-	test_str "unset a="
-	test_str "unset _"
-	test_str "unset a1a"
-	test_str "not_command ; \$a"
-	CMD="env -i"
-	test_str "ls"
-	unset CMD
-	test_str "export a+= ; export | grep -v _="
-	test_str "export a+=toto ; export | grep -v _="
-	test_str "unset a ; export a+=toto ; export | grep -v _="
-	test_str "unset a ; export a+= ;export a +=fred ; export | grep -v _="
-	
-	test_str "echo \$SHLVL"
-	export SHLVL=999
-	test_str "echo \$SHLVL"
-	export SHLVL=1000
-	test_str "echo \$SHLVL"
-	unset SHLVL
-	test_str "echo \$SHLVL"
-
-	test_str "| a"
-	test_str "&& a"
-	test_str "|| a"
-	test_str "|| &&"
-	test_str "( )"
-	test_str "(( )"
-	test_str "()( ))"
-	test_str "()( )()"
-	test_str "()( &&  )()"
-	test_str "()( ||  )()"
-	test_str "(&&)"
-	test_str "&&||"
-	test_str "(&&)"
-	test_str "||&&||"
-	test_str "(|) && ls"
-	test_str "| && ls"
-	test_str "(|&&|) && ls"
-	test_str "(|)(|)(|)"
-	test_str "ls (|) ls"
-	test_str "(ls|) && ls"
-fi
-
-if is_active "fix2"
-then
-	test_str "&& lso"
-	test_str "(|ls) && ls"
-	test_str "(cat <<)"
-	test_str "echo toto && echo tata; echo titi ;"
-	test_str "export a==a+= ; export b\$a ; echo \$b"
-
-	CMD="env -i"
-	test_str "export abba ; export abba+=\$abba ; export | grep -v _="
-	test_str "unset a ; export a+==a+= ; echo \$a ; export b\$a ; echo \$b ; export | grep -v _="
-	unset CMD
-fi
-
-if is_active "hc-export"
-then
-
-	while test "$TEST_RANGE" -ge 0
-	do
-		create_input
-		test_str "export a=a; export b=b; export $INPUTS ; echo \$a ; echo \$b"
-		test_str "export a; export b; export $INPUTS ; echo \$a ; echo \$b"
-		test_str "export a; export b=b; export $INPUTS ; echo \$a ; echo \$b"
-		test_str "export a=a; export b; export $INPUTS ; echo \$a ; echo \$b"
-		(( TEST_RANGE-- ))
-	done
-fi
 
 if is_active "ni"
 then
@@ -817,11 +622,6 @@ then
 	test_str "/bin/"
 	test_str "//bin//"
 	unset CMD
-fi
-
-if is_active "fix4"
-then
-	test_str "/bin/lss"
 fi
 
 echo "Test KO RET: ${TEST_KO_RET}/${TEST_NUMBER}"
