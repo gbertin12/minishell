@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 15:12:52 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:07:58 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ long long	ft_lliota(long long n, t_minishell *ms);
 long long	next_arg(char *s, t_token *token, t_minishell *ms);
 
 char		is_space(char c);
+char		onlyquote(char *s);
 char		onlyspace(char *s);
 char		token_is_empty(t_token *t);
 char		between_quote(char *s, size_t x);
