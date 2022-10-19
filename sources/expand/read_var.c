@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 14:11:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/11 14:07:41 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 14:38:18 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ char	*read_var(char *s, t_minishell *ms)
 		return (ft_strdup("?", ms));
 	if ((!ft_isalpha(s[i]) && s[i] != '_') || !*s)
 		return (ft_strdup("", ms));
-	while (s[i] && !is_space(s[i])
-		&& s[i] != '$' && s[i] != '\'' && s[i] != '"')
+	while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
 		i++;
 	ret_v = ft_substr(s, 0, i, ms);
 	return (ret_v);
