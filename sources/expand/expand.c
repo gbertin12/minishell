@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:17:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 15:17:35 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:43:00 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ static void	replace_cmd(t_token *token, t_minishell *ms)
 			remove_first_arg(token, ms);
 		}
 		else
-		{
-			token->cmd = NULL;
 			break ;
-		}
 	}
 }
 
