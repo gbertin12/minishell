@@ -81,6 +81,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		main2(&ms, ms.s);
 	}
+	printf("exit");
 	reset(&ms, ms.s);
 	free_all(&ms);
 	rl_clear_history();
