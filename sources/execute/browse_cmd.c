@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 12:38:49 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 13:09:49 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 	if (have_child(ms->t_head))
 	{
 		if (WIFSIGNALED(status))
-			exec->l_retv = status;
+		{
+			if (status == 131)
+				exec->l_retv = status;
+			else
+				exec->l_retv = status + 128;
+		}
 		else
 			exec->l_retv = WEXITSTATUS(status);
 	}

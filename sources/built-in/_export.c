@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/12 17:20:33 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:01:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static int	declaration(t_minishell *ms)
 	while (env)
 	{
 		if (env->value)
-			printf("export -x %s=\"%s\"\n", env->key, env->value);
+			printf("export %s=\"%s\"\n", env->key, env->value);
 		else
-			printf("export -x %s\n", env->key);
+			printf("export %s\n", env->key);
 		env = next_declare(ms, env);
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/17 10:43:09 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:02:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
+	char			show;
 	struct s_env	*next;	
 }	t_env;
 
@@ -87,6 +88,7 @@ typedef struct s_minishell
 	t_exec			*exec;
 	t_token			*t_head;
 	t_termios		term;
+	t_termios		old_term;
 	struct s_obj	*o_head;
 	t_file_error	*err_head;
 }	t_minishell;
