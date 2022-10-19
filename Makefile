@@ -31,6 +31,7 @@ SRCS = minishell.c\
 		sources/execute/exec.c \
 		sources/execute/exit_child.c \
 		sources/execute/get_path.c \
+		sources/execute/init_execute.c \
 		sources/execute/redir.c \
 		sources/execute/step_of_exec.c\
 		sources/expand/between_quote.c\

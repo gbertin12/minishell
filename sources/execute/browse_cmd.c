@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   browse_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 13:30:20 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:08:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,21 @@ int	have_child(t_token *token)
 	return (0);
 }
 
-int	init_execute(t_token *token)
+int	return_value_child(int status, t_exec *exec, t_minishell *ms)
 {
-	if (token->have_in)
+	if (have_child(ms->t_head))
 	{
-		if (token->inputfile < 0)
-			return (1);
+		if (WIFSIGNALED(status))
+		{
+			if (status == 131)
+				exec->l_retv = status;
+			else
+				exec->l_retv = status + 128;
+		}
+		else
+			exec->l_retv = WEXITSTATUS(status);
 	}
-	if (token->have_out)
-	{
-		if (token->outputfile < 0)
-			return (1);
-	}
-	return (0);
+	return (exec->l_retv);
 }
 
 t_exec	*start_browse_cmd(t_minishell *ms)
@@ -71,22 +73,11 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 		waitpid(exec->token->pid, &status, 0);
 		exec->token = exec->token->next;
 	}
-	if (have_child(ms->t_head))
-	{
-		if (WIFSIGNALED(status))
-		{
-			if (status == 131)
-				exec->l_retv = status;
-			else
-				exec->l_retv = status + 128;
-		}
-		else
-			exec->l_retv = WEXITSTATUS(status);
-	}
 	if (dup2(exec->tmpin, 0) == -1)
 		return (1);
 	if (dup2(exec->tmpout, 1) == -1)
 		return (1);
+	exec->l_retv = return_value_child(status, exec, ms);
 	close(exec->tmpin);
 	close(exec->tmpout);
 	g_lretv = exec->l_retv;

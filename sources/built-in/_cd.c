@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 12:21:36 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:04:07 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 	return (0);
 }
 
-static char	exec_chdir(char *path, t_minishell *ms)
+static char	exec_chdir(t_token *token, char *path, t_minishell *ms)
 {
 	char	*value_oldpwd;
 	char	*n_path;
@@ -50,7 +50,8 @@ static char	exec_chdir(char *path, t_minishell *ms)
 
 	value_oldpwd = get_pwd(ms);
 	if (do_env_key_exist("CDPATH", ms) && (path[0] != '.'
-			&& path[1] != '.' && path[0] != '/'))
+			&& path[1] != '.' && path[0] != '/')
+		&& count_arg(token->arg_head) > 0)
 	{
 		all_cdpath = ft_split(get_env_value("CDPATH", ms), ':', ms);
 		n_path = check_cd_path(path, all_cdpath, ms);
@@ -77,14 +78,16 @@ char	_cd(t_token *token, t_minishell *ms)
 	}
 	home_path = get_env_value("HOME", ms);
 	nb_arg = count_arg(token->arg_head);
-	if (nb_arg == 0 && home_path)
-		return (exec_chdir(home_path, ms));
-	else if (nb_arg == 0 && !home_path)
+	if (nb_arg == 0 && (home_path && home_path[0]))
+		return (exec_chdir(token, home_path, ms));
+	else if (nb_arg == 0 && !do_env_key_exist("HOME", ms))
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (1);
 	}
-	return (exec_chdir(token->arg_head->value, ms));
+	else if (nb_arg == 0 && (!home_path || !home_path[0]))
+		return (0);
+	return (exec_chdir(token, token->arg_head->value, ms));
 }
 
 int	exec_cd(t_token *token, t_minishell *ms)
