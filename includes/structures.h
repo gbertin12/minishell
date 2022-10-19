@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:50:37 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 10:26:58 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:02:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
+	char			show;
 	struct s_env	*next;	
 }	t_env;
 

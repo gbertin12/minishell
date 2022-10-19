@@ -67,6 +67,7 @@ SRCS = minishell.c\
 		sources/utils/check_key_env.c \
 		sources/utils/check_path.c\
 		sources/utils/count_elem.c\
+		sources/utils/create_basic_environement.c\
 		sources/utils/create_error.c\
 		sources/utils/do_env_key_exist.c\
 		sources/utils/free_arg.c\

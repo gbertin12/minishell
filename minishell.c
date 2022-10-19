@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 10:44:30 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:18:10 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void	init(t_minishell *ms, char **envp, int argc, char **argv)
 	if (tcsetattr(0, TCSANOW, &ms->term))
 		exit(1);
 	ms->pwd = get_pwd(ms);
-	copy_env(ms, envp);
+	if (!envp[0])
+		create_basic_environement(ms);
+	else
+		copy_env(ms, envp);
 }
 
 static void	reset(t_minishell *ms, char *s)

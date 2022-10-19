@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _env.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:55:17 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:51:40 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 11:07:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	_env(t_minishell *ms)
 	env = ms->e_head;
 	while (env)
 	{
+		if (env->show)
+		{
+			env = env->next;
+			continue ;
+		}
 		if (env->value)
 			printf("%s=%s\n", env->key, env->value);
 		env = env->next;
