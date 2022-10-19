@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 13:18:25 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:01:47 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	print_in_file(int fd, char *limiter, t_minishell *ms)
 
 	rl_clear_history();
 	signal(SIGINT, sigint_heredoc);
-	append = readline(">");
+	append = readline("> ");
 	while (!ft_strcmp(append, limiter))
 	{
 		append = heredoc_expand(append, ms);
