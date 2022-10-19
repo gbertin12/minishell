@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/18 12:49:08 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 08:47:24 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,12 @@ int	end_browse_cmd(t_exec *exec, t_minishell *ms)
 		exec->token = exec->token->next;
 	}
 	if (have_child(ms->t_head))
-		exec->l_retv = WEXITSTATUS(status);
+	{
+		if (WIFSIGNALED(status))
+			exec->l_retv = status;
+		else
+			exec->l_retv = WEXITSTATUS(status);
+	}
 	if (dup2(exec->tmpin, 0) == -1)
 		return (1);
 	if (dup2(exec->tmpout, 1) == -1)
