@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 10:23:57 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 12:42:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	heredoc(char *limiter, t_minishell *ms)
 	int		fd;
 	int		pid;
 	char	*tmp_file;
+	int		status;
 
 	tmp_file = ft_strjoin("/tmp/", ft_itoa(*limiter, ms), ms);
 	if (!tmp_file)
@@ -72,8 +73,15 @@ int	heredoc(char *limiter, t_minishell *ms)
 		return (-1);
 	if (pid == 0)
 		heredoc_child(fd, limiter, ms);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
 	signal(SIGQUIT, sigquit_exec);
+	if (WIFSIGNALED(status))
+	{
+		
+		g_lretv = status;
+	}
+	else
+		g_lretv = WEXITSTATUS(status);
 	close(fd);
 	fd = open(tmp_file, O_RDONLY);
 	if (fd == -1)
