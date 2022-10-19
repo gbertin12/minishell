@@ -75,6 +75,7 @@ SRCS = minishell.c\
 		sources/utils/free_split.c\
 		sources/utils/free_tokens.c\
 		sources/utils/ft_atoll.c\
+		sources/utils/ft_concate.c\
 		sources/utils/ft_malloc.c\
 		sources/utils/ft_strcmp.c\
 		sources/utils/ft_superjoin.c\
