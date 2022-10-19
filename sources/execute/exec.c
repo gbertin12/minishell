@@ -6,26 +6,14 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 15:19:53 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:31:51 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	null_cmd(t_exec *exec)
-{
-	
-	if (exec->token->cmd == NULL)
-		return (1);
-	if (exec->token->cmd[0] == '\0')
-		ft_putstr_fd("minishell: : command not found\n", 2);
-	return (0);
-}
-
 static void	check_exec_cmd(t_exec *exec, t_minishell *ms)
 {
-	if (null_cmd(exec))
-		exit_child(0, ms);
 	if (check_path(exec, ms))
 		exit_child(127, ms);
 	execve(exec->path, exec->args, exec->env);
