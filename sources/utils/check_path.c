@@ -6,22 +6,43 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:59:00 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/11 14:05:51 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/19 12:35:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*check_cd_path(char *path, char **all_cdpath, t_minishell *ms)
+static char	*make_cdpath(char *path, char *all_cdpath, t_minishell *ms)
 {
 	char	*n_path;
 
-	while (*all_cdpath)
+	if (all_cdpath[ft_strlen(all_cdpath) - 1] != '/')
 	{
-		n_path = ft_strjoin(*all_cdpath, "/", ms);
+		n_path = ft_strjoin(all_cdpath, "/", ms);
 		if (!n_path)
 			return (NULL);
-		n_path = ft_strjoin(n_path, path, ms);
+	}
+	else
+	{
+		n_path = ft_strdup(all_cdpath, ms);
+		if (!n_path)
+			return (NULL);
+	}
+	n_path = ft_strjoin(n_path, path, ms);
+	if (!n_path)
+		return (NULL);
+	return (n_path);
+}
+
+char	*check_cd_path(char *path, char **all_cdpath, t_minishell *ms)
+{
+	char	*n_path;
+	int		i;
+
+	i = 0;
+	while (all_cdpath[i])
+	{
+		n_path = make_cdpath(path, all_cdpath[i], ms);
 		if (!n_path)
 			return (NULL);
 		if (access(n_path, 0) != -1)
@@ -32,7 +53,7 @@ char	*check_cd_path(char *path, char **all_cdpath, t_minishell *ms)
 			return (n_path);
 		}
 		ft_free(n_path, ms);
-		all_cdpath++;
+		i++;
 	}
 	return (NULL);
 }

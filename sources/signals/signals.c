@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/17 13:25:21 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:28:36 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	init_signals(void)
 	signal(SIGQUIT, sigquit_handler);
 }
 
-
 void	sigint_heredoc(int sig)
 {
+	ft_putstr_fd("^C\n", 1);
 	rl_replace_line("", 0);
 	exit(sig);
 }
@@ -36,7 +36,7 @@ void	sigint_handler(int sig)
 	if (sig != SIGINT)
 		return ;
 	g_lretv = 130;
-	printf("\n");
+	printf("^C\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -46,7 +46,4 @@ void	sigquit_handler(int sig)
 {
 	if (sig != SIGQUIT)
 		return ;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
 }

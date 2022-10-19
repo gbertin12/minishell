@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _exit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 12:55:35 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:43:33 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	b_exit(t_token *token, t_minishell *ms)
 				ret_v = g_lretv;
 		}
 		rl_clear_history();
+		tcsetattr(0, TCSANOW, &ms->old_term);
 		exit_child(ret_v, ms);
 	}
 	return (0);

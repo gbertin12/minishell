@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:07:10 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/12 17:13:05 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:53:58 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		add_end_obj(t_obj *head, t_obj *obj);
 void		free_arg(t_arg *arg, t_minishell *ms);
 void		free_split(char **tab, t_minishell *ms);
 void		add_end_file(t_token *token, t_file *obj);
+void		create_basic_environement(t_minishell *ms);
 void		add_end_token(t_token *obj, t_minishell *ms);
 void		add_end_err(t_file_error *head, t_file_error *obj);
 void		modify_env(char *key, char *value, t_minishell *ms);

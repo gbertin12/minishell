@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replace_env_value.c                                :+:      :+:    :+:   */
+/*   create_basic_environement.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 14:38:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 11:01:51 by ccambium         ###   ########.fr       */
+/*   Created: 2022/10/19 10:52:56 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/19 11:12:06 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	replace_env_value(char *key, char *value, t_minishell *ms)
+void	create_basic_environement(t_minishell *ms)
 {
 	t_env	*env;
+	t_env	*e;
 
-	if (!value)
-		return ;
-	env = ms->e_head;
-	while (env != NULL)
-	{
-		if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
-		{
-			ft_free(env->value, ms);
-			env->value = ft_strdup(value, ms);
-			ft_free(env->key, ms);
-			env->key = ft_strdup(key, ms);
-			if (env->show == 1)
-				env->show = 0;
-			return ;
-		}
-		env = env->next;
-	}
+	modify_env("PWD", ms->pwd, ms);
+	modify_env("SHLVL", "1", ms);
+	env = ft_malloc(sizeof(t_env), ms);
+	env->key = ft_strdup("PATH", ms);
+	env->value = ft_strdup(
+			"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", ms);
+	env->show = 1;
+	env->next = NULL;
+	e = ms->e_head;
+	while (e->next)
+		e = e->next;
+	e->next = env;
 }
