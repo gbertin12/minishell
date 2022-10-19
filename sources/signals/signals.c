@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 09:54:05 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:06:20 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sigint_handler(int sig)
 	if (sig != SIGINT)
 		return ;
 	g_lretv = 130;
-	printf("\n");
+	printf("^C\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
