@@ -65,7 +65,7 @@ SRCS = minishell.c\
 		sources/utils/add_front.c\
 		sources/utils/add_key_with_empty_value.c\
 		sources/utils/check_is_directory.c\
-		sources/utils/check_key_env.c \
+		sources/utils/check_key_env.c\
 		sources/utils/check_path.c\
 		sources/utils/count_elem.c\
 		sources/utils/create_basic_environement.c\
@@ -85,6 +85,7 @@ SRCS = minishell.c\
 		sources/utils/list_to_tab.c\
 		sources/utils/modify_env.c\
 		sources/utils/next_arg_parsing.c\
+		sources/utils/onlyquote.c\
 		sources/utils/onlyspace.c\
 		sources/utils/print_err.c \
 		sources/utils/replace_env_value.c\
