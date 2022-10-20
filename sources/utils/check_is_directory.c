@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:33:41 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 09:27:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:59:32 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	print(char *msg, char *path, int printable)
 int	check_is_directory(char *path, int printable)
 {
 	DIR	*dir;
-
 
 	if (!path)
 		return (1);

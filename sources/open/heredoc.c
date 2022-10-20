@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 12:42:20 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:53:23 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,23 @@ static void	heredoc_child(int fd, char *limiter, t_minishell *ms)
 	exit_child(0, ms);
 }
 
+static void	set_ret_value(int pid)
+{
+	int		status;
+
+	waitpid(pid, &status, 0);
+	signal(SIGQUIT, sigquit_exec);
+	if (WIFSIGNALED(status))
+		g_lretv = status;
+	else
+		g_lretv = WEXITSTATUS(status);
+}
+
 int	heredoc(char *limiter, t_minishell *ms)
 {
 	int		fd;
 	int		pid;
 	char	*tmp_file;
-	int		status;
 
 	tmp_file = ft_strjoin("/tmp/", ft_itoa(*limiter, ms), ms);
 	if (!tmp_file)
@@ -73,15 +84,7 @@ int	heredoc(char *limiter, t_minishell *ms)
 		return (-1);
 	if (pid == 0)
 		heredoc_child(fd, limiter, ms);
-	waitpid(pid, &status, 0);
-	signal(SIGQUIT, sigquit_exec);
-	if (WIFSIGNALED(status))
-	{
-		
-		g_lretv = status;
-	}
-	else
-		g_lretv = WEXITSTATUS(status);
+	set_ret_value(pid);
 	close(fd);
 	fd = open(tmp_file, O_RDONLY);
 	if (fd == -1)

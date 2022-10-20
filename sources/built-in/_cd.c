@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 15:00:27 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:59:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_err(char *path, t_minishell *ms)
 {
 	char	*err;
-	
+
 	err = NULL;
 	err = ft_strjoin(err, "minishell: cd: ", ms);
 	if (!err)
@@ -139,9 +139,9 @@ static void	exec_child(t_token *token, t_minishell *ms)
 		exit_child(1, ms);
 	redir_out(token);
 	if (_cd(token, ms))
-			exit_child(1, ms);
-		else
-			exit_child(0, ms);
+		exit_child(1, ms);
+	else
+		exit_child(0, ms);
 }
 
 static int	exec_in_child(t_token *token, t_minishell *ms)

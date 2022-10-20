@@ -6,12 +6,12 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/14 08:25:52 by gbertin          ###   ########.fr        #mbium
+#    Updated: 2022/10/20 15:53:50 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = clang
+CC = gcc
 FLAGS = -Wall -Wextra -Werror -g3 -I /opt/homebrew/opt/readline/include
 RM = rm -f
 LIBFT_PATH = sources/libs/libft/
