@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _unset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:50:13 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 10:39:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/20 08:57:04 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	_unset(t_arg *arg, t_minishell *ms)
 	{
 		e_before = NULL;
 		e_env = ms->e_head;
-		if (check_key_env(arg->value) && arg->value && arg->value[0])
+		if (check_key_env(arg->value))
 		{
 			print_not_valid_identifier("unset", arg->value);
 			flag = 1;

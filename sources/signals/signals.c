@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 10:06:20 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:28:36 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_signals(void)
 
 void	sigint_heredoc(int sig)
 {
+	ft_putstr_fd("^C\n", 1);
 	rl_replace_line("", 0);
 	exit(sig);
 }

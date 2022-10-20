@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/11 15:34:06 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:41:37 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,26 @@ static void	split_cmd(t_token *token, t_minishell *ms)
 	}
 }
 
+static char	in_quote(char *s, size_t x)
+{
+	char	d_quote;
+	char	quote;
+	size_t	i;
+
+	quote = 0;
+	d_quote = 0;
+	i = 0;
+	while (s && s[i] && i <= x)
+	{
+		if (s[i] == '"' && !quote)
+			d_quote = char_ternary(d_quote, 0, 1);
+		if (s[i] == '\'' && !d_quote)
+			quote = char_ternary(quote, 0, 1);
+		i++;
+	}
+	return (quote + d_quote);
+}
+
 char	expand_cmd(t_token *token, t_minishell *ms)
 {
 	size_t	i;
@@ -68,12 +88,9 @@ char	expand_cmd(t_token *token, t_minishell *ms)
 		token->cmd = replace_var(token->cmd, i, ms);
 		if (!token->cmd)
 			return (1);
+		if (!in_quote(token->cmd, i))
+			split_cmd(token, ms);
 		i = next_var(token->cmd);
-	}
-	if (flag)
-	{
-		delete_quotes(token, ms);
-		split_cmd(token, ms);
 	}
 	return (EXIT_SUCCESS);
 }

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   between_quote.c                                    :+:      :+:    :+:   */
+/*   ft_concate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 10:56:22 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 13:42:25 by ccambium         ###   ########.fr       */
+/*   Created: 2022/10/19 15:06:22 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/19 15:12:23 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	between_quote(char *s, size_t x)
+char	*ft_concate(char **tab, t_minishell *ms)
 {
-	char	d_quote;
-	char	quote;
+	char	*ret_v;
+	char	*tmp;
 	size_t	i;
 
-	quote = 0;
-	d_quote = 0;
 	i = 0;
-	while (s && s[i] && i <= x)
+	ret_v = NULL;
+	if (!tab || !tab[0])
+		return (ft_strdup("", ms));
+	ret_v = ft_strjoin("", tab[0], ms);
+	if (!ret_v)
+		return (NULL);
+	while (tab[++i] != NULL)
 	{
-		if (s[i] == '"' && !quote)
-			d_quote = char_ternary(d_quote, 0, 1);
-		if (s[i] == '\'' && !d_quote)
-			quote = char_ternary(quote, 0, 1);
-		i++;
+		tmp = ft_strjoin(ret_v, tab[i], ms);
+		if (!tmp)
+			return (ret_v);
+		ft_free(ret_v, ms);
+		ret_v = tmp;
 	}
-	return (quote);
+	return (ret_v);
 }

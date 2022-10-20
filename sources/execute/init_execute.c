@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_null.c                                      :+:      :+:    :+:   */
+/*   init_execute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:21:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 08:50:19 by gbertin          ###   ########.fr       */
+/*   Created: 2022/10/19 15:05:27 by gbertin           #+#    #+#             */
+/*   Updated: 2022/10/19 16:30:57 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	remove_null(t_token *token, t_minishell *ms)
+int	init_execute(t_token *token)
 {
-	t_arg	*arg;
-	t_arg	*last;
-
-	arg = token->arg_head;
-	last = NULL;
-	while (arg)
+	if (token->have_in)
 	{
-		if (!arg->value)
-		{
-			if (!last)
-				token->arg_head = arg->next;
-			else
-				last->next = arg->next;
-			free_arg(arg, ms);
-			arg = token->arg_head;
-			continue ;
-		}
-		last = arg;
-		arg = arg->next;
+		if (token->inputfile < 0)
+			return (1);
 	}
+	if (token->have_out)
+	{
+		if (token->outputfile < 0)
+			return (1);
+	}
+	return (0);
+}
+
+int	null_cmd(t_exec *exec)
+{
+	if (exec->token->cmd == NULL)
+		return (0);
+	if (exec->token->cmd[0] == '\0')
+	{
+		ft_putstr_fd("minishell: : command not found\n", 2);
+		return (0);
+	}
+	return (1);
 }

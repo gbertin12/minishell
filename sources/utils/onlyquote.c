@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   modify_env.c                                       :+:      :+:    :+:   */
+/*   onlyquote.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 09:53:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 14:54:13 by gbertin          ###   ########.fr       */
+/*   Created: 2022/10/19 15:56:30 by ccambium          #+#    #+#             */
+/*   Updated: 2022/10/19 15:58:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	modify_env(char *key, char *value, t_minishell *ms)
+char	onlyquote(char *s)
 {
-	if (!value)
-		add_key_with_empty_value(key, ms);
-	else if (do_env_key_exist(key, ms))
-		replace_env_value(key, value, ms);
-	else
-		add_env_key_value(key, value, ms);
+	size_t	i;
+
+	i = -1;
+	while (*(s + ++i))
+	{
+		if (*(s + i) != '\'' && *(s + i) != '"')
+			return (0);
+	}
+	return (1);
 }
