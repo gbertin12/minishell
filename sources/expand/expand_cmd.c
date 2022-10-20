@@ -76,15 +76,12 @@ static char	in_quote(char *s, size_t x)
 char	expand_cmd(t_token *token, t_minishell *ms)
 {
 	size_t	i;
-	char	flag;
 
-	flag = 0;
 	if (token->cmd == NULL)
 		return (0);
 	i = next_var(token->cmd);
 	while (token->cmd[i])
 	{
-		flag = 1;
 		token->cmd = replace_var(token->cmd, i, ms);
 		if (!token->cmd)
 			return (1);
