@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 08:50:12 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:08:17 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,16 +133,20 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	i = ft_strchr(arg->value, '$');
 	while (arg)
 	{
-		i = ft_strchr(arg->value, '$');
-		if (!i || between_quote(arg->value, (i - arg->value))
-			|| i[1] == '\0' || is_space(i[1]) || i[1] == '$')
+		if (!i || !*i || i[1] == '\0' || is_space(i[1]) || i[1] == '$')
 		{
 			arg = arg->next;
+			continue ;
+		}
+		if (between_quote(arg->value, (i - arg->value)))
+		{
+			i = ft_strchr(i + 1, '$');
 			continue ;
 		}
 		key = read_var(++i, ms);
 		if (expand_arg2(arg, key, i, ms))
 			return (1);
+		i = ft_strchr(arg->value, '$');
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 09:14:47 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 12:54:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	reset(t_minishell *ms, char *s)
 
 static void	main2(t_minishell *ms, char *s)
 {
-	if (*s)
+	if (*s && !onlyspace(s))
 		add_history(s);
 	else
 	{
