@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 11:58:21 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:00:27 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ static int	check_err(char *path, t_minishell *ms)
 	return (1);
 }
 
+static void	set_oldpwd_null(t_minishell *ms)
+{
+	t_env	*head;
+
+	head = ms->e_head;
+	while (head)
+	{
+		if (ft_strcmp(head->key, "OLDPWD"))
+		{
+			head->value = NULL;
+			head->show = 1;
+			return ;
+		}
+		head = head->next;
+	}
+}
+
 static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 								t_minishell *ms)
 {
@@ -55,8 +72,13 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 		value_pwd = n_path;
 	else
 		value_pwd = get_pwd(ms);
-	modify_env("OLDPWD", value_oldpwd, ms);
-	modify_env("PWD", value_pwd, ms);
+	if (do_env_key_exist("PWD", ms))
+	{
+		modify_env("PWD", value_pwd, ms);
+		modify_env("OLDPWD", value_oldpwd, ms);
+	}
+	else
+		set_oldpwd_null(ms);
 	if (ms->pwd)
 		ft_free(ms->pwd, ms);
 	ms->pwd = ft_strdup(value_pwd, ms);
