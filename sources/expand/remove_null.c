@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_null.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:21:46 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/03 13:37:45 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/20 08:50:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	remove_null(t_token *token, t_minishell *ms)
 	last = NULL;
 	while (arg)
 	{
-		if (!arg->value || !*arg->value)
+		if (!arg->value)
 		{
 			if (!last)
 				token->arg_head = arg->next;

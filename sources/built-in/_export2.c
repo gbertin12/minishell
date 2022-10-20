@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:50:58 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/05 11:54:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 09:05:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	check_append_export(char *export)
 	int	i;
 
 	i = 0;
+	if (!export || export[0] == '\0')
+		return (0);
 	while (export[i] != '\0' && export[i] != '=')
 	{
 		if (export[i] == '+' && export[i + 1] == '=')

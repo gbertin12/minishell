@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 11:01:06 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:09:38 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,17 @@ int	_export(t_token *token, t_minishell *ms)
 
 	if (token == NULL)
 		return (EXIT_FAILURE);
-	if (no_valid_arg(token->arg_head))
+	if (count_arg(token->arg_head) == 0)
 		return (declaration(ms));
 	arg = token->arg_head;
 	error = 0;
 	while (arg != NULL)
 	{
-		if (arg->value && arg->value[0])
+		if (arg->value)
 		{
-			if (check_append_export(arg->value) && append_export(arg, ms))
+			if (arg->value && arg->value[0] == '\0')
+				print_not_valid_identifier("export", arg->value);
+			else if (check_append_export(arg->value) && append_export(arg, ms))
 					error = 0;
 			else if (_export2(arg, ms))
 				error = 1;

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 12:43:33 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 11:27:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 	token->pid = fork();
 	if (token->pid == 0)
 	{
+		if (init_execute(token))
+			exit_child(1, ms);
 		if (ms->exec->last)
 		{
 			close(ms->exec->last->pipefd[0]);
@@ -83,6 +85,9 @@ int	b_exit(t_token *token, t_minishell *ms)
 		exec_in_child(token, ms);
 	else
 	{
+		open_all(ms);
+		if (init_execute(token))
+			return (1);
 		ret_v = g_lretv;
 		printf("exit\n");
 		if (token->arg_head)

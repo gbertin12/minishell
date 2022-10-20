@@ -6,21 +6,42 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 15:04:07 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 11:58:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_err(char *path)
+static int	check_err(char *path, t_minishell *ms)
 {
-	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putstr_fd(path, 2);
-	ft_putstr_fd(": ", 2);
+	char	*err;
+	
+	err = NULL;
+	err = ft_strjoin(err, "minishell: cd: ", ms);
+	if (!err)
+		return (1);
+	err = ft_strjoin(err, path, ms);
+	if (!err)
+		return (1);
+	err = ft_strjoin(err, ": ", ms);
+	if (!err)
+		return (1);
 	if (errno == 116)
-		ft_putstr_fd("no such file or directory\n", 2);
+	{
+		err = ft_strjoin(err, "No such file or directory\n", ms);
+		if (!err)
+			return (1);
+	}
 	else
-		perror("");
+	{
+		err = ft_strjoin(err, strerror(errno), ms);
+		if (!err)
+			return (1);
+		err = ft_strjoin(err, "\n", ms);
+		if (!err)
+			return (1);
+	}
+	ft_putstr_fd(err, 2);
 	return (1);
 }
 
@@ -59,9 +80,9 @@ static char	exec_chdir(t_token *token, char *path, t_minishell *ms)
 			return (replace_pwd_in_env(value_oldpwd, n_path, ms));
 	}
 	if (access(path, 0) == -1)
-		return (check_err(path));
+		return (check_err(path, ms));
 	if (chdir(path) == -1)
-		return (check_err(path));
+		return (check_err(path, ms));
 	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	return (0);
 }
@@ -73,7 +94,7 @@ char	_cd(t_token *token, t_minishell *ms)
 
 	if (count_arg(token->arg_head) > 1)
 	{
-		ft_putstr_fd("minishell: pwd: too many arguments\n", 2);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (1);
 	}
 	home_path = get_env_value("HOME", ms);
@@ -90,10 +111,49 @@ char	_cd(t_token *token, t_minishell *ms)
 	return (exec_chdir(token, token->arg_head->value, ms));
 }
 
+static void	exec_child(t_token *token, t_minishell *ms)
+{
+	if (init_execute(token))
+		exit_child(1, ms);
+	redir_out(token);
+	if (_cd(token, ms))
+			exit_child(1, ms);
+		else
+			exit_child(0, ms);
+}
+
+static int	exec_in_child(t_token *token, t_minishell *ms)
+{
+	int	ret_v;
+
+	if (token->next)
+	{
+		if (pipe(token->pipefd))
+			return (1);
+	}
+	token->pid = fork();
+	if (token->pid == 0)
+	{
+		if (ms->exec->last)
+		{
+			close(ms->exec->last->pipefd[0]);
+			close(ms->exec->last->pipefd[1]);
+		}
+		exec_child(token, ms);
+		ret_v = g_lretv;
+		exit_child(ret_v, ms);
+	}
+	return (1);
+}
+
 int	exec_cd(t_token *token, t_minishell *ms)
 {
-	if (count_token(ms->t_head) == 1)
+	if (count_token(ms->t_head) > 1)
+		exec_in_child(token, ms);
+	else
 	{
+		if (init_execute(token))
+			return (1);
 		if (_cd(token, ms))
 			return (1);
 		else
