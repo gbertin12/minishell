@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _env.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:55:17 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 11:07:25 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:10:40 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	exec_child(t_token *token, t_minishell *ms)
 		close(ms->exec->last->pipefd[0]);
 		close(ms->exec->last->pipefd[1]);
 	}
-	if (init_execute(token))
-		exit_child(1, ms);
+	init_execute(token, ms);
 	redir_out(token);
 	if (_env(ms))
 		exit_child(1, ms);

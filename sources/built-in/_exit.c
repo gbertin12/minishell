@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 11:27:05 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 09:11:39 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void	exec_child(t_token *token, t_minishell *ms)
 {
 	int	ret_v;
 
-	if (init_execute(token))
-		exit_child(1, ms);
 	redir_out(token);
 	if (token->arg_head)
 	{
@@ -63,8 +61,7 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 	token->pid = fork();
 	if (token->pid == 0)
 	{
-		if (init_execute(token))
-			exit_child(1, ms);
+		init_execute(token, ms);
 		if (ms->exec->last)
 		{
 			close(ms->exec->last->pipefd[0]);
@@ -86,12 +83,16 @@ int	b_exit(t_token *token, t_minishell *ms)
 	else
 	{
 		open_all(ms);
-		if (init_execute(token))
-			return (1);
 		ret_v = g_lretv;
 		printf("exit\n");
 		if (token->arg_head)
 		{
+			if (init_exec_no_child(token) == 130)
+				return (130);
+			if (init_exec_no_child(token) == -1)
+				return (0);
+			if (init_exec_no_child(token) == 1)
+				return (1);
 			if (check_too_many(token) && !check_arg(0, token))
 				return (1);
 			else if (!check_arg(1, token))

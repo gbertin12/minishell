@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _pwd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:00:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/17 11:22:28 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:14:21 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	exec_pwd(t_token *token, t_minishell *ms)
 			close(ms->exec->last->pipefd[0]);
 			close(ms->exec->last->pipefd[1]);
 		}
-		if (init_execute(token))
-			exit_child(1, ms);
+		init_execute(token, ms);
 		redir_out(token);
 		if (_pwd(ms))
 			exit_child(1, ms);

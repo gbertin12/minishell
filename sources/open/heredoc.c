@@ -6,64 +6,70 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 15:53:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 09:23:44 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	error_heredoc(char *limiter)
+static int	error_heredoc(char *limiter)
 {
 	ft_putstr_fd("minishell: warning: here-document delimited by\
  end-of-file (wanted `", 2);
 	ft_putstr_fd(limiter, 2);
 	ft_putstr_fd("')\n", 2);
+	return (1);
 }
 
-static void	print_in_file(int fd, char *limiter, t_minishell *ms)
+static int	print_in_file(int fd, char *limiter, t_minishell *ms)
 {
 	char	*append;
+	int		err;
 
+	err = 0;
 	rl_clear_history();
 	signal(SIGINT, sigint_heredoc);
 	append = readline("> ");
 	while (!ft_strcmp(append, limiter))
 	{
 		append = heredoc_expand(append, ms);
-		if (append && *append)
+		if (append)
 		{
 			ft_putstr_fd(append, fd);
 			ft_putstr_fd("\n", fd);
 		}
 		else if (!append)
 		{
-			error_heredoc(limiter);
+			if (g_lretv != 130)
+				err = error_heredoc(limiter);
+			else 
+				return (130);
 			break ;
 		}
 		ft_free(append, ms);
 		append = readline("> ");
 	}
 	ft_free(append, ms);
+	return (err);
 }
 
 static void	heredoc_child(int fd, char *limiter, t_minishell *ms)
 {
+	int	ret;
+	
 	signal(SIGINT, sigint_heredoc);
-	print_in_file(fd, limiter, ms);
+	ret = print_in_file(fd, limiter, ms);
 	close(fd);
-	exit_child(0, ms);
+	exit_child(ret, ms);
 }
 
-static void	set_ret_value(int pid)
+static int	set_ret_value(int pid)
 {
 	int		status;
 
 	waitpid(pid, &status, 0);
 	signal(SIGQUIT, sigquit_exec);
-	if (WIFSIGNALED(status))
-		g_lretv = status;
-	else
-		g_lretv = WEXITSTATUS(status);
+	return (WEXITSTATUS(status));
 }
 
 int	heredoc(char *limiter, t_minishell *ms)
@@ -84,8 +90,11 @@ int	heredoc(char *limiter, t_minishell *ms)
 		return (-1);
 	if (pid == 0)
 		heredoc_child(fd, limiter, ms);
-	set_ret_value(pid);
 	close(fd);
+	if (set_ret_value(pid) == 130)
+		return (-2);
+	if (set_ret_value(pid) == 1)
+		return (-3);
 	fd = open(tmp_file, O_RDONLY);
 	if (fd == -1)
 		return (-1);

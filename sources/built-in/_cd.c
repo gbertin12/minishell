@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/20 15:59:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 10:00:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,7 @@ char	_cd(t_token *token, t_minishell *ms)
 
 static void	exec_child(t_token *token, t_minishell *ms)
 {
-	if (init_execute(token))
-		exit_child(1, ms);
+	init_execute(token, ms);
 	redir_out(token);
 	if (_cd(token, ms))
 		exit_child(1, ms);
@@ -174,7 +173,11 @@ int	exec_cd(t_token *token, t_minishell *ms)
 		exec_in_child(token, ms);
 	else
 	{
-		if (init_execute(token))
+		if (init_exec_no_child(token) == 130)
+			return (130);
+		if (init_exec_no_child(token) == -1)
+			return (0);
+		if (init_exec_no_child(token) == 1)
 			return (1);
 		if (_cd(token, ms))
 			return (1);

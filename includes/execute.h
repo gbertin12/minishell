@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:40:09 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 15:31:10 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 10:00:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		null_cmd(t_exec *exec);
 int		ft_search_char(char *str);
 int		browse_cmd(t_minishell *ms);
 
-int		init_execute(t_token *token);
+int		init_execute(t_token *token, t_minishell *ms);
+int		init_exec_no_child(t_token *token);
 int		redir_in(t_token *token, t_token *last);
 int		redir_out(t_token *token);
 

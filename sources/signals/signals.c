@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 16:51:31 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:18:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_signals(void)
 
 void	sigint_heredoc(int sig)
 {
+	g_lretv = 130;
 	ft_putstr_fd("^C\n", 1);
 	rl_replace_line("", 0);
 	(void)sig;

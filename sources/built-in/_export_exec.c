@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/11 14:50:31 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 09:13:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static int	exec_child(t_token *token, t_minishell *ms)
 {
-	if (init_execute(token))
-		exit_child(1, ms);
+	init_execute(token, ms);
 	redir_out(token);
 	if (token->arg_head == NULL)
 	{
@@ -51,8 +50,7 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 
 static int	exec_in_parent(t_token *token, t_minishell *ms)
 {
-	if (init_execute(token))
-		return (1);
+	//init_execute(token, ms);
 	redir_out(token);
 	if (_export(token, ms))
 		return (1);
@@ -68,6 +66,12 @@ int	exec_export(t_token *token, t_minishell *ms)
 	}
 	else
 	{
+			if (init_exec_no_child(token) == 130)
+			return (130);
+		if (init_exec_no_child(token) == -1)
+			return (0);
+		if (init_exec_no_child(token) == 1)
+			return (1);
 		if (exec_in_parent(token, ms))
 			return (1);
 		else

@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:41:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 15:31:51 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 09:03:25 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	exec_first_cmd(t_exec *exec, t_minishell *ms)
 		return (1);
 	if (exec->token->pid == 0)
 	{
-		if (init_execute(exec->token))
-			exit_child(1, ms);
+		init_execute(exec->token, ms);
 		if (exec->token->have_in)
 		{
 			if (dup2(exec->token->inputfile, 0) == -1)
@@ -57,8 +56,7 @@ int	exec_middle(t_exec *exec, t_minishell *ms)
 		return (1);
 	if (exec->token->pid == 0)
 	{
-		if (init_execute(exec->token))
-			exit_child(1, ms);
+		init_execute(exec->token, ms);
 		redir_in(exec->token, exec->last);
 		redir_out(exec->token);
 		check_exec_cmd(exec, ms);
@@ -74,8 +72,7 @@ int	exec_last(t_exec *exec, t_minishell *ms)
 		return (1);
 	if (exec->token->pid == 0)
 	{
-		if (init_execute(exec->token))
-			exit_child(1, ms);
+		init_execute(exec->token, ms);
 		redir_in(exec->token, exec->last);
 		if (exec->token->have_out)
 		{
