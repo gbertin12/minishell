@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:13:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:22:43 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	reset(t_minishell *ms, char *s)
 
 static void	main2(t_minishell *ms, char *s)
 {
-	if (*s && !onlyspace(s))
+	if (*s)
 		add_history(s);
 	else
 	{
@@ -69,6 +69,8 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	ms;
 	char		*prompt;
 
+	if (!isatty(0) || !isatty(1))
+		return (EXIT_FAILURE);
 	init(&ms, envp, argc, argv);
 	while (1)
 	{
