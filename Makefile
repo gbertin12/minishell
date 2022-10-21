@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/20 15:53:50 by gbertin          ###   ########.fr        #
+#    Updated: 2022/10/21 12:38:15 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRCS = minishell.c\
 		sources/open/complex_var.c\
 		sources/open/expand_file.c\
 		sources/open/expand_simple_var.c\
-		sources/open/heredoc.c \
+		sources/open/heredoc.c\
+		sources/open/heredoc_child.c\
 		sources/open/if_type_file_exist.c\
 		sources/open/open_files.c \
 		sources/open/open_all.c \
