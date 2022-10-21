@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 14:49:15 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:25:52 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	heredoc2(int fd, int pid, char *tmp_file, t_minishell *ms)
 		return (ft_free(tmp_file, ms), -2);
 	if (x == 1)
 		return (ft_free(tmp_file, ms), -3);
+	close(fd);
 	fd = open(tmp_file, O_RDONLY);
 	if (fd == -1)
 		return (ft_free(tmp_file, ms), -1);
@@ -53,7 +54,6 @@ int	heredoc(char *limiter, t_minishell *ms)
 	pid = fork();
 	if (pid < 0)
 		return (ft_free(tmp_file, ms), -1);
-	close(fd);
 	if (pid == 0)
 		heredoc_child(fd, limiter, ms);
 	return (heredoc2(fd, pid, tmp_file, ms));

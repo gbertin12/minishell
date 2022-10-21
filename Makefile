@@ -6,7 +6,7 @@
 #    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/21 14:58:20 by gbertin          ###   ########.fr        #
+#    Updated: 2022/10/21 16:46:59 by gbertin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ SRCS = minishell.c\
 		sources/open/heredoc.c\
 		sources/open/heredoc_child.c\
 		sources/open/if_type_file_exist.c\
-		sources/open/open_files.c \
 		sources/open/open_all.c \
 		sources/open/print_err_files.c\
 		sources/open/replace_value_key.c\

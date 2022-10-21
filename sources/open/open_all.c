@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:59:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:06:13 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:54:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,64 @@ void	print_err(t_minishell *ms)
 	}
 }
 
+int	open_output(t_file *file, t_token *token, t_minishell *ms)
+{
+	int	fd;
+
+	fd = 0;
+	if (file->append)
+		fd = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		fd = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+		put_error_fd(file, token->file_head, ms);
+	return (fd);
+}
+
+int	open_input(t_file *file, t_token *token, t_minishell *ms)
+{
+	int	fd;
+
+	fd = 0;
+	if (file->append)
+		fd = heredoc(file->path, ms);
+	else
+		fd = open(file->path, O_RDONLY);
+	if (fd < -1)
+		return (fd);
+	else if (fd < 0)
+		put_error_fd(file, token->file_head, ms);
+	return (fd);
+}
+
+static void	open_file(t_token *token, t_minishell *ms)
+{
+	t_file	*file;
+
+	file = token->file_head;
+	while (file)
+	{
+		file->path = expand_file(file->path, ms);
+		if (!file->path)
+		{
+			if (file->type == 0)
+				token->inputfile = -1;
+			else if (file->type == 1)
+				token->outputfile = -1;
+		}
+		else
+		{
+			if (file->type == 0)
+				token->inputfile = open_input(file, token, ms);
+			else if (file->type == 1)
+				token->outputfile = open_output(file, token, ms);
+		}
+		if (token->inputfile < 0 || token->outputfile < 0)
+			return ;
+		file = file->next;
+	}
+}
+
 void	open_all(t_minishell *ms)
 {
 	t_token			*token;
@@ -39,14 +97,7 @@ void	open_all(t_minishell *ms)
 		token->outputfile = 0;
 		token->have_in = have_infile(token);
 		token->have_out = have_outfile(token);
-		if (token->have_in)
-		{
-			token->inputfile = open_input(token, ms);
-			if (token->inputfile < 0)
-				break ;
-		}
-		if (token->have_out)
-			token->outputfile = open_output(token, ms);
+		open_file(token, ms);
 		token = token->next;
 	}
 	print_err(ms);

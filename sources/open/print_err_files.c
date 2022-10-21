@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:58:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/12 11:26:59 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 16:54:40 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void	put_error_fd(t_file *file, t_file *head, t_minishell *ms)
 {
 	t_file_error	*new_err;
 
-	if (did_print(file, head))
-		return ;
+	(void)head;
 	if (ms->err_head == NULL)
 	{
 		new_err = ft_malloc(sizeof(t_file_error), ms);
