@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:22:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:03:08 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	char		*prompt;
 
 	if (!isatty(0) || !isatty(1))
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	init(&ms, envp, argc, argv);
 	while (1)
 	{
