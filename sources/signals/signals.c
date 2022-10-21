@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 18:18:34 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:18:50 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_signals(void)
 void	sigint_heredoc(int sig)
 {
 	g_lretv = 130;
-	ft_putstr_fd("^C\n", 1);
 	rl_replace_line("", 0);
 	(void)sig;
 	close(0);
@@ -38,7 +37,7 @@ void	sigint_handler(int sig)
 	if (sig != SIGINT)
 		return ;
 	g_lretv = 130;
-	printf("^C\n");
+	ft_putchar_fd('\n', 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -48,4 +47,8 @@ void	sigquit_handler(int sig)
 {
 	if (sig != SIGQUIT)
 		return ;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+
 }
