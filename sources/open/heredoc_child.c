@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 12:35:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/21 12:52:16 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:48:32 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	print_in_file(int fd, char *limiter, t_minishell *ms)
 		}
 		else if (!append)
 		{
-			err = 1;
+			err = 130;
 			if (g_lretv != 130)
 				err = error_heredoc(limiter, fd);
 			break ;
@@ -56,6 +56,7 @@ void	heredoc_child(int fd, char *limiter, t_minishell *ms)
 
 	signal(SIGINT, sigint_heredoc);
 	rl_clear_history();
+	g_lretv = 0;
 	ret = print_in_file(fd, limiter, ms);
 	close(fd);
 	exit_child(ret, ms);
