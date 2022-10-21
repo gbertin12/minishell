@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 09:13:54 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:12:13 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	exec_export(t_token *token, t_minishell *ms)
 	}
 	else
 	{
-			if (init_exec_no_child(token) == 130)
+		if (init_exec_no_child(token) == 130)
 			return (130);
 		if (init_exec_no_child(token) == -1)
 			return (0);

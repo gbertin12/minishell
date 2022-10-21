@@ -6,11 +6,13 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 12:46:35 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:05:02 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	*remove_quotes(char *s, t_minishell *ms, int depth);
 
 static char	get_char_target(char *s)
 {
@@ -42,10 +44,19 @@ static int	count_quotes(char *s)
 	return (ret_v / 2);
 }
 
-static char	*remove_quotes2(char *s, char **tmp, t_minishell *ms)
+static char	*remove_quotes2(char *s, char **tmp, t_minishell *ms, char to_find)
 {
 	char	*ret_v;
+	int		ndepth;
+	size_t	x;
 
+	x = size_t_ternary(ft_strchr(s, to_find) - s > 0,
+			ft_strchr(s, to_find) - s, 0);
+	tmp[2] = ft_substr(s,
+			ft_strchr(&s[x + 1], to_find) - s + 1, ft_strlen(s), ms);
+	ndepth = count_quotes(tmp[2]);
+	if (ndepth)
+		tmp[2] = remove_quotes(tmp[2], ms, 0);
 	tmp[3] = NULL;
 	ret_v = ft_concate(tmp, ms);
 	if (!tmp[0] || !tmp[1] || !tmp[2] || !ret_v)
@@ -68,7 +79,7 @@ static char	*remove_quotes(char *s, t_minishell *ms, int depth)
 	if (!tmp || !s)
 		return (s);
 	if (!*s)
-		return (NULL);
+		return (free_split(tmp, ms), NULL);
 	if (!ft_strchr(s, '\'') && !ft_strchr(s, '"'))
 		return (s);
 	to_find = get_char_target(s);
@@ -80,12 +91,7 @@ static char	*remove_quotes(char *s, t_minishell *ms, int depth)
 	ndepth = count_quotes(tmp[1]);
 	if (ndepth > 1)
 		tmp[1] = remove_quotes(tmp[1], ms, ndepth);
-	tmp[2] = ft_substr(s,
-			ft_strchr(&s[x + 1], to_find) - s + 1, ft_strlen(s), ms);
-	ndepth = count_quotes(tmp[2]);
-	if (ndepth)
-		tmp[2] = remove_quotes(tmp[2], ms, 0);
-	return (remove_quotes2(s, tmp, ms));
+	return (remove_quotes2(s, tmp, ms, to_find));
 }
 
 void	delete_quotes(t_token *token, t_minishell *ms)

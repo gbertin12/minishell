@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:06:27 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:13:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	ms;
 	char		*prompt;
 
-	if (!isatty(0) || !isatty(1))
-		return (EXIT_SUCCESS);
 	init(&ms, envp, argc, argv);
 	while (1)
 	{

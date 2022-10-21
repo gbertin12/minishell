@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:27:30 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 09:24:30 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:11:18 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	open_input2(t_file *file, t_token *token, t_minishell *ms)
 	else
 		fd = open(file->path, O_RDONLY);
 	if (fd < -1)
-		return(fd);
+		return (fd);
 	else if (fd < 0)
 		put_error_fd(file, token->file_head, ms);
 	return (fd);

@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 13:08:17 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:52:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ static char	expand_arg_multi(t_arg *arg, char **argv, char *w, t_minishell *ms)
 	return (0);
 }
 
-static char	expand_arg2(t_arg *arg, char *key, char *i, t_minishell *ms)
+static char	expand_arg2(t_arg *arg, char *i, t_minishell *ms)
 {
 	char	*tmp;
 	char	**arg_value;
+	char	*key;
 
+	key = read_var(++i, ms);
 	tmp = get_env_value(key, ms);
 	if (!tmp)
 		tmp = ft_strdup("", ms);
@@ -114,10 +116,8 @@ static char	expand_arg2(t_arg *arg, char *key, char *i, t_minishell *ms)
 			return (1);
 	}
 	else
-	{
 		arg->value = replace_var_multi(arg->value, --i - arg->value,
 				"", ms);
-	}
 	return (0);
 }
 
@@ -125,7 +125,6 @@ char	expand_arg(t_token *token, t_minishell *ms)
 {
 	t_arg	*arg;
 	char	*i;
-	char	*key;
 
 	arg = token->arg_head;
 	if (!arg || !arg->value)
@@ -143,8 +142,7 @@ char	expand_arg(t_token *token, t_minishell *ms)
 			i = ft_strchr(i + 1, '$');
 			continue ;
 		}
-		key = read_var(++i, ms);
-		if (expand_arg2(arg, key, i, ms))
+		if (expand_arg2(arg, i, ms))
 			return (1);
 		i = ft_strchr(arg->value, '$');
 	}

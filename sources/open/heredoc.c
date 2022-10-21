@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:21:45 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 09:23:44 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:09:31 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	print_in_file(int fd, char *limiter, t_minishell *ms)
 		{
 			if (g_lretv != 130)
 				err = error_heredoc(limiter);
-			else 
+			else
 				return (130);
 			break ;
 		}
@@ -56,7 +56,7 @@ static int	print_in_file(int fd, char *limiter, t_minishell *ms)
 static void	heredoc_child(int fd, char *limiter, t_minishell *ms)
 {
 	int	ret;
-	
+
 	signal(SIGINT, sigint_heredoc);
 	ret = print_in_file(fd, limiter, ms);
 	close(fd);

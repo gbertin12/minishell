@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_execute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:05:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 09:08:31 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:49:54 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_exec_no_child(t_token *token)
 {
-		if (token->have_in)
+	if (token->have_in)
 	{
 		if (token->inputfile == -2)
 			return (130);
