@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/19 17:06:13 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 14:53:02 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 		exec->l_retv = 126;
 	else if (exec->token->cmd && exec->token->cmd[0] == '\0')
 		exec->l_retv = 1;
-	if (count_token(ms->t_head) > 1)
-		exec->token = exec->token->next;
-	else
-		exec->err = 1;
+	exec->token = exec->token->next;
 	return (exec);
 }
 

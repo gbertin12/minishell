@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:32 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 08:59:26 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 15:05:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	browse_cmd(t_minishell *ms)
 		return (1);
 	if (exec->token)
 		exec = first(exec, ms);
-	if (exec->err)
+	if (!exec->token)
 		return (end_browse_cmd(exec, ms));
 	token = exec->token;
 	while (token->next)

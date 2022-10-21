@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _exit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:19:42 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:00:57 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,27 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 
 int	b_exit(t_token *token, t_minishell *ms)
 {
-	int	ret_v;
-
 	if (count_token(ms->t_head) > 1)
 		exec_in_child(token, ms);
 	else
 	{
-		ret_v = g_lretv;
 		if (token->arg_head)
 		{
 			if (check_too_many(token) && !check_arg(0, token))
 				return (1);
 			else if (!check_arg(1, token))
-				ret_v = ft_atoll(token->arg_head->value) % 256;
-			else
-				ret_v = g_lretv;
+				g_lretv = ft_atoll(token->arg_head->value) % 256;
 		}
 		if (init_exec_no_child(token) == 130)
 			return (130);
 		if (init_exec_no_child(token) == -1)
-			ret_v = 0;
+			g_lretv = 0;
 		if (init_exec_no_child(token) == 1)
 			return (1);
 		printf("exit\n");
 		rl_clear_history();
 		tcsetattr(0, TCSANOW, &ms->old_term);
-		exit_child(ret_v, ms);
+		exit_child(g_lretv, ms);
 	}
 	return (0);
 }

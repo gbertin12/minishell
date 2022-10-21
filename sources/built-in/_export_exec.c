@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 10:44:53 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:12:13 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:01:08 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	exec_in_child(t_token *token, t_minishell *ms)
 
 static int	exec_in_parent(t_token *token, t_minishell *ms)
 {
-	//init_execute(token, ms);
 	redir_out(token);
 	if (_export(token, ms))
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:49:26 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:37:45 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:01:15 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int		open_input(t_token *token, t_minishell *ms);
 int		open_output(t_token *token, t_minishell *ms);
 int		check_have_next_type(t_file *file, char type);
 int		check_ambiguous(char *path, char *print, t_file *file, int ambiguous);
-
 
 #endif
