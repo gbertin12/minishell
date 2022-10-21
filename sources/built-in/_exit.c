@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:14:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 09:11:39 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:09:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,9 @@ int	b_exit(t_token *token, t_minishell *ms)
 		exec_in_child(token, ms);
 	else
 	{
-		open_all(ms);
 		ret_v = g_lretv;
-		printf("exit\n");
 		if (token->arg_head)
 		{
-			if (init_exec_no_child(token) == 130)
-				return (130);
-			if (init_exec_no_child(token) == -1)
-				return (0);
-			if (init_exec_no_child(token) == 1)
-				return (1);
 			if (check_too_many(token) && !check_arg(0, token))
 				return (1);
 			else if (!check_arg(1, token))
@@ -100,6 +92,13 @@ int	b_exit(t_token *token, t_minishell *ms)
 			else
 				ret_v = g_lretv;
 		}
+		if (init_exec_no_child(token) == 130)
+			return (130);
+		if (init_exec_no_child(token) == -1)
+			ret_v = 0;
+		if (init_exec_no_child(token) == 1)
+			return (1);
+		printf("exit\n");
 		rl_clear_history();
 		tcsetattr(0, TCSANOW, &ms->old_term);
 		exit_child(ret_v, ms);
