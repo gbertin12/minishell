@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 10:20:59 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/21 14:54:20 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 16:31:26 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,4 @@ void	sigquit_handler(int sig)
 {
 	if (sig != SIGQUIT)
 		return ;
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
 }
