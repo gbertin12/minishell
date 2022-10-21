@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/20 09:09:38 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/21 16:19:28 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	tmp = ft_split(arg->value, '=', ms);
 	if (!tmp)
 		return (EXIT_FAILURE);
+	if (!tmp[0])
+		return (print_not_valid_identifier("export", arg->value));
 	key = ft_strtrim(tmp[0], " \t\n\r\f\v", ms);
 	if (!key)
 		return (EXIT_FAILURE);
