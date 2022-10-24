@@ -1,0 +1,1361 @@
+==271907== FILE DESCRIPTORS: 5 open at exit.
+==271907== Open file descriptor 6:       
+==271907==    at 0x49C4D3B: open (open64.c:48)
+==271907==    by 0x10F141: open_output (open_all.c:38)
+==271907==    by 0x10F2CC: open_file (open_all.c:80)
+==271907==    by 0x10F381: open_all (open_all.c:100)
+==271907==    by 0x10BB8E: start_browse_cmd (browse_cmd.c:56)
+==271907==    by 0x10BD13: browse_cmd (browse_cmd.c:92)
+==271907==    by 0x109540: main2 (minishell.c:63)
+==271907==    by 0x10963F: main (minishell.c:83)
+==271907== 
+==271907== Open file descriptor 0: /dev/pts/0
+==271907==    at 0x49C58CB: dup2 (syscall-template.S:78)
+==271907==    by 0x10BC6C: end_browse_cmd (browse_cmd.c:76)
+==271907==    by 0x10BD6C: browse_cmd (browse_cmd.c:98)
+==271907==    by 0x109540: main2 (minishell.c:63)
+==271907==    by 0x10963F: main (minishell.c:83)
+==271907== 
+==271907== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==271907==    <inherited from parent>
+==271907== 
+==271907== Open file descriptor 2: /dev/pts/0
+==271907==    <inherited from parent>
+==271907== 
+==271907== Open file descriptor 1: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/      
+==271907==    at 0x49C58CB: dup2 (syscall-template.S:78)
+==271907==    by 0x10C599: redir_out (redir.c:19)
+==271907==    by 0x109FF8: exec_echo (_echo.c:75)
+==271907==    by 0x10B93E: exec_builtin (exec_built_in.c:43)
+==271907==    by 0x10C8D8: first (step_of_exec.c:59)
+==271907==    by 0x10BD48: browse_cmd (browse_cmd.c:96)
+==271907==    by 0x109540: main2 (minishell.c:63)
+==271907==    by 0x10963F: main (minishell.c:83)
+==271907== 
+==271907== 
+==271907== 8 bytes in 1 blocks are still reachable in loss record 1 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x495638E: strdup (strdup.c:42)
+==271907==    by 0x4AC44F7: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD538: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 12 bytes in 1 blocks are still reachable in loss record 2 of 58
+==271907==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A3041: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488E063: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488E7D5: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BFE5: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 13 bytes in 1 blocks are still reachable in loss record 3 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488ACF2: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D228: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 14 bytes in 1 blocks are still reachable in loss record 4 of 58
+==271907==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABEC3E: tparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC4274: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC44E9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD538: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 15 bytes in 1 blocks are still reachable in loss record 5 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x495638E: strdup (strdup.c:42)
+==271907==    by 0x4ABCE4F: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 16 bytes in 1 blocks are still reachable in loss record 6 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x487D317: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 20 bytes in 1 blocks are still reachable in loss record 7 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488B9D3: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488A818: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488AC6C: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D228: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 23 bytes in 1 blocks are still reachable in loss record 8 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x495638E: strdup (strdup.c:42)
+==271907==    by 0x4AB9AA7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AB9D9B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 35 bytes in 1 blocks are still reachable in loss record 9 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABA68C: _nc_home_terminfo (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AB9D85: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 46 bytes in 1 blocks are still reachable in loss record 10 of 58
+==271907==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3504: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907== 
+==271907== 46 bytes in 1 blocks are still reachable in loss record 11 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB818E: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 48 bytes in 1 blocks are still reachable in loss record 12 of 58
+==271907==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB9E9B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 78 bytes in 1 blocks are still reachable in loss record 13 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB81FF: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 94 bytes in 1 blocks are still reachable in loss record 14 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABE542: _nc_tparm_analyze (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABE7CB: tparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC4274: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC44E9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD538: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 104 bytes in 1 blocks are still reachable in loss record 15 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB9E04: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 110 bytes in 1 blocks are still reachable in loss record 16 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C010: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 110 bytes in 1 blocks are still reachable in loss record 17 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488E02F: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488E7D5: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BFE5: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 156 bytes in 1 blocks are still reachable in loss record 18 of 58
+==271907==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3522: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907== 
+==271907== 256 bytes in 1 blocks are still reachable in loss record 19 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D466: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 280 bytes in 1 blocks are still reachable in loss record 20 of 58
+==271907==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABCDB7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 496 bytes in 1 blocks are still reachable in loss record 21 of 58
+==271907==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AC378B: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 496 bytes in 1 blocks are still reachable in loss record 22 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB82D9: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 755 bytes in 1 blocks are still reachable in loss record 23 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AC380B: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,024 bytes in 1 blocks are still reachable in loss record 24 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488DB8A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,024 bytes in 1 blocks are still reachable in loss record 25 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488DBA0: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,024 bytes in 1 blocks are still reachable in loss record 26 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488DBE8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,024 bytes in 1 blocks are still reachable in loss record 27 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488DC07: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,024 bytes in 1 blocks are still reachable in loss record 28 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488DC1F: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,024 bytes in 1 blocks are still reachable in loss record 29 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488DC37: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,536 bytes in 1 blocks are still reachable in loss record 30 of 58
+==271907==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A3041: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881944: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881998: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D21C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 1,556 bytes in 1 blocks are still reachable in loss record 31 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AC2E82: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 2,032 bytes in 1 blocks are still reachable in loss record 32 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4898999: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 2,208 bytes in 138 blocks are still reachable in loss record 33 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48818F0: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881998: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D21C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 3,792 bytes in 1 blocks are still reachable in loss record 34 of 58
+==271907==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3540: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907== 
+==271907== 3,792 bytes in 1 blocks are still reachable in loss record 35 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB81AF: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,016 bytes in 1 blocks are still reachable in loss record 36 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x489CA5B: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1094C9: main2 (minishell.c:50)
+==271907==    by 0x10963F: main (minishell.c:83)
+==271907== 
+==271907== 4,080 bytes in 1 blocks are still reachable in loss record 37 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48989B9: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 38 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897F45: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4898897: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 39 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897FCA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4898897: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 40 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897FCA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48988A3: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 41 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897FCA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48988AF: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 42 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF72: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D274: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 43 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF72: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D283: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 4,112 bytes in 1 blocks are still reachable in loss record 44 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF72: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D2A1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 7,952 bytes in 1 blocks are still reachable in loss record 45 of 58
+==271907==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x4AB8FA7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4AB979F: _nc_find_type_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x4ABDC9C: tgetstr_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271907==    by 0x489879B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 46 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897FB7: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4898897: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 47 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897F45: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48988A3: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 48 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897FB7: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48988A3: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 49 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897F45: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48988AF: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 50 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4897FB7: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x48988AF: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 51 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF63: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D274: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 52 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF63: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D283: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 53 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF63: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D2A1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 54 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D2BF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 8,224 bytes in 2 blocks are still reachable in loss record 55 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D2D2: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 12,336 bytes in 3 blocks are still reachable in loss record 56 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF3A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D283: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 12,336 bytes in 3 blocks are still reachable in loss record 57 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487BF3A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D2A1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+==271907== 28,784 bytes in 7 blocks are still reachable in loss record 58 of 58
+==271907==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271907==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488AA92: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x488AC6C: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D228: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271907==    by 0x1095FA: main (minishell.c:79)
+==271907== 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ==271261== FILE DESCRIPTORS: 28 open at exit.
+==271261== Open file descriptor 0: /dev/pts/2
+==271261==    at 0x49C58CB: dup2 (syscall-template.S:78)
+==271261==    by 0x10BC6C: end_browse_cmd (browse_cmd.c:76)
+==271261==    by 0x10BD6C: browse_cmd (browse_cmd.c:98)
+==271261==    by 0x109540: main2 (minishell.c:63)
+==271261==    by 0x10963F: main (minishell.c:83)
+==271261== 
+==271261== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 56: /dev/ptmx
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 55: /usr/share/code/resources/app/node_modules.asar
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 54: /mnt/nfs/homes/gbertin/.config/Code/logs/20221024T162309/ptyhost.log
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 51: /usr/share/code/resources/app/node_modules.asar
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 50: /dev/shm/.org.chromium.Chromium.HPw8cb (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 49: /dev/shm/.org.chromium.Chromium.XVxtU9 (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 48: /dev/shm/.org.chromium.Chromium.LSxZS9 (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 47: /dev/shm/.org.chromium.Chromium.piGTfL (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 46: /dev/shm/.org.chromium.Chromium.gVYA3N (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 45: /dev/shm/.org.chromium.Chromium.BPd1MN (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 44: /dev/shm/.org.chromium.Chromium.9YmofO (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 43: /dev/shm/.org.chromium.Chromium.Xt4LVM (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 42: /usr/share/fonts/truetype/liberation2/LiberationSerif-Regular.ttf
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 41: /dev/shm/.org.chromium.Chromium.mKXyLM (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open AF_UNIX socket 40: <unknown>
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 39: /dev/shm/.org.chromium.Chromium.4Ur5AM (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 38: /tmp/.org.chromium.Chromium.oe2Qd9 (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 33: /proc/262071/status
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 32: /proc/262071/statm
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 31: /mnt/nfs/homes/gbertin/.config/Code/Dictionaries/en-US-10-1.bdic
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 25: /dev/shm/.org.chromium.Chromium.L6xerK (deleted)
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open AF_UNIX socket 24: <unknown>
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 20: /usr/share/code/v8_context_snapshot.bin
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 3: /mnt/nfs/homes/gbertin/Documents/github_perso/minishell/valgrind-out.txt
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 2: /dev/pts/2
+==271261==    <inherited from parent>
+==271261== 
+==271261== Open file descriptor 1: /dev/pts/2
+==271261==    at 0x49C58CB: dup2 (syscall-template.S:78)
+==271261==    by 0x10BC8B: end_browse_cmd (browse_cmd.c:78)
+==271261==    by 0x10BD6C: browse_cmd (browse_cmd.c:98)
+==271261==    by 0x109540: main2 (minishell.c:63)
+==271261==    by 0x10963F: main (minishell.c:83)
+==271261== 
+==271261== 
+==271261== 8 bytes in 1 blocks are still reachable in loss record 1 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x495638E: strdup (strdup.c:42)
+==271261==    by 0x4AC44F7: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD538: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8 bytes in 1 blocks are still reachable in loss record 2 of 58
+==271261==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A3041: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488E063: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488E7D5: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BFE5: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 13 bytes in 1 blocks are still reachable in loss record 3 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488ACF2: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D228: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 14 bytes in 1 blocks are still reachable in loss record 4 of 58
+==271261==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABEC3E: tparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC4274: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC44E9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD538: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 15 bytes in 1 blocks are still reachable in loss record 5 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x495638E: strdup (strdup.c:42)
+==271261==    by 0x4ABCE4F: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 16 bytes in 1 blocks are still reachable in loss record 6 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x487D317: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 20 bytes in 1 blocks are still reachable in loss record 7 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488B9D3: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488A818: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488AC6C: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D228: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 23 bytes in 1 blocks are still reachable in loss record 8 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x495638E: strdup (strdup.c:42)
+==271261==    by 0x4AB9AA7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AB9D9B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 35 bytes in 1 blocks are still reachable in loss record 9 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABA68C: _nc_home_terminfo (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AB9D85: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 46 bytes in 1 blocks are still reachable in loss record 10 of 58
+==271261==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3504: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261== 
+==271261== 46 bytes in 1 blocks are still reachable in loss record 11 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB818E: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 48 bytes in 1 blocks are still reachable in loss record 12 of 58
+==271261==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB9E9B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 78 bytes in 1 blocks are still reachable in loss record 13 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB81FF: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 94 bytes in 1 blocks are still reachable in loss record 14 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABE542: _nc_tparm_analyze (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABE7CB: tparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC4274: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC44E9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD538: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 104 bytes in 1 blocks are still reachable in loss record 15 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB9E04: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E1E: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 110 bytes in 1 blocks are still reachable in loss record 16 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C010: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 110 bytes in 1 blocks are still reachable in loss record 17 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488E02F: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488E7D5: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BFE5: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 156 bytes in 1 blocks are still reachable in loss record 18 of 58
+==271261==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3522: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261== 
+==271261== 256 bytes in 1 blocks are still reachable in loss record 19 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D466: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 280 bytes in 1 blocks are still reachable in loss record 20 of 58
+==271261==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABCDB7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 496 bytes in 1 blocks are still reachable in loss record 21 of 58
+==271261==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AC378B: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 496 bytes in 1 blocks are still reachable in loss record 22 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB82D9: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 755 bytes in 1 blocks are still reachable in loss record 23 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AC380B: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,024 bytes in 1 blocks are still reachable in loss record 24 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488DB8A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,024 bytes in 1 blocks are still reachable in loss record 25 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488DBA0: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,024 bytes in 1 blocks are still reachable in loss record 26 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488DBE8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,024 bytes in 1 blocks are still reachable in loss record 27 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488DC07: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,024 bytes in 1 blocks are still reachable in loss record 28 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488DC1F: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,024 bytes in 1 blocks are still reachable in loss record 29 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488DC37: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48930E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487C0F6: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4D3: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,536 bytes in 1 blocks are still reachable in loss record 30 of 58
+==271261==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A3041: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881944: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881998: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D21C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 1,556 bytes in 1 blocks are still reachable in loss record 31 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AC2E82: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 2,032 bytes in 1 blocks are still reachable in loss record 32 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4898999: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 2,208 bytes in 138 blocks are still reachable in loss record 33 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48818F0: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881998: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D21C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 3,792 bytes in 1 blocks are still reachable in loss record 34 of 58
+==271261==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4ABA2C7: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3540: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC391C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3D13: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AC3E44: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABC9F5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE04: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261== 
+==271261== 3,792 bytes in 1 blocks are still reachable in loss record 35 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB81AF: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABCE1B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABD359: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489875B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,016 bytes in 1 blocks are still reachable in loss record 36 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x489CA5B: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1094C9: main2 (minishell.c:50)
+==271261==    by 0x10963F: main (minishell.c:83)
+==271261== 
+==271261== 4,080 bytes in 1 blocks are still reachable in loss record 37 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48989B9: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 38 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897F45: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4898897: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 39 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897FCA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4898897: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 40 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897FCA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48988A3: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 41 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897FCA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48988AF: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 42 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF72: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D274: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 43 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF72: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D283: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 4,112 bytes in 1 blocks are still reachable in loss record 44 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF72: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D2A1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 7,952 bytes in 1 blocks are still reachable in loss record 45 of 58
+==271261==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x4AB8FA7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4AB979F: _nc_find_type_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x4ABDC9C: tgetstr_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2)
+==271261==    by 0x489879B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 46 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897FB7: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4898897: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 47 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897F45: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48988A3: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 48 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897FB7: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48988A3: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 49 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897F45: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48988AF: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 50 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4897FB7: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x48988AF: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D1FF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 51 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF63: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D274: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 52 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF63: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D283: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 53 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF63: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D2A1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 54 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D2BF: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 8,224 bytes in 2 blocks are still reachable in loss record 55 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D2D2: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 12,336 bytes in 3 blocks are still reachable in loss record 56 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF3A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D283: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 12,336 bytes in 3 blocks are still reachable in loss record 57 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4889F1D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487BF3A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D2A1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 
+==271261== 28,784 bytes in 7 blocks are still reachable in loss record 58 of 58
+==271261==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271261==    by 0x48A300C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4881A91: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x4888D79: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488AA92: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x488AC6C: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D228: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x487D4AF: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==271261==    by 0x1095FA: main (minishell.c:79)
+==271261== 

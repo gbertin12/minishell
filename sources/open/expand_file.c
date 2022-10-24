@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:11:50 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 16:49:25 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/24 17:39:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,9 @@ static char	*get_next_var(char *path, t_minishell *ms)
 	return (ret_v);
 }
 
-static int	is_ambiguous(char *value, t_minishell *ms)
+static int	is_ambiguous(char *value)
 {
-	char	**split;
-
-	if (!value)
-		return (1);
-	split = ft_split_set(value, " \n\r\v\t\f", ms);
-	if (!split)
-		return (1);
-	if (split[1])
+	if (!value || value[0] == '\0')
 		return (1);
 	return (0);
 }
@@ -111,7 +104,7 @@ char	*expand_file(char *path, t_minishell *ms)
 	{
 		tmp = get_next_var(&path[i], ms);
 		if (path[i] == '$' && ambiguous != 1 && tmp && tmp[0] != '\0')
-			ambiguous = is_ambiguous(tmp, ms);
+			ambiguous = is_ambiguous(tmp);
 		new_path = ft_strjoin(new_path, tmp, ms);
 		if (!new_path)
 			break ;
