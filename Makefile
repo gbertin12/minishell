@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 12:27:27 by gbertin           #+#    #+#              #
-#    Updated: 2022/10/21 16:46:59 by gbertin          ###   ########.fr        #
+#    Updated: 2022/10/25 15:39:23 by ccambium         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS = minishell.c\
 		sources/expand/heredoc_expand.c\
 		sources/expand/read_var.c\
 		sources/expand/remove_null.c\
+		sources/expand/replace_var_multi.c\
 		sources/expand/replace_var.c\
 		sources/open/check_ambiguous.c\
 		sources/open/complex_var.c\
