@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 12:24:36 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 15:02:38 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:20:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,16 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 {
 	char	*value_pwd;
 
-	value_pwd = get_pwd(ms);
+	value_pwd = NULL;
 	if (n_path)
 		value_pwd = n_path;
 	else
 		value_pwd = get_pwd(ms);
+	if (value_pwd == NULL)
+	{
+		perror("chdir: error retrieving current directory: getcwd: cannot access parent directories");
+		return (1);
+	}
 	if (do_env_key_exist("PWD", ms))
 	{
 		modify_env("PWD", value_pwd, ms);
@@ -68,11 +73,11 @@ static char	exec_chdir(t_token *token, char *path, t_minishell *ms)
 		if (n_path)
 			return (replace_pwd_in_env(value_oldpwd, n_path, ms));
 	}
+	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	if (access(path, 0) == -1)
 		return (check_err(path, ms));
 	if (chdir(path) == -1)
 		return (check_err(path, ms));
-	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	return (0);
 }
 

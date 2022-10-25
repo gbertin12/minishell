@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:47:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 15:02:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:17:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_err(char *path, t_minishell *ms)
 		return (1);
 	if (errno == 116)
 	{
-		err = ft_strjoin(err, "No such file or directory\n", ms);
+		err = ft_strjoin(err, "State file handle\n", ms);
 		if (!err)
 			return (1);
 	}
