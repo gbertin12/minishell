@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 12:24:36 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/24 18:20:09 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/25 14:51:25 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 		value_pwd = get_pwd(ms);
 	if (value_pwd == NULL)
 	{
-		perror("chdir: error retrieving current directory: getcwd: cannot access parent directories");
+		perror("chdir: error retrieving current directory:\
+		getcwd: cannot access parent directories");
 		return (1);
 	}
 	if (do_env_key_exist("PWD", ms))
