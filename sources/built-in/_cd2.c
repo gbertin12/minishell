@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 12:24:36 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/25 14:51:25 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/25 18:00:04 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 	if (value_pwd == NULL)
 	{
 		perror("chdir: error retrieving current directory:\
-		getcwd: cannot access parent directories");
+ getcwd: cannot access parent directories");
 		return (1);
 	}
 	if (do_env_key_exist("PWD", ms))
