@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:18:50 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/19 15:41:37 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:50:53 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,20 @@ static void	split_cmd(t_token *token, t_minishell *ms)
 	split = ft_split_set(token->cmd, " \n\r\v\t\f", ms);
 	if (!split || !split[0])
 		return ;
-	if (split[1])
+	ft_free(token->cmd, ms);
+	token->cmd = split[0];
+	if (!split[1])
+		return ;
+	i = count_tab(split) - 1;
+	while (i > 0)
 	{
-		ft_free(token->cmd, ms);
-		token->cmd = split[0];
-		i = count_tab(split) - 1;
-		while (i > 0)
+		token->arg_head = add_front_arg(token->arg_head, split[i], ms);
+		if (token->arg_head == NULL)
 		{
-			token->arg_head = add_front_arg(token->arg_head, split[i], ms);
-			if (token->arg_head == NULL)
-			{
-				free_split(split, ms);
-				return ;
-			}
-			i--;
+			free_split(split, ms);
+			return ;
 		}
+		i--;
 	}
 }
 
