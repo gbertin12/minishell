@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_execute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:05:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 11:49:54 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:40:31 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,18 @@ int	init_execute(t_token *token, t_minishell *ms)
 	return (0);
 }
 
-int	null_cmd(t_exec *exec)
+int	null_cmd(t_exec *exec, t_minishell *ms)
 {
-	if (exec->token->cmd == NULL)
-		return (0);
-	if (exec->token->cmd[0] == '\0')
+	if (exec->token->cmd == NULL || exec->token->cmd[0] == '\0')
 	{
-		ft_putstr_fd("minishell: : command not found\n", 2);
+		if (exec->token->cmd != NULL && exec->token->cmd[0] == '\0')
+		{
+			ft_putstr_fd("minishell: : command not found\n", 2);
+			return (0);
+		}
+		exec->token->pid = fork();
+		if (exec->token->pid == 0)
+			exit_child(g_lretv, ms);
 		return (0);
 	}
 	return (1);

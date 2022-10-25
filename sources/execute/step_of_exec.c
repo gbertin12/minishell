@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 09:49:27 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 16:44:07 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/25 14:27:34 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_last_arg(t_token *token)
 
 t_exec	*first(t_exec *exec, t_minishell *ms)
 {
-	if (null_cmd(exec) && check_is_directory(exec->token->cmd, 0))
+	if (null_cmd(exec, ms) && check_is_directory(exec->token->cmd, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -79,7 +79,7 @@ t_exec	*first(t_exec *exec, t_minishell *ms)
 
 t_exec	*middle(t_exec *exec, t_minishell *ms)
 {
-	if (null_cmd(exec) && check_is_directory(exec->token->cmd, 0))
+	if (null_cmd(exec, ms) && check_is_directory(exec->token->cmd, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
@@ -101,7 +101,7 @@ t_exec	*middle(t_exec *exec, t_minishell *ms)
 
 t_exec	*last(t_exec *exec, t_minishell *ms)
 {
-	if (null_cmd(exec) && check_is_directory(exec->token->cmd, 0))
+	if (null_cmd(exec, ms) && check_is_directory(exec->token->cmd, 0))
 	{
 		exec->args = args_to_tab(exec->token, ms);
 		if (check_is_built_in(exec->token))
