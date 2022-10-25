@@ -6,11 +6,31 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/21 11:52:59 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:17:55 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	in_quote(char *s, size_t x)
+{
+	char	d_quote;
+	char	quote;
+	size_t	i;
+
+	quote = 0;
+	d_quote = 0;
+	i = 0;
+	while (s && s[i] && i <= x)
+	{
+		if (s[i] == '"' && !quote)
+			d_quote = char_ternary(d_quote, 0, 1);
+		if (s[i] == '\'' && !d_quote)
+			quote = char_ternary(quote, 0, 1);
+		i++;
+	}
+	return (quote + d_quote);
+}
 
 static char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms)
 {
@@ -101,24 +121,25 @@ static char	expand_arg2(t_arg *arg, char *i, t_minishell *ms)
 
 	key = read_var(++i, ms);
 	tmp = get_env_value(key, ms);
+	ft_free(key, ms);
 	if (!tmp)
 		tmp = ft_strdup("", ms);
 	arg_value = ft_split_set(tmp, " \n\r\v\t\f", ms);
 	if (count_tab(arg_value) == 1)
-	{
-		if (arg_value)
-			arg->value = replace_var_multi(arg->value, --i - arg->value,
-					arg_value[0], ms);
-	}
+		arg->value = replace_var_multi(arg->value, --i - arg->value,
+				tmp, ms);
+	else if (count_tab(arg_value) > 1 && in_quote(arg->value, i - arg->value))
+		arg->value = replace_var_multi(arg->value, --i - arg->value,
+				tmp, ms);
 	else if (count_tab(arg_value) > 1)
 	{
 		if (expand_arg_multi(arg, arg_value, --i, ms))
-			return (1);
+			return (free_split(arg_value, ms), 1);
 	}
 	else
 		arg->value = replace_var_multi(arg->value, --i - arg->value,
 				"", ms);
-	return (0);
+	return (free_split(arg_value, ms), 0);
 }
 
 char	expand_arg(t_token *token, t_minishell *ms)
