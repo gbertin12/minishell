@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _cd2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 12:24:36 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/25 18:00:04 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:15:09 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	replace_pwd_in_env(char *value_oldpwd, char *n_path,
 	char	*value_pwd;
 
 	value_pwd = NULL;
+	value_pwd = get_pwd(ms);
 	if (n_path)
 		value_pwd = n_path;
 	else
@@ -74,11 +75,11 @@ static char	exec_chdir(t_token *token, char *path, t_minishell *ms)
 		if (n_path)
 			return (replace_pwd_in_env(value_oldpwd, n_path, ms));
 	}
-	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	if (access(path, 0) == -1)
 		return (check_err(path, ms));
 	if (chdir(path) == -1)
 		return (check_err(path, ms));
+	replace_pwd_in_env(value_oldpwd, NULL, ms);
 	return (0);
 }
 
