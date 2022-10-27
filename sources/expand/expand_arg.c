@@ -6,11 +6,31 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/25 17:54:41 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/28 01:06:25 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	in_quote(char *s, size_t x)
+{
+	char	d_quote;
+	char	quote;
+	size_t	i;
+
+	quote = 0;
+	d_quote = 0;
+	i = 0;
+	while (s && s[i] && i <= x)
+	{
+		if (s[i] == '"' && !quote)
+			d_quote = char_ternary(d_quote, 0, 1);
+		if (s[i] == '\'' && !d_quote)
+			quote = char_ternary(quote, 0, 1);
+		i++;
+	}
+	return (quote + d_quote);
+}
 
 static char	expand_arg_multi2(char **argv, t_minishell *ms,
 			t_arg **first, t_arg **last)
@@ -22,11 +42,10 @@ static char	expand_arg_multi2(char **argv, t_minishell *ms,
 	a = ft_malloc(sizeof(t_arg), ms);
 	if (!a)
 		return (1);
+	*first = a;
 	while (argv[++i])
 	{
 		a->value = ft_strdup(argv[i], ms);
-		if (i == 1)
-			*first = a;
 		if (argv[i + 1])
 		{
 			a->next = ft_malloc(sizeof(t_arg), ms);
@@ -36,8 +55,9 @@ static char	expand_arg_multi2(char **argv, t_minishell *ms,
 			continue ;
 		}
 		else
-			*last = a;
+			break ;
 	}
+	*last = a;
 	return (0);
 }
 
@@ -47,21 +67,23 @@ static char	expand_arg_multi(t_arg *arg, char **argv, char *w, t_minishell *ms)
 	t_arg	*last;
 	char	*tmp;
 
-	arg->value = replace_var_multi(arg->value, (size_t)(w - arg->value),
-			argv[0], ms);
+	first = NULL;
+	last = NULL;
 	if (!arg->value)
 		return (1);
-	tmp = ft_substr(arg->value, (size_t)(w - arg->value), ft_strlen(w), ms);
+	tmp = keep_left(arg, w, ms);
 	if (!tmp)
 		return (1);
 	arg->value = ft_substr(arg->value, 0, (size_t)(w - arg->value), ms);
 	if (!arg->value)
-		return (1);
+		return (ft_free(tmp, ms), 1);
+	arg->value = replace_var_multi(arg->value, (size_t)(w - arg->value),
+			argv[0], ms);
 	if (expand_arg_multi2(argv, ms, &first, &last))
 		return (EXIT_FAILURE);
 	last->value = ft_strjoin(last->value, tmp, ms);
 	if (!last->value)
-		return (1);
+		return (ft_free(tmp, ms), 1);
 	last->next = arg->next;
 	arg->next = first;
 	return (0);
@@ -79,21 +101,15 @@ static char	expand_arg2(t_arg *arg, char *i, t_minishell *ms)
 	if (!tmp)
 		tmp = ft_strdup("", ms);
 	arg_value = ft_split_set(tmp, " \n\r\v\t\f", ms);
-	if (count_tab(arg_value) == 1)
-	{
-		if (arg_value)
-			arg->value = replace_var_multi(arg->value, --i - arg->value,
-					arg_value[0], ms);
-	}
-	else if (count_tab(arg_value) > 1)
+	if (count_tab(arg_value) && !in_quote(arg->value, (i - arg->value)))
 	{
 		if (expand_arg_multi(arg, arg_value, --i, ms))
-			return (free_split(arg_value, ms), 1);
+			return (ft_free(tmp, ms), free_split(arg_value, ms), 1);
 	}
 	else
 		arg->value = replace_var_multi(arg->value, --i - arg->value,
-				"", ms);
-	return (free_split(arg_value, ms), 0);
+				tmp, ms);
+	return (ft_free(tmp, ms), free_split(arg_value, ms), 0);
 }
 
 char	expand_arg(t_token *token, t_minishell *ms)
@@ -102,11 +118,11 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	char	*i;
 
 	arg = token->arg_head;
-	if (!arg || !arg->value)
+	if (!arg || !arg->value || !ft_strchr(arg->value, '$'))
 		return (0);
-	i = ft_strchr(arg->value, '$');
 	while (arg)
 	{
+		i = ft_strchr(arg->value, '$');
 		if (!i || !*i || i[1] == '\0' || is_space(i[1]) || i[1] == '$')
 		{
 			arg = arg->next;
@@ -119,7 +135,6 @@ char	expand_arg(t_token *token, t_minishell *ms)
 		}
 		if (expand_arg2(arg, i, ms))
 			return (1);
-		i = ft_strchr(arg->value, '$');
 	}
 	return (0);
 }

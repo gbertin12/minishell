@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 10:18:19 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/25 15:37:52 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:09:38 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	remove_null(t_token *token, t_minishell *ms);
 
 char	*read_var(char *s, t_minishell *ms);
 char	*heredoc_expand(char *s, t_minishell *ms);
+char	*keep_left(t_arg *arg, char *w, t_minishell *ms);	
 char	*replace_var(char *s, size_t x, t_minishell *ms);
 char	*replace_var_multi(char *s, size_t x, char *value, t_minishell *ms);
 
