@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 12:22:43 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:27:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,20 @@ static void	main2(t_minishell *ms, char *s)
 	reset(ms, s);
 }
 
+static void checker(t_minishell *ms, char **argv)
+{
+	if (ft_strcmp(argv[1], "-c"))
+	{
+		ms->s = argv[2];
+		ms->tester = 1;
+		if (parsing(ms->s, ms))
+			exit(g_lretv);
+		expand(ms);
+		browse_cmd(ms);
+		exit(g_lretv);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	ms;
@@ -72,6 +86,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!isatty(0) || !isatty(1))
 		return (EXIT_FAILURE);
 	init(&ms, envp, argc, argv);
+	checker(&ms, argv);
 	while (1)
 	{
 		init_signals();
