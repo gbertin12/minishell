@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 09:57:51 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/25 14:50:16 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:04:53 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,18 @@ static int	_export2(t_arg *arg, t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-int	_export(t_token *token, t_minishell *ms)
+static int exec_exp(t_token *token, t_minishell *ms)
 {
 	t_arg	*arg;
 	int		error;
 
-	if (token == NULL)
-		return (EXIT_FAILURE);
-	if (count_arg(token->arg_head) == 0)
-		return (declaration(ms));
 	arg = token->arg_head;
 	error = 0;
+	if (count_arg(token->arg_head) == 0)
+	{
+		declaration(ms);
+		return (0);
+	}
 	while (arg != NULL)
 	{
 		if (arg->value)
@@ -119,12 +120,56 @@ int	_export(t_token *token, t_minishell *ms)
 			if (arg->value && arg->value[0] == '\0')
 				print_not_valid_identifier("export", arg->value);
 			else if (check_append_export(arg->value) && append_export(arg, ms))
-					error = 0;
+				error = 0;
 			else if (_export2(arg, ms))
 				error = 1;
 		}
 		arg = arg->next;
 	}
+	return (error);
+}
+
+static void exec_child(t_token *token, t_minishell *ms)
+{
+	int error;
+	
+	if (token->next)
+	{
+		if (pipe(token->pipefd))
+			return ;
+	}
+	token->pid = fork();
+	if (token->pid < 0)
+		return ;
+	if (token->pid == 0)
+	{
+		if (ms->exec->last)
+		{
+			close(ms->exec->last->pipefd[0]);
+			close(ms->exec->last->pipefd[1]);
+		}
+		init_execute(token, ms);
+		redir_out(token);
+		error = exec_exp(token, ms);	
+		if (error)
+			exit_child(1, ms);
+		exit_child(0, ms);
+	}
+	return ;
+}
+
+int	_export(t_token *token, t_minishell *ms)
+{
+	int		error;
+
+	if (token == NULL)
+		return (EXIT_FAILURE);
+	if (count_token(ms->t_head) > 1)
+	{
+		exec_child(token, ms);
+		return (0);
+	}
+	error = exec_exp(token, ms);
 	if (error)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
