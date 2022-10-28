@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 12:31:18 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/28 09:27:20 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:12:05 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	main2(t_minishell *ms, char *s)
 	reset(ms, s);
 }
 
-static void checker(t_minishell *ms, char **argv)
+static void	checker(t_minishell *ms, char **argv)
 {
 	if (ft_strcmp(argv[1], "-c"))
 	{
@@ -74,6 +74,7 @@ static void checker(t_minishell *ms, char **argv)
 			exit(g_lretv);
 		expand(ms);
 		browse_cmd(ms);
+		free_all(ms);
 		exit(g_lretv);
 	}
 }
