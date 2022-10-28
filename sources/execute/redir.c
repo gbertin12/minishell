@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:44:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/21 17:15:00 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:53:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,14 @@ int	redir_out(t_token *token)
 	if (token->have_out)
 	{
 		if (dup2(token->outputfile, 1) == -1)
-		{
-			perror("minishell");
 			return (1);
-		}
 		close(token->outputfile);
 	}
 	else if (token->next)
 	{
 		close(token->pipefd[0]);
 		if (dup2(token->pipefd[1], 1) == -1)
-		{
-			perror ("minishell");
 			return (1);
-		}
 		close(token->pipefd[0]);
 		close(token->pipefd[1]);
 	}
