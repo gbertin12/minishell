@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:45:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/10/18 12:48:55 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/10/28 09:26:18 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	exit_child(int num_err, t_minishell *ms)
 		close(ms->exec->tmpin);
 		close(ms->exec->tmpout);
 	}
-	free(ms->s);
+	if (ms->s && ms->tester == 0)
+		free(ms->s);
 	free_all(ms);
 	rl_clear_history();
 	exit(num_err);
