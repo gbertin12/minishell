@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/29 21:16:57 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/29 21:23:38 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,6 @@ char	split_arg(t_arg *arg, t_minishell *ms)
 	arg->next = first;
 	return (free_split(arg_value, ms), 0);
 }
-
-// static char	in_quote(char *s, size_t x)
-// {
-// 	char	d_quote;
-// 	char	quote;
-// 	size_t	i;
-
-// 	quote = 0;
-// 	d_quote = 0;
-// 	i = 0;
-// 	while (s && s[i] && i <= x)
-// 	{
-// 		if (s[i] == '"' && !quote)
-// 			d_quote = char_ternary(d_quote, 0, 1);
-// 		if (s[i] == '\'' && !d_quote)
-// 			quote = char_ternary(quote, 0, 1);
-// 		i++;
-// 	}
-// 	return (quote + d_quote);
-// }
 
 static void	expand_arg2(t_token *token, t_minishell *minishell)
 {
