@@ -6,13 +6,11 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 10:22:05 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/21 12:05:02 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/29 20:40:30 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static char	*remove_quotes(char *s, t_minishell *ms, int depth);
 
 static char	get_char_target(char *s)
 {
@@ -66,7 +64,7 @@ static char	*remove_quotes2(char *s, char **tmp, t_minishell *ms, char to_find)
 	return (ret_v);
 }
 
-static char	*remove_quotes(char *s, t_minishell *ms, int depth)
+char	*remove_quotes(char *s, t_minishell *ms, int depth)
 {
 	char	to_find;
 	char	**tmp;
