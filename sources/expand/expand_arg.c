@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 10:09:49 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/29 21:23:38 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:03:24 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ static void	expand_arg2(t_token *token, t_minishell *minishell)
 	}
 }
 
+static char	*next_var(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != '$' && !between_quote(s, i))
+		i++;
+	if (!s[i])
+		return (NULL);
+	return (s + i);
+}
+
 char	expand_arg(t_token *token, t_minishell *ms)
 {
 	t_arg	*arg;
@@ -88,15 +100,10 @@ char	expand_arg(t_token *token, t_minishell *ms)
 	arg = token->arg_head;
 	while (arg)
 	{
-		i = ft_strchr(arg->value, '$');
+		i = next_var(arg->value);
 		if (!i || !*i || i[1] == '\0' || is_space(i[1]) || i[1] == '$')
 		{
 			arg = arg->next;
-			continue ;
-		}
-		if (between_quote(arg->value, (i - arg->value)))
-		{
-			i = ft_strchr(i + 1, '$');
 			continue ;
 		}
 		arg->value = replace_var(arg->value, i - arg->value, ms);
