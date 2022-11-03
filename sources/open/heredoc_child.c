@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 12:35:38 by ccambium          #+#    #+#             */
-/*   Updated: 2022/11/03 12:12:23 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:39:34 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,70 @@ static int	error_heredoc(char *limiter, int fd)
 	return (fd);
 }
 
+// static void	free_append(void *append, t_minishell *ms)
+// {
+// 	t_obj	*x;
+// 	t_obj	*last;
+
+// 	last = NULL;
+// 	x = ms->o_head;
+// 	while (x != NULL)
+// 	{
+// 		if (&x->ptr == &append)
+// 		{
+// 			free(append);
+// 			if (last == NULL)
+// 				ms->o_head = x->next;
+// 			else
+// 				last->next = x->next;
+// 			free(x);
+// 			return ;
+// 		}
+// 		last = x;
+// 		x = x->next;
+// 	}
+// 	free(append);
+// }
+
+static int	print_in_file2(int fd, char *append, char *limiter, int *err)
+{
+	if (append)
+	{
+		ft_putstr_fd(append, fd);
+		ft_putstr_fd("\n", fd);
+	}
+	else if (!append)
+	{
+		*err = 130;
+		if (g_lretv != 130)
+			*err = error_heredoc(limiter, fd);
+		return (1);
+	}
+	return (0);
+}
+
 static int	print_in_file(int fd, char *limiter, t_minishell *ms)
 {
 	char	*append;
 	int		err;
+	char	*tmp;
 
 	err = 0;
 	signal(SIGINT, sigint_heredoc);
-	append = readline("> ");
+	tmp = readline("> ");
+	append = ft_strdup(tmp, ms);
+	free(tmp);
 	while (!ft_strcmp(append, limiter))
 	{
 		append = heredoc_expand(append, ms);
-		if (append)
-		{
-			ft_putstr_fd(append, fd);
-			ft_putstr_fd("\n", fd);
-		}
-		else if (!append)
-		{
-			err = 130;
-			if (g_lretv != 130)
-				err = error_heredoc(limiter, fd);
+		ft_free(append, ms);
+		if (print_in_file2(fd, append, limiter, &err))
 			break ;
-		}
-		free(append);
-		append = readline("> ");
+		tmp = readline("> ");
+		append = ft_strdup(tmp, ms);
+		free(tmp);
 	}
-	return (free(append), err);
+	return (ft_free(append, ms), err);
 }
 
 void	heredoc_child(int fd, char *limiter, t_minishell *ms)

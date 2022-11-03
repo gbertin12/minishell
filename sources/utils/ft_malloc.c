@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:43:45 by ccambium          #+#    #+#             */
-/*   Updated: 2022/11/03 12:46:22 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:34:12 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ void	ft_free(void *ptr, t_minishell *ms)
 		x = x->next;
 	}
 	if (x == NULL)
-	{
-		free(ptr);
 		return ;
-	}
 	if (last == NULL)
 		ms->o_head = x->next;
 	else
