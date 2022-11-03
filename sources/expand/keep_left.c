@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 23:37:43 by ccambium          #+#    #+#             */
-/*   Updated: 2022/10/28 00:34:25 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:12:42 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*keep_left(t_arg *arg, char *w, t_minishell *ms)
 	size_t	x;
 
 	x = size_of_key((w + 1)) + 1;
-	left = ft_substr(arg->value, (size_t)((w + x) - arg->value), ft_strlen((w + x)), ms);
+	left = ft_substr(arg->value, (size_t)((w + x) - arg->value),
+			ft_strlen((w + x)), ms);
 	if (!left)
 		return (NULL);
 	return (left);
