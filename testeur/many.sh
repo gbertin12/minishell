@@ -34,7 +34,8 @@ test_string "env > test"
 test_string "pwd"
 test_string '$ffr'
 test_string '$fef ls'
+test_string 'badcmd'
 
-rm test
+rm -f test
 chmod 777 denied
 rm -rf denied

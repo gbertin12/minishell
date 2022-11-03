@@ -45,6 +45,8 @@ test_string 'echo "$ls $ls2"'
 test_string 'echo -n test $ls'
 test_string 'echo -nnnn test $fef'
 test_string '$ls$ls2'
+test_string ""
+test_string 'echo $USER"$USER"$USER'
 
 
 # rm -rf output_posix output_tester
