@@ -6,7 +6,7 @@
 /*   By: ccambium <ccambium@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:21:53 by ccambium          #+#    #+#             */
-/*   Updated: 2022/09/01 13:33:23 by ccambium         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:32:59 by ccambium         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ char	*heredoc_expand(char *s, t_minishell *ms)
 		if (!s)
 			s = tmp;
 		else
+		{
 			ft_free(tmp, ms);
+			ft_putstr_fd("free heredoc", 2);
+		}
 		i = next_var(s);
 	}
 	return (s);
